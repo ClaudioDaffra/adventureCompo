@@ -1,0 +1,17 @@
+[
+  {"id":"guerriero","nome":"Guerriero","bonuses":{"FOR":1,"COS":1},"sottoclassi":[
+    {"id":"barbaro","nome":"Barbaro","bonus":{"FOR":1},"skills":["Furia","Colpo Possente"],"trait":"Quando entra in furia, ignora i malus armatura per 3 turni.","hpBonus":16,"combBonus":{"dan":3}},
+    {"id":"mercenario","nome":"Mercenario","bonus":{"DES":1},"skills":["Tattiche di Gruppo","Schermaglia"],"trait":"Bonus ATT+2 contro umanoidi.","hpBonus":13,"combBonus":{"att":1,"def":1}},
+    {"id":"cavaliere","nome":"Cavaliere","bonus":{"CHA":1},"skills":["Carica","Scudo di Ferro"],"trait":"Puo' bloccare un attacco al turno gratis.","hpBonus":15,"combBonus":{"def":2,"rd":1}}
+  ]},
+  {"id":"ladro","nome":"Ladro/Assassino","bonuses":{"DES":2},"sottoclassi":[
+    {"id":"assassino","nome":"Assassino","bonus":{"DES":1},"skills":["Lama Avvelenata","Colpo Furtivo"],"trait":"Primo attacco da furtivo: danno raddoppiato.","hpBonus":9,"combBonus":{"att":2,"ini":1}},
+    {"id":"ladro","nome":"Ladro","bonus":{"INT":1},"skills":["Scassinare","Trappole"],"trait":"Puo' rubare oggetti dai nemici (dado).","hpBonus":8,"combBonus":{"ini":3}},
+    {"id":"esploratore","nome":"Esploratore","bonus":{"WIS":1},"skills":["Tracciamento","Erboristeria"],"trait":"Incontri casuali ridotti del 30%.","hpBonus":10,"combBonus":{"ini":2,"dan":1}}
+  ]},
+  {"id":"stregone","nome":"Stregone/Mistico","bonuses":{"INT":2},"sottoclassi":[
+    {"id":"negromante","nome":"Negromante","bonus":{"INT":1},"skills":["Dardo Oscuro","Evocazione"],"trait":"Puo' evocare un non-morto che combatte per lui.","hpBonus":8,"combBonus":{"att":1}},
+    {"id":"sacerdote","nome":"Sacerdote","bonus":{"WIS":1},"skills":["Guarigione","Benedizione"],"trait":"Recupera HP extra dopo ogni combattimento.","hpBonus":10,"combBonus":{"rd":2}},
+    {"id":"sciamano","nome":"Sciamano","bonus":{"WIS":1},"skills":["Visione","Maledizione"],"trait":"Puo' vedere i punti deboli dei nemici.","hpBonus":9,"combBonus":{"ini":2}}
+  ]}
+]

@@ -1,0 +1,49 @@
+{
+  "armi_1m": [
+    {"id":"spada_corta","nome":"Spada Corta","rar":"normal","slot":"Arma1M","attr":{},"comb":{"att":1,"dan":3,"def":1},"res":{},"elemDan":{},"lore":"Lama affidabile, usata da soldati di ogni terra.","prezzo":20},
+    {"id":"daga_cimmera","nome":"Daga Cimmera","rar":"normal","slot":"Arma1M","attr":{},"comb":{"att":2,"dan":2,"def":1},"res":{},"elemDan":{},"lore":"Daga lunga dei guerrieri del nord.","prezzo":15},
+    {"id":"ascia_mano","nome":"Ascia da Mano","rar":"normal","slot":"Arma1M","attr":{},"comb":{"att":0,"dan":5,"def":-1},"res":{},"elemDan":{},"lore":"Ascia leggera, lanciabile.","prezzo":18},
+    {"id":"spada_akbitana","nome":"Spada di Akbitana","rar":"special","slot":"Arma1M","attr":{},"comb":{"att":2,"dan":5,"def":1},"res":{},"elemDan":{},"lore":"Acciaio stellare di Akbitana. La migliore lama dell'Hyrkania.","prezzo":120},
+    {"id":"daga_stigiana","nome":"Daga Stigiana","rar":"special","slot":"Arma1M","attr":{},"comb":{"att":2,"dan":3,"def":0},"res":{},"elemDan":{"veleno":2},"lore":"Avvelenata con il fiele del serpente di Set.","prezzo":90},
+    {"id":"spada_sangue","nome":"Spada Cimmera del Sangue","rar":"rare","slot":"Arma1M","attr":{},"comb":{"att":2,"dan":6,"def":2},"res":{},"elemDan":{"veleno":2},"lore":"Forgiata nel sangue di cento battaglie. Ricompensa della Prima Quest.","prezzo":0},
+    {"id":"martello_destino","nome":"Martello del Destino","rar":"unique","slot":"Arma2M","attr":{"FOR":5},"comb":{"att":0,"dan":10,"def":-3},"res":{},"elemDan":{"freddo":5},"lore":"L'unica arma che può ferire Re Valthor il Gelido. Forgiato dai 9 Frammenti dell'Urlo.","prezzo":0}
+  ],
+  "armi_2m": [
+    {"id":"ascia_bipenne","nome":"Ascia Bipenne","rar":"normal","slot":"Arma2M","attr":{},"comb":{"att":-1,"dan":9,"def":-2},"res":{},"elemDan":{},"lore":"Più adatta a spaccare porte che deflettere colpi.","prezzo":35},
+    {"id":"lancia","nome":"Lancia Lunga","rar":"normal","slot":"Arma2M","attr":{},"comb":{"att":1,"dan":4,"def":2},"res":{},"elemDan":{},"lore":"Arma da fanteria. Mantiene la distanza dal nemico.","prezzo":25},
+    {"id":"martello_pesante","nome":"Martello Pesante","rar":"normal","slot":"Arma2M","attr":{},"comb":{"att":0,"dan":7,"def":-1},"res":{},"elemDan":{},"lore":"Schiaccia armature come gusci d'uovo.","prezzo":30},
+    {"id":"ascia_nordheim","nome":"Ascia dei Nordheim","rar":"special","slot":"Arma2M","attr":{},"comb":{"att":1,"dan":6},"res":{},"elemDan":{"freddo":1},"lore":"Grondante del freddo eterno delle terre del nord.","prezzo":70},
+    {"id":"ascia_troll","nome":"Ascia dei Troll","rar":"rare","slot":"Arma2M","attr":{},"comb":{"att":-2,"dan":8,"def":-1},"res":{},"elemDan":{"freddo":3},"lore":"Arma del Re dei Troll delle Foreste Oscure. Pesa come un albero.","prezzo":0}
+  ],
+  "armature": [
+    {"id":"abiti_logori","nome":"Abiti Logori","rar":"normal","slot":"Torso","attr":{},"comb":{"rd":0,"ini":0},"res":{},"lore":"Panni usurati. Nessuna protezione.","prezzo":2},
+    {"id":"pelli_bestia","nome":"Pelli di Bestia","rar":"normal","slot":"Torso","attr":{},"comb":{"rd":1,"ini":0},"res":{"freddo":1},"lore":"Calde e resistenti.","prezzo":12},
+    {"id":"cuoio_borchiato","nome":"Cuoio Borchiato","rar":"normal","slot":"Torso","attr":{},"comb":{"rd":2,"ini":-1},"res":{},"lore":"Cuoio rinforzato con borchie metalliche.","prezzo":25},
+    {"id":"cotta_maglia","nome":"Cotta di Maglia","rar":"normal","slot":"Torso","attr":{},"comb":{"rd":4,"ini":-2},"res":{},"lore":"Anelli di ferro intrecciati. Standard militare.","prezzo":80},
+    {"id":"cotta_maglia_nordica","nome":"Cotta di Maglia Nordica","rar":"special","slot":"Torso","attr":{},"comb":{"rd":6,"ini":-2},"res":{"freddo":2},"lore":"Forgiata dai fabbri di Asgard. Leggera per la sua resistenza.","prezzo":200},
+    {"id":"piastre_pesanti","nome":"Piastre Pesanti","rar":"special","slot":"Torso","attr":{},"comb":{"rd":6,"ini":-4},"res":{},"lore":"Massima protezione. Massima lentezza.","prezzo":120},
+    {"id":"mantello_scaglie","nome":"Mantello di Scaglie Viventi","rar":"rare","slot":"Torso","attr":{"COS":1},"comb":{"rd":4,"ini":-1},"res":{"acido":8,"veleno":3},"lore":"Scaglie vive del Serpente delle Paludi. Si muovono per deflettere i colpi.","prezzo":0},
+    {"id":"piastre_ghiaccio","nome":"Piastre di Ghiaccio Eterno","rar":"rare","slot":"Torso","attr":{},"comb":{"rd":8,"ini":-5},"res":{"freddo":5,"fuoco":-2},"lore":"Acciaio intessuto di ghiaccio eterno della Montagna Luminosa.","prezzo":0},
+    {"id":"tunica_cultista","nome":"Tunica del Cultista","rar":"normal","slot":"Torso","attr":{},"comb":{"rd":1,"ini":2},"res":{"magia":3},"lore":"Tessuto rituale dei cultisti del Ghiaccio Eterno.","prezzo":40}
+  ],
+  "elmi": [
+    {"id":"elmo_ferro","nome":"Elmo di Ferro","rar":"normal","slot":"Testa","attr":{},"comb":{"def":1},"res":{},"lore":"Protezione base per la testa.","prezzo":18},
+    {"id":"elmo_borchiato","nome":"Elmo Borchiato","rar":"normal","slot":"Testa","attr":{},"comb":{"def":2,"ini":-1},"res":{},"lore":"Rinforzato con borchie d'acciaio.","prezzo":35},
+    {"id":"elmo_nordico","nome":"Elmo Nordico con Corna","rar":"special","slot":"Testa","attr":{"FRT":1},"comb":{"def":2},"res":{"freddo":1},"lore":"L'elmo del guerriero del nord. Incute timore.","prezzo":65}
+  ],
+  "accessori": [
+    {"id":"amuleto_giada","nome":"Amuleto di Giada","rar":"special","slot":"Collo","attr":{"RES":1},"comb":{},"res":{"veleno":2},"lore":"Giada verde levigata dai sacerdoti.","prezzo":60},
+    {"id":"anello_principessa","nome":"Anello della Principessa","rar":"unique","slot":"Dita","attr":{"FOR":2,"DES":2,"COS":2,"RES":2,"INT":2,"FRT":2},"comb":{},"res":{},"lore":"L'anello di Elara di Koppar. Benedetto da Mitra.","prezzo":0},
+    {"id":"amuleto_mitra","nome":"Sigillo di Mitra","rar":"rare","slot":"Collo","attr":{},"comb":{},"res":{"magia":3},"lore":"Inciso col simbolo sacro di Mitra.","prezzo":180},
+    {"id":"essenza_ghiaccio","nome":"Essenza di Ghiaccio Eterno","rar":"rare","slot":"Dita","attr":{},"comb":{},"res":{"freddo":5,"fulmine":3},"lore":"Un anello forgiato dall'essenza stessa del ghiaccio di Ymir.","prezzo":0},
+    {"id":"dente_drago","nome":"Dente di Drago Bianco","rar":"rare","slot":"Collo","attr":{"FOR":1},"comb":{},"res":{},"lore":"Porta fortuna e forza. +1 Destino.","prezzo":250}
+  ],
+  "consumabili": [
+    {"id":"poz_guarigione","nome":"Pozione di Guarigione","rar":"normal","tipo":"consumabile","effetto":{"hp":15},"lore":"Erbe locali bollite con grasso d'orso.","prezzo":20},
+    {"id":"intruglio_vecchio","nome":"Intruglio del Vecchio","rar":"normal","tipo":"consumabile","effetto":{"hp":8},"lore":"Ricetta tramandata di generazione in generazione.","prezzo":12},
+    {"id":"acqua_sacra","nome":"Acqua Ghiaccio Sacro","rar":"special","tipo":"consumabile","effetto":{"res_freddo":5},"lore":"Acqua del Pozzo Sacro di Venarium. Efficace una sessione.","prezzo":50},
+    {"id":"filtro_antimagico","nome":"Filtro Antimagico","rar":"rare","tipo":"consumabile","effetto":{"res_magia":7},"lore":"Distillato di rune di protezione.","prezzo":120},
+    {"id":"elisir_berserker","nome":"Elisir del Berserker","rar":"rare","tipo":"consumabile","effetto":{"hp":50,"int_temp":-1},"lore":"Aumenta la forza ma offusca la mente. Usare con giudizio.","prezzo":150},
+    {"id":"corno_urlo","nome":"Corno dell'Urlo","rar":"special","tipo":"consumabile_quest","effetto":{"ini":10},"lore":"Suona solo una volta. Il suono congela i nemici di paura.","prezzo":0}
+  ]
+}

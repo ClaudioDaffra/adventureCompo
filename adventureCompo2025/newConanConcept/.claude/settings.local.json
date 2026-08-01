@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p C:/tmp/newConan/saves)",
+      "Bash(npm install:*)",
+      "Bash(node -e ':*)",
+      "Bash(node server.js)",
+      "Bash(curl -s http://localhost:3000/api/saves)",
+      "Bash(kill %1)",
+      "Bash(curl -s -X POST http://localhost:3000/api/game/new -H 'Content-Type: application/json' -d '{\"sesso\":\"M\",\"nome\":\"Conan\",\"eta\":\"34\",\"razza\":\"cimmero\",\"classe\":\"guerriero\",\"sottoclasse\":\"barbaro\",\"background\":\"soldato\",\"dio\":\"crom\",\"seed\":\"12345\",\"storia\":\"Nato tra le montagne.\",\"attributes\":{\"FOR\":12,\"DES\":10,\"COS\":12,\"INT\":8,\"WIS\":9,\"CHA\":9}}')",
+      "Bash(pkill -f \"node server.js\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 19056 /F)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/api/data)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\)\")",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); console.log\\(Object.keys\\(d\\)\\);\")",
+      "Bash(curl -s http://localhost:3000/api/data -o C:/tmp/apidata.json)",
+      "Bash(node:*)",
+      "Bash(curl -s -X POST http://localhost:3000/api/save-character -H 'Content-Type: application/json' -d '{\"nome\":\"Conan\",\"razza\":\"cimmero\",\"classe\":\"guerriero\",\"sottoclasse\":\"barbaro\",\"gold\":45,\"frammenti\":[],\"derived\":{\"hp\":28,\"maxHp\":28},\"attributes\":{\"FOR\":12,\"DES\":9,\"COS\":9,\"RES\":9,\"INT\":9,\"FRT\":9}}')",
+      "Bash(curl -s http://localhost:3000/api/characters)",
+      "Bash(curl:*)",
+      "Bash(pkill -f \"node.*server.js\")",
+      "Bash(cat /c/tmp/newConan/characters/*.json)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(e.get\\('n','?'\\), '→ loot:', e.get\\('loot','[]'\\)\\) for e in \\(d if isinstance\\(d,list\\) else d.get\\('enemies',[]\\)\\)]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(json.dumps\\(q, ensure_ascii=False\\)\\) for q in d.get\\('minor',[]\\)]\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('major:', len\\(d.get\\('major',[]\\)\\), 'secondary:', len\\(d.get\\('secondary',[]\\)\\), 'side:', len\\(d.get\\('side',[]\\)\\)\\)\")",
+      "Bash(python3 -c \" import sys,json d=json.load\\(sys.stdin\\) minor=d.get\\('minor',[]\\) print\\('minor count:', len\\(minor\\)\\) if minor: print\\('first minor:'\\) print\\(json.dumps\\(minor[0], indent=2\\)\\) print\\('last minor:'\\) print\\(json.dumps\\(minor[-1], indent=2\\)\\) \")",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e \"const d=require\\('./data/quests.json'\\);const m=d.minor||[];console.log\\(JSON.stringify\\(m,null,2\\)\\);\")",
+      "Read(//tmp/**)",
+      "Bash(ls C:/tmp/newConan/*.js)",
+      "Bash(ls C:/tmp/newConan/src/*.js)",
+      "Bash(ls C:/tmp/newConan/server*.js)",
+      "Bash(ls C:/tmp/newConan/app*.js)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(q['id'], q.get\\('nome',''\\)\\) for q in d.get\\('minor',[]\\)]\")",
+      "Bash(python3 *)",
+      "Bash(xargs grep *)"
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+
+1) logica del gioco
+
+2) schermata iniziale
+
+3) schermata personaggio
+	-	scelta LOAD / NEW
+	
+4) NEW	Creazione Personaggio
+
+	: sesso, età, nome, classe, dio, sottoclasse, evento, codice, storia
+	Assegnazioni Punti . punteggio mediano 9
+	9 punti liberi da assegnare , massimo incremento di 3 pe questi punteggi
+	possiamo recuperare 6 punti sottraendole alle altre abilità con un massimo incremento di 2
+	quindi possiamo arrivare ad un punteggio massimo per caratteristicica iniziale di 14e minimo di 7 ;
+	
+	oro casuale a seconda anche del background , quest 0 punto partenza vedi storia , impostazione SEED
+
+5) menu principale
+
+	vedi scheda personaggio	;	( scehrda personaggio inventario , oggeti questo resistenze sistema attacco e altro )
+	
+	vedi mappa Cimmeria		;	( possibilità di scelta luoghi annche in base alle quest attive ) 
+							;	pianifica desstinazione di arrivo , calcolo percorso
+							;	qui a seconda  anche delle quests attive o completate appariranno i nuovi luoghi
+	
+	vedi quest				;	->	quest maggiori minori , attive e completate ;  
+	
+	viaggia					;	verso destinazione
+	
+	termina					;	-> salva
+	
+	walkthorugh				;	metti walk thorugh storia ( vedi la storia nei reference ) 
+	
+6) viaggio 
+
+	incontri casuali 
+	e/o riposo
+	
+	riposo ...
+	
+	combattimento ->	scehda battaglia	->	vai a 7
+	
+	altrimenti dopo alcune iterazioni a seconda della lungherzza del viaggio vai 8 -> ad arrrivo e destinaizone
+	
+7) scheda battaglia :
+	
+	generazione	personaggio	con la scheda simile a conan oppure se è un mostro vedi caratteristiche mostro attacco fine
+	
+	attacca			a seconda dell'iniziativa
+	difenditi		se va a buon fine bonus difesa
+	gestione abilità speciali
+	fuga			dado se va a buon fine termine combattimento altrimenti viene rincorso e si reinizia
+	resa			dado se va a buon fine cessione oggetto o altro se nulla punti vita
+	morte/vita		gestione morte
+	vittoria		recupero bottino
+
+
+8) arrivo a destinazione
+
+	a seconda della locazione come puoi cedere dal listato potrebbero esserci mag o mistico o fabbro
+	la bacheca c'è sempre e indica le missioni secondarie
+	
+		città
+		
+		villaggio
+
+		accampamento
+	
+	pesronaggi caratteristiche : bachehca maga , mistico fabbro
+	
+	quando accedi a un negozio fai una schermata diversa con grafica petscii vedi punto 10
+	
+	se prende oggetto equipaggia, lascia inventario gestisci contanti
+	
+	potrebbero anche esserci NPC, gestisci dialoghi ed eventuale schermata petscii e scelta
+	missioni , update quest , update map locations e quant'altro
+
+9) nei luoghi interagisci con i pesronaggi , scelta diaglohi missioi accetta declina ed altro
+
+	
+
+10) in refernce ti allego anche schermate in petsci art del vecchio conan come riferimento
+
+11) 

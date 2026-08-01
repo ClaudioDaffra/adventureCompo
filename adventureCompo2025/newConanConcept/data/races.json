@@ -1,0 +1,8 @@
+[
+  {"id":"cimmero","nome":"Cimmero","bonuses":{"FOR":1,"COS":1},"maluses":{"INT":-1},"skills":["Resistenza al Freddo","Senso di Sopravvivenza"],"lore":"Figli delle montagne gelate. Duri come il ferro.","res":{"freddo":2,"veleno":1,"acido":1,"fuoco":1}},
+  {"id":"aquiloniano","nome":"Aquiloniano","bonuses":{"INT":1,"CHA":1},"maluses":{"COS":-1},"skills":["Diplomazia","Tattica"],"lore":"Civilta' avanzata. Strateghi nati.","res":{"acido":1,"fulmine":1,"fuoco":1,"freddo":1,"veleno":1,"magia":1}},
+  {"id":"nordheim","nome":"Nordheimr","bonuses":{"FOR":2},"maluses":{"INT":-1,"CHA":-1},"skills":["Furia Berserker","Resistenza al Freddo"],"lore":"Giganti biondi del nord. Violenti e leali.","res":{"freddo":3,"fulmine":2,"acido":1}},
+  {"id":"hyrkaniano","nome":"Hyrkaniano","bonuses":{"DES":2},"maluses":{"FOR":-1},"skills":["Arco Composito","Schivata"],"lore":"Arcieri delle steppe. Veloci come il vento.","res":{"freddo":2,"fulmine":1}},
+  {"id":"stigiano","nome":"Stigiano","bonuses":{"INT":1,"WIS":1},"maluses":{"FOR":-1},"skills":["Magia Nera","Conoscenza Occulta"],"lore":"Figli di Set. Maestri della magia del serpente.","res":{"veleno":3,"magia":3,"fuoco":1}},
+  {"id":"picta","nome":"Picta","bonuses":{"DES":1,"WIS":1},"maluses":{"CHA":-1},"skills":["Mimetismo","Tocco Silenzioso"],"lore":"Selvaggi delle foreste. Cacciatori nati.","res":{"veleno":2,"acido":1,"magia":1}}
+]

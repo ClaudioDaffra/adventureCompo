@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgia degli Incontri - L'Urlo di Ymir</title>
+    <style>
+        :root {
+            --bg-color: #2b2b2b; --panel-bg: #3a3226; --paper-bg: #d8ccb4;
+            --text-dark: #1a1a1a; --text-light: #e0d6c2; --accent: #8b0000;
+            --border: #5c4a32; --gold: #c5a059;
+            --col-normal: #aaaaaa; --col-special: #5599ff; --col-rare: #ddcc22;
+            --col-legend: #44cc44; --col-unique: #ff4444; --col-enemy: #a83232;
+            --col-ice: #88ccff; --col-fire: #ff6633;
+        }
+        body { font-family: 'Georgia', serif; background-color: var(--bg-color); color: var(--text-light); margin: 0; padding: 20px; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+        h1.title-main { font-family: 'Impact', sans-serif; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; font-size: 1.6em; }
+        .subtitle { color: #888; font-style: italic; font-size: 0.85em; margin-bottom: 20px; }
+        .sheet-container { width: 100%; max-width: 1050px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .full-width { grid-column: 1 / -1; }
+        .panel { background-color: var(--panel-bg); border: 2px solid var(--border); border-radius: 5px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        .panel-title { font-family: 'Impact', sans-serif; color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-top: 0; font-size: 1.2em; letter-spacing: 1px; text-transform: uppercase; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; font-size: 0.85em; color: var(--gold); margin-bottom: 3px; }
+        select, button { width: 100%; padding: 8px; background-color: var(--paper-bg); border: 1px solid var(--border); color: var(--text-dark); font-family: 'Georgia', serif; font-weight: bold; cursor: pointer; }
+        button { background-color: var(--accent); color: white; text-transform: uppercase; letter-spacing: 1px; border-radius: 3px; transition: 0.2s; }
+        button:hover { background-color: #a80000; }
+        .attr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+        .attr-box { background: var(--paper-bg); color: var(--text-dark); padding: 10px; border: 1px solid var(--border); border-radius: 3px; text-align: center; }
+        .attr-name { font-weight: bold; font-size: 1.1em; color: var(--accent); display: block; margin-bottom: 5px; }
+        .attr-total { font-size: 2em; font-weight: bold; line-height: 1; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #666; padding-bottom: 2px; }
+        .stat-label { font-weight: bold; }
+        .stat-value { color: var(--gold); font-weight: bold; font-size: 1.1em; }
+        .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .skill-tag { display: inline-block; background: #554433; color: var(--text-light); padding: 4px 8px; margin: 2px; border-radius: 3px; font-size: 0.9em; border: 1px solid var(--gold); }
+        .loot-box { background: rgba(0,0,0,0.4); border-left: 4px solid var(--gold); padding: 10px; margin-top: 10px; }
+        .equip-box { background: #1a1a1a; padding: 8px; border: 1px solid var(--border); margin-bottom: 5px; border-radius: 3px; }
+        .tier-Normale { color: var(--col-normal); }
+        .tier-Elite { color: var(--col-special); text-shadow: 0 0 5px rgba(85,153,255,0.5); }
+        .tier-Boss { color: var(--col-unique); text-shadow: 0 0 8px rgba(255,68,68,0.8); font-size: 1.1em; }
+        .enemy-header { text-align: center; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 15px; }
+        .enemy-name { font-family: 'Impact', sans-serif; font-size: 2.2em; color: var(--col-enemy); letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+        .enemy-type { font-style: italic; color: #aaa; }
+        .quest-badge { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 3px; font-size: 0.75em; margin-left: 8px; vertical-align: middle; }
+        .ice-glow { color: var(--col-ice) !important; text-shadow: 0 0 8px rgba(136,204,255,0.8); }
+        .fire-glow { color: var(--col-fire) !important; text-shadow: 0 0 8px rgba(255,102,51,0.8); }
+        .lore-box { background: rgba(0,0,0,0.3); border-left: 3px solid var(--col-ice); padding: 8px 12px; font-style: italic; font-size: 0.85em; color: #aaa; margin-bottom: 10px; }
+        .biome-tag { display: inline-block; background: #1a2a1a; border: 1px solid var(--col-legend); color: var(--col-legend); padding: 1px 6px; border-radius: 3px; font-size: 0.75em; margin: 1px; }
+    </style>
+</head>
+<body>
+
+<h1 class="title-main">&#9874; Forgia degli Incontri</h1>
+<p class="subtitle">L'Urlo di Ymir — Hyboria Edition | Genera nemici per bioma e grado di minaccia</p>
+
+<div class="sheet-container">
+
+    <div class="panel">
+        <h2 class="panel-title">&#9874; Generatore Incontri</h2>
+        <p style="font-size: 0.85em; color: #aaa;">Seleziona il bioma (o la locazione corrispondente) e il grado di minaccia. Il sistema forgerà il nemico con equipaggiamento e bottino.</p>
+        
+        <div class="form-group">
+            <label>Bioma / Locazione</label>
+            <select id="sel-biome">
+                <option value="any">Qualsiasi Bioma</option>
+                <option value="tundra">Tundra / Montagne Ghiacciate (es. Venarium)</option>
+                <option value="picchi">Picchi Tempestosi / Alture (es. Gurth)</option>
+                <option value="rovine">Rovine Antiche / Maledette (es. Conajohara)</option>
+                <option value="palude">Paludi Oscure</option>
+                <option value="vulcano">Terre Vulcaniche</option>
+                <option value="deserto">Deserto di Zuarir / Steppe</option>
+                <option value="foresta">Foresta Oscura (Re dei Troll)</option>
+                <option value="montagna">Montagna Luminosa (Finale)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Grado di Minaccia</label>
+            <select id="sel-tier">
+                <option value="Normale">Normale (Gregario / Bestia standard)</option>
+                <option value="Elite">Élite (Campione / Mostro Maggiore)</option>
+                <option value="Boss">Boss (Condottiero / Orrore Mitologico)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Filtro Quest (Opzionale)</label>
+            <select id="sel-quest">
+                <option value="">Nessun filtro — Qualsiasi nemico</option>
+                <option value="M1">Quest Maggiore 1 – Il Primo Urlo (Venarium)</option>
+                <option value="M2">Quest Maggiore 2 – Il Canto dei Clan Traditi (Gurth)</option>
+                <option value="M3">Quest Maggiore 3 – La Sposa del Serpente (Paludi)</option>
+                <option value="M4">Quest Maggiore 4 – Il Cuore che Brucia (Vulcano)</option>
+                <option value="M5">Quest Maggiore 5 – La Principessa di Ghiaccio (Koppar)</option>
+                <option value="M6">Quest Maggiore 6 – Il Re dei Troll (Foreste)</option>
+                <option value="M7">Quest Maggiore 7 – Il Mercante dell'Ombra (Shadizar)</option>
+                <option value="M8">Quest Maggiore 8 – La Danza dei Morti (Khorshemish)</option>
+                <option value="M9">Quest Maggiore 9 – Il Tradimento del Mistico (Gurth)</option>
+                <option value="M10">Quest Maggiore 10 – La Forgia Perduta (Vulcano)</option>
+                <option value="M11">Quest Maggiore 11 – La Scalata dell'Addio (Montagna)</option>
+                <option value="M12">Quest Maggiore 12 – Il Trono di Ghiaccio (Cima)</option>
+            </select>
+        </div>
+
+        <button onclick="generateEncounter()">&#9874; Evoca Nemico</button>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">&#9774; Bottino & Ricompense</h2>
+        <div id="loot-container" class="loot-box">
+            <i style="color:#888;">Nessun nemico sconfitto... per ora.</i>
+        </div>
+        <div id="quest-reward-box" style="display:none; margin-top:10px; padding:10px; background:rgba(136,204,255,0.08); border:1px solid var(--col-ice); border-radius:4px;">
+            <div style="color:var(--col-ice); font-weight:bold; margin-bottom:6px;">&#10052; Ricompensa Quest Collegata:</div>
+            <div id="quest-reward-text" style="font-size:0.9em; color:#ccc;"></div>
+        </div>
+    </div>
+
+    <div class="panel full-width" id="enemy-sheet" style="display: none;">
+        <div class="enemy-header">
+            <h1 class="enemy-name" id="en-name">Nome Nemico</h1>
+            <div class="enemy-type" id="en-desc">Tipo | Bioma | Grado</div>
+            <div id="en-lore" class="lore-box" style="display:none; margin-top:10px;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h3 style="color:var(--gold); border-bottom:1px solid var(--border); margin-top:0;">Attributi</h3>
+                <div class="attr-grid">
+                    <div class="attr-box"><span class="attr-name">FOR</span><span class="attr-total" id="en-for">10</span></div>
+                    <div class="attr-box"><span class="attr-name">DES</span><span class="attr-total" id="en-des">10</span></div>
+                    <div class="attr-box"><span class="attr-name">COS</span><span class="attr-total" id="en-cos">10</span></div>
+                    <div class="attr-box"><span class="attr-name">RES</span><span class="attr-total" id="en-res">10</span></div>
+                    <div class="attr-box"><span class="attr-name">INT</span><span class="attr-total" id="en-int">10</span></div>
+                    <div class="attr-box"><span class="attr-name">FRT</span><span class="attr-total" id="en-frt">10</span></div>
+                </div>
+                <h3 style="color:var(--gold); border-bottom:1px solid var(--border);">Combattimento (Flat)</h3>
+                <div class="stat-row"><span class="stat-label">Vita Punti (HP)</span><span class="stat-value" style="color:var(--col-unique);" id="en-hp">0</span></div>
+                <div class="stat-row"><span class="stat-label">Attacco Fisico (ATT)</span><span class="stat-value" id="en-att">0</span></div>
+                <div class="stat-row"><span class="stat-label">Danno (DAN)</span><span class="stat-value" id="en-dan">0</span></div>
+                <div class="stat-row"><span class="stat-label">Danno Elementale</span><span class="stat-value" style="color:#ff8855;" id="en-elem-dan">-</span></div>
+                <div class="stat-row"><span class="stat-label">Difesa (DEF)</span><span class="stat-value" id="en-def">0</span></div>
+                <div class="stat-row"><span class="stat-label">Armatura (RD)</span><span class="stat-value" id="en-rd">0</span></div>
+                <div class="stat-row"><span class="stat-label">Iniziativa (INI)</span><span class="stat-value" id="en-ini">0</span></div>
+            </div>
+            <div>
+                <h3 style="color:var(--gold); border-bottom:1px solid var(--border); margin-top:0;">Riduzioni e Vulnerabilità Elementali</h3>
+                <div class="res-grid" style="margin-bottom: 15px;">
+                    <div class="stat-row"><span class="stat-label">Fuoco</span><span class="stat-value" id="en-res-FUO">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Freddo</span><span class="stat-value" id="en-res-FRE">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Acido</span><span class="stat-value" id="en-res-ACI">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Veleno</span><span class="stat-value" id="en-res-VEL">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Magia</span><span class="stat-value" id="en-res-MAG">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Fulmine</span><span class="stat-value" id="en-res-FUL">0</span></div>
+                </div>
+                <h3 style="color:var(--gold); border-bottom:1px solid var(--border);">Abilità Speciali</h3>
+                <div id="en-skills" style="margin-bottom: 15px;"></div>
+                <h3 style="color:var(--gold); border-bottom:1px solid var(--border);">Equipaggiamento / Armi Naturali</h3>
+                <div id="en-equip"></div>
+                <div id="en-biomes" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ==========================================
+// DATABASE NEMICI – L'URLO DI YMIR
+// ==========================================
+const ENEMY_DB = [
+    // === NEMICI ORIGINALI ===
+    { "n": "Cimmero Rinnegato", "t": "Umanoide", "isMonster": false, "fixedElem": null,
+      "attr": {"FOR":12,"DES":10,"COS":14,"RES":10,"INT":8,"FRT":9},
+      "armor": {"rd":2,"def":1}, "baseRes": {"FRE":20},
+      "skills": ["Furia", "Colpo Possente"],
+      "loot": ["Spada Cimmera", "Pelli"], "biome": ["tundra","picchi","any"],
+      "lore": "Guerriero che ha rinnegato il suo clan per servire forze oscure." },
+
+    { "n": "Stregone Stigiano", "t": "Umanoide", "isMonster": false, "fixedElem": "MAG",
+      "attr": {"FOR":6,"DES":8,"COS":8,"RES":10,"INT":16,"FRT":12},
+      "armor": {"rd":1,"def":0}, "baseRes": {"MAG":60,"VEL":20},
+      "skills": ["Dardo Oscuro", "Evocazione"],
+      "loot": ["Pergamena", "Daga Rituale"], "biome": ["rovine","deserto","any"],
+      "lore": "Sacerdote di Set che manipola la magia del serpente." },
+
+    { "n": "Assassino Hyrkaniano", "t": "Umanoide", "isMonster": false, "fixedElem": "VEL",
+      "attr": {"FOR":8,"DES":16,"COS":10,"RES":8,"INT":10,"FRT":8},
+      "armor": {"rd":1,"def":3}, "baseRes": {"VEL":40},
+      "skills": ["Lama Avvelenata", "Schivata"],
+      "loot": ["Arco Hyrkaniano", "Veleno"], "biome": ["rovine","palude","deserto"],
+      "lore": "Killer silenzioso addestrato nelle steppe hyrkaniane." },
+
+    { "n": "Gigante dei Ghiacci", "t": "Mitologico", "isMonster": true, "fixedElem": "FRE",
+      "attr": {"FOR":22,"DES":6,"COS":20,"RES":16,"INT":6,"FRT":12},
+      "armor": {"rd":8,"def":0}, "baseRes": {"FRE":100,"FUO":-50},
+      "skills": ["Schianto", "Alito Gelido"],
+      "loot": ["Cuore di Ghiaccio", "Ossa Grandi"], "biome": ["tundra","picchi"],
+      "lore": "Figlio di Ymir, condannato a vagare nelle terre ghiacciate." },
+
+    { "n": "Djinn della Tempesta", "t": "Elementale", "isMonster": true, "fixedElem": "FUL",
+      "attr": {"FOR":10,"DES":18,"COS":12,"RES":14,"INT":14,"FRT":12},
+      "armor": {"rd":5,"def":5}, "baseRes": {"FUL":100,"FRE":20,"FIS":50},
+      "skills": ["Catena di Fulmini", "Volo"],
+      "loot": ["Essenza Elettrica"], "biome": ["picchi"],
+      "lore": "Spirito del vento che ha tradito entrambi gli dei." },
+
+    { "n": "Golem di Magma", "t": "Costrutto", "isMonster": true, "fixedElem": "FUO",
+      "attr": {"FOR":24,"DES":4,"COS":22,"RES":18,"INT":2,"FRT":20},
+      "armor": {"rd":12,"def":-2}, "baseRes": {"FUO":100,"FRE":-50,"VEL":100,"ACI":50},
+      "skills": ["Pugno Rovente", "Esplosione Lavica"],
+      "loot": ["Cuore di Vulcano", "Ossidiana"], "biome": ["vulcano"],
+      "lore": "Custode della Forgia Perduta, forgiato dal fuoco vivo del vulcano." },
+
+    { "n": "Serpente delle Paludi", "t": "Bestia", "isMonster": true, "fixedElem": "ACI",
+      "attr": {"FOR":14,"DES":14,"COS":14,"RES":10,"INT":4,"FRT":12},
+      "armor": {"rd":4,"def":2}, "baseRes": {"ACI":80,"VEL":80,"FUL":-20},
+      "skills": ["Sputo Acido", "Stritolare"],
+      "loot": ["Scaglie", "Ghiandola Acida"], "biome": ["palude"],
+      "lore": "Antico custode dei segreti della Strega delle Paludi." },
+
+    { "n": "Spettro di Acheron", "t": "Non-Morto", "isMonster": true, "fixedElem": "MAG",
+      "attr": {"FOR":8,"DES":14,"COS":10,"RES":12,"INT":12,"FRT":20},
+      "armor": {"rd":0,"def":6}, "baseRes": {"MAG":80,"VEL":100,"FUO":-20},
+      "skills": ["Urlo Banshee", "Tocco Spettrale"],
+      "loot": ["Polvere Spettrale"], "biome": ["rovine","montagna"],
+      "lore": "Anima dell'antico impero di Acheron, legata al ghiaccio eterno di Valthor." },
+
+    // === NUOVI NEMICI – L'URLO DI YMIR ===
+    { "n": "Troll Reale di Ymir", "t": "Mitologico", "isMonster": true, "fixedElem": "FRE",
+      "attr": {"FOR":28,"DES":8,"COS":26,"RES":14,"INT":6,"FRT":18},
+      "armor": {"rd":10,"def":-3}, "baseRes": {"FRE":120,"FUO":-70,"VEL":80},
+      "skills": ["Schianto Tellurico", "Rigenerazione Ghiacciata", "Urlo di Ymir"],
+      "loot": ["Zanna di Troll Reale", "Cuore di Ghiaccio Nero", "Ascia dei Troll"],
+      "biome": ["palude","picchi","foresta"],
+      "lore": "Il Re dei Troll ha rubato un Frammento dell'Urlo per proclamarsi sovrano di Cimmeria. Corpo enorme coperto di ghiaccio vivo. Quando urla, la foresta trema. Si rigenera da ogni colpo che non sia fuoco puro.",
+      "questLink": "M6" },
+
+    { "n": "Cultista del Ghiaccio Eterno", "t": "Umanoide", "isMonster": false, "fixedElem": "MAG",
+      "attr": {"FOR":10,"DES":12,"COS":12,"RES":14,"INT":18,"FRT":16},
+      "armor": {"rd":2,"def":4}, "baseRes": {"MAG":90,"FRE":60,"FUO":-40},
+      "skills": ["Dardo di Brina", "Evocazione Spettri", "Preghiera di Valthor"],
+      "loot": ["Tunica del Cultista", "Pergamena del Patto", "Cristallo di Ghiaccio"],
+      "biome": ["rovine","vulcano","montagna","any"],
+      "lore": "Seguace fanatico del Re Valthor. Ha bevuto l'acqua del Pozzo Gelido, trasformando il sangue in ghiaccio liquido. Non prova dolore. Non si arrende mai.",
+      "questLink": null },
+
+    { "n": "Lupo Mannaro di Gurth", "t": "Bestia", "isMonster": true, "fixedElem": "VEL",
+      "attr": {"FOR":18,"DES":20,"COS":16,"RES":10,"INT":4,"FRT":14},
+      "armor": {"rd":3,"def":2}, "baseRes": {"VEL":70,"FRE":30},
+      "skills": ["Morso Infetto", "Balzo Notturno", "Rigenerazione Lunare"],
+      "loot": ["Pelle di Lupo Mannaro", "Zanna Argentata", "Cuore di Bestia"],
+      "biome": ["picchi","tundra","foresta"],
+      "lore": "Un guerriero di Gurth corrotto dalla maledizione di Valthor. Corre solo di notte. Il suo morso trasferisce la maledizione. Solo l'argento o il fuoco può fermarlo.",
+      "questLink": "Minore1" },
+
+    { "n": "Djinn del Ghiaccio Traditore", "t": "Elementale", "isMonster": true, "fixedElem": "FRE",
+      "attr": {"FOR":12,"DES":22,"COS":14,"RES":16,"INT":16,"FRT":14},
+      "armor": {"rd":6,"def":6}, "baseRes": {"FRE":120,"FUL":-50,"FUO":40},
+      "skills": ["Tempesta di Lame di Ghiaccio", "Volo Gelido", "Trappola di Cristallo"],
+      "loot": ["Essenza di Ghiaccio Eterno", "Gemma Tempestosa"],
+      "biome": ["picchi","montagna"],
+      "lore": "Ha tradito Ymir per primo. Ora serve Valthor, ma solo per aspettare il momento giusto per tradire anche lui. Parla sempre in forma di enigma. Se sconfitto, rivela un segreto sulla Montagna Luminosa.",
+      "questLink": "Minore3" },
+
+    { "n": "Mistico Corrotto", "t": "Umanoide", "isMonster": false, "fixedElem": "MAG",
+      "attr": {"FOR":10,"DES":12,"COS":14,"RES":16,"INT":20,"FRT":18},
+      "armor": {"rd":3,"def":5}, "baseRes": {"MAG":100,"FRE":60,"FUO":-30},
+      "skills": ["Visione del Tradimento", "Maledizione di Valthor", "Forma Spettrale"],
+      "loot": ["Occhio del Mistico", "Pergamena della Verità", "Frammento 9 dell'Urlo"],
+      "biome": ["picchi","rovine","any"],
+      "lore": "Il figlio segreto di Re Valthor. Ha vissuto per mille anni fingendo di essere un saggio cieco. Quando la maschera cade, il suo potere è terrificante. Ma nasconde ancora un barlume di umanità.",
+      "questLink": "M9" },
+
+    { "n": "Re Valthor il Gelido", "t": "Mitologico", "isMonster": true, "fixedElem": "FRE",
+      "attr": {"FOR":32,"DES":14,"COS":30,"RES":22,"INT":20,"FRT":24},
+      "armor": {"rd":15,"def":5}, "baseRes": {"FRE":200,"FUO":-100,"MAG":80,"VEL":100},
+      "skills": ["Urlo di Ymir", "Catena di Ghiaccio Eterno", "Forma di Dio", "Esercito dei Non-Morti", "Tempesta Millenaria"],
+      "loot": ["Corona di Ymir", "Martello del Destino", "Frammento 12 dell'Urlo"],
+      "biome": ["montagna"],
+      "lore": "Re cimmero che mille anni fa strinse un patto con gli Dei Oscuri di Stygia. Ora è ghiaccio e odio puro, imprigionato ma non sconfitto. I suoi occhi sono stelle di brina. La sua voce spezza le rocce. Il suo toccarlo uccide all'istante… a meno che il Martello del Destino non sia con te.",
+      "questLink": "M12" }
+];
+
+// ==========================================
+// DATABASE EQUIPAGGIAMENTI UMANOIDI
+// ==========================================
+const WEAPONS = [
+    { n:"Spada Corta",            att:1,  dan:3,  def:1,  elem:null },
+    { n:"Ascia Bipenne",          att:-1, dan:6,  def:-2, elem:null },
+    { n:"Lancia Lunga",           att:1,  dan:4,  def:2,  elem:null },
+    { n:"Daga Stigiana",          att:2,  dan:3,  def:0,  elem:{type:'VEL',val:2} },
+    { n:"Martello Pesante",       att:0,  dan:7,  def:-1, elem:null },
+    // Nuove armi – Urlo di Ymir
+    { n:"Ascia dei Troll",        att:-2, dan:8,  def:-1, elem:{type:'FRE',val:3} },
+    { n:"Spada del Sangue Cimmero",att:1, dan:4,  def:2,  elem:{type:'VEL',val:2} },
+    { n:"Martello del Destino",   att:0,  dan:10, def:-3, elem:{type:'FRE',val:5} }
+];
+
+const ARMORS = [
+    { n:"Abiti Logori",              rd:0, ini:0 },
+    { n:"Pelli di Bestia",           rd:1, ini:0 },
+    { n:"Cuoio Borchiato",           rd:2, ini:-1 },
+    { n:"Cotta di Maglia",           rd:4, ini:-2 },
+    { n:"Piastre Pesanti",           rd:6, ini:-4 },
+    // Nuove armature – Urlo di Ymir
+    { n:"Mantello di Scaglie Viventi",rd:4, ini:-1 },
+    { n:"Piastre di Ghiaccio Eterno", rd:8, ini:-5 },
+    { n:"Tunica del Cultista",        rd:1, ini:2 }
+];
+
+// Quest Rewards per i link alle quest
+const QUEST_REWARDS = {
+    "M1": { nome:"Quest Maggiore 1 – Il Primo Urlo", bioma:"Venarium", ricompensa:"Frammento 1 dell'Urlo (Amuleto: +3 FRT) • 120 Zecchini • Spada Cimmera del Sangue (DAN+2, VEL)" },
+    "M2": { nome:"Quest Maggiore 2 – Il Canto dei Clan Traditi", bioma:"Gurth", ricompensa:"Frammento 2 dell'Urlo • Corno dell'Urlo (consumabile: +10 INI) • Accesso Forgia del Mistico" },
+    "M3": { nome:"Quest Maggiore 3 – La Sposa del Serpente", bioma:"Paludi", ricompensa:"Frammento 3 dell'Urlo • Mantello di Scaglie Viventi (RD+4, ACI 100%)" },
+    "M4": { nome:"Quest Maggiore 4 – Il Cuore che Brucia", bioma:"Terre Vulcaniche", ricompensa:"Frammento 4 dell'Urlo • Cuore di Vulcano (Arma Leggendaria: DAN Fuoco+5)" },
+    "M5": { nome:"Quest Maggiore 5 – La Principessa di Ghiaccio", bioma:"Koppar", ricompensa:"Frammento 5 dell'Urlo • Anello della Principessa (rar-unique: +2 tutti gli attributi)" },
+    "M6": { nome:"Quest Maggiore 6 – Il Re dei Troll", bioma:"Foreste Oscure", ricompensa:"Frammento 6 dell'Urlo • Ascia dei Troll (DAN+6, att-2, leggendaria)" },
+    "M7": { nome:"Quest Maggiore 7 – Il Mercante dell'Ombra", bioma:"Shadizar", ricompensa:"Frammento 7 dell'Urlo • 300 Zecchini • Daga dell'Ombra (VEL+4)" },
+    "M8": { nome:"Quest Maggiore 8 – La Danza dei Morti", bioma:"Khorshemish", ricompensa:"Frammento 8 dell'Urlo • Polvere Spettrale (perma +3 INI, +1 Destino)" },
+    "M9": { nome:"Quest Maggiore 9 – Il Tradimento del Mistico", bioma:"Gurth (ritorno)", ricompensa:"Frammento 9 dell'Urlo • Possibile alleato eterno se perdonato" },
+    "M10": { nome:"Quest Maggiore 10 – La Forgia Perduta", bioma:"Vulcano", ricompensa:"Martello del Destino (Leggendario: DAN+8, FOR+5, effetto 'Urlo di Ymir' 1×/partita)" },
+    "M11": { nome:"Quest Maggiore 11 – La Scalata dell'Addio", bioma:"Montagna Luminosa", ricompensa:"Frammento 10 + 11 dell'Urlo • +5 Destino permanente" },
+    "M12": { nome:"Quest Maggiore 12 – Il Trono di Ghiaccio", bioma:"Cima Montagna Luminosa", ricompensa:"Corona di Ymir (rar-unique: +6 tutti gli attributi) • Fine partita con epilogo" },
+    "Minore1": { nome:"Quest Minore 1 – Caccia al Lupo Mannaro", bioma:"Picchi", ricompensa:"Pelle di Lupo Mannaro + Zanna Argentata + 40 Zecchini" },
+    "Minore3": { nome:"Quest Minore 3 – La Vendetta del Djinn", bioma:"Picchi", ricompensa:"Essenza di Ghiaccio Eterno (Anello Fulmine)" }
+};
+
+// ==========================================
+// LOGICA GENERAZIONE
+// ==========================================
+function getTierMultipliers(tier) {
+    if (tier === "Elite") return { attr: 3, hp: 25, dan: 2, rd: 1, att: 1 };
+    if (tier === "Boss")  return { attr: 6, hp: 60, dan: 4, rd: 3, att: 3 };
+    return { attr: 0, hp: 0, dan: 0, rd: 0, att: 0 };
+}
+
+function generateEncounter() {
+    const biome = document.getElementById("sel-biome").value;
+    const tier  = document.getElementById("sel-tier").value;
+    const questFilter = document.getElementById("sel-quest").value;
+
+    let pool = ENEMY_DB;
+    if (biome !== "any") pool = ENEMY_DB.filter(e => e.biome.includes(biome));
+    if (pool.length === 0) pool = ENEMY_DB;
+
+    // Se c'è un filtro quest, privilegia il boss collegato
+    if (questFilter) {
+        const questEnemies = ENEMY_DB.filter(e => e.questLink === questFilter);
+        if (questEnemies.length > 0) pool = questEnemies;
+    }
+
+    const baseEnemy = pool[Math.floor(Math.random() * pool.length)];
+    const mods = getTierMultipliers(tier);
+    let enemy = JSON.parse(JSON.stringify(baseEnemy));
+    enemy.tier = tier;
+
+    for(let k in enemy.attr) enemy.attr[k] += mods.attr;
+
+    let finalStats = {
+        hp: (enemy.attr.COS * 2) + mods.hp,
+        att: Math.floor(enemy.attr.DES / 4) + mods.att,
+        dan: Math.floor(enemy.attr.FOR / 3) + mods.dan,
+        def: Math.floor(enemy.attr.DES / 4) + enemy.armor.def,
+        rd:  Math.floor(enemy.attr.RES / 5) + enemy.armor.rd + mods.rd,
+        ini: Math.floor(enemy.attr.DES / 2),
+        elemDan: null,
+        equipHTML: ""
+    };
+
+    let finalLoot = [];
+
+    if (!enemy.isMonster) {
+        let w = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
+        let a = ARMORS[Math.floor(Math.random() * ARMORS.length)];
+        finalStats.att += w.att;
+        finalStats.dan += w.dan;
+        finalStats.def += w.def || 0;
+        finalStats.rd  += a.rd;
+        finalStats.ini += a.ini;
+        if (w.elem) finalStats.elemDan = `${w.elem.type} +${w.elem.val}`;
+        else if (enemy.fixedElem) finalStats.elemDan = `${enemy.fixedElem} +${mods.dan > 0 ? mods.dan + 1 : 2}`;
+        finalStats.equipHTML = `
+            <div class="equip-box"><strong>Arma:</strong> ${w.n} (ATT ${w.att>0?'+':''}${w.att}, DAN +${w.dan})</div>
+            <div class="equip-box"><strong>Armatura:</strong> ${a.n} (RD +${a.rd}, INI ${a.ini})</div>`;
+        finalLoot.push(`[Equip] ${w.n}`);
+        finalLoot.push(`[Equip] ${a.n}`);
+        finalLoot.push(`Sacchetto con ${Math.floor(Math.random()*10) + (tier==='Boss'?50:5)} Zecchini`);
+    } else {
+        if (enemy.fixedElem) finalStats.elemDan = `${enemy.fixedElem} +${Math.floor(enemy.attr.FRT/4) + mods.dan}`;
+        finalStats.equipHTML = `<div class="equip-box"><em>Armi Naturali e Pelli Spesse (Bonus integrati in RD e DAN)</em></div>`;
+        finalLoot.push(...enemy.loot);
+        if (tier === "Elite") finalLoot.push("Gemma Grezza (Valore: 20 Zecchini)");
+        if (tier === "Boss") finalLoot.push("<strong>[&#10052; Frammento dell'Urlo]</strong>: Oggetto di Quest. Porta con te sulla Montagna Luminosa.");
+    }
+
+    renderSheet(enemy, finalStats);
+    renderLoot(finalLoot, tier, enemy.questLink);
+}
+
+function renderSheet(enemy, stats) {
+    document.getElementById("enemy-sheet").style.display = "block";
+
+    let prefix = enemy.tier === "Normale" ? "" : (enemy.tier === "Elite" ? "Campione " : "Orrore ");
+    let nameEl = document.getElementById("en-name");
+    nameEl.textContent = prefix + enemy.n;
+    nameEl.className = `enemy-name tier-${enemy.tier}`;
+
+    // Aggiunge badge quest se collegato
+    if (enemy.questLink) {
+        nameEl.innerHTML += `<span class="quest-badge">${enemy.questLink}</span>`;
+    }
+
+    document.getElementById("en-desc").textContent =
+        `${enemy.t} | ${enemy.biome.join(", ")} | Grado: ${enemy.tier}`;
+
+    // Lore
+    let loreEl = document.getElementById("en-lore");
+    if (enemy.lore) {
+        loreEl.textContent = '"' + enemy.lore + '"';
+        loreEl.style.display = "block";
+    } else {
+        loreEl.style.display = "none";
+    }
+
+    document.getElementById("en-for").textContent = enemy.attr.FOR;
+    document.getElementById("en-des").textContent = enemy.attr.DES;
+    document.getElementById("en-cos").textContent = enemy.attr.COS;
+    document.getElementById("en-res").textContent = enemy.attr.RES;
+    document.getElementById("en-int").textContent = enemy.attr.INT;
+    document.getElementById("en-frt").textContent = enemy.attr.FRT;
+
+    document.getElementById("en-hp").textContent  = stats.hp;
+    document.getElementById("en-att").textContent = stats.att > 0 ? `+${stats.att}` : stats.att;
+    document.getElementById("en-dan").textContent = stats.dan > 0 ? `+${stats.dan}` : stats.dan;
+    document.getElementById("en-def").textContent = stats.def > 0 ? `+${stats.def}` : stats.def;
+    document.getElementById("en-rd").textContent  = stats.rd;
+    document.getElementById("en-ini").textContent = stats.ini > 0 ? `+${stats.ini}` : stats.ini;
+    document.getElementById("en-elem-dan").textContent = stats.elemDan || "Nessuno";
+
+    let resBaseFlat = Math.floor(enemy.attr.RES / 5);
+    const elems = ["FUO","FRE","ACI","VEL","MAG","FUL"];
+    elems.forEach(el => {
+        let jsonVal = enemy.baseRes[el] || 0;
+        let flatVal = Math.floor(jsonVal / 10);
+        let total   = resBaseFlat + flatVal;
+        let elDom   = document.getElementById(`en-res-${el}`);
+        elDom.textContent = total > 0 ? `+${total}` : total;
+        if (total < 0) elDom.style.color = "#ff4444";
+        else if (total > 10) elDom.style.color = "#88ccff";
+        else if (total > 5) elDom.style.color = "#44cc44";
+        else elDom.style.color = "var(--gold)";
+    });
+
+    document.getElementById("en-skills").innerHTML =
+        enemy.skills.map(s => `<span class="skill-tag">${s}</span>`).join(" ");
+    document.getElementById("en-equip").innerHTML = stats.equipHTML;
+
+    // Biomi
+    document.getElementById("en-biomes").innerHTML =
+        "Trovato in: " + enemy.biome.map(b => `<span class="biome-tag">${b}</span>`).join(" ");
+}
+
+function renderLoot(lootArray, tier, questLink) {
+    let html = `<h4 style="margin-top:0; color:var(--col-unique);">Bottino Sconfitto (${tier}):</h4><ul>`;
+    lootArray.forEach(item => { html += `<li>${item}</li>`; });
+    html += `</ul><p style="font-size:0.8em; color:#aaa;">Il Master può permettere ai giocatori di raccogliere l'equipaggiamento degli umanoidi per usarlo o venderlo ai mercanti.</p>`;
+    document.getElementById("loot-container").innerHTML = html;
+
+    // Mostra ricompensa quest se collegata
+    const qrBox = document.getElementById("quest-reward-box");
+    if (questLink && QUEST_REWARDS[questLink]) {
+        const qr = QUEST_REWARDS[questLink];
+        document.getElementById("quest-reward-text").innerHTML =
+            `<strong>${qr.nome}</strong><br>Bioma: ${qr.bioma}<br>Ricompensa: ${qr.ricompensa}`;
+        qrBox.style.display = "block";
+    } else {
+        qrBox.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "fabbro": {
+    "id": "fabbro",
+    "nome": "FABBRO",
+    "voce": "Acciaio e fuoco, barbaro. Quello che serve per sopravvivere a Cimmeria.",
+    "catalog": {
+      "slots": ["Arma","Arma2M","Torso","Scudo","Testa","Bracciali","Stivali"],
+      "rarities": ["normal","normal","normal","special","special","rare"],
+      "countMin": 4,
+      "countMax": 8,
+      "priceVar": 0.2
+    }
+  },
+  "mistico": {
+    "id": "mistico",
+    "nome": "MISTICO",
+    "voce": "La conoscenza ha un prezzo. Ma l'ignoranza ne ha uno piu' alto.",
+    "catalog": {
+      "slots": ["Pergamene","Collo","AnelloDX"],
+      "rarities": ["normal","normal","special","special","rare"],
+      "countMin": 3,
+      "countMax": 6,
+      "priceVar": 0.15
+    }
+  },
+  "maga": {
+    "id": "maga",
+    "nome": "MAGA / ANTRO",
+    "voce": "Il ghiaccio e il fuoco parlano lingue diverse. Io le conosco entrambe.",
+    "catalog": {
+      "slots": ["Consumabili"],
+      "rarities": ["normal","normal","normal","special","special","rare"],
+      "countMin": 4,
+      "countMax": 7,
+      "priceVar": 0.2
+    }
+  }
+}

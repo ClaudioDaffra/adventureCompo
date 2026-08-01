@@ -1,0 +1,427 @@
+{
+  "nome": "Sonja",
+  "sesso": "femmine",
+  "eta": "34",
+  "razza": "hyboriano",
+  "classe": "barbaro",
+  "sottoclasse": "berserker",
+  "background": "schiavo",
+  "dio": "crom",
+  "evento": "villaggio",
+  "condotta": "acciaio",
+  "seed": 1721021,
+  "attributes": {
+    "FOR": 17,
+    "DES": 18,
+    "COS": 13,
+    "RES": 14,
+    "INT": 15,
+    "FRT": 9
+  },
+  "derived": {
+    "hp": 36,
+    "maxHp": 36,
+    "energia": 26,
+    "maxEnergia": 26,
+    "att": 24,
+    "dan": 22,
+    "def": 12,
+    "rd": 10,
+    "ini": 6
+  },
+  "baseResistances": {
+    "fuoco": 4,
+    "freddo": 4,
+    "acido": 3,
+    "veleno": 3,
+    "magia": 3,
+    "fulmine": 3,
+    "incanto": 6
+  },
+  "resistances": {
+    "fuoco": 4,
+    "freddo": 10,
+    "acido": 3,
+    "veleno": 7,
+    "magia": 9,
+    "fulmine": 3,
+    "incanto": 6
+  },
+  "skills": [
+    "Adattamento",
+    "Furia",
+    "Intimidire",
+    "Sopportazione",
+    "Sopravvivenza",
+    "Fermezza"
+  ],
+  "competenze": [
+    "Sociale",
+    "Armi a 2 mani",
+    "Sfondamento",
+    "Furtivita'",
+    "Resistenza",
+    "Resistenza Fuoco",
+    "Armatura"
+  ],
+  "traits": [
+    "Adattabile: +1 a tutte le Abilita' Sociali.",
+    "Il dio non ascolta, ma da' Forza."
+  ],
+  "equipment": {
+    "elmo": {
+      "id": "e4",
+      "nome": "Elmo del Grande Orso",
+      "rar": "rare",
+      "slot": "Testa",
+      "attr": {
+        "FOR": 1,
+        "COS": 1
+      },
+      "comb": {},
+      "res": {
+        "freddo": 4
+      },
+      "lore": "Forgiato dalle tribu' nordheimer.",
+      "prezzo": 190,
+      "instanceId": "e4_1777215516780"
+    },
+    "armatura": {
+      "id": "arm6",
+      "nome": "Cotta di Maglia Nordica",
+      "rar": "rare",
+      "slot": "Torso",
+      "attr": {
+        "RES": 1
+      },
+      "comb": {
+        "rd": 6,
+        "ini": -2
+      },
+      "res": {
+        "freddo": 2
+      },
+      "lore": "Acciaio rinforzato con ossa di drago bianco.",
+      "prezzo": 240,
+      "instanceId": "arm6_1777116652033"
+    },
+    "bracciali": {
+      "id": "b3",
+      "nome": "Bracciali del Re",
+      "rar": "rare",
+      "slot": "Bracciali",
+      "attr": {
+        "FOR": 1,
+        "DES": 1
+      },
+      "comb": {
+        "att": 1
+      },
+      "res": {},
+      "lore": "Simbolo di potere e precisione.",
+      "prezzo": 215,
+      "instanceId": "b3_1777119350100"
+    },
+    "cintura": null,
+    "amuleto": {
+      "id": "a1",
+      "nome": "Dente di Lupo",
+      "rar": "normal",
+      "slot": "Collo",
+      "attr": {},
+      "comb": {
+        "att": 1
+      },
+      "res": {},
+      "lore": "Un dente di lupo-mannaro.",
+      "prezzo": 20,
+      "instanceId": "a1_1777229066924"
+    },
+    "anello": {
+      "id": "an3",
+      "nome": "Anello d'Argento di Set",
+      "rar": "rare",
+      "slot": "AnelloDX",
+      "attr": {
+        "INT": 1
+      },
+      "comb": {},
+      "res": {
+        "veleno": 4,
+        "magia": 2
+      },
+      "lore": "Simbolo di potere oscuro.",
+      "prezzo": 255,
+      "instanceId": "an3_1777203547802"
+    },
+    "stivali": {
+      "id": "s2",
+      "nome": "Stivali di Ferro",
+      "rar": "special",
+      "slot": "Stivali",
+      "attr": {},
+      "comb": {
+        "rd": 1
+      },
+      "res": {},
+      "lore": "Un calcio porta il peso di una mazza.",
+      "prezzo": 75,
+      "instanceId": "s2_1777203309126"
+    },
+    "arma": {
+      "id": "w_unique1",
+      "nome": "Lama di Conan",
+      "rar": "unique",
+      "slot": "Arma",
+      "attr": {
+        "FOR": 2,
+        "DES": 1
+      },
+      "comb": {
+        "att": 5,
+        "dan": 14,
+        "def": 2
+      },
+      "res": {
+        "magia": 4
+      },
+      "elemDan": {},
+      "lore": "Taglia il destino stesso.",
+      "instanceId": "uni_1777205783003"
+    },
+    "scudo": {
+      "id": "sc2",
+      "nome": "Scudo Rinforzato",
+      "rar": "normal",
+      "slot": "Scudo",
+      "attr": {},
+      "comb": {
+        "def": 2,
+        "att": -1
+      },
+      "res": {},
+      "lore": "Pesante ma impenetrabile.",
+      "prezzo": 20,
+      "instanceId": "sc2_1777203397450"
+    }
+  },
+  "inventory": [
+    {
+      "id": "antidoto_maga",
+      "nome": "Antidoto della Maga",
+      "rar": "special",
+      "slot": null,
+      "tipo": "consumabile",
+      "prezzo": 40,
+      "effetto": {
+        "curePoison": true,
+        "hp": 5
+      },
+      "desc": "Cura il veleno (1 HP/g) e recupera 5 HP.",
+      "usableInCombat": false,
+      "instanceId": "antidoto_maga_1777206972965"
+    },
+    {
+      "id": "pot3",
+      "nome": "Balsamo di Guerriero",
+      "rar": "special",
+      "tipo": "consumabile",
+      "usableInCombat": true,
+      "cat": "pozioni",
+      "effetto": {
+        "hp": 30
+      },
+      "desc": "Recupera 30 HP.",
+      "prezzo": 85,
+      "instanceId": "pot3_1777229129477"
+    },
+    {
+      "id": "pot3",
+      "nome": "Balsamo di Guerriero",
+      "rar": "special",
+      "tipo": "consumabile",
+      "usableInCombat": true,
+      "cat": "pozioni",
+      "effetto": {
+        "hp": 30
+      },
+      "desc": "Recupera 30 HP.",
+      "prezzo": 85,
+      "instanceId": "pot3_1777230361192"
+    },
+    {
+      "id": "pot3",
+      "nome": "Balsamo di Guerriero",
+      "rar": "special",
+      "tipo": "consumabile",
+      "usableInCombat": true,
+      "cat": "pozioni",
+      "effetto": {
+        "hp": 30
+      },
+      "desc": "Recupera 30 HP.",
+      "prezzo": 85,
+      "instanceId": "pot3_1777230945913"
+    }
+  ],
+  "gold": 9,
+  "destino": 1,
+  "destinoGemsFound": [
+    19
+  ],
+  "frammenti": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "alleanze": [
+    "Strega delle Paludi",
+    "Principessa Elara",
+    "Re dei Troll",
+    "Mistico"
+  ],
+  "currentLocation": 4,
+  "visitedLocations": [
+    0,
+    8,
+    9,
+    1,
+    19,
+    2,
+    3,
+    11,
+    10,
+    16,
+    15,
+    4,
+    5,
+    6,
+    7,
+    12
+  ],
+  "unlockedLocations": [
+    0,
+    1,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    12
+  ],
+  "questMajorStato": {
+    "M1": "completata",
+    "M2": "completata",
+    "M3": "completata",
+    "M4": "completata",
+    "M5": "completata",
+    "M6": "completata",
+    "M7": "completata",
+    "M8": "completata",
+    "M9": "completata",
+    "M10": "completata",
+    "M11": "completata",
+    "M12": "attiva"
+  },
+  "questMinorStato": {
+    "m8": "completata",
+    "m2": "completata",
+    "rnd_9_20568_0": "completata",
+    "rnd_9_20568_1": "completata",
+    "m1": "completata",
+    "m3": "completata",
+    "rnd_2_20568_0": "completata",
+    "m7": "completata",
+    "rnd_11_20568_0": "completata",
+    "rnd_11_20568_1": "completata",
+    "m11": "completata",
+    "rnd_9_20569_0": "completata",
+    "rnd_9_20569_1": "completata",
+    "m6": "completata",
+    "rnd_11_20569_0": "completata",
+    "rnd_11_20569_1": "completata",
+    "m9": "completata",
+    "m4": "completata",
+    "rnd_6_20569_0": "completata",
+    "rnd_6_20569_1": "completata",
+    "m10": "completata",
+    "m5": "completata",
+    "rnd_12_20569_0": "completata"
+  },
+  "activeQuest": "M12",
+  "travelDestination": 4,
+  "travelProgress": 6,
+  "travelDistance": 6,
+  "combatState": null,
+  "gameOver": false,
+  "ending": null,
+  "onore": {
+    "vinte": 104,
+    "fuggite": 42,
+    "rese": 2
+  },
+  "durata": 451,
+  "pbState": {
+    "FOR": {
+      "base": 9,
+      "prim": 3,
+      "sec": 0
+    },
+    "DES": {
+      "base": 9,
+      "prim": 2,
+      "sec": 0
+    },
+    "COS": {
+      "base": 9,
+      "prim": 0,
+      "sec": 0
+    },
+    "RES": {
+      "base": 9,
+      "prim": 0,
+      "sec": 1
+    },
+    "INT": {
+      "base": 8,
+      "prim": 0,
+      "sec": 0
+    },
+    "FRT": {
+      "base": 9,
+      "prim": 1,
+      "sec": 0
+    }
+  },
+  "createdAt": "2026-04-25T11:27:44.053Z",
+  "_venariumIntroDone": true,
+  "poisonDmgPerDay": 0,
+  "savedAt": "2026-04-26T19:15:54.533Z",
+  "scrollBonuses": {
+    "att": 10,
+    "ini": 4,
+    "dan": 3,
+    "def": 3
+  },
+  "potionResistances": {}
+}

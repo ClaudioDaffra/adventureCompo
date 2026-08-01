@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheda Personaggio Hyboriano - Cimmeria</title>
+    <style>
+        :root {
+            --bg-color: #2b2b2b; --panel-bg: #3a3226; --paper-bg: #d8ccb4;
+            --text-dark: #1a1a1a; --text-light: #e0d6c2; --accent: #8b0000;
+            --border: #5c4a32; --gold: #c5a059;
+            --col-normal: #aaaaaa;
+            --col-special: #5599ff;
+            --col-rare: #ddcc22;
+            --col-legend: #44cc44;
+            --col-unique: #ff4444;
+            --col-ice: #88ccff;
+            --col-quest: #ff9900;
+        }
+        body { font-family: 'Georgia', serif; background-color: var(--bg-color); color: var(--text-light); margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .sheet-container { width: 100%; max-width: 1050px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .full-width { grid-column: 1 / -1; }
+        .panel { background-color: var(--panel-bg); border: 2px solid var(--border); border-radius: 5px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        .panel-title { font-family: 'Impact', sans-serif; color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-top: 0; font-size: 1.2em; letter-spacing: 1px; text-transform: uppercase; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; font-size: 0.85em; color: var(--gold); margin-bottom: 3px; }
+        select, input[type="text"], input[type="number"] { width: 100%; padding: 5px; background-color: var(--paper-bg); border: 1px solid var(--border); color: var(--text-dark); font-family: 'Georgia', serif; box-sizing: border-box; }
+        select option { padding: 4px; }
+        .pool-info { background: #222; padding: 8px; margin-bottom: 10px; border-radius: 3px; text-align: center; font-size: 0.9em; border: 1px solid var(--border); }
+        .pool-info span { color: var(--gold); font-weight: bold; }
+        .attr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .attr-box { background: var(--paper-bg); color: var(--text-dark); padding: 8px; border: 1px solid var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: space-between; }
+        .attr-left { display: flex; flex-direction: column; }
+        .attr-name { font-weight: bold; font-size: 1.1em; }
+        .attr-controls { display: flex; gap: 4px; align-items: center; font-size: 0.8em; margin-top: 2px; flex-wrap: wrap; }
+        .attr-controls button { background: #555; color: white; border: none; width: 18px; height: 18px; cursor: pointer; border-radius: 2px; font-size: 12px; }
+        .attr-controls button:disabled { background: #999; cursor: not-allowed; }
+        .attr-right { text-align: right; }
+        .attr-mod { font-size: 0.8em; color: #555; }
+        .attr-total { font-size: 1.8em; font-weight: bold; line-height: 1; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #666; padding-bottom: 2px; }
+        .stat-label { font-weight: bold; }
+        .stat-value { color: var(--gold); font-weight: bold; font-size: 1.1em; }
+        .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .skill-tag { display: inline-block; background: #554433; color: var(--text-light); padding: 4px 8px; margin: 2px; border-radius: 3px; font-size: 0.9em; border: 1px solid var(--gold); }
+        .skill-section { margin-bottom: 10px; }
+        .trait-box { background: rgba(0,0,0,0.3); padding: 10px; font-style: italic; font-size: 0.9em; border-left: 3px solid var(--gold); margin-top: 10px; }
+
+        /* === MAPPA === */
+        .map-panel { position: relative; width: 100%; height: 320px; background: #1a1208; border: 2px solid var(--border); border-radius: 5px; overflow: hidden; margin-top: 10px; }
+        .map-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, #2a1f0a 0%, #0e0b05 70%); }
+        .map-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(90,70,30,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(90,70,30,0.15) 1px, transparent 1px); background-size: 30px 30px; }
+        .map-location { position: absolute; cursor: default; transform: translate(-50%,-50%); text-align: center; }
+        .map-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid #8b6020; margin: 0 auto 2px; box-shadow: 0 0 6px rgba(197,160,89,0.7); }
+        .map-dot.capital { width: 14px; height: 14px; background: #ff9900; box-shadow: 0 0 10px rgba(255,153,0,0.8); }
+        .map-dot.village { width: 7px; height: 7px; background: #888; box-shadow: none; }
+        .map-dot.quest   { width: 10px; height: 10px; background: #ff4444; box-shadow: 0 0 8px rgba(255,68,68,0.8); animation: questpulse 1.5s infinite; }
+        @keyframes questpulse { 0%,100%{box-shadow:0 0 6px rgba(255,68,68,0.8);} 50%{box-shadow:0 0 14px rgba(255,68,68,1);} }
+        .map-label { font-size: 0.55em; color: #c5a059; white-space: nowrap; font-family: Georgia, serif; letter-spacing: 0.5px; }
+        .map-title-overlay { position: absolute; top: 6px; left: 10px; font-family: Impact, sans-serif; font-size: 0.9em; color: rgba(197,160,89,0.5); letter-spacing: 2px; text-transform: uppercase; }
+        .map-legend { position: absolute; bottom: 6px; right: 8px; font-size: 0.6em; color: #888; line-height: 1.6; }
+        .map-route { position: absolute; pointer-events: none; }
+
+        /* === INVENTARIO EQUIPAGGIAMENTO ATTIVO === */
+        .inv-slot { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+        .inv-label { width: 90px; font-weight: bold; color: var(--gold); font-size: 0.85em; flex-shrink: 0; }
+        .inv-item-name { flex: 1; padding: 4px 8px; border-radius: 3px; border: 1px solid var(--border); font-size: 0.9em; font-weight: bold; background: #1a1a1a; min-height: 28px; display: flex; align-items: center; }
+        .inv-item-name.rar-normal  { color: var(--col-normal); border-color: var(--col-normal); }
+        .inv-item-name.rar-special { color: var(--col-special); border-color: var(--col-special); }
+        .inv-item-name.rar-rare    { color: var(--col-rare);    border-color: var(--col-rare); }
+        .inv-item-name.rar-legend  { color: var(--col-legend);  border-color: var(--col-legend); }
+        .inv-item-name.rar-unique  { color: var(--col-unique);  border-color: var(--col-unique); }
+        .inv-remove-btn { background: #8b0000; color: white; border: none; border-radius: 3px; cursor: pointer; padding: 2px 7px; font-size: 0.85em; }
+        .inv-bonus-line { font-size: 0.75em; color: #aaa; margin-bottom: 6px; margin-left: 98px; font-style: italic; }
+
+        /* === FORGIA & NEGOZIO === */
+        .forgia-tabs, .shop-tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+        .forgia-tab, .shop-tab { padding: 6px 14px; border: 1px solid var(--border); border-radius: 4px 4px 0 0; cursor: pointer; font-size: 0.9em; background: #222; color: var(--text-light); }
+        .forgia-tab.active, .shop-tab.active { background: var(--panel-bg); border-bottom-color: var(--panel-bg); color: var(--gold); font-weight: bold; }
+        .forgia-section, .shop-section { display: none; }
+        .forgia-section.active, .shop-section.active { display: block; }
+
+        .rarity-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+        .rarity-btn { padding: 5px 12px; border: 2px solid; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85em; background: #111; transition: all 0.2s; }
+        .rarity-btn.rar-normal  { border-color: var(--col-normal);  color: var(--col-normal); }
+        .rarity-btn.rar-special { border-color: var(--col-special); color: var(--col-special); }
+        .rarity-btn.rar-rare    { border-color: var(--col-rare);    color: var(--col-rare); }
+        .rarity-btn.rar-legend  { border-color: var(--col-legend);  color: var(--col-legend); }
+        .rarity-btn.rar-unique  { border-color: var(--col-unique);  color: var(--col-unique); }
+        .rarity-btn.selected    { filter: brightness(1.4); background: rgba(255,255,255,0.1); }
+
+        .item-card { background: #111; border: 2px solid var(--border); border-radius: 6px; padding: 14px; margin-top: 10px; min-height: 80px; }
+        .item-card-name { font-size: 1.3em; font-weight: bold; margin-bottom: 6px; }
+        .item-card-rarity { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .item-card-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+        .item-stat-pill { background: rgba(255,255,255,0.07); border-radius: 4px; padding: 3px 8px; font-size: 0.85em; }
+        .item-stat-pill.pos { color: #7f7; }
+        .item-stat-pill.neg { color: #f77; }
+        .item-card-lore { font-style: italic; font-size: 0.85em; color: #aaa; margin-bottom: 8px; border-left: 2px solid var(--border); padding-left: 8px; }
+        .item-card-cond { font-size: 0.8em; color: #e0a040; margin-top: 6px; }
+
+        .forgia-btn { padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.95em; margin-right: 8px; margin-top: 8px; }
+        .forgia-btn-random { background: #555; color: white; }
+        .forgia-btn-equip  { background: #8b4513; color: white; }
+        .forgia-btn-equip:disabled { background: #444; color: #888; cursor: not-allowed; }
+
+        .item-list, .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 10px; }
+        .item-list-card, .shop-card { border: 2px solid; border-radius: 5px; padding: 10px; cursor: pointer; background: #111; transition: all 0.15s; }
+        .item-list-card:hover, .shop-card:hover { filter: brightness(1.3); }
+        .item-list-card.rar-normal, .shop-card.rar-normal  { border-color: var(--col-normal);  color: var(--col-normal); }
+        .item-list-card.rar-special, .shop-card.rar-special { border-color: var(--col-special); color: var(--col-special); }
+        .item-list-card.rar-rare, .shop-card.rar-rare    { border-color: var(--col-rare);    color: var(--col-rare); }
+        .item-list-card.rar-legend, .shop-card.rar-legend  { border-color: var(--col-legend);  color: var(--col-legend); }
+        .item-list-card.rar-unique, .shop-card.rar-unique  { border-color: var(--col-unique);  color: var(--col-unique); }
+        
+        .ilc-name, .sc-name { font-weight: bold; font-size: 0.95em; margin-bottom: 4px; }
+        .ilc-stats { font-size: 0.78em; color: #ccc; }
+        .sc-price { color: var(--gold); font-size: 0.8em; margin-bottom: 3px; }
+        .sc-desc  { font-size: 0.75em; color: #aaa; }
+        .sc-effect{ font-size: 0.75em; color: #7f7; margin-top: 3px; }
+
+        .slot-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+        .slot-btn { padding: 4px 10px; border: 1px solid var(--border); border-radius: 3px; cursor: pointer; font-size: 0.8em; background: #222; color: var(--text-light); }
+        .slot-btn.active { background: var(--gold); color: #111; font-weight: bold; }
+
+        .comb-delta { font-size: 0.8em; margin-left: 6px; }
+        .comb-delta.pos { color: #7f7; }
+        .comb-delta.neg { color: #f77; }
+
+        .shop-buy-bar { background: #1a1a1a; border: 1px solid var(--border); border-radius: 5px; padding: 10px; margin-top: 10px; display: none; }
+        .shop-buy-bar .sb-name { font-weight: bold; color: var(--gold); margin-bottom: 6px; }
+        .shop-buy-bar button { padding: 6px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+        .btn-buy { background: #8b4513; color: white; }
+        .btn-use  { background: #2a6a2a; color: white; margin-left: 8px; }
+        .btn-drop { background: #555; color: white; margin-left: 8px; }
+        
+        .inv-bag  { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; min-height: 36px; }
+        .inv-bag-item { padding: 4px 10px; border-radius: 4px; border: 1px solid; font-size: 0.8em; cursor: pointer; }
+        .inv-bag-item.rar-normal  { border-color: var(--col-normal);  color: var(--col-normal); }
+        .inv-bag-item.rar-special { border-color: var(--col-special); color: var(--col-special); }
+        .inv-bag-item.rar-rare    { border-color: var(--col-rare);    color: var(--col-rare); }
+        .inv-bag-item.rar-legend  { border-color: var(--col-legend);  color: var(--col-legend); }
+        .inv-bag-item.rar-unique  { border-color: var(--col-unique);  color: var(--col-unique); }
+        
+        .shop-msg { font-size: 0.85em; margin-top: 6px; min-height: 18px; }
+        .shop-msg.ok  { color: #7f7; }
+        .shop-msg.err { color: #f77; }
+    </style>
+</head>
+<body>
+
+<div class="sheet-container">
+    <div class="panel full-width">
+        <h2 class="panel-title">Identita' e Terre Hyboriane</h2>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div>
+                <div class="form-group"><label>Sesso</label><select id="sel-sesso" onchange="updateNames()"><option value="maschi">Maschio</option><option value="femmine">Femmina</option></select></div>
+                <div class="form-group"><label>Nome</label><select id="sel-nome"></select></div>
+                <div class="form-group">
+                    <label>Fascia d'Eta' (Applica bonus/malus)</label>
+                    <select id="sel-eta" onchange="calcAll()">
+                        <option value="18" title="ATTRIBUTI: DES+1, FRT-1">18 Anni (+DES, -FRT)</option>
+                        <option value="24" title="ATTRIBUTI: FOR+1, INT-1">24 Anni (+FOR, -INT)</option>
+                        <option value="34" title="ATTRIBUTI: RES+1, FRT-1" selected>34 Anni (+RES, -FRT)</option>
+                        <option value="45" title="ATTRIBUTI: INT+1, FOR-1">45 Anni (+INT, -FOR)</option>
+                        <option value="55" title="ATTRIBUTI: FRT+1, DES-1">55 Anni (+FRT, -DES)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Seed Mondo (Casuale)</label>
+                    <input type="text" id="inp-seed" readonly>
+                </div>
+            </div>
+            
+            <div class="map-panel" id="map-container">
+                <div class="map-bg"></div>
+                <div class="map-grid"></div>
+                <svg class="map-route" id="map-svg" width="100%" height="100%" style="position:absolute;inset:0;"></svg>
+                <div class="map-title-overlay">Mappa della Cimmeria</div>
+                <div class="map-legend">
+                    <span style="color:var(--gold);">&#9679;</span> Citta' &nbsp;
+                    <span style="color:#ff9900;">&#9679;</span> Capitale &nbsp;
+                    <span style="color:#888;">&#9679;</span> Villaggio &nbsp;
+                    <span style="color:#f44;">&#9679;</span> Quest
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FRAMMENTI DELL'URLO DI YMIR -->
+    <div class="panel full-width" id="frammenti-panel">
+        <h2 class="panel-title">&#10052; Frammenti dell'Urlo di Ymir (0 / 12)</h2>
+        <p style="font-size:0.8em; color:#aaa; margin-top:0;">Raccogli tutti e 12 i Frammenti per forgiare il <strong style="color:var(--col-legend)">Martello del Destino</strong> e sfidare Re Valthor sulla Montagna Luminosa. I Frammenti si ottengono completando le 12 Quest Maggiori.</p>
+        <div id="frammenti-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin-bottom:10px;">
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <div id="frammenti-progress" style="flex:1; background:#111; border-radius:4px; height:10px; border:1px solid var(--border); overflow:hidden;">
+                <div id="frammenti-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#88ccff,#ffffff); transition:width 0.5s;"></div>
+            </div>
+            <span id="frammenti-label" style="color:var(--col-ice,#88ccff); font-weight:bold; min-width:80px;">0 / 12</span>
+            <button onclick="addFragmento()" style="width:auto; padding:5px 14px; font-size:0.85em; background:#334455; color:#88ccff; border:1px solid #88ccff; border-radius:3px; cursor:pointer;">+ Aggiungi Frammento</button>
+            <button onclick="resetFragmenti()" style="width:auto; padding:5px 14px; font-size:0.85em; background:#443322; color:#aaa; border:1px solid #666; border-radius:3px; cursor:pointer;">Reset</button>
+        </div>
+        <div id="frammenti-martello-msg" style="display:none; margin-top:10px; padding:10px; background:rgba(196,160,89,0.15); border:2px solid var(--gold); border-radius:4px; text-align:center; font-family:'Impact',sans-serif; letter-spacing:2px; color:var(--gold);">
+            &#9874; TUTTI I FRAMMENTI RACCOLTI! IL MARTELLO DEL DESTINO PUÒ ESSERE FORGIATO! &#9874;
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">Origini e Fede</h2>
+        <div class="form-group"><label>Razza</label><select id="sel-razza" onchange="calcAll()"></select></div>
+        <div class="form-group"><label>Classe</label><select id="sel-classe" onchange="aggiornaSottoclasse()"></select></div>
+        <div class="form-group"><label>Sottoclasse</label><select id="sel-sottoclasse" onchange="calcAll()"></select></div>
+        <div class="form-group"><label>Background</label><select id="sel-bg" onchange="calcAll()"></select></div>
+        <div class="form-group"><label>Deita'</label><select id="sel-dio" onchange="calcAll()"></select></div>
+        <div class="form-group"><label>Evento Formativo</label><select id="sel-evento" onchange="calcAll()"></select></div>
+        <div class="form-group"><label>Codice di Condotta</label><select id="sel-condotta" onchange="calcAll()"></select></div>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">Attributi (Point Buy)</h2>
+        <div class="pool-info">
+            Pool Primario: <span id="pool-prim-display">9</span> |
+            Pool Scambio: <span id="pool-sec-display">0</span>
+        </div>
+        <div class="attr-grid" id="attr-grid-container"></div>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">Abilita' & Competenze</h2>
+        <div id="skills-container"></div>
+        <div class="trait-box" id="trait-box" style="display:none;"><strong>Tratti Passivi:</strong><br><span id="trait-text"></span></div>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">Combattimento Base</h2>
+        <div class="stat-row"><span class="stat-label">Vita (HP)</span><span class="stat-value" id="val-hp">10</span></div>
+        <div class="stat-row"><span class="stat-label">Energia</span><span class="stat-value" id="val-energia">10</span></div>
+        <div class="stat-row"><span class="stat-label">Attacco Fisico (ATT)</span><span class="stat-value" id="val-att">0</span><span class="comb-delta" id="delta-att"></span></div>
+        <div class="stat-row"><span class="stat-label">Danno Base (DAN)</span><span class="stat-value" id="val-dan">0</span><span class="comb-delta" id="delta-dan"></span></div>
+        <div class="stat-row"><span class="stat-label">Difesa (DEF)</span><span class="stat-value" id="val-def">0</span><span class="comb-delta" id="delta-def"></span></div>
+        <div class="stat-row"><span class="stat-label">Armatura (RD)</span><span class="stat-value" id="val-rd">0</span><span class="comb-delta" id="delta-rd"></span></div>
+        <div class="stat-row"><span class="stat-label">Iniziativa (INI)</span><span class="stat-value" id="val-ini">0</span><span class="comb-delta" id="delta-ini"></span></div>
+    </div>
+
+    <div class="panel full-width">
+        <h2 class="panel-title">Riduzione Danni Elementali & Magici (Valori Flat)</h2>
+        <p style="font-size:0.8em; color:#aaa; margin-top:0;">Sottrae un valore fisso ai danni elementali subiti. Le armi speciali possono infliggere danni elementali aggiuntivi.</p>
+        <div class="res-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="stat-row"><span class="stat-label">Rid. Fuoco</span><span class="stat-value" id="res-fuoco">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Freddo</span><span class="stat-value" id="res-freddo">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Acido</span><span class="stat-value" id="res-acido">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Veleno</span><span class="stat-value" id="res-veleno">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Magia</span><span class="stat-value" id="res-magia">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Fulmine</span><span class="stat-value" id="res-fulmine">0</span></div>
+            <div class="stat-row"><span class="stat-label">Rid. Incanto</span><span class="stat-value" id="res-incanto">0</span></div>
+        </div>
+    </div>
+
+    <div class="panel full-width">
+        <h2 class="panel-title">Equipaggiamento Attivo</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+            <div id="inv-left">
+                <div class="inv-slot" id="inv-slot-elmo">
+                    <span class="inv-label">Elmo</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-elmo">--- Vuoto ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('elmo')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-elmo"></div>
+                
+                <div class="inv-slot" id="inv-slot-armatura">
+                    <span class="inv-label">Armatura</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-armatura">--- Vuota ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('armatura')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-armatura"></div>
+                
+                <div class="inv-slot" id="inv-slot-bracciali">
+                    <span class="inv-label">Bracciali</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-bracciali">--- Vuoti ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('bracciali')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-bracciali"></div>
+                
+                <div class="inv-slot" id="inv-slot-cintura">
+                    <span class="inv-label">Cintura</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-cintura">--- Vuota ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('cintura')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-cintura"></div>
+            </div>
+            
+            <div id="inv-right">
+                <div class="inv-slot" id="inv-slot-amuleto">
+                    <span class="inv-label">Amuleto</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-amuleto">--- Vuoto ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('amuleto')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-amuleto"></div>
+                
+                <div class="inv-slot" id="inv-slot-anello">
+                    <span class="inv-label">Anello</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-anello">--- Vuoto ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('anello')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-anello"></div>
+
+                <div class="inv-slot" id="inv-slot-stivali">
+                    <span class="inv-label">Stivali</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-stivali">--- Vuoti ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('stivali')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-stivali"></div>
+
+                <div class="inv-slot" id="inv-slot-arma">
+                    <span class="inv-label">Arma</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-arma">--- Nessuna ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('arma')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-arma"></div>
+                
+                <div class="inv-slot" id="inv-slot-scudo">
+                    <span class="inv-label">Scudo</span>
+                    <span class="inv-item-name rar-normal" id="inv-name-scudo">--- Nessuno ---</span>
+                    <button class="inv-remove-btn" onclick="removeEquip('scudo')" title="Rimuovi">x</button>
+                </div>
+                <div class="inv-bonus-line" id="inv-bonus-scudo"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel full-width">
+        <h2 class="panel-title">&#9774; Mercato e Zaino (Consumabili e Quest)</h2>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px;">
+            <div class="inv-slot" style="margin-bottom:0;">
+                <span class="inv-label" style="width:auto; margin-right:8px;">Zecchini:</span>
+                <input type="number" id="val-zecchini" value="1" readonly style="color: var(--gold); font-weight:bold; background:#222; border:1px solid var(--border); padding:4px; width:60px;">
+            </div>
+            <div class="inv-slot" style="margin-bottom:0; margin-left:20px;">
+                <span class="inv-label" style="width:auto; margin-right:8px;">Destino:</span>
+                <input type="number" id="val-fate" value="0" readonly style="color: var(--accent); font-weight:bold; background:#222; border:1px solid var(--border); padding:4px; width:60px;" title="Punti spesi per deviare la morte o eventi fatali. Aumentati da background o Quest Uniche.">
+            </div>
+            <span id="shop-msg" class="shop-msg" style="margin-left:auto;"></span>
+        </div>
+
+        <div style="margin-bottom:10px; padding:10px; background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:4px;">
+            <label style="color:var(--gold); font-size:0.85em;">Il Tuo Zaino (Oggetti posseduti — Clicca per usare/gestire)</label>
+            <div class="inv-bag" id="inv-bag-display">
+                <span style="color:#555; font-style:italic; font-size:0.8em;">Zaino vuoto</span>
+            </div>
+        </div>
+
+        <div class="shop-buy-bar" id="bag-detail-bar">
+            <div class="sb-name" id="bag-detail-name"></div>
+            <div style="font-size:0.8em; color:#aaa; margin-bottom:6px;" id="bag-detail-desc"></div>
+            <div style="font-size:0.8em; color:#7f7; margin-bottom:6px;" id="bag-detail-eff"></div>
+            <button class="btn-use" onclick="useBagItem()">&#9670; Usa / Equipaggia</button>
+            <button class="btn-drop" onclick="dropBagItem()">&#10006; Getta via</button>
+        </div>
+
+        <hr style="border-color:var(--border); margin:15px 0;">
+
+        <div class="shop-tabs">
+            <div class="shop-tab active" onclick="switchShop('armi')">&#9876; Armeria</div>
+            <div class="shop-tab" onclick="switchShop('pozioni')">&#9879; Alchimista</div>
+            <div class="shop-tab" onclick="switchShop('pergamene')">&#9998; Sapienza</div>
+            <div class="shop-tab" onclick="switchShop('oggetti')">&#9671; Sopravvivenza & Reliquie</div>
+        </div>
+
+        <div class="shop-section active" id="ss-armi">
+            <p style="font-size:0.8em; color:#888; margin:4px 0 8px;">Equipaggiamento acquistabile. Le armi potenti o magiche si trovano solo in Forgia o nelle Quest.</p>
+            <div class="shop-grid" id="shop-grid-armi"></div>
+        </div>
+
+        <div class="shop-section" id="ss-pozioni">
+            <p style="font-size:0.8em; color:#888; margin:4px 0 8px;">Consumabili per curare ferite o resistere temporaneamente agli elementi.</p>
+            <div class="shop-grid" id="shop-grid-pozioni"></div>
+        </div>
+
+        <div class="shop-section" id="ss-pergamene">
+            <p style="font-size:0.8em; color:#888; margin:4px 0 8px;">Antichi tomi. Se letti, conferiscono bonus permanenti.</p>
+            <div class="shop-grid" id="shop-grid-pergamene"></div>
+        </div>
+
+        <div class="shop-section" id="ss-oggetti">
+            <p style="font-size:0.8em; color:#888; margin:4px 0 8px;">Oggetti d'uso comune e sacre Reliquie in grado di manipolare il Destino e risolvere Quest.</p>
+            <div class="shop-grid" id="shop-grid-oggetti"></div>
+        </div>
+
+        <div class="shop-buy-bar" id="shop-buy-bar">
+            <div class="sb-name" id="shop-buy-name"></div>
+            <div style="font-size:0.8em; color:#aaa; margin-bottom:4px;" id="shop-buy-desc"></div>
+            <div style="font-size:0.8em; color:#7f7; margin-bottom:6px;" id="shop-buy-eff"></div>
+            <button class="btn-buy" onclick="buySelectedItem()">&#9762; Paga Zecchini</button>
+        </div>
+    </div>
+
+    <div class="panel full-width">
+        <h2 class="panel-title">&#9874; La Forgia di Crom (Creazione Loot/Loot Master)</h2>
+        <div class="forgia-tabs">
+            <div class="forgia-tab active" onclick="switchForgia('random')">Genera Bottino Casuale</div>
+            <div class="forgia-tab" onclick="switchForgia('scegli')">Sfoglia Artefatti Esistenti</div>
+        </div>
+
+        <div class="forgia-section active" id="fs-random">
+            <p style="font-size:0.9em; color:#aaa; margin-top:0;">Permette al Master di generare ricompense bilanciate in base alla rarita'.</p>
+            <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:200px;">
+                    <label style="color:var(--gold);">Rarita'</label>
+                    <div class="rarity-bar" id="rarity-bar">
+                        <button class="rarity-btn rar-normal selected" onclick="selectRarity('normal',this)">Normale</button>
+                        <button class="rarity-btn rar-special" onclick="selectRarity('special',this)">Speciale</button>
+                        <button class="rarity-btn rar-rare" onclick="selectRarity('rare',this)">Raro</button>
+                        <button class="rarity-btn rar-legend" onclick="selectRarity('legend',this)">Leggendario</button>
+                        <button class="rarity-btn rar-unique" onclick="selectRarity('unique',this)">Unico</button>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                    <label style="color:var(--gold);">Slot Oggetto</label>
+                    <div class="slot-filter" id="slot-filter-random">
+                        <button class="slot-btn active" onclick="selectSlot('any',this,'random')">Qualsiasi</button>
+                        <button class="slot-btn" onclick="selectSlot('Arma',this,'random')">Arma 1M</button>
+                        <button class="slot-btn" onclick="selectSlot('Arma2M',this,'random')">Arma 2M</button>
+                        <button class="slot-btn" onclick="selectSlot('Arco',this,'random')">Arco</button>
+                        <button class="slot-btn" onclick="selectSlot('Scudo',this,'random')">Scudo</button>
+                        <button class="slot-btn" onclick="selectSlot('Torso',this,'random')">Armatura</button>
+                        <button class="slot-btn" onclick="selectSlot('Testa',this,'random')">Elmo</button>
+                        <button class="slot-btn" onclick="selectSlot('Collo',this,'random')">Amuleto</button>
+                        <button class="slot-btn" onclick="selectSlot('Bracciali',this,'random')">Bracciali</button>
+                        <button class="slot-btn" onclick="selectSlot('Cintura',this,'random')">Cintura</button>
+                        <button class="slot-btn" onclick="selectSlot('AnelloDX',this,'random')">Anello</button>
+                        <button class="slot-btn" onclick="selectSlot('Stivali',this,'random')">Stivali</button>
+                        <button class="slot-btn" onclick="selectSlot('Frammento',this,'random')">&#10052; Frammento</button>
+                    </div>
+                </div>
+            </div>
+            <button class="forgia-btn forgia-btn-random" onclick="forgiaCasuale()">&#9874; Genera</button>
+            <button class="forgia-btn forgia-btn-equip" id="btn-equip-random" onclick="equipCurrentItem()" disabled>&#8658; Trasferisci in Scheda</button>
+            <div class="item-card" id="item-card-random">
+                <div style="color:#555; font-style:italic;">Nessun oggetto ancora generato.</div>
+            </div>
+        </div>
+
+        <div class="forgia-section" id="fs-scegli">
+            <p style="font-size:0.9em; color:#aaa; margin-top:0;">Visualizza gli Artefatti Epici, Leggendari e il Loot base preimpostato.</p>
+            <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:10px;">
+                <div style="flex:1; min-width:200px;">
+                    <label style="color:var(--gold);">Filtra per Slot</label>
+                    <div class="slot-filter" id="slot-filter-scegli">
+                        <button class="slot-btn active" onclick="selectSlot('any',this,'scegli')">Tutti</button>
+                        <button class="slot-btn" onclick="selectSlot('Arma',this,'scegli')">Arma 1M</button>
+                        <button class="slot-btn" onclick="selectSlot('Arma2M',this,'scegli')">Arma 2M</button>
+                        <button class="slot-btn" onclick="selectSlot('Arco',this,'scegli')">Arco</button>
+                        <button class="slot-btn" onclick="selectSlot('Scudo',this,'scegli')">Scudo</button>
+                        <button class="slot-btn" onclick="selectSlot('Torso',this,'scegli')">Armatura</button>
+                        <button class="slot-btn" onclick="selectSlot('Testa',this,'scegli')">Elmo</button>
+                        <button class="slot-btn" onclick="selectSlot('Collo',this,'scegli')">Amuleto</button>
+                        <button class="slot-btn" onclick="selectSlot('Bracciali',this,'scegli')">Bracciali</button>
+                        <button class="slot-btn" onclick="selectSlot('Cintura',this,'scegli')">Cintura</button>
+                        <button class="slot-btn" onclick="selectSlot('AnelloDX',this,'scegli')">Anello</button>
+                        <button class="slot-btn" onclick="selectSlot('Stivali',this,'scegli')">Stivali</button>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                    <label style="color:var(--gold);">Filtra per Rarita'</label>
+                    <div class="rarity-bar">
+                        <button class="rarity-btn rar-normal selected" id="rar-filter-normal" onclick="toggleRarFilter('normal',this)">Normale</button>
+                        <button class="rarity-btn rar-special selected" id="rar-filter-special" onclick="toggleRarFilter('special',this)">Speciale</button>
+                        <button class="rarity-btn rar-rare selected" id="rar-filter-rare" onclick="toggleRarFilter('rare',this)">Raro</button>
+                        <button class="rarity-btn rar-legend selected" id="rar-filter-legend" onclick="toggleRarFilter('legend',this)">Leggendario</button>
+                        <button class="rarity-btn rar-unique selected" id="rar-filter-unique" onclick="toggleRarFilter('unique',this)">Unico</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item-list" id="item-list-container"></div>
+            <hr style="border-color:var(--border); margin:14px 0;">
+            <div class="item-card" id="item-card-scegli">
+                <div style="color:#555; font-style:italic;">Clicca su un oggetto per visualizzarne i dettagli.</div>
+            </div>
+            <button class="forgia-btn forgia-btn-equip" id="btn-equip-scegli" onclick="equipChosenItem()" disabled>&#8658; Equipaggia / Indossa</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ==========================================
+// DATABASE COMPLETO (RICALIBRATO FLAT)
+// ==========================================
+// NOTA: Le resistenze (%) sono state convertite in Riduzione flat. 
+// Es: 10% -> 2, 15% -> 3, 5% -> 1.
+const DB = {
+    nomi: {
+        maschi: ["Conan", "Kull", "Subotai", "Connar", "Dargan", "Khorin", "Brann", "Targan", "Cormac"],
+        femmine: ["Sonja", "Valeria", "Raina", "Morrga", "Brynn", "Shaela", "Kara", "Tirra", "Maevra"]
+    },
+    eta: {
+        "18": { attr: {"DES":1, "FRT":-1} },
+        "24": { attr: {"FOR":1, "INT":-1} },
+        "34": { attr: {"RES":1, "FRT":-1} },
+        "45": { attr: {"INT":1, "FOR":-1} },
+        "55": { attr: {"FRT":1, "DES":-1} }
+    },
+    razze: {
+        cimmero:   { nome: "Cimmero",    attr: {"FOR":1,"COS":1,"INT":-1}, res: {"freddo":2,"veleno":1,"acido":1,"fuoco":1}, skills: {"abilita":["Sopravvivenza"],"competenze":["Forza Bruta"]}, tratto: "Infrangibile: ignora un KO a sessione." },
+        hyboriano: { nome: "Hyboriano",  attr: {"INT":1,"FRT":1,"FOR":-1}, res: {"acido":1,"fulmine":1,"fuoco":1,"freddo":1,"veleno":1,"magia":1}, skills: {"abilita":["Adattamento"],"competenze":["Sociale"]}, tratto: "Adattabile: +1 a tutte le Abilita' Sociali." },
+        nordheimer:{ nome: "Nordheimer", attr: {"FOR":1,"RES":1,"INT":-1}, res: {"freddo":3,"fulmine":2,"acido":1}, skills: {"abilita":["Navigazione"],"competenze":["Remare"]}, tratto: "Figlio del Nord: Ignora penalita' freddo." },
+        shemita:   { nome: "Shemita",    attr: {"DES":1,"INT":1,"COS":-1}, res: {"fuoco":3,"veleno":1,"magia":1}, skills: {"abilita":["Mirabilita'"],"competenze":["Arco"]}, tratto: "Nato nelle Sabbie: +1 con Archi." },
+        stigiano:  { nome: "Stigiano",   attr: {"INT":1,"FRT":1,"FOR":-1}, res: {"veleno":3,"magia":3,"fuoco":1}, skills: {"abilita":["Occultismo"],"competenze":["Stregoneria"]}, tratto: "Sangue Oscuro: Resiste alla corruzione." },
+        zingarano: { nome: "Zingarano",  attr: {"DES":1,"FRT":1,"RES":-1}, res: {"acido":1,"fulmine":1,"freddo":1}, skills: {"abilita":["Acrobazia"],"competenze":["Furtivita'"]}, tratto: "Marinaio: Nessuna penalita' in combattimento navale." },
+        kushita:   { nome: "Kushita",    attr: {"COS":1,"FOR":1,"INT":-1}, res: {"veleno":3,"fuoco":2,"freddo":-1}, skills: {"abilita":["Mimetismo"],"competenze":["Caccia Giungla"]}, tratto: "Pelle d'Ebano: Bonus mimetismo nella giungla." },
+        hircano:   { nome: "Hircano",    attr: {"DES":1,"RES":1,"FOR":-1}, res: {"freddo":2,"fulmine":1}, skills: {"abilita":["Equitazione"],"competenze":["Tiro da Cavallo"]}, tratto: "Cavaliere Nato: +2 TxC a cavallo." },
+        turaniano: { nome: "Turaniano",  attr: {"INT":1,"DES":1,"FRT":-1}, res: {"fuoco":1,"magia":1}, skills: {"abilita":["Tattica"],"competenze":["Formazione"]}, tratto: "Disciplinato: Bonus tattica militare." },
+        pitto:     { nome: "Pitto",      attr: {"INT":1,"DES":1,"FRT":-1}, res: {"veleno":2,"acido":1,"magia":1}, skills: {"abilita":["Imboscata"],"competenze":["Armi Primitive"]}, tratto: "Predatore: Bonus imboscate nelle foreste." }
+    },
+    classi: {
+        barbaro:   { nome: "Barbaro",         sottoclassi: {
+            berserker: { nome: "Berserker",        attr: {"FOR":1,"RES":-1}, hp: 16, comb: {"dan":3}, skills: {"abilita":["Furia","Intimidire"],"competenze":["Armi a 2 mani","Sfondamento"]} },
+            nomade:    { nome: "Nomade",            attr: {"DES":1},          hp: 14, comb: {"ini":2,"dan":1}, skills: {"abilita":["Resistenza","Sopravvivenza"],"competenze":["Armi da lancio","Cavalcare"]} }
+        }},
+        mercenario:{ nome: "Mercenario",      sottoclassi: {
+            condottiero:{ nome: "Condottiero",     attr: {"INT":1,"FRT":1},  hp: 13, comb: {"att":1,"def":1}, skills: {"abilita":["Leadership","Strategia"],"competenze":["Tattica","Addestramento"]} },
+            guardia:    { nome: "Guardia del Corpo",attr: {"COS":1,"DES":-1}, hp: 15, comb: {"def":2,"rd":1}, skills: {"abilita":["Combattimento","Percezione"],"competenze":["Scudo","Protezione"]} }
+        }},
+        ladro:     { nome: "Ladro",           sottoclassi: {
+            assassino:    { nome: "Assassino",     attr: {"DES":1,"FRT":-1}, hp: 9,  comb: {"att":2,"ini":1}, skills: {"abilita":["Furtivita'","Avvelenamento"],"competenze":["Pugnale","Colpo Fatale"]} },
+            borseggiatore:{ nome: "Borseggiatore", attr: {"DES":1,"FRT":1},  hp: 8,  comb: {"ini":3}, skills: {"abilita":["Scassinare","Inganno"],"competenze":["Malizia","Fuga"]} }
+        }},
+        sciamano:  { nome: "Sciamano Tribale",sottoclassi: {
+            guaritore: { nome: "Guerriero degli Spiriti", attr: {"INT":1,"COS":1}, hp: 10, comb: {"rd":2}, skills: {"abilita":["Conoscenza Erbe","Evocazioni"],"competenze":["Curare","Riti Tribali"]} },
+            veggente:  { nome: "Veggente",                attr: {"INT":2,"FOR":-1}, hp: 8,  comb: {"ini":2}, skills: {"abilita":["Intuizioni","Divinazione"],"competenze":["Percezione","Comunicazione Spiriti"]} }
+        }}
+    },
+    background: {
+        schiavo:   { nome: "Schiavo Liberato",   attr: {"RES":1,"FRT":-1},  hp: 5, zecchini: 5,   skills: {"abilita":["Sopportazione"],"competenze":["Furtivita'"]} },
+        nobile:    { nome: "Nobile Esule",        attr: {"INT":1,"FOR":-1},  hp: 0, zecchini: 200, skills: {"abilita":["Etichetta"],"competenze":["Scherma"]} },
+        cacciatore:{ nome: "Cacciatore Selvaggio",attr: {"DES":1,"INT":-1},  hp: 2, zecchini: 25,  skills: {"abilita":["Sopravvivenza"],"competenze":["Tracciamento"]} },
+        soldato:   { nome: "Veterano di Guerra",  attr: {"FOR":1,"FRT":-1},  hp: 3, zecchini: 50,  skills: {"abilita":["Combattimento"],"competenze":["Disciplina"]} },
+        pirata:    { nome: "Pirata/Corsaro",      attr: {"DES":1,"RES":-1},  hp: 1, zecchini: 100, skills: {"abilita":["Acrobazia"],"competenze":["Equipaggio"]} }
+    },
+    dei: {
+        crom:     { nome: "Crom",     attr: {"FOR":2,"INT":-1},  comb: {"dan":1},          res: {"freddo":1},          hp: 0, bonus: "Il dio non ascolta, ma da' Forza.", fate: 0, skills: {"abilita":["Intimidire"],"competenze":["Resistenza"]} },
+        mitra:    { nome: "Mitra",    attr: {"RES":1,"DES":-1},  comb: {"def":1},           res: {"magia":1},           hp: 0, bonus: "Giustizia e protezione.",           fate: 0, skills: {"abilita":["Fede"],"competenze":["Guarigione"]} },
+        set:      { nome: "Set",      attr: {"INT":1,"FOR":-1},  comb: {"att":1},           res: {"veleno":2,"magia":1}, hp:-2, bonus: "Rituali antichi e veleni.",        fate: 0, skills: {"abilita":["Sotterfugio"],"competenze":["Veleni"]} },
+        ymir:     { nome: "Ymir",     attr: {"FOR":1,"COS":1,"INT":-1}, comb: {"dan":1,"rd":1}, res: {"freddo":2},     hp: 2, bonus: "Furia del gelo.",                   fate: 0, skills: {"abilita":["Resistenza"],"competenze":["Sopravvivenza"]} },
+        bel:      { nome: "Bel",      attr: {"DES":1,"RES":-1},  comb: {"ini":2},           res: {},                    hp: 0, bonus: "Agilita' dei ladri.",               fate: 0, skills: {"abilita":["Furtivita'"],"competenze":["Ladro"]} },
+        ishtar:   { nome: "Ishtar",   attr: {"FRT":1,"COS":1,"FOR":-1}, comb: {"def":1},   res: {},                    hp: 5, bonus: "Fertilita' e vita.",                fate: 0, skills: {"abilita":["Empatia"],"competenze":["Persuasione"]} },
+        antenati: { nome: "Antenati", attr: {"RES":1,"DES":1},   comb: {"att":1,"def":1},   res: {},                    hp: 0, bonus: "Fiducia solo nell'acciaio.",        fate: 0, skills: {"abilita":["Tradizione"],"competenze":["Armi"]} }
+    },
+    eventi: {
+        villaggio: { nome: "Il Villaggio Bruciato",   fate: 1,  attr: {"RES":1,"FRT":-1},  res: {"fuoco":1},  skills: {"abilita":["Odio"],"competenze":["Resistenza Fuoco"]} },
+        galere:    { nome: "Schiavo nelle Galere",    fate: 0,  attr: {"FOR":1,"INT":-1},  res: {},           skills: {"abilita":["Remare"],"competenze":["Sopportazione"]} },
+        lupi:      { nome: "Sopravvissuto ai Lupi",   fate: 1,  attr: {"DES":1,"FRT":-1},  res: {"freddo":1}, skills: {"abilita":["Istinto"],"competenze":["Percezione"]} },
+        tradito:   { nome: "Tradito dal Clan",        fate: -1, attr: {"DES":1,"FRT":-1},  res: {},           skills: {"abilita":["Paranoia"],"competenze":["Sospetto"]} },
+        orrore:    { nome: "Ha visto l'Orrore Antico",fate: 2,  attr: {"INT":1,"FRT":-2},  res: {"magia":1},  skills: {"abilita":["Ossidiana Mentale"],"competenze":["Resistenza Incanto"]} }
+    },
+    condotte: {
+        acciaio:       { nome: "Acciaio sopra ogni cosa", attr: {"FOR":1,"INT":-1},  res: {},              comb: {"dan":1}, skills: {"abilita":["Testardaggine"],"competenze":["Armatura"]} },
+        disonore:      { nome: "Morte prima del disonore",attr: {"RES":1,"DES":-1},  res: {},              comb: {"rd":1},  skills: {"abilita":["Fede"],"competenze":["Tenacia"]} },
+        menzogna:      { nome: "Civilta' e' menzogna",   attr: {"FOR":1,"FRT":-1},  res: {},              comb: {"att":1}, skills: {"abilita":["Intimidire"],"competenze":["Urlo di Guerra"]} },
+        sangue:        { nome: "Debito di sangue",        attr: {"DES":1,"INT":-1},  res: {},              comb: {"att":1,"def":-1}, skills: {"abilita":["Ossessione"],"competenze":["Inseguimento"]} },
+        superstizioso: { nome: "Superstizioso",           attr: {"FRT":1,"RES":-1},  res: {"incanto":2}, comb: {}, skills: {"abilita":["Riti Propiziatori"],"competenze":["Percezione Magica"]} },
+        magia:         { nome: "Diffidenza per la Magia", attr: {"RES":1,"INT":-1},  res: {"magia":1},    comb: {}, skills: {"abilita":["Purificazione"],"competenze":["Distruzione Magica"]} }
+    }
+};
+
+// ==========================================
+// DATABASE FORGIA - OGGETTI PREDEFINITI
+// ==========================================
+const FORGIA_DB = {
+    Testa: [
+        { id:"e_none",  nome:"Nessuno",            rar:"normal",  slot:"Testa",     attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"e1",      nome:"Cuffia di Cuoio",    rar:"normal",  slot:"Testa",     attr:{},                 comb:{rd:1},        res:{}, lore:"Rozza protezione di pelle conciata." },
+        { id:"e2",      nome:"Elmo di Ferro",      rar:"normal",  slot:"Testa",     attr:{},                 comb:{def:1},       res:{}, lore:"Elmetto di fattura cimmera." },
+        { id:"e3",      nome:"Maschera Stigiana",  rar:"special", slot:"Testa",     attr:{INT:1},            comb:{},            res:{magia:2}, lore:"Bronzo dorato cesellato con i simboli di Set." },
+        { id:"e4",      nome:"Elmo del Grande Orso",rar:"rare",   slot:"Testa",     attr:{FOR:1,COS:1},      comb:{},            res:{freddo:4}, lore:"Forgiato dalle tribù nordheimer." },
+        { id:"e5",      nome:"Corona di Xaltotun", rar:"legend",  slot:"Testa",     attr:{INT:2,FRT:1},      comb:{rd:1},        res:{magia:6}, lore:"Nessun incanto può penetrare chi la porta." },
+        { id:"e_unique1",nome:"Elmo della Tempesta Nera",rar:"unique",slot:"Testa", attr:{FOR:1,INT:1,DES:1},comb:{att:1,def:1},res:{fulmine:10,magia:4}, lore:"Rifiuta ogni maledizione." }
+    ],
+    Collo: [
+        { id:"a_none",  nome:"Nessuno",             rar:"normal",  slot:"Collo",    attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"a1",      nome:"Dente di Lupo",       rar:"normal",  slot:"Collo",    attr:{},                 comb:{att:1},       res:{}, lore:"Un dente di lupo-mannaro." },
+        { id:"a2",      nome:"Amuleto di Giada",    rar:"special", slot:"Collo",    attr:{RES:1},            comb:{},            res:{veleno:2}, lore:"Giada verde levigata dai sacerdoti." },
+        { id:"a3",      nome:"Occhio del Serpente", rar:"rare",    slot:"Collo",    attr:{INT:1},            comb:{ini:2},       res:{magia:4}, lore:"Dona una lucidita' soprannaturale." },
+        { id:"a4",      nome:"Cuore di Ahriman",    rar:"legend",  slot:"Collo",    attr:{FRT:3},            comb:{},            res:{magia:10}, lore:"Assorbe ogni attacco magico come una spugna." },
+        { id:"a_unique1",nome:"Occhio di Ibis",     rar:"unique",  slot:"Collo",    attr:{INT:2,FRT:2},      comb:{ini:3},       res:{magia:8,incanto:6}, lore:"Rivela l'invisibile e svela le menzogne." }
+    ],
+    Bracciali: [
+        { id:"b_none",  nome:"Nessuno",             rar:"normal",  slot:"Bracciali",attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"b1",      nome:"Polsini di Cuoio",    rar:"normal",  slot:"Bracciali",attr:{FOR:1},            comb:{},            res:{}, lore:"Semplici rinforzi di cuoio." },
+        { id:"b2",      nome:"Bracciali d'Acciaio", rar:"special", slot:"Bracciali",attr:{},                 comb:{def:1,rd:1},  res:{}, lore:"Acciaio temprato di Aquilonia." },
+        { id:"b3",      nome:"Bracciali del Re",    rar:"rare",    slot:"Bracciali",attr:{FOR:1,DES:1},      comb:{att:1},       res:{}, lore:"Simbolo di potere e precisione." },
+        { id:"b4",      nome:"Morsa di Crom",       rar:"legend",  slot:"Bracciali",attr:{FOR:2},            comb:{dan:2},       res:{}, lore:"Chi li indossa non lascia la presa." },
+        { id:"b_unique1",nome:"Catene Spezzate",    rar:"unique",  slot:"Bracciali",attr:{FOR:2,RES:2},      comb:{dan:3,def:-1},res:{acido:4}, lore:"Il metallo porta ira e resistenza." }
+    ],
+    Cintura: [
+        { id:"c_none",  nome:"Nessuna",              rar:"normal",  slot:"Cintura",  attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"c1",      nome:"Cintura di Corda",     rar:"normal",  slot:"Cintura",  attr:{COS:1},            comb:{},            res:{}, lore:"Leggera e robusta." },
+        { id:"c2",      nome:"Cintura di Cuoio",     rar:"special", slot:"Cintura",  attr:{RES:1},            comb:{},            res:{}, lore:"Cuoio di toro nero Kushita." },
+        { id:"c3",      nome:"Fascia dello Sciamano",rar:"rare",    slot:"Cintura",  attr:{INT:1,FRT:1},      comb:{},            res:{magia:3}, lore:"Amplifica i rituali spirituali." },
+        { id:"c_unique1",nome:"Cintura delle Sabbie",rar:"unique",  slot:"Cintura",  attr:{DES:2,RES:1},      comb:{ini:2},       res:{fuoco:5,acido:3}, lore:"Rende leggeri come il vento." }
+    ],
+    AnelloDX: [
+        { id:"an_none", nome:"Vuoto",                rar:"normal",  slot:"AnelloDX", attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"an1",     nome:"Anello di Bronzo",     rar:"normal",  slot:"AnelloDX", attr:{},                 comb:{att:1},       res:{}, lore:"Portato per buona sorte." },
+        { id:"an2",     nome:"Sigillo del Ladro",    rar:"special", slot:"AnelloDX", attr:{DES:1},            comb:{ini:1},       res:{}, lore:"Apre porte chiuse." },
+        { id:"an3",     nome:"Anello d'Argento di Set",rar:"rare",  slot:"AnelloDX", attr:{INT:1},            comb:{},            res:{veleno:4,magia:2}, lore:"Simbolo di potere oscuro." },
+        { id:"an4",     nome:"Anello Nero di Thoth-Amon",rar:"legend",slot:"AnelloDX",attr:{INT:2},           comb:{dan:1},       res:{magia:8}, lore:"Chi lo indossa comanda i serpenti." },
+        { id:"an_unique1",nome:"Anello del Re Immortale",rar:"unique",slot:"AnelloDX",attr:{FRT:3,INT:1},    comb:{def:2},       res:{magia:6,incanto:8}, lore:"Protegge dalla morte certa." }
+    ],
+    Stivali: [
+        { id:"s_none",  nome:"Nessuno",              rar:"normal",  slot:"Stivali",  attr:{},                 comb:{},            res:{}, lore:"" },
+        { id:"s1",      nome:"Stivali Leggeri",      rar:"normal",  slot:"Stivali",  attr:{DES:1},            comb:{},            res:{}, lore:"Silenziosi come passi su neve." },
+        { id:"s2",      nome:"Stivali di Ferro",     rar:"special", slot:"Stivali",  attr:{},                 comb:{rd:1},        res:{}, lore:"Un calcio porta il peso di una mazza." },
+        { id:"s3",      nome:"Passo del Ghepardo",   rar:"rare",    slot:"Stivali",  attr:{DES:2},            comb:{ini:2},       res:{}, lore:"Il portatore si muove come il felino." },
+        { id:"s_unique1",nome:"Sandali di Set",      rar:"unique",  slot:"Stivali",  attr:{DES:2,INT:1},      comb:{ini:3,att:1}, res:{veleno:6}, lore:"Grazia e velocita' di serpente." }
+    ],
+    Torso: [
+        { id:"arm_none",nome:"Nessuna",              rar:"normal",  slot:"Torso",    attr:{},                 comb:{rd:0,ini:0},  res:{}, lore:"" },
+        { id:"arm1",    nome:"Pelli di Lupo",        rar:"normal",  slot:"Torso",    attr:{},                 comb:{rd:1,ini:-1}, res:{}, lore:"Calda e resistente." },
+        { id:"arm2",    nome:"Cuoio di Aquilonia",   rar:"normal",  slot:"Torso",    attr:{},                 comb:{rd:2,ini:-1}, res:{}, lore:"Armatura di cuoio indurito." },
+        { id:"arm3",    nome:"Scaglie di Bronzo",    rar:"normal",  slot:"Torso",    attr:{},                 comb:{rd:3,ini:-2}, res:{}, lore:"Squame di bronzo sovrapposte." },
+        { id:"arm4",    nome:"Piastre Cimmere",      rar:"normal",  slot:"Torso",    attr:{},                 comb:{rd:5,ini:-4}, res:{}, lore:"Ferro scuro dei fabbri cimmeri." },
+        { id:"arm5",    nome:"Seta Nera Stigiana",   rar:"special", slot:"Torso",    attr:{},                 comb:{rd:2,ini:1},  res:{magia:2}, lore:"Fili impregnati di protezione magica." },
+        { id:"arm6",    nome:"Cotta di Maglia Nordica",rar:"rare",  slot:"Torso",    attr:{RES:1},            comb:{rd:6,ini:-2}, res:{freddo:2}, lore:"Acciaio rinforzato con ossa di drago bianco." },
+        { id:"arm7",    nome:"Corazza d'Ossa di Drago",rar:"legend",slot:"Torso",    attr:{COS:1},            comb:{rd:8,ini:-1}, res:{fuoco:4,freddo:2}, lore:"Resistenza soprannaturale." },
+        { id:"arm_unique1",nome:"Pelle di Dragone Nero",rar:"unique",slot:"Torso",   attr:{COS:2,RES:2},      comb:{rd:10,ini:0}, res:{fuoco:8,magia:5}, lore:"Immunita' al fuoco." }
+    ],
+    Scudo: [
+        { id:"sc_none", nome:"Nessuno",              rar:"normal",  slot:"Scudo",    attr:{},                 comb:{def:0,att:0}, res:{}, lore:"" },
+        { id:"sc1",     nome:"Scudo Rotondo di Legno",rar:"normal", slot:"Scudo",    attr:{},                 comb:{def:1,att:0}, res:{}, lore:"Economico e affidabile." },
+        { id:"sc2",     nome:"Scudo Rinforzato",     rar:"normal",  slot:"Scudo",    attr:{},                 comb:{def:2,att:-1},res:{}, lore:"Pesante ma impenetrabile." },
+        { id:"sc3",     nome:"Egida di Mitra",       rar:"rare",    slot:"Scudo",    attr:{FRT:1},            comb:{def:3,att:0}, res:{magia:3}, lore:"Respinge i colpi magici come pioggia." },
+        { id:"sc4",     nome:"Scudo del Leone Aquiloniano",rar:"legend",slot:"Scudo",attr:{INT:1,FRT:1},      comb:{def:4,att:-1},res:{fuoco:2,magia:2}, lore:"Chi lo porta sente la responsabilita' del trono." },
+        { id:"sc_unique1",nome:"Vortice di Kull",    rar:"unique",  slot:"Scudo",    attr:{FRT:2,RES:1},      comb:{def:5,att:1}, res:{magia:6,incanto:4}, lore:"Devia ogni attacco." }
+    ],
+    Arma: [
+        { id:"arma_none",nome:"Nessuna",             rar:"normal",  slot:"Arma",     attr:{},                 comb:{att:0,dan:0,def:0}, res:{}, elemDan:{}, lore:"" },
+        { id:"w1",      nome:"Spada Corta",          rar:"normal",  slot:"Arma",     attr:{},                 comb:{att:1,dan:3,def:1}, res:{}, elemDan:{}, lore:"Facile da portare." },
+        { id:"w2",      nome:"Spada Lunga",          rar:"normal",  slot:"Arma",     attr:{},                 comb:{att:1,dan:4,def:0}, res:{}, elemDan:{}, lore:"La lama di un soldato." },
+        { id:"w3",      nome:"Lama di Akbitanan",    rar:"special", slot:"Arma",     attr:{},                 comb:{att:2,dan:5,def:1}, res:{}, elemDan:{}, lore:"Acciaio grigio-blu di qualità ineguagliabile." },
+        { id:"w4",      nome:"Daga del Culto di Set",rar:"rare",    slot:"Arma",     attr:{INT:1},            comb:{att:3,dan:4,def:2}, res:{}, elemDan:{veleno:2}, lore:"Avvelenata. Danno veleno +2." },
+        { id:"w5",      nome:"Lama del Fato di Crom",rar:"legend",  slot:"Arma",     attr:{FOR:1},            comb:{att:3,dan:12,def:-1},res:{}, elemDan:{}, lore:"Spada di ferro nero trovata nella cripta di Ben Morgh." },
+        { id:"w6",      nome:"Spada della Fenice",   rar:"legend",  slot:"Arma",     attr:{FRT:1},            comb:{att:4,dan:10,def:2}, res:{}, elemDan:{fuoco:3}, lore:"Forgiata nel fuoco. Danno Fuoco +3." },
+        { id:"w_unique1",nome:"Lama di Conan",       rar:"unique",  slot:"Arma",     attr:{FOR:2,DES:1},      comb:{att:5,dan:14,def:2}, res:{magia:4}, elemDan:{}, lore:"Taglia il destino stesso." },
+        { id:"w_unique2",nome:"Falce di Nergal",     rar:"unique",  slot:"Arma",     attr:{INT:2,FRT:-1},     comb:{att:4,dan:11,def:-1},res:{}, elemDan:{incanto:4}, lore:"Colpisce l'anima. Danno Incanto +4." }
+    ],
+    Arma2M: [
+        { id:"a2m_none",nome:"Nessuna",              rar:"normal",  slot:"Arma2M",   attr:{},                 comb:{att:0,dan:0}, res:{}, elemDan:{}, lore:"" },
+        { id:"a2m1",    nome:"Spadone Barbarico",    rar:"normal",  slot:"Arma2M",   attr:{},                 comb:{att:-1,dan:8},res:{}, elemDan:{}, lore:"Lama grezza di ferro cimmero." },
+        { id:"a2m2",    nome:"Ascia Bipenne",        rar:"normal",  slot:"Arma2M",   attr:{},                 comb:{att:-1,dan:9,def:-2},res:{}, elemDan:{}, lore:"Più adatta a spaccare porte che a deflettere colpi." },
+        { id:"a2m3",    nome:"Lancia Lunga",         rar:"normal",  slot:"Arma2M",   attr:{},                 comb:{att:1,dan:5,def:2}, res:{}, elemDan:{}, lore:"Il bastone d'asta dei guerrieri tribali." },
+        { id:"a2m4",    nome:"Ascia dei Nordheim",   rar:"special", slot:"Arma2M",   attr:{},                 comb:{att:1,dan:6,def:0}, res:{}, elemDan:{freddo:1}, lore:"Incisa con rune. Danno Freddo +1." },
+        { id:"a2m5",    nome:"Spada Atlantea Antica",rar:"rare",    slot:"Arma2M",   attr:{INT:1},            comb:{att:2,dan:8,def:0}, res:{}, elemDan:{magia:2}, lore:"Il metallo vibra. Danno Magia +2." },
+        { id:"a2m6",    nome:"Maglio di Ymir",       rar:"legend",  slot:"Arma2M",   attr:{FOR:2,COS:1},      comb:{att:0,dan:15,def:-2},res:{}, elemDan:{freddo:4}, lore:"Ogni colpo porta tempesta. Danno Freddo +4." },
+        { id:"a2m_unique1",nome:"Alabarda del Drago Rosso",rar:"unique",slot:"Arma2M",attr:{FOR:2,DES:1},    comb:{att:2,dan:13,def:1}, res:{}, elemDan:{fuoco:5}, lore:"Brucia all'impatto. Danno Fuoco +5." }
+    ],
+    Arco: [
+        { id:"arc_none",nome:"Nessuno",              rar:"normal",  slot:"Arco",     attr:{},                 comb:{att:0,dan:0}, res:{}, elemDan:{}, lore:"" },
+        { id:"arc1",    nome:"Arco Corto",           rar:"normal",  slot:"Arco",     attr:{},                 comb:{att:1,dan:2}, res:{}, elemDan:{}, lore:"Adatto a distanze brevi." },
+        { id:"arc2",    nome:"Arco Lungo Shemita",   rar:"normal",  slot:"Arco",     attr:{},                 comb:{att:1,dan:4}, res:{}, elemDan:{}, lore:"I migliori del mondo conosciuto." },
+        { id:"arc3",    nome:"Arco del Vento",       rar:"special", slot:"Arco",     attr:{DES:1},            comb:{att:2,dan:4}, res:{}, elemDan:{}, lore:"Non perde mai la mira." },
+        { id:"arc4",    nome:"Arco di Corno di Drago",rar:"rare",   slot:"Arco",     attr:{DES:1,FOR:1},      comb:{att:3,dan:6}, res:{}, elemDan:{}, lore:"Le frecce volano dritte anche controvento." },
+        { id:"arc_unique1",nome:"Arco della Stella Cadente",rar:"unique",slot:"Arco",attr:{DES:3},            comb:{att:4,dan:8,ini:2}, res:{}, elemDan:{magia:3}, lore:"Frecce come luce. Danno Magia +3." }
+    ],
+    // === NUOVE ARMI – L'URLO DI YMIR ===
+    Arma2M_Urlo: [
+        { id:"urlo_a1", nome:"Ascia dei Troll Reali",   rar:"legend",  slot:"Arma2M",   attr:{FOR:2},            comb:{att:-2,dan:8,def:-1}, res:{}, elemDan:{freddo:3}, lore:"L'ascia forgiata dai Troll Reali nelle profondità delle Foreste Oscure. Ogni colpo porta il gelo di Ymir." },
+        { id:"urlo_a2", nome:"Spada del Sangue Cimmero",rar:"rare",    slot:"Arma",     attr:{FOR:1},            comb:{att:1,dan:4,def:2},   res:{}, elemDan:{veleno:2}, lore:"Forgiata con il sangue dei caduti della Battaglia di Venarium. Ricompensa della Quest Maggiore 1." },
+        { id:"urlo_a3", nome:"Martello del Destino",    rar:"unique",  slot:"Arma2M",   attr:{FOR:5,COS:2},      comb:{att:0,dan:10,def:-3}, res:{freddo:5}, elemDan:{freddo:5}, lore:"Forgiato nella Forgia Perduta con i 12 Frammenti dell'Urlo di Ymir. L'unica arma in grado di ferire Re Valthor il Gelido. Una volta per partita: 'Urlo di Ymir' — danno triplo." },
+        { id:"urlo_a4", nome:"Daga dell'Ombra",         rar:"rare",    slot:"Arma",     attr:{DES:2},            comb:{att:3,dan:3,def:1,ini:2}, res:{}, elemDan:{veleno:4}, lore:"Sottratta al Mercante dell'Ombra di Shadizar. Lama che non brilla mai alla luce." },
+        { id:"urlo_a5", nome:"Cuore di Vulcano",         rar:"legend",  slot:"Arma",     attr:{FOR:2,FRT:1},      comb:{att:2,dan:7,def:0},   res:{fuoco:4}, elemDan:{fuoco:5}, lore:"L'arma del cuore del Golem di Magma. Brucia ciò che tocca. I non-morti temono il suo calore." }
+    ],
+    // === NUOVE ARMATURE – L'URLO DI YMIR ===
+    Torso_Urlo: [
+        { id:"urlo_t1", nome:"Mantello di Scaglie Viventi",rar:"rare",  slot:"Torso",    attr:{COS:1},            comb:{rd:4,ini:-1},         res:{acido:8,veleno:3}, lore:"Scaglie vive del Serpente delle Paludi. Si muovono per deflettere i colpi. Ricompensa Quest Maggiore 3." },
+        { id:"urlo_t2", nome:"Piastre di Ghiaccio Eterno", rar:"legend",slot:"Torso",    attr:{COS:2,RES:2},      comb:{rd:8,ini:-5},         res:{freddo:10,magia:3}, lore:"Armatura forgiata nel ghiaccio vivo della Montagna Luminosa. Fredda come il cuore di Valthor. Non si spezza mai." },
+        { id:"urlo_t3", nome:"Tunica del Cultista",         rar:"special",slot:"Torso",   attr:{INT:1},            comb:{rd:1,ini:2},           res:{freddo:3,magia:2}, lore:"Tessuta con fili di brina dai Cultisti del Ghiaccio Eterno. Leggera ma magicamente protettiva." }
+    ],
+    // === FRAMMENTI DELL'URLO (slot speciale) ===
+    Frammento: [
+        { id:"fr0",  nome:"Nessuno",                         rar:"normal", slot:"Frammento", attr:{},              res:{}, lore:"" },
+        { id:"fr1",  nome:"Frammento 1 – L'Urlo del Sangue", rar:"unique", slot:"Frammento", attr:{FRT:3},         res:{freddo:5}, lore:"Una scheggia di ghiaccio vivo che urla quando la tocchi. Ricompensa: Quest Maggiore 1 (Venarium)." },
+        { id:"fr2",  nome:"Frammento 2 – Il Canto dei Clan", rar:"unique", slot:"Frammento", attr:{RES:3},         res:{}, comb:{ini:2}, lore:"Risuona con le voci dei clan traditi di Gurth. Ricompensa: Quest Maggiore 2." },
+        { id:"fr3",  nome:"Frammento 3 – La Sposa Serpente", rar:"unique", slot:"Frammento", attr:{COS:4},         res:{acido:4}, lore:"Odora di palude e veleno dolce. Ricompensa: Quest Maggiore 3 (Paludi)." },
+        { id:"fr4",  nome:"Frammento 4 – Il Cuore di Fuoco", rar:"unique", slot:"Frammento", attr:{FOR:3},         res:{fuoco:6}, lore:"Ancora caldo della lava della Forgia Perduta. Ricompensa: Quest Maggiore 4 (Vulcano)." },
+        { id:"fr5",  nome:"Frammento 5 – Il Ghiaccio Rotto", rar:"unique", slot:"Frammento", attr:{INT:1,DES:1,FOR:1,RES:1,COS:1,FRT:1}, res:{freddo:3}, lore:"L'anello della principessa Elara, trasformato in frammento dalla maledizione infranta. Ricompensa: Quest Maggiore 5 (Koppar)." },
+        { id:"fr6",  nome:"Frammento 6 – La Zanna del Troll", rar:"unique", slot:"Frammento", attr:{FOR:4,COS:2},  res:{freddo:5}, lore:"Strappato al Re dei Troll. Ancora puzza di bestia. Ricompensa: Quest Maggiore 6 (Foreste)." },
+        { id:"fr7",  nome:"Frammento 7 – L'Ombra Rubata",   rar:"unique", slot:"Frammento", attr:{DES:3,INT:1},   res:{veleno:4,magia:2}, lore:"Il frammento nascosto nel palazzo del Mercante dell'Ombra di Shadizar. Ricompensa: Quest Maggiore 7." },
+        { id:"fr8",  nome:"Frammento 8 – La Danza dei Morti",rar:"unique", slot:"Frammento", attr:{FRT:4},         res:{magia:5}, comb:{ini:3}, lore:"La Polvere Spettrale di Khorshemish cristallizzata nel frammento. Ricompensa: Quest Maggiore 8." },
+        { id:"fr9",  nome:"Frammento 9 – Il Tradimento",     rar:"unique", slot:"Frammento", attr:{INT:3,FRT:2},   res:{magia:6}, lore:"Portava il Mistico Corrotto. Ora porta il peso di mille anni di segreti. Ricompensa: Quest Maggiore 9 (Gurth)." },
+        { id:"fr10", nome:"Frammento 10 – La Scalata",       rar:"unique", slot:"Frammento", attr:{FOR:2,RES:2},   res:{freddo:8}, comb:{rd:2}, lore:"Trovato a metà della Montagna Luminosa, tra le rocce di ghiaccio eterno. Ricompensa: Quest Maggiore 11." },
+        { id:"fr11", nome:"Frammento 11 – L'Addio",          rar:"unique", slot:"Frammento", attr:{COS:3,FRT:2},   res:{freddo:8,magia:4}, lore:"L'ultimo frammento prima della cima. Piange quando lo tocchi. Ricompensa: Quest Maggiore 11." },
+        { id:"fr12", nome:"Frammento 12 – L'Urlo Finale",    rar:"unique", slot:"Frammento", attr:{FOR:6,DES:6,COS:6,RES:6,INT:6,FRT:6}, comb:{rd:10}, res:{freddo:20,magia:10}, lore:"La Corona di Ymir spezzata e raccolta dalla fronte del Re sconfitto. Il potere del Dio tradito è nelle tue mani. Ricompensa: Quest Maggiore 12 (Fine Partita)." }
+    ]
+};
+
+// ==========================================
+// DATABASE FORGIA CASUALE
+// ==========================================
+const FORGIA_GEN = {
+    adj: {
+        "Rozzo":       { ms:"Rozzo",       fs:"Rozza",       mp:"Rozzi",       fp:"Rozze" },
+        "Antico":      { ms:"Antico",      fs:"Antica",      mp:"Antichi",     fp:"Antiche" },
+        "Cimmero":     { ms:"Cimmero",     fs:"Cimmera",     mp:"Cimmeri",     fp:"Cimmere" },
+        "Nordico":     { ms:"Nordico",     fs:"Nordica",     mp:"Nordici",     fp:"Nordiche" },
+        "Aquiloniano": { ms:"Aquiloniano", fs:"Aquiloniana", mp:"Aquiloniani", fp:"Aquiloniane" },
+        "Maledetto":   { ms:"Maledetto",   fs:"Maledetta",   mp:"Maledetti",   fp:"Maledette" },
+        "Sacro":       { ms:"Sacro",       fs:"Sacra",       mp:"Sacri",       fp:"Sacre" },
+        "Corrotto":    { ms:"Corrotto",    fs:"Corrotta",    mp:"Corrotti",    fp:"Corrotte" },
+        "Benedetto":   { ms:"Benedetto",   fs:"Benedetta",   mp:"Benedetti",   fp:"Benedette" },
+        "Oscuro":      { ms:"Oscuro",      fs:"Oscura",      mp:"Oscuri",      fp:"Oscure" }
+    },
+    bases: {
+        "Arma":     [{ n:"Spada",  g:"f",s:"s"},{ n:"Ascia",   g:"f",s:"s"},{ n:"Daga",  g:"f",s:"s"},{ n:"Mazza",g:"f",s:"s"}],
+        "Arma2M":   [{ n:"Spadone",g:"m",s:"s"},{ n:"Maglio",  g:"m",s:"s"},{ n:"Alabarda",g:"f",s:"s"}],
+        "Arco":     [{ n:"Arco Corto",g:"m",s:"s"},{ n:"Arco Lungo",g:"m",s:"s"}],
+        "Scudo":    [{ n:"Scudo Rotondo",g:"m",s:"s"},{ n:"Pavese",g:"m",s:"s"}],
+        "Torso":    [{ n:"Usbergo",g:"m",s:"s"},{ n:"Corazza",g:"f",s:"s"},{ n:"Piastre",g:"f",s:"p"}],
+        "Testa":    [{ n:"Elmo",   g:"m",s:"s"},{ n:"Maschera",g:"f",s:"s"}],
+        "Collo":    [{ n:"Amuleto",g:"m",s:"s"},{ n:"Collana", g:"f",s:"s"}],
+        "Bracciali":[{ n:"Bracciali",g:"m",s:"p"}],
+        "Cintura":  [{ n:"Cintura",g:"f",s:"s"}],
+        "AnelloDX": [{ n:"Anello", g:"m",s:"s"}],
+        "Stivali":  [{ n:"Stivali",g:"m",s:"p"}]
+    },
+    suffixes: ["di Crom","di Mitra","di Set","del Sangue","del Destino","delle Ombre","del Ghiaccio","della Tempesta","del Serpente","della Fenice","del Drago","dell'Abisso"],
+    slotWeights: {
+        "Arma":     { attr:0.6,  combat:1.2, res:0.2,  main:"dan" },
+        "Arma2M":   { attr:0.8,  combat:1.6, res:0.2,  main:"dan" },
+        "Arco":     { attr:0.5,  combat:1.0, res:0.1,  main:"att" },
+        "Scudo":    { attr:0.4,  combat:0.9, res:0.8,  main:"def" },
+        "Torso":    { attr:0.7,  combat:1.0, res:1.4,  main:"rd" },
+        "Testa":    { attr:0.5,  combat:0.7, res:0.8,  main:"rd" },
+        "Collo":    { attr:1.4,  combat:0.5, res:1.1,  main:"hp" },
+        "Bracciali":{ attr:0.9,  combat:0.8, res:0.4,  main:"att" },
+        "Cintura":  { attr:1.0,  combat:0.5, res:0.5,  main:"hp" },
+        "AnelloDX": { attr:1.5,  combat:0.6, res:1.0,  main:"magia" },
+        "Stivali":  { attr:0.6,  combat:1.0, res:0.4,  main:"ini" }
+    },
+    // Modificati valori di resMax per il sistema Flat
+    rarityPower: {
+        "normal":  { attrMax:0, combMax:2, resMax:1,  attrPts:0, combPts:1, resPts:1, extraEffect:false },
+        "special": { attrMax:1, combMax:3, resMax:3,  attrPts:1, combPts:2, resPts:2, extraEffect:false },
+        "rare":    { attrMax:2, combMax:4, resMax:5,  attrPts:2, combPts:3, resPts:3, extraEffect:false },
+        "legend":  { attrMax:3, combMax:5, resMax:8,  attrPts:3, combPts:4, resPts:4, extraEffect:true  },
+        "unique":  { attrMax:4, combMax:6, resMax:12, attrPts:4, combPts:6, resPts:6, extraEffect:true  }
+    },
+    rarLore: {
+        "normal":  ["Un oggetto grezzo ma funzionale.","Fattura rozza, ma regge ai colpi.","Semplice e affidabile."],
+        "special": ["Porta segni di magia minore.","Insolita qualità per un oggetto comune.","Si percepisce qualcosa di particolare al tatto."],
+        "rare":    ["Un artigiano eccezionale lo ha forgiato con metalli rari.","Incantesimi di livello medio lo proteggono.","La sua fama precede il suo portatore."],
+        "legend":  ["Forgiato in un'era perduta quando gli dei camminavano tra gli uomini.","Il suo potere è palpabile anche a distanza.","Solo eroi possono sopportarne il peso spirituale."],
+        "unique":  ["Un solo esemplare esiste nel mondo conosciuto.","Il destino stesso sembra avvolgerlo.","Leggende narrano di chi lo ha indossato e ha cambiato il corso della storia."]
+    }
+};
+
+// ==========================================
+// DATABASE NEGOZIO (Corretti Stringhe & Ricalibrati in Flat)
+// ==========================================
+const SHOP_DB = {
+    armi: [
+        { id:'sh_w1',  nome:'Coltello da Caccia',    rar:'normal',  prezzo:8,   cat:'armi',     slot:'Arma',    comb:{att:1,dan:2},     res:{},          desc:'Lama corta da cintura.', lore:'' },
+        { id:'sh_w2',  nome:'Ascia da Boscaiolo',    rar:'normal',  prezzo:12,  cat:'armi',     slot:'Arma',    comb:{att:0,dan:3},     res:{},          desc:'Strumento e arma di emergenza.', lore:'' },
+        { id:'sh_w3',  nome:'Spada di Ferro Grezzo', rar:'normal',  prezzo:20,  cat:'armi',     slot:'Arma',    comb:{att:1,dan:3,def:0},res:{},         desc:'Fattura cimmera grezza ma solida.', lore:'' },
+        { id:'sh_w4',  nome:'Scudo Rotondo Legno',   rar:'normal',  prezzo:10,  cat:'armi',     slot:'Scudo',   comb:{def:1},           res:{},          desc:'Legno di quercia con bordo di ferro.', lore:'' },
+        { id:'sh_w5',  nome:'Pelli di Lupo',         rar:'normal',  prezzo:15,  cat:'armi',     slot:'Torso',   comb:{rd:1,ini:-1},     res:{freddo:1},  desc:'Pelli di lupo delle steppe cimmere.', lore:'' },
+        { id:'sh_w6',  nome:'Cuoio di Aquilonia',    rar:'normal',  prezzo:25,  cat:'armi',     slot:'Torso',   comb:{rd:2,ini:-1},     res:{},          desc:'Armatura di cuoio indurito.', lore:'' },
+        { id:'sh_w7',  nome:'Elmo di Ferro',         rar:'normal',  prezzo:18,  cat:'armi',     slot:'Testa',   comb:{def:1},           res:{},          desc:'Elmetto solido come la roccia.', lore:'' },
+        { id:'sh_w8',  nome:'Spada di Akbitana',     rar:'special', prezzo:80,  cat:'armi',     slot:'Arma',    comb:{att:2,dan:5,def:1},res:{},         desc:'Forgiata dai mastri di Akbitana.', lore:'' },
+        { id:'sh_w9',  nome:'Seta Nera Stigiana',    rar:'special', prezzo:95,  cat:'armi',     slot:'Torso',   comb:{rd:2,ini:1},      res:{magia:2},   desc:'Fili impregnati di magia protettiva.', lore:'' },
+        { id:'sh_w10', nome:'Scudo Rinforzato',      rar:'special', prezzo:60,  cat:'armi',     slot:'Scudo',   comb:{def:2,att:-1},    res:{},          desc:'Ferro e legno combinati.', lore:'' },
+        { id:'sh_w11', nome:'Ascia dei Nordheim',    rar:'special', prezzo:70,  cat:'armi',     slot:'Arma2M',  comb:{att:1,dan:6},     res:{freddo:1},  desc:'Incisa con rune di Ymir.', lore:'' },
+        { id:'sh_w12', nome:'Cotta Maglia Nordica',  rar:'rare',    prezzo:200, cat:'armi',     slot:'Torso',   comb:{rd:6,ini:-2},     res:{freddo:2},  attr:{RES:1}, desc:'Rinforzata con ossa di drago bianco.', lore:'' },
+        { id:'sh_w13', nome:'Daga Culto Set',        rar:'rare',    prezzo:180, cat:'armi',     slot:'Arma',    comb:{att:3,dan:4,def:2}, elemDan:{veleno:2}, attr:{INT:1}, desc:'Avvelenata con il veleno sacro.', lore:'' }
+    ],
+    pozioni: [
+        { id:'pot1',  nome:'Pozione di Guarigione',     rar:'normal',  prezzo:20,  cat:'pozioni',  uso:'hp',    effVal:15, res:{},            desc:'Recupera 15 HP.', lore:'' },
+        { id:'pot2',  nome:'Intruglio del Vecchio',     rar:'normal',  prezzo:12,  cat:'pozioni',  uso:'hp',    effVal:8,  res:{},            desc:'Recupera 8 HP.', lore:'' },
+        { id:'pot3',  nome:'Balsamo di Guerriero',      rar:'special', prezzo:50,  cat:'pozioni',  uso:'hp',    effVal:30, res:{},            desc:'Recupera 30 HP.', lore:'' },
+        { id:'pot4',  nome:'Antidoto di Tigre Nera',    rar:'normal',  prezzo:25,  cat:'pozioni',  uso:'res',              res:{veleno:4},    desc:'+4 Rid. Veleno per la sessione.', lore:'' },
+        { id:'pot5',  nome:'Olio del Fuoco Eterno',     rar:'special', prezzo:55,  cat:'pozioni',  uso:'res',              res:{fuoco:5},     desc:'+5 Rid. Fuoco per la sessione.', lore:'' },
+        { id:'pot6',  nome:'Acqua Ghiaccio Sacro',      rar:'special', prezzo:50,  cat:'pozioni',  uso:'res',              res:{freddo:5},    desc:'+5 Rid. Freddo per la sessione.', lore:'' },
+        { id:'pot7',  nome:'Filtro Antimagico',         rar:'rare',    prezzo:120, cat:'pozioni',  uso:'res',              res:{magia:7},     desc:'+7 Rid. Magia temporanea.', lore:'' },
+        { id:'pot8',  nome:'Elisir del Berserker',      rar:'rare',    prezzo:150, cat:'pozioni',  uso:'hp',    effVal:50, res:{},            desc:'Recupera 50 HP (riduce INT-1 per la sessione se gestito dal Master).', lore:'' },
+        { id:'pot9',  nome:'Pozione di Antracite',      rar:'special', prezzo:45,  cat:'pozioni',  uso:'res',              res:{acido:4},     desc:'+4 Rid. Acido per la sessione.', lore:'' }
+    ],
+    pergamene: [
+        { id:'perg1', nome:'Mappa delle Rovine',        rar:'normal',  prezzo:30,  cat:'pergamene',uso:'misc', desc:'Indica una rovina inesplorata. Utile per trovare tesori.', lore:'Inchiostro sbiadito su pelle.' },
+        { id:'perg2', nome:'Testo di Tattica Militare', rar:'normal',  prezzo:25,  cat:'pergamene',uso:'comb', attr:{INT:0}, comb:{att:1},  desc:'+1 ATT permanente.', lore:'Scritto da un generale.' },
+        { id:'perg3', nome:'Pergamena di Guarigione',   rar:'special', prezzo:65,  cat:'pergamene',uso:'hp',    effVal:20, res:{},            desc:'Recupera 20 HP una volta.', lore:'Geroglifici che pulsano.' },
+        { id:'perg4', nome:'Segreti di Erboristeria',   rar:'normal',  prezzo:20,  cat:'pergamene',uso:'res',              res:{veleno:2},    desc:'+2 Rid. Veleno permanente.', lore:'Tramandato oralmente.' },
+        { id:'perg5', nome:'Rune di Protezione',        rar:'special', prezzo:80,  cat:'pergamene',uso:'res',              res:{magia:3},     desc:'+3 Rid. Magia permanente.', lore:'Simboli di sangue.' },
+        { id:'perg6', nome:'Codice Ladri Shadizar',     rar:'rare',    prezzo:150, cat:'pergamene',uso:'comb', comb:{ini:2,att:1},          desc:'+2 INI +1 ATT permanenti.', lore:'Scritto con segreti oscuri.' },
+        { id:'perg7', nome:'Trattato Veleni Stigiani',  rar:'rare',    prezzo:140, cat:'pergamene',uso:'res',              res:{veleno:4,magia:2}, desc:'+4 Rid. Veleno +2 Rid. Magia permanenti.', lore:'Proibito nel mondo.' }
+    ],
+    oggetti: [
+        { id:'obj1',  nome:'Torcia di Resina',         rar:'normal',  prezzo:3,   cat:'oggetti',  uso:'misc',   desc:'Illumina le tenebre. Indispensabile.', lore:'' },
+        { id:'obj2',  nome:'Corda di Seta',            rar:'normal',  prezzo:8,   cat:'oggetti',  uso:'misc',   desc:'30 braccia di corda resistente.', lore:'' },
+        { id:'obj3',  nome:'Razione da Viaggio',       rar:'normal',  prezzo:5,   cat:'oggetti',  uso:'hp',     effVal:5, res:{}, desc:'Recupera 5 HP.', lore:'' },
+        { id:'obj4',  nome:'Kit del Medico',           rar:'normal',  prezzo:15,  cat:'oggetti',  uso:'hp',     effVal:10, res:{}, desc:'Bende, erbe. Recupera 10 HP.', lore:'' },
+        { id:'obj5',  nome:'Amuleto Portafortuna',     rar:'normal',  prezzo:10,  cat:'oggetti',  uso:'misc',   desc:'I Cimmeri giurano che porti fortuna.', lore:'' },
+        { id:'obj6',  nome:'Pietra Focaia',            rar:'normal',  prezzo:2,   cat:'oggetti',  uso:'misc',   desc:'Per accendere fuochi.', lore:'' },
+        { id:'obj7',  nome:'Amuleto Protezione',      rar:'special', prezzo:60,  cat:'oggetti',  uso:'res',    res:{magia:2,veleno:2}, desc:'+2 Rid Magia e Veleno per sessione.', lore:'' },
+        { id:'obj8',  nome:'Maschera Guerriero',      rar:'special', prezzo:75,  cat:'oggetti',  uso:'comb',   comb:{att:1}, desc:'+1 ATT psicologico.', lore:'' },
+        { id:'obj10', nome:'Frammento Cristallo Nero',rar:'rare',    prezzo:200, cat:'oggetti',  uso:'destino',effDestino:1, res:{magia:4}, desc:'+1 Destino. Richiesto dalla Quest di Shadizar.', lore:'Aura oscura.', questTag:'shadizar' },
+        { id:'obj11', nome:'Dente di Drago Bianco',   rar:'rare',    prezzo:250, cat:'oggetti',  uso:'destino',effDestino:1, attr:{FOR:1}, desc:'+1 Destino +1 FOR. Quest di Venarium.', lore:'Ancora caldo.', questTag:'venarium' },
+        { id:'obj12', nome:'Sigillo di Mitra',        rar:'rare',    prezzo:180, cat:'oggetti',  uso:'destino',effDestino:1, res:{magia:3,incanto:3}, desc:'+1 Destino. Quest di Tarantia.', lore:'Oro puro.', questTag:'tarantia' },
+        { id:'obj_u1',nome:'Corona di Nemedia',       rar:'unique',  prezzo:0,   cat:'oggetti',  uso:'destino',effDestino:3, attr:{FRT:2,INT:1}, desc:'Non in vendita. Loot Grand Quest di Koth. +3 Destino.', lore:'Primo re di Nemedia.', questTag:'koth' },
+        { id:'obj_u2',nome:'Occhio di Crom',          rar:'unique',  prezzo:0,   cat:'oggetti',  uso:'destino',effDestino:2, attr:{FOR:2}, comb:{dan:2}, desc:'Non in vendita. Boss Ben Morgh. +2 Destino.', lore:'Gemma della notte.', questTag:'benmorgh' },
+        // === OGGETTI QUEST – L'URLO DI YMIR ===
+        { id:'urlo_o1',nome:'Corno dell\'Urlo',       rar:'special', prezzo:0,   cat:'oggetti',  uso:'comb', comb:{ini:10}, desc:'Non in vendita. Ricompensa Quest Maggiore 2 (Gurth). Una volta: +10 INI in combattimento.', lore:'Il suono fa tremare i ghiacciai.', questTag:'gurth' },
+        { id:'urlo_o2',nome:'Polvere Spettrale',      rar:'rare',    prezzo:0,   cat:'oggetti',  uso:'comb', comb:{ini:3}, effDestino:1, desc:'Non in vendita. Quest Maggiore 8 (Khorshemish). Perma +3 INI e +1 Destino.', lore:'I morti di Acheron camminano ancora.', questTag:'khorshemish' },
+        { id:'urlo_o3',nome:'Anello della Principessa',rar:'unique', prezzo:0,   cat:'oggetti',  uso:'destino', effDestino:1, attr:{FOR:2,DES:2,COS:2,RES:2,INT:2,FRT:2}, desc:'Non in vendita. Quest M5 (Koppar). +2 tutti gli attributi se Elara è viva.', lore:'Il ghiaccio si è sciolto.', questTag:'koppar' },
+        { id:'urlo_o4',nome:'Gemma Grezza',           rar:'special', prezzo:40,  cat:'oggetti',  uso:'misc', desc:'Gemma trovata nelle miniere. Vendibile ai mercanti.', lore:'Luccica come ghiaccio.', questTag:'' },
+        { id:'urlo_o5',nome:'Zanna Argentata',        rar:'rare',    prezzo:0,   cat:'oggetti',  uso:'destino', effDestino:1, attr:{DES:1}, desc:'Non in vendita. Quest Minore 1 (Lupo Mannaro). +1 Destino +1 DES.', lore:'Argentata con la luce della luna.', questTag:'gurth' },
+        { id:'urlo_o6',nome:'Pergamena del Patto',    rar:'rare',    prezzo:0,   cat:'oggetti',  uso:'comb', comb:{att:1}, attr:{INT:2}, desc:'Non in vendita. Trovata sui Cultisti. +1 ATT +2 INT permanenti.', lore:'Scritta col sangue di Valthor.', questTag:'' }
+    ]
+};
+
+// ==========================================
+// MAPPA LOCAZIONI
+// ==========================================
+const MAP_LOCATIONS = [
+  { name:"Venarium",    x:22, y:18, type:"quest",   desc:"Antica fortezza di confine, teatro di sanguinose battaglie cimmere. Rovine e fantasmi." },
+  { name:"Tarantia",   x:42, y:55, type:"capital",  desc:"Splendida capitale dell'Aquilonia, citta' di marmi bianchi e intrighi politici." },
+  { name:"Shadizar",   x:62, y:60, type:"city",     desc:"La famigerata Citta' dei Ladri, labirinto di vicoli oscuri e mercati neri." },
+  { name:"Khorshemish",x:58, y:72, type:"city",     desc:"Grande citta' mercantile di Shem, ricca e corrotta, governata da principi-sacerdoti." },
+  { name:"Messantia",  x:30, y:75, type:"city",     desc:"Porto principale di Argos, famosa per flotte e taverne dei marinai." },
+  { name:"Zuarir",     x:72, y:80, type:"city",     desc:"Oasi fortificata ai margini del deserto, punto d'incontro per carovane e spie." },
+  { name:"Koppar",     x:18, y:40, type:"city",     desc:"Citta' mineraria nota per fucine e commercio di metalli rari." },
+  { name:"Thanza",     x:35, y:30, type:"village",  desc:"Antico insediamento collinare, avvolto da leggende su culti oscuri." },
+  { name:"Asgalun",    x:55, y:85, type:"city",     desc:"Potente citta'-stato di Shem, centro di sapere arcano e templi stellari." },
+  { name:"Koth",       x:50, y:62, type:"city",     desc:"Regno di citta' fortificate e signori della guerra, terra di mercenari." },
+  { name:"Conajohara", x:28, y:22, type:"quest",    desc:"Avamposto di frontiera ai margini delle terre selvagge, spesso assediato da tribù cimmerie." },
+  { name:"Gurth",      x:14, y:28, type:"village",  desc:"Villaggio montano cimmero, foreste oscure e clan fieri." },
+  { name:"Ormuz",      x:78, y:55, type:"city",     desc:"Citta' dove si acquistano armi incantate e pozioni." },
+  { name:"Tyro",       x:40, y:88, type:"city",     desc:"Citta' di missioni e taverne." },
+  { name:"Arya",       x:65, y:35, type:"village",  desc:"Contrada e piazza commerciale." }
+];
+
+const MAP_ROUTES = [
+  [0,10],[10,6],[6,7],[7,1],[1,3],[3,9],[9,2],[2,11],[11,0],
+  [1,4],[4,13],[13,3],[3,8],[8,5],[5,2],[9,12],[12,5],[7,0]
+];
+
+// ==========================================
+// STATO GLOBALE
+// ==========================================
+const STAT_KEYS = ['FOR','DES','COS','RES','INT','FRT'];
+let pbState = {};
+STAT_KEYS.forEach(k => pbState[k] = { base:9, prim:0, sec:0 });
+
+let equippedItems = { elmo:null, armatura:null, bracciali:null, cintura:null, anello:null, stivali:null, amuleto:null, arma:null, scudo:null };
+let bagItems = [];
+let selectedShopItem = null;
+let selectedBagItem  = null;
+let selectedBagIdx   = -1;
+
+let selectedRarity = 'normal';
+let selectedSlotRandom = 'any';
+let selectedSlotScegli = 'any';
+let rarFilterActive = {normal:true, special:true, rare:true, legend:true, unique:true};
+let currentForgedItem = null;
+let currentChosenItem = null;
+
+// ==========================================
+// UTILITY & UI CORE
+// ==========================================
+function getVal(obj,key){ return (obj && obj[key]!==undefined)?obj[key]:0; }
+function clamp(v,mn,mx){ return Math.max(mn,Math.min(mx,v)); }
+function getSafeObj(obj){ return (obj&&obj.skills)?obj.skills:{abilita:[],competenze:[]}; }
+function rnd(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function rndInt(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+
+function rarLabel(r){ return {normal:"Normale",special:"Speciale",rare:"Raro",legend:"Leggenda",unique:"Unico"}[r]||r; }
+function rarColor(r){ return {normal:"var(--col-normal)",special:"var(--col-special)",rare:"var(--col-rare)",legend:"var(--col-legend)",unique:"var(--col-unique)"}[r]||"#fff"; }
+
+function generateTooltip(item){
+    if(!item||typeof item==='string') return "";
+    let lines=[];
+    if(item.attr&&Object.keys(item.attr).length>0) lines.push("ATT: "+Object.entries(item.attr).map(([k,v])=>`${k} ${v>0?'+':''}${v}`).join(', '));
+    if(item.comb&&Object.keys(item.comb).length>0) lines.push("CMB: "+Object.entries(item.comb).map(([k,v])=>`${k.toUpperCase()} ${v>0?'+':''}${v}`).join(', '));
+    // Danni Elementali (armi)
+    if(item.elemDan&&Object.keys(item.elemDan).length>0) lines.push("DANNO ELEM: "+Object.entries(item.elemDan).map(([k,v])=>`${k} +${v}`).join(', '));
+    // Resistenze flat (armature/pozioni)
+    if(item.res&&Object.keys(item.res).length>0) lines.push("RID. ELEM: "+Object.entries(item.res).map(([k,v])=>`${k} +${v}`).join(', '));
+    if(item.skills){
+        if(item.skills.abilita&&item.skills.abilita.length>0) lines.push("ABILITA': "+item.skills.abilita.join(', '));
+        if(item.skills.competenze&&item.skills.competenze.length>0) lines.push("COMPETENZE: "+item.skills.competenze.join(', '));
+    }
+    if(item.tratto) lines.push("TRATTO: "+item.tratto);
+    if(item.bonus) lines.push("DONO: "+item.bonus);
+    return lines.length>0?lines.join('\n'):"Nessun effetto diretto.";
+}
+
+function popSelect(id,data){
+    const sel=document.getElementById(id);
+    if(!sel||!data) return;
+    sel.innerHTML='';
+    Object.keys(data).forEach(key=>{
+        let item=data[key];
+        let opt=document.createElement('option');
+        opt.value=key;
+        if(typeof item==='string'){opt.textContent=item;opt.title="Nome";}
+        else{opt.textContent=item.nome||"Sconosciuto";opt.title=generateTooltip(item);}
+        sel.appendChild(opt);
+    });
+}
+function updateNames(){ popSelect('sel-nome',DB.nomi[document.getElementById('sel-sesso').value]); }
+function aggiornaSottoclasse(){
+    let ck=document.getElementById('sel-classe').value;
+    popSelect('sel-sottoclasse',DB.classi[ck].sottoclassi);
+    calcAll();
+}
+
+// Point Buy
+function buildAttrUI(){
+    const container=document.getElementById('attr-grid-container');
+    container.innerHTML='';
+    STAT_KEYS.forEach(k=>{
+        container.innerHTML+=`
+        <div class="attr-box">
+            <div class="attr-left">
+                <span class="attr-name">${k}</span>
+                <div class="attr-controls">
+                    Base(7-9): <button id="btn-base-dwn-${k}" onclick="updatePB('${k}','base',-1)">-</button>
+                    <span id="val-base-${k}">9</span>
+                    <button id="btn-base-up-${k}" onclick="updatePB('${k}','base',1)">+</button>
+                    (+3): <button id="btn-prim-dwn-${k}" onclick="updatePB('${k}','prim',-1)">-</button>
+                    <span id="val-prim-${k}">0</span>
+                    <button id="btn-prim-up-${k}" onclick="updatePB('${k}','prim',1)">+</button>
+                    (+2): <button id="btn-sec-dwn-${k}" onclick="updatePB('${k}','sec',-1)">-</button>
+                    <span id="val-sec-${k}">0</span>
+                    <button id="btn-sec-up-${k}" onclick="updatePB('${k}','sec',1)">+</button>
+                </div>
+            </div>
+            <div class="attr-right">
+                <div class="attr-mod" id="mod-${k.toLowerCase()}">+0</div>
+                <div class="attr-total" id="tot-${k.toLowerCase()}">9</div>
+            </div>
+        </div>`;
+    });
+}
+
+function updatePB(stat,type,delta){
+    let s=pbState[stat];
+    if(type==='base') s.base=clamp(s.base+delta,7,9);
+    else if(type==='prim') s.prim=clamp(s.prim+delta,0,3);
+    else if(type==='sec') s.sec=clamp(s.sec+delta,0,2);
+    document.getElementById(`val-base-${stat}`).textContent=s.base;
+    document.getElementById(`val-prim-${stat}`).textContent=(s.prim>0?'+':'')+s.prim;
+    document.getElementById(`val-sec-${stat}`).textContent=(s.sec>0?'+':'')+s.sec;
+    aggiornaPoolUI();
+    calcAll();
+}
+
+function aggiornaPoolUI(){
+    let primUsed=0,secGained=0,secUsed=0;
+    STAT_KEYS.forEach(k=>{ primUsed+=pbState[k].prim; secGained+=(9-pbState[k].base); secUsed+=pbState[k].sec; });
+    let primAvail=9-primUsed; let secAvail=secGained-secUsed;
+    document.getElementById('pool-prim-display').textContent=primAvail;
+    document.getElementById('pool-sec-display').textContent=secAvail;
+    STAT_KEYS.forEach(k=>{
+        const s=pbState[k];
+        document.getElementById(`btn-prim-up-${k}`).disabled=(primAvail<=0||s.prim>=3);
+        document.getElementById(`btn-prim-dwn-${k}`).disabled=(s.prim<=0);
+        document.getElementById(`btn-sec-up-${k}`).disabled=(secAvail<=0||s.sec>=2);
+        document.getElementById(`btn-sec-dwn-${k}`).disabled=(s.sec<=0);
+        document.getElementById(`btn-base-up-${k}`).disabled=(s.base>=9||secAvail<0);
+        document.getElementById(`btn-base-dwn-${k}`).disabled=(s.base<=7);
+    });
+}
+
+// ==========================================
+// CALCOLO PRINCIPALE E STATS
+// ==========================================
+function calcAll(){
+    let razza=DB.razze[document.getElementById('sel-razza').value]||{};
+    let classeKey=document.getElementById('sel-classe').value;
+    let sottoclasseKey=document.getElementById('sel-sottoclasse').value;
+    let classeData=(DB.classi[classeKey]&&DB.classi[classeKey].sottoclassi[sottoclasseKey])||{};
+    let bg=DB.background[document.getElementById('sel-bg').value]||{};
+    let dio=DB.dei[document.getElementById('sel-dio').value]||{};
+    let evento=DB.eventi[document.getElementById('sel-evento').value]||{};
+    let condotta=DB.condotte[document.getElementById('sel-condotta').value]||{};
+    let eta=DB.eta[document.getElementById('sel-eta').value]||{};
+
+    // Zecchini UI (solo read per la classe base, il master li cambia via negozio)
+    if(document.getElementById('val-zecchini').value === "1" && getVal(bg,'zecchini')>0){
+        document.getElementById('val-zecchini').value=1+getVal(bg,'zecchini');
+    }
+    document.getElementById('val-fate').value=getVal(evento,'fate');
+
+    // Equipaggiamento Attivo
+    let eqAttr={FOR:0,DES:0,COS:0,RES:0,INT:0,FRT:0};
+    let eqComb={att:0,dan:0,def:0,rd:0,ini:0};
+    let eqRes={fuoco:0,freddo:0,acido:0,veleno:0,magia:0,fulmine:0,incanto:0};
+
+    Object.values(equippedItems).forEach(item=>{
+        if(!item) return;
+        if(item.attr) Object.entries(item.attr).forEach(([k,v])=>{ if(eqAttr[k]!==undefined) eqAttr[k]+=v; });
+        if(item.comb) Object.entries(item.comb).forEach(([k,v])=>{ if(eqComb[k]!==undefined) eqComb[k]+=v; });
+        if(item.res) Object.entries(item.res).forEach(([k,v])=>{ if(eqRes[k]!==undefined) eqRes[k]+=v; });
+    });
+
+    // Attributi
+    let mods={},T={};
+    STAT_KEYS.forEach(stat=>{
+        mods[stat]=getVal(razza.attr,stat)+getVal(classeData.attr,stat)+getVal(bg.attr,stat)+
+                   getVal(dio.attr,stat)+getVal(evento.attr,stat)+getVal(condotta.attr,stat)+getVal(eta.attr,stat)+eqAttr[stat];
+        document.getElementById(`mod-${stat.toLowerCase()}`).textContent=(mods[stat]>=0?'+':'')+mods[stat];
+        T[stat]=clamp(pbState[stat].base+pbState[stat].prim+pbState[stat].sec+mods[stat],0,18);
+        document.getElementById(`tot-${stat.toLowerCase()}`).textContent=T[stat];
+    });
+
+    // Combattimento Base
+    let combFix={att:0,dan:0,def:0,ini:0,rd:0};
+    for(let k in combFix) combFix[k]=getVal(classeData.comb,k)+getVal(dio.comb,k)+getVal(condotta.comb,k);
+
+    let baseAtt=combFix.att+Math.floor(T.DES/4);
+    let baseDan=combFix.dan+Math.floor(T.FOR/3);
+    let baseDef=combFix.def+Math.floor(T.DES/4);
+    let baseIni=combFix.ini+Math.floor(T.DES/2);
+    let baseRd=combFix.rd+Math.floor(T.RES/5);
+    let baseHp=getVal(classeData,'hp')+getVal(bg,'hp')+getVal(dio,'hp')+(T.COS*2);
+
+    document.getElementById('val-hp').textContent=baseHp;
+    document.getElementById('val-energia').textContent=(T.INT+T.FRT)*2;
+
+    function showStat(id,base,eq,deltaId){
+        document.getElementById(id).textContent=base+eq;
+        let del=document.getElementById(deltaId);
+        if(eq!==0){ del.textContent=(eq>0?'+':'')+eq+'(eq)'; del.className='comb-delta '+(eq>0?'pos':'neg'); }
+        else { del.textContent=''; del.className='comb-delta'; }
+    }
+    showStat('val-att',baseAtt,eqComb.att,'delta-att');
+    showStat('val-dan',baseDan,eqComb.dan,'delta-dan');
+    showStat('val-def',baseDef,eqComb.def,'delta-def');
+    showStat('val-ini',baseIni,eqComb.ini,'delta-ini');
+    showStat('val-rd', baseRd, eqComb.rd, 'delta-rd');
+
+    // Resistenze FLAT
+    let resTypes=['fuoco','freddo','acido','veleno','magia','fulmine'];
+    resTypes.forEach(type=>{
+        // Calcolo base (Resistenza diviso 5 invece di 2 perché usiamo riduzioni flat piccole)
+        let val=getVal(razza.res,type)+getVal(dio.res,type)+getVal(evento.res,type)+getVal(condotta.res,type)+Math.floor(T.RES/5)+eqRes[type];
+        document.getElementById(`res-${type}`).textContent=clamp(val,0,100);
+    });
+    let incanto=(Math.floor(T.FRT/2))+Math.floor(T.RES/5)+getVal(condotta.res,'incanto')+eqRes.incanto;
+    document.getElementById('res-incanto').textContent=clamp(incanto,0,100);
+
+    // Abilita' e Competenze
+    let s1=getSafeObj(razza),s2=getSafeObj(classeData),s3=getSafeObj(bg),s4=getSafeObj(dio),s5=getSafeObj(evento),s6=getSafeObj(condotta);
+    let allAbilita=new Set([...s1.abilita,...s2.abilita,...s3.abilita,...s4.abilita,...s5.abilita,...s6.abilita]);
+    let allCompetenze=new Set([...s1.competenze,...s2.competenze,...s3.competenze,...s4.competenze,...s5.competenze,...s6.competenze]);
+    document.getElementById('skills-container').innerHTML=`
+        <div class="skill-section"><strong>Abilita':</strong><br>${[...allAbilita].map(a=>`<span class="skill-tag">${a}</span>`).join('')}</div>
+        <div class="skill-section"><strong>Competenze:</strong><br>${[...allCompetenze].map(c=>`<span class="skill-tag">${c}</span>`).join('')}</div>`;
+
+    // Tratti
+    let tratti=[razza.tratto,dio.bonus].filter(Boolean);
+    if(tratti.length>0){
+        document.getElementById('trait-box').style.display='block';
+        document.getElementById('trait-text').innerHTML=tratti.join('<br>');
+    } else { document.getElementById('trait-box').style.display='none'; }
+}
+
+// ==========================================
+// INVENTARIO ATTIVO E NEGOZIO
+// ==========================================
+function slotForItem(item){
+    if(!item) return null;
+    const map={Testa:'elmo',Collo:'amuleto',Bracciali:'bracciali',Cintura:'cintura',AnelloDX:'anello',Stivali:'stivali',Torso:'armatura',Scudo:'scudo',Arma:'arma',Arma2M:'arma',Arco:'arma'};
+    return map[item.slot]||null;
+}
+function equipItem(item){
+    if(!item) return;
+    let slot=slotForItem(item);
+    if(!slot){ alert("Slot non valido per equip."); return; }
+    equippedItems[slot]=item;
+    refreshInventoryUI(); calcAll();
+}
+function removeEquip(slot){
+    equippedItems[slot]=null;
+    refreshInventoryUI(); calcAll();
+}
+function refreshInventoryUI(){
+    Object.entries(equippedItems).forEach(([slot,item])=>{
+        let nameEl=document.getElementById('inv-name-'+slot);
+        let bonusEl=document.getElementById('inv-bonus-'+slot);
+        if(!nameEl) return;
+        nameEl.className='inv-item-name '+(item?'rar-'+item.rar:'rar-normal');
+        nameEl.textContent=item?item.nome:'--- Vuoto ---';
+        if(bonusEl){
+            if(item){
+                let parts=[];
+                if(item.attr) Object.entries(item.attr).forEach(([k,v])=>parts.push(`${k}${v>0?'+':''}${v}`));
+                if(item.comb) Object.entries(item.comb).forEach(([k,v])=>parts.push(`${k.toUpperCase()}${v>0?'+':''}${v}`));
+                if(item.res) Object.entries(item.res).forEach(([k,v])=>parts.push(`Rid.${k.charAt(0).toUpperCase()+k.slice(1)} +${v}`));
+                if(item.elemDan) Object.entries(item.elemDan).forEach(([k,v])=>parts.push(`Danno ${k.charAt(0).toUpperCase()+k.slice(1)} +${v}`));
+                bonusEl.textContent=parts.join(' | ');
+                bonusEl.style.color=rarColor(item.rar);
+            } else { bonusEl.textContent=''; }
+        }
+    });
+}
+
+function showShopMsg(msg, ok){
+    let el = document.getElementById('shop-msg');
+    el.textContent = msg; el.className = 'shop-msg ' + (ok ? 'ok' : 'err');
+    setTimeout(()=>{ el.textContent=''; el.className='shop-msg'; }, 3000);
+}
+
+function renderShopGrid(cat, containerId){
+    let container = document.getElementById(containerId);
+    if(!container) return;
+    container.innerHTML = '';
+    let items = SHOP_DB[cat] || [];
+    items.forEach(item => {
+        let div = document.createElement('div');
+        div.className = 'shop-card rar-' + item.rar;
+        let priceStr = item.prezzo > 0 ? item.prezzo + ' Zecchini' : '<span style="color:#888">Trovabile nelle Quest</span>';
+        let effParts = [];
+        if(item.effVal && item.uso==='hp') effParts.push('+'+item.effVal+' HP');
+        if(item.res) Object.entries(item.res).forEach(([k,v])=>{ if(v) effParts.push('Rid.'+k+' +'+v); });
+        if(item.elemDan) Object.entries(item.elemDan).forEach(([k,v])=>{ if(v) effParts.push('Danno '+k+' +'+v); });
+        if(item.attr) Object.entries(item.attr).forEach(([k,v])=>{ if(v) effParts.push(k+(v>0?'+':'')+v); });
+        if(item.comb) Object.entries(item.comb).forEach(([k,v])=>{ if(v) effParts.push(k.toUpperCase()+(v>0?'+':'')+v); });
+        if(item.effDestino) effParts.push('+'+item.effDestino+' Destino');
+        div.innerHTML = `
+            <div class="sc-name">${item.nome}</div>
+            <div class="sc-price">${priceStr}</div>
+            <div class="sc-desc">${item.desc}</div>
+            ${effParts.length ? '<div class="sc-effect">'+effParts.join(' | ')+'</div>' : ''}
+        `;
+        if(item.prezzo > 0){ div.onclick = () => selectShopItem(item); } 
+        else { div.style.opacity = '0.5'; div.style.cursor = 'default'; }
+        container.appendChild(div);
+    });
+}
+
+function selectShopItem(item){
+    selectedShopItem = item;
+    let bar = document.getElementById('shop-buy-bar');
+    bar.style.display = 'block';
+    document.getElementById('shop-buy-name').textContent = '[' + rarLabel(item.rar) + '] ' + item.nome;
+    document.getElementById('shop-buy-desc').textContent = item.desc;
+}
+
+function buySelectedItem(){
+    if(!selectedShopItem) return;
+    let z = parseInt(document.getElementById('val-zecchini').value)||0;
+    if(z < selectedShopItem.prezzo){ showShopMsg('Zecchini insufficienti!', false); return; }
+    document.getElementById('val-zecchini').value = z - selectedShopItem.prezzo;
+    bagItems.push({...selectedShopItem, uses: (selectedShopItem.uso==='hp'||selectedShopItem.uso==='res') ? 1 : 99});
+    renderBag();
+    showShopMsg('Acquistato: ' + selectedShopItem.nome, true);
+    document.getElementById('shop-buy-bar').style.display = 'none';
+    selectedShopItem = null;
+}
+
+function renderBag(){
+    let container = document.getElementById('inv-bag-display');
+    if(bagItems.length === 0){ container.innerHTML = '<span style="color:#555; font-style:italic; font-size:0.8em;">Zaino vuoto</span>'; return; }
+    container.innerHTML = '';
+    bagItems.forEach((item, idx) => {
+        let div = document.createElement('span');
+        div.className = 'inv-bag-item rar-' + item.rar;
+        div.textContent = item.nome + (item.uses && item.uses < 99 ? ' (x'+item.uses+')' : '');
+        div.onclick = () => selectBagItem(item, idx);
+        container.appendChild(div);
+    });
+}
+
+function selectBagItem(item, idx){
+    selectedBagItem = item; selectedBagIdx = idx;
+    let bar = document.getElementById('bag-detail-bar');
+    bar.style.display = 'block';
+    document.getElementById('bag-detail-name').textContent = item.nome;
+    document.getElementById('bag-detail-desc').textContent = item.desc;
+}
+
+function useBagItem(){
+    if(!selectedBagItem || selectedBagIdx < 0) return;
+    let item = selectedBagItem;
+    if(item.uso === 'hp' && item.effVal){
+        let hpEl = document.getElementById('val-hp');
+        hpEl.textContent = (parseInt(hpEl.textContent)||0) + item.effVal;
+        showShopMsg('+'+item.effVal+' HP Recuperati!', true);
+        consumeBagItem();
+    } else if(item.uso === 'res'){
+        Object.keys(item.res||{}).forEach(k => {
+            let el = document.getElementById('res-'+k);
+            if(el) el.textContent = (parseInt(el.textContent)||0) + item.res[k];
+        });
+        showShopMsg('Resistenze Elementali aumentate!', true);
+        consumeBagItem();
+    } else if(item.uso === 'destino'){
+        let fateEl = document.getElementById('val-fate');
+        fateEl.value = (parseInt(fateEl.value)||0) + (item.effDestino||1);
+        showShopMsg('Destino Manipolato!', true);
+        consumeBagItem();
+    } else if(item.slot){
+        equipItem(item);
+        showShopMsg(item.nome + ' equipaggiato!', true);
+        bagItems.splice(selectedBagIdx, 1);
+        renderBag(); hideBagDetail();
+    } else if(item.uso === 'comb'){
+        Object.entries(item.comb||{}).forEach(([k,v])=>{
+            let el = document.getElementById('val-'+k);
+            if(el) el.textContent = (parseInt(el.textContent)||0) + v;
+        });
+        showShopMsg('Conoscenza assimilata!', true);
+        consumeBagItem();
+    } else {
+        showShopMsg('Oggetto usato.', true);
+        consumeBagItem();
+    }
+}
+function consumeBagItem(){
+    if(selectedBagIdx < 0) return;
+    if(bagItems[selectedBagIdx].uses > 1){ bagItems[selectedBagIdx].uses--; }
+    else { bagItems.splice(selectedBagIdx, 1); }
+    renderBag(); hideBagDetail();
+}
+function dropBagItem(){
+    if(selectedBagIdx < 0) return;
+    bagItems.splice(selectedBagIdx, 1);
+    renderBag(); hideBagDetail();
+    showShopMsg('Oggetto gettato.', false);
+}
+function hideBagDetail(){ document.getElementById('bag-detail-bar').style.display='none'; selectedBagItem=null; selectedBagIdx=-1; }
+
+function switchShop(tab){
+    document.querySelectorAll('.shop-tab').forEach((t,i)=> t.classList.toggle('active', ['armi','pozioni','pergamene','oggetti'][i]===tab));
+    document.querySelectorAll('.shop-section').forEach((s,i)=> s.classList.toggle('active', ['ss-armi','ss-pozioni','ss-pergamene','ss-oggetti'][i]==='ss-'+tab));
+    document.getElementById('shop-buy-bar').style.display='none';
+}
+
+// ==========================================
+// MAPPA
+// ==========================================
+function buildMap(){
+    const container = document.getElementById('map-container');
+    const svg = document.getElementById('map-svg');
+    const W = container.offsetWidth || 900;
+    const H = container.offsetHeight || 320;
+    let svgContent = '';
+    MAP_ROUTES.forEach(([a,b]) => {
+        let la = MAP_LOCATIONS[a], lb = MAP_LOCATIONS[b];
+        let x1 = (la.x/100)*W, y1 = (la.y/100)*H;
+        let x2 = (lb.x/100)*W, y2 = (lb.y/100)*H;
+        svgContent += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(90,70,30,0.45)" stroke-width="1" stroke-dasharray="4,3"/>`;
+    });
+    svg.innerHTML = svgContent;
+    container.querySelectorAll('.map-location').forEach(e=>e.remove());
+    MAP_LOCATIONS.forEach(loc => {
+        let div = document.createElement('div');
+        div.className = 'map-location';
+        div.style.left = loc.x + '%'; div.style.top  = loc.y + '%';
+        div.title = loc.name + ': ' + loc.desc;
+        div.innerHTML = `<div class="map-dot ${loc.type}"></div><div class="map-label">${loc.name}</div>`;
+        container.appendChild(div);
+    });
+}
+
+// ==========================================
+// FORGIA CASUALE
+// ==========================================
+function selectRarity(rar,btn){
+    selectedRarity=rar;
+    document.querySelectorAll('#rarity-bar .rarity-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+function selectSlot(slot,btn,section){
+    if(section==='random'){
+        selectedSlotRandom=slot;
+        document.querySelectorAll('#slot-filter-random .slot-btn').forEach(b=>b.classList.remove('active'));
+    } else {
+        selectedSlotScegli=slot;
+        document.querySelectorAll('#slot-filter-scegli .slot-btn').forEach(b=>b.classList.remove('active'));
+        renderItemList();
+    }
+    btn.classList.add('active');
+}
+function toggleRarFilter(rar,btn){
+    rarFilterActive[rar]=!rarFilterActive[rar];
+    btn.classList.toggle('selected'); renderItemList();
+}
+
+function forgiaCasuale(){
+    let allSlots=Object.keys(FORGIA_GEN.bases);
+    let slot=selectedSlotRandom==='any'?rnd(allSlots):selectedSlotRandom;
+    let base=rnd(FORGIA_GEN.bases[slot]);
+    let adj=FORGIA_GEN.adj[rnd(Object.keys(FORGIA_GEN.adj))];
+    let adjForm=adj[base.g+(base.s==='s'?'s':'p')];
+    let itemName=`${base.n} ${adjForm} ${rnd(FORGIA_GEN.suffixes)}`;
+
+    let rp=FORGIA_GEN.rarityPower[selectedRarity];
+    let sw=FORGIA_GEN.slotWeights[slot]||{attr:1,combat:1,res:1};
+    let attr={}, comb={}, res={}, elemDan={};
+
+    if(rp.attrPts>0){
+        let pts=rp.attrPts, pool=[...STAT_KEYS];
+        while(pts>0&&pool.length>0){
+            let k=pool.splice(Math.floor(Math.random()*pool.length),1)[0];
+            if(Math.random()<sw.attr*0.5){ attr[k]=(Math.random()<0.8?Math.min(pts,rp.attrMax):-1); pts--; }
+        }
+    }
+    if(rp.combPts>0){
+        let pts=rp.combPts, ck=['att','dan','def','rd','ini'];
+        while(pts>0&&ck.length>0){
+            let k=ck.splice(Math.floor(Math.random()*ck.length),1)[0];
+            if(Math.random()<sw.combat*0.4){ comb[k]=(Math.random()<0.85?Math.min(pts,rp.combMax):-1); pts--; }
+        }
+    }
+    let mainKey=sw.main;
+    if(['att','dan','def','rd','ini'].includes(mainKey)){ if(!comb[mainKey]) comb[mainKey]=rp.combMax>0?1:0; }
+
+    // Resistenze ed Elementi (flat)
+    if(rp.resPts>0){
+        let pts=rp.resPts, rt=['fuoco','freddo','acido','veleno','magia','fulmine','incanto'];
+        while(pts>0&&rt.length>0){
+            let k=rt.splice(Math.floor(Math.random()*rt.length),1)[0];
+            if(Math.random()<sw.res*0.4){
+                if(slot==='Arma'||slot==='Arma2M'||slot==='Arco') elemDan[k]=rndInt(1,rp.resMax);
+                else res[k]=rndInt(1,rp.resMax);
+                pts--;
+            }
+        }
+    }
+
+    currentForgedItem={
+        id:'forged_'+Date.now(), nome:itemName, rar:selectedRarity, slot:slot,
+        attr, comb, res, elemDan, lore:rnd(FORGIA_GEN.rarLore[selectedRarity])
+    };
+    renderItemCard(currentForgedItem,'item-card-random');
+    document.getElementById('btn-equip-random').disabled=false;
+}
+
+function equipCurrentItem(){ if(currentForgedItem) equipItem(currentForgedItem); }
+function equipChosenItem(){ if(currentChosenItem) equipItem(currentChosenItem); }
+
+function renderItemList(){
+    const container=document.getElementById('item-list-container');
+    container.innerHTML='';
+    let allItems=[];
+    Object.values(FORGIA_DB).forEach(arr=>allItems.push(...arr));
+    allItems=allItems.filter(item=>{
+        if(["Nessuno","Nessuna","Vuoto"].includes(item.nome)) return false;
+        if(!rarFilterActive[item.rar]) return false;
+        if(selectedSlotScegli!=='any'&&item.slot!==selectedSlotScegli) return false;
+        return true;
+    });
+    if(allItems.length===0){ container.innerHTML='<div style="color:#888; font-style:italic;">Nessun oggetto con i filtri attuali.</div>'; return; }
+    
+    allItems.forEach(item=>{
+        let div=document.createElement('div');
+        div.className=`item-list-card rar-${item.rar}`;
+        let sl=[];
+        if(item.comb) Object.entries(item.comb).forEach(([k,v])=>sl.push(`${k.toUpperCase()}:+${v}`));
+        if(item.attr) Object.entries(item.attr).forEach(([k,v])=>sl.push(`${k}:+${v}`));
+        if(item.res) Object.entries(item.res).forEach(([k,v])=>sl.push(`Rid.${k.charAt(0)}:+${v}`));
+        if(item.elemDan) Object.entries(item.elemDan).forEach(([k,v])=>sl.push(`Dan.${k.charAt(0)}:+${v}`));
+        div.innerHTML=`<div class="ilc-name">[${rarLabel(item.rar)}] ${item.nome}</div><div class="ilc-stats">${sl.join(' | ')||'-'}</div>`;
+        div.onclick=()=>selectItemFromList(item,div);
+        container.appendChild(div);
+    });
+}
+function selectItemFromList(item,div){
+    document.querySelectorAll('.item-list-card').forEach(d=>d.style.outline='');
+    div.style.outline=`2px solid ${rarColor(item.rar)}`;
+    currentChosenItem=item;
+    renderItemCard(item,'item-card-scegli');
+    document.getElementById('btn-equip-scegli').disabled=false;
+}
+
+function renderItemCard(item,containerId){
+    let c=document.getElementById(containerId);
+    if(!item) return;
+    let col=rarColor(item.rar), statsHtml='';
+    if(item.attr) Object.entries(item.attr).forEach(([k,v])=>{ statsHtml+=`<span class="item-stat-pill ${v>0?'pos':'neg'}">${k}: ${v>0?'+':''}${v}</span>`; });
+    if(item.comb) Object.entries(item.comb).forEach(([k,v])=>{ statsHtml+=`<span class="item-stat-pill ${v>0?'pos':'neg'}">${k.toUpperCase()}: ${v>0?'+':''}${v}</span>`; });
+    if(item.res) Object.entries(item.res).forEach(([k,v])=>{ statsHtml+=`<span class="item-stat-pill ${v>0?'pos':'neg'}">Rid. ${k}: ${v>0?'+':''}${v}</span>`; });
+    if(item.elemDan) Object.entries(item.elemDan).forEach(([k,v])=>{ statsHtml+=`<span class="item-stat-pill pos">Danno ${k}: +${v}</span>`; });
+    c.innerHTML=`
+        <div class="item-card-name" style="color:${col}">${item.nome}</div>
+        <div class="item-card-rarity" style="color:${col}">${rarLabel(item.rar)} &bull; Slot: ${item.slot}</div>
+        <div class="item-card-stats">${statsHtml||'<span class="item-stat-pill">Nessun bonus diretto</span>'}</div>
+        ${item.lore?`<div class="item-card-lore">"${item.lore}"</div>`:''}
+    `;
+    c.style.borderColor=col;
+}
+
+function switchForgia(tab){
+    document.querySelectorAll('.forgia-tab').forEach((t,i)=>t.classList.toggle('active',['random','scegli'][i]===tab));
+    document.querySelectorAll('.forgia-section').forEach((s,i)=>s.classList.toggle('active',['fs-random','fs-scegli'][i]==='fs-'+tab));
+    if(tab==='scegli') renderItemList();
+}
+
+// ==========================================
+// FRAMMENTI DELL'URLO DI YMIR
+// ==========================================
+const FRAMMENTI_NOMI = [
+    "L'Urlo del Sangue","Il Canto dei Clan","La Sposa Serpente","Il Cuore di Fuoco",
+    "Il Ghiaccio Rotto","La Zanna del Troll","L'Ombra Rubata","La Danza dei Morti",
+    "Il Tradimento","La Scalata","L'Addio","L'Urlo Finale"
+];
+let frammentiRaccolti = [];
+
+function renderFragmenti() {
+    const grid = document.getElementById('frammenti-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 0; i < 12; i++) {
+        const raccolto = frammentiRaccolti.includes(i+1);
+        const div = document.createElement('div');
+        div.style.cssText = `padding:6px 4px; border-radius:4px; text-align:center; font-size:0.7em; cursor:pointer;
+            border:1px solid ${raccolto ? '#88ccff' : '#444'};
+            background:${raccolto ? 'rgba(136,204,255,0.15)' : 'rgba(0,0,0,0.3)'};
+            color:${raccolto ? '#88ccff' : '#555'};`;
+        div.innerHTML = `<div style="font-size:1.4em;">${raccolto ? '❄️' : '○'}</div><div>${i+1}</div><div style="font-size:0.85em; margin-top:2px;">${FRAMMENTI_NOMI[i].substring(0,12)}…</div>`;
+        div.title = `Frammento ${i+1} – ${FRAMMENTI_NOMI[i]}${raccolto ? ' (RACCOLTO)' : ' (non ancora)'}`;
+        div.onclick = () => toggleFragmento(i+1);
+        grid.appendChild(div);
+    }
+    const n = frammentiRaccolti.length;
+    const bar = document.getElementById('frammenti-bar');
+    const label = document.getElementById('frammenti-label');
+    const panel = document.getElementById('frammenti-panel');
+    const martelloMsg = document.getElementById('frammenti-martello-msg');
+    if (bar) bar.style.width = (n / 12 * 100) + '%';
+    if (label) label.textContent = n + ' / 12';
+    if (panel) panel.querySelector('.panel-title').textContent = `❄ Frammenti dell'Urlo di Ymir (${n} / 12)`;
+    if (martelloMsg) martelloMsg.style.display = n >= 12 ? 'block' : 'none';
+}
+function toggleFragmento(idx) {
+    const pos = frammentiRaccolti.indexOf(idx);
+    if (pos >= 0) frammentiRaccolti.splice(pos, 1);
+    else frammentiRaccolti.push(idx);
+    frammentiRaccolti.sort((a,b)=>a-b);
+    renderFragmenti();
+}
+function addFragmento() {
+    for (let i = 1; i <= 12; i++) {
+        if (!frammentiRaccolti.includes(i)) { frammentiRaccolti.push(i); frammentiRaccolti.sort((a,b)=>a-b); break; }
+    }
+    renderFragmenti();
+}
+function resetFragmenti() { frammentiRaccolti = []; renderFragmenti(); }
+
+// ==========================================
+// INIT
+// ==========================================
+window.onload=function(){
+    document.getElementById('inp-seed').value=Math.floor(1000+Math.random()*9000);
+    buildAttrUI();
+    popSelect('sel-razza',DB.razze); popSelect('sel-classe',DB.classi); aggiornaSottoclasse();
+    popSelect('sel-bg',DB.background); popSelect('sel-dio',DB.dei);
+    popSelect('sel-evento',DB.eventi); popSelect('sel-condotta',DB.condotte);
+    updateNames(); aggiornaPoolUI(); calcAll(); renderItemList();
+    
+    renderShopGrid('armi', 'shop-grid-armi');
+    renderShopGrid('pozioni', 'shop-grid-pozioni');
+    renderShopGrid('pergamene', 'shop-grid-pergamene');
+    renderShopGrid('oggetti', 'shop-grid-oggetti');
+    
+    setTimeout(buildMap, 100);
+    renderFragmenti();
+};
+</script>
+</body>
+</html>

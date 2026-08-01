@@ -1,0 +1,8 @@
+[
+  {"id":"onore","nome":"Codice d'Onore","desc":"Non attacchi mai un avversario alle spalle. Non colpisci i feriti.","bonus":{"FRT":1},"trait":"Onore del guerriero: gli alleati NPC aumentano fedeltà del 20%."},
+  {"id":"sopravvivenza","nome":"Codice di Sopravvivenza","desc":"Nessuna regola. Solo i risultati contano. La morte è per i deboli.","bonus":{"DES":1},"trait":"Tattica spietata: puoi colpire per primo nei duelli, ignorando l'iniziativa."},
+  {"id":"clan","nome":"Fedeltà al Clan","desc":"Il clan viene prima di tutto. I traditori devono morire.","bonus":{"COS":1},"trait":"Protezione del clan: quando un alleato è in pericolo, ottieni +2 ATT e DAN."},
+  {"id":"vendetta","nome":"Spirito di Vendetta","desc":"Non dimentichi mai un torto. Prima o poi regolerai i conti.","bonus":{"INT":1},"trait":"Memoria del sangue: +2 ATT contro nemici che ti hanno causato danni in precedenza."},
+  {"id":"liberta","nome":"Spirito Libero","desc":"Non ti legas a nessuno. La libertà è il tuo unico dio.","bonus":{},"trait":"Nomade: prezzi di viaggio ridotti, incontri casuali positivi più frequenti."},
+  {"id":"fatalismo","nome":"Fatalismo Cimmero","desc":"Ciò che deve essere, sarà. Crom ha già deciso il tuo destino.","bonus":{"RES":1},"trait":"Accettazione: dopo una sconfitta, recuperi il doppio degli HP nel prossimo riposo."}
+]

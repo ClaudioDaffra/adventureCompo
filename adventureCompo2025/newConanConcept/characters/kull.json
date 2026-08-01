@@ -1,0 +1,317 @@
+{
+  "nome": "Kull",
+  "sesso": "maschi",
+  "eta": "18",
+  "razza": "cimmero",
+  "classe": "mercenario",
+  "sottoclasse": "condottiero",
+  "background": "pirata",
+  "dio": "crom",
+  "evento": "lupi",
+  "condotta": "sangue",
+  "seed": 1573028,
+  "attributes": {
+    "FOR": 15,
+    "DES": 17,
+    "COS": 14,
+    "RES": 8,
+    "INT": 6,
+    "FRT": 9
+  },
+  "derived": {
+    "hp": 11,
+    "maxHp": 38,
+    "energia": 28,
+    "maxEnergia": 28,
+    "att": 8,
+    "dan": 10,
+    "def": 7,
+    "rd": 4,
+    "ini": 4
+  },
+  "baseResistances": {
+    "fuoco": 2,
+    "freddo": 5,
+    "acido": 2,
+    "veleno": 2,
+    "magia": 1,
+    "fulmine": 1,
+    "incanto": 5
+  },
+  "resistances": {
+    "fuoco": 2,
+    "freddo": 5,
+    "acido": 2,
+    "veleno": 2,
+    "magia": 1,
+    "fulmine": 1,
+    "incanto": 5
+  },
+  "skills": [
+    "Sopravvivenza",
+    "Leadership",
+    "Strategia",
+    "Acrobazia",
+    "Intimidire",
+    "Istinto",
+    "Ossessione"
+  ],
+  "competenze": [
+    "Forza Bruta",
+    "Tattica",
+    "Addestramento",
+    "Equipaggio",
+    "Resistenza",
+    "Percezione",
+    "Inseguimento"
+  ],
+  "traits": [
+    "Infrangibile: ignora un KO a sessione.",
+    "Il dio non ascolta, ma da' Forza."
+  ],
+  "equipment": {
+    "elmo": null,
+    "armatura": {
+      "nome": "Tunica del Cultista",
+      "rar": "rare",
+      "tipo": "equipment",
+      "slot": "armatura",
+      "comb": {
+        "def": 2,
+        "rd": 3
+      },
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569010796_51400"
+    },
+    "bracciali": {
+      "id": "b3",
+      "nome": "Bracciali del Re",
+      "rar": "rare",
+      "slot": "Bracciali",
+      "attr": {
+        "FOR": 1,
+        "DES": 1
+      },
+      "comb": {
+        "att": 1
+      },
+      "res": {},
+      "lore": "Simbolo di potere e precisione.",
+      "prezzo": 195,
+      "instanceId": "b3_1777569498695"
+    },
+    "cintura": null,
+    "amuleto": null,
+    "anello": {
+      "nome": "Gemma Tempestosa",
+      "rar": "rare",
+      "tipo": "equipment",
+      "slot": "anello",
+      "comb": null,
+      "attr": {
+        "DES": 1
+      },
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569709484_29938"
+    },
+    "stivali": null,
+    "arma": {
+      "id": "a2m5",
+      "nome": "Spada Atlantea Antica",
+      "rar": "rare",
+      "slot": "Arma2M",
+      "attr": {
+        "INT": 1
+      },
+      "comb": {
+        "att": 2,
+        "dan": 8,
+        "def": 0
+      },
+      "res": {},
+      "elemDan": {
+        "magia": 2
+      },
+      "lore": "Il metallo vibra. Danno Magia +2.",
+      "prezzo": 200,
+      "instanceId": "a2m5_1777569622638"
+    },
+    "scudo": null
+  },
+  "inventory": [
+    {
+      "nome": "Cristallo di Ghiaccio",
+      "rar": "rare",
+      "tipo": "materiale",
+      "slot": null,
+      "comb": null,
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569010796_55816"
+    },
+    {
+      "nome": "Zanna Argentata",
+      "rar": "rare",
+      "tipo": "equipment",
+      "slot": "arma",
+      "comb": {
+        "att": 2,
+        "dan": 3
+      },
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569775224_23396"
+    },
+    {
+      "nome": "Cuore di Bestia",
+      "rar": "rare",
+      "tipo": "materiale",
+      "slot": null,
+      "comb": null,
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569775224_29509"
+    },
+    {
+      "nome": "Scaglie",
+      "rar": "rare",
+      "tipo": "materiale",
+      "slot": null,
+      "comb": null,
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777569937247_3729"
+    },
+    {
+      "nome": "Cuore di Vulcano",
+      "rar": "rare",
+      "tipo": "materiale",
+      "slot": null,
+      "comb": null,
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777570022016_76324"
+    },
+    {
+      "nome": "Ossidiana",
+      "rar": "rare",
+      "tipo": "materiale",
+      "slot": null,
+      "comb": null,
+      "attr": null,
+      "effetto": {},
+      "prezzo": 55,
+      "instanceId": "loot_1777570022016_23993"
+    }
+  ],
+  "gold": 853,
+  "destino": 0,
+  "destinoGemsFound": [],
+  "frammenti": [
+    1,
+    2,
+    3
+  ],
+  "alleanze": [
+    "Strega delle Paludi"
+  ],
+  "currentLocation": 3,
+  "visitedLocations": [
+    0,
+    8,
+    13,
+    9,
+    19,
+    1,
+    2,
+    3
+  ],
+  "unlockedLocations": [
+    0,
+    1,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    2,
+    3
+  ],
+  "questMajorStato": {
+    "M1": "completata",
+    "M2": "completata",
+    "M3": "completata",
+    "M4": "attiva"
+  },
+  "questMinorStato": {
+    "m2": "completata",
+    "m8": "completata",
+    "m3": "completata",
+    "m1": "completata",
+    "rnd_2_20573_0": "completata",
+    "m7": "completata",
+    "m11": "completata"
+  },
+  "activeQuest": "M4",
+  "travelDestination": 3,
+  "travelProgress": 7,
+  "travelDistance": 7,
+  "combatState": null,
+  "gameOver": false,
+  "ending": null,
+  "onore": {
+    "vinte": 15,
+    "fuggite": 6,
+    "rese": 0
+  },
+  "durata": 59.5,
+  "pbState": {
+    "FOR": {
+      "base": 9,
+      "prim": 1,
+      "sec": 1
+    },
+    "DES": {
+      "base": 9,
+      "prim": 3,
+      "sec": 0
+    },
+    "COS": {
+      "base": 9,
+      "prim": 2,
+      "sec": 2
+    },
+    "RES": {
+      "base": 9,
+      "prim": 0,
+      "sec": 0
+    },
+    "INT": {
+      "base": 6,
+      "prim": 0,
+      "sec": 0
+    },
+    "FRT": {
+      "base": 9,
+      "prim": 0,
+      "sec": 0
+    }
+  },
+  "createdAt": "2026-04-30T17:07:14.696Z",
+  "_venariumIntroDone": true,
+  "savedAt": "2026-04-30T17:30:10.555Z"
+}

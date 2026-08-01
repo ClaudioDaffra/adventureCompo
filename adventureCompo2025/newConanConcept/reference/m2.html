@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CONAN II – L'Urlo di Ymir | Mappa Hyboriana</title>
+    <style>
+        :root {
+            --c64-bg:#1a1030; --c64-border:#6c5eb5; --c64-white:#ffffff;
+            --c64-red:#cc3333; --c64-cyan:#67B6BD; --c64-green:#55AA43;
+            --c64-yellow:#c5a059; --c64-orange:#905E23; --c64-grey:#2a2a2a;
+            --c64-ice:#88ccff; --c64-fire:#ff6633; --c64-gold:#ffd700;
+            --col-normal:#aaa; --col-special:#5599ff; --col-rare:#ddcc22;
+            --col-legend:#44cc44; --col-unique:#ff4444;
+        }
+        *{box-sizing:border-box;}
+        body{background:var(--c64-bg);color:#fff;font-family:'Courier New',monospace;
+            text-transform:uppercase;margin:0;padding:10px;min-height:100vh;}
+
+        /* ── TOP HEADER ── */
+        .game-header{display:flex;justify-content:space-between;align-items:center;
+            padding:8px 14px;background:#000;border:2px solid var(--c64-border);
+            margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+        .game-title{font-size:1.1em;color:var(--c64-gold);letter-spacing:3px;font-weight:bold;}
+        .frammenti-hud{display:flex;align-items:center;gap:6px;font-size:0.75em;}
+        .frag-count{color:var(--c64-ice);font-weight:bold;font-size:1.1em;}
+        .frag-pip{display:inline-block;width:12px;height:12px;border-radius:2px;
+            border:1px solid #444;background:#111;transition:all .3s;}
+        .frag-pip.lit{background:var(--c64-ice);border-color:#aaddff;box-shadow:0 0 6px var(--c64-ice);}
+
+        /* ── LAYOUT ── */
+        .main-container{display:grid;grid-template-columns:1fr 360px;gap:10px;max-width:1340px;margin:0 auto;}
+        .panel{border:3px solid #555;background:#0a0a0a;padding:12px;position:relative;}
+        .panel-gold{border-color:var(--c64-gold);}
+
+        /* ── HUD ── */
+        .hud{display:grid;grid-template-columns:repeat(5,1fr);background:var(--c64-grey);
+            padding:8px 10px;border:2px solid #fff;margin-bottom:8px;
+            color:var(--c64-yellow);font-size:11px;gap:4px;}
+        .hud>div{text-align:center;}
+
+        /* ── MAPPA ── */
+        .map-viewport{position:relative;width:100%;height:520px;background:#000;
+            border:2px solid var(--c64-border);overflow:hidden;}
+        #biome-layer{position:absolute;display:grid;
+            grid-template-columns:repeat(60,1fr);grid-template-rows:repeat(40,1fr);
+            width:100%;height:100%;pointer-events:none;}
+        .cell{font-size:11px;line-height:13.5px;text-align:center;font-weight:bold;}
+        #route-svg{position:absolute;inset:0;z-index:5;pointer-events:none;width:100%;height:100%;}
+        .route-line{stroke:var(--c64-white);stroke-width:3;stroke-dasharray:8;fill:none;}
+        .arrow-head{fill:var(--c64-white);}
+        .marker{position:absolute;transform:translate(-50%,-50%);z-index:10;cursor:pointer;text-align:center;}
+        .marker-label{font-size:7px;color:#fff;background:var(--c64-red);
+            padding:1px 3px;border:1px solid #fff;white-space:nowrap;margin-top:1px;}
+        .marker-label.locked{background:#333;color:#666;}
+        .marker-label.quest-active{background:#cc6600;animation:pulse-quest 1.5s infinite;}
+        @keyframes pulse-quest{0%,100%{box-shadow:0 0 4px #ff9900;}50%{box-shadow:0 0 10px #ffcc00;}}
+
+        /* ── VISTA LOCATION ── */
+        #view-location{display:none;}
+        .active-view{display:block!important;}
+        .loc-name{text-align:center;color:var(--c64-gold);margin:0 0 8px;font-size:1.3em;letter-spacing:2px;}
+        .loc-art{white-space:pre;color:var(--c64-yellow);text-align:center;font-size:16px;
+            padding:8px;border-bottom:1px dashed #555;margin-bottom:8px;}
+        .loc-desc{background:var(--c64-grey);padding:12px;border:2px solid #555;
+            font-size:12px;line-height:1.5;color:#ddd;margin-bottom:10px;}
+        .loc-shops{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+        .shop-btn{padding:8px 4px;font-size:11px;text-align:center;cursor:pointer;
+            border:2px solid;background:#111;font-family:'Courier New',monospace;
+            font-weight:bold;text-transform:uppercase;transition:all .2s;}
+        .shop-btn.fabbro{border-color:#cc6600;color:#cc6600;}
+        .shop-btn.fabbro:hover{background:#cc6600;color:#000;}
+        .shop-btn.mistico{border-color:var(--c64-special,#5599ff);color:#5599ff;}
+        .shop-btn.mistico:hover{background:#5599ff;color:#000;}
+        .shop-btn.maga{border-color:#aa44aa;color:#cc55cc;}
+        .shop-btn.maga:hover{background:#aa44aa;color:#fff;}
+        .shop-btn.disabled{border-color:#333;color:#444;cursor:default;}
+
+        /* ── SHOP OVERLAY ── */
+        .shop-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.95);
+            z-index:50;padding:14px;overflow-y:auto;}
+        .shop-overlay.open{display:block;}
+        .shop-title{color:var(--c64-gold);font-size:1em;border-bottom:1px solid #555;
+            padding-bottom:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+        .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:10px;}
+        .shop-item{border:2px solid #555;padding:8px;cursor:pointer;font-size:11px;
+            background:#0d0d0d;transition:all .2s;}
+        .shop-item:hover{filter:brightness(1.4);}
+        .shop-item.rar-normal{border-color:var(--col-normal);}
+        .shop-item.rar-special{border-color:var(--col-special);}
+        .shop-item.rar-rare{border-color:var(--col-rare);}
+        .shop-item.rar-legend{border-color:var(--col-legend);}
+        .shop-item.rar-unique{border-color:var(--col-unique);}
+        .item-name{font-weight:bold;margin-bottom:3px;}
+        .item-price{color:var(--c64-gold);font-size:10px;}
+        .item-effect{color:#7f7;font-size:10px;margin-top:2px;}
+        .shop-buy-bar{background:#111;border:1px solid #444;padding:10px;margin-top:8px;display:none;}
+        .btn-buy{background:#8b4513;color:#fff;border:none;padding:6px 14px;cursor:pointer;
+            font-weight:bold;font-size:11px;font-family:'Courier New',monospace;}
+        .btn-close-shop{background:var(--c64-red);color:#fff;border:none;padding:4px 10px;
+            cursor:pointer;font-family:'Courier New',monospace;font-size:11px;}
+
+        /* ── QUEST LOG ── */
+        .quest-panel{border:2px solid var(--c64-orange);background:#0d0800;padding:10px;margin-bottom:8px;}
+        .quest-panel h3{margin:0 0 8px;color:var(--c64-orange);font-size:0.9em;}
+        .quest-entry{font-size:10px;color:#ccc;padding:4px 0;border-bottom:1px dashed #333;line-height:1.4;}
+        .quest-entry.major{color:var(--c64-gold);}
+        .quest-entry.active{color:#ffdd55;}
+        .quest-entry.done{color:#44cc44;}
+        .quest-entry.locked{color:#444;}
+
+        /* ── DIALOGO ── */
+        .dialog-box{background:#0d0d1a;border:2px solid var(--c64-ice);padding:12px;
+            margin-bottom:8px;font-size:11px;line-height:1.6;display:none;}
+        .dialog-box.open{display:block;}
+        .dialog-speaker{color:var(--c64-gold);font-weight:bold;margin-bottom:4px;}
+        .dialog-text{color:#ddf;font-style:italic;}
+        .dialog-choices{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
+        .dialog-choice{background:#111;border:1px solid var(--c64-ice);color:var(--c64-ice);
+            padding:6px 10px;cursor:pointer;font-size:10px;font-family:'Courier New',monospace;
+            text-align:left;transition:all .2s;text-transform:uppercase;}
+        .dialog-choice:hover{background:var(--c64-ice);color:#000;}
+
+        /* ── LOG ── */
+        .log-box{height:100px;background:#000;border:1px solid var(--c64-border);
+            padding:8px;color:var(--c64-yellow);font-size:11px;overflow-y:auto;}
+
+        /* ── SIDEBAR ── */
+        .sidebar-box{background:var(--c64-grey);border:2px solid #555;padding:10px;margin-bottom:8px;}
+        .sidebar-box h3{margin:0 0 8px;color:var(--c64-yellow);font-size:0.85em;}
+
+        /* ── INVENTORY HUD ── */
+        .inv-hud{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+        .inv-slot-mini{border:1px solid #444;padding:4px 6px;font-size:10px;background:#0a0a0a;}
+        .inv-slot-mini span{color:var(--c64-gold);}
+        .bag-area{min-height:30px;display:flex;flex-wrap:wrap;gap:4px;padding:4px;
+            background:#050505;border:1px solid #333;}
+        .bag-item{padding:2px 6px;border:1px solid;font-size:9px;cursor:pointer;}
+        .bag-item.rar-normal{border-color:var(--col-normal);color:var(--col-normal);}
+        .bag-item.rar-special{border-color:var(--col-special);color:var(--col-special);}
+        .bag-item.rar-rare{border-color:var(--col-rare);color:var(--col-rare);}
+        .bag-item.rar-legend{border-color:var(--col-legend);color:var(--col-legend);}
+        .bag-item.rar-unique{border-color:var(--col-unique);color:var(--col-unique);}
+
+        /* ── BOTTONI ── */
+        button.btn-action{background:var(--c64-orange);color:#fff;border:2px solid #fff;
+            padding:7px 10px;cursor:pointer;font-weight:bold;width:100%;font-size:11px;
+            font-family:'Courier New',monospace;text-transform:uppercase;margin-top:4px;}
+        button.btn-action:hover{background:var(--c64-yellow);color:#000;}
+        button.btn-back{background:#222;color:#aaa;border:2px solid #555;padding:6px 10px;
+            cursor:pointer;width:100%;font-family:'Courier New',monospace;
+            font-size:11px;margin-top:6px;text-transform:uppercase;}
+        select.sel-main{background:#000;color:#fff;border:1px solid #fff;padding:8px;width:100%;
+            font-family:'Courier New',monospace;font-size:11px;}
+
+        /* ── FINALE SCREEN ── */
+        #view-finale{display:none;position:fixed;inset:0;background:#000;z-index:200;
+            display:none;align-items:center;justify-content:center;flex-direction:column;}
+        .finale-title{font-size:2em;color:var(--c64-gold);letter-spacing:4px;text-align:center;margin-bottom:20px;}
+        .finale-text{color:#ccc;font-size:0.9em;max-width:500px;text-align:center;line-height:1.8;}
+
+        /* ── ENCOUNTER OVERLAY ── */
+        .encounter-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);
+            z-index:180;padding:20px;overflow-y:auto;max-width:600px;margin:40px auto;
+            border:3px solid var(--col-unique);max-height:calc(100vh - 80px);}
+        .encounter-overlay.open{display:block;}
+        .enc-name{font-size:1.5em;color:var(--col-unique);letter-spacing:2px;text-align:center;margin-bottom:4px;}
+        .enc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0;}
+        .enc-stat{background:#111;padding:6px;text-align:center;font-size:12px;}
+        .enc-stat-val{color:var(--c64-gold);font-size:1.3em;font-weight:bold;}
+        .enc-hp-bar{height:16px;background:#330000;border:1px solid #666;margin:8px 0;position:relative;}
+        .enc-hp-fill{height:100%;background:linear-gradient(90deg,#660000,#ff3333);transition:width .5s;}
+        .enc-hp-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+            font-size:11px;font-weight:bold;}
+        .enc-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+        .enc-btn{padding:10px;font-size:12px;cursor:pointer;border:2px solid;
+            background:#0a0a0a;font-family:'Courier New',monospace;text-transform:uppercase;}
+        .enc-btn.attack{border-color:#cc3333;color:#cc3333;}
+        .enc-btn.attack:hover{background:#cc3333;color:#fff;}
+        .enc-btn.flee{border-color:#888;color:#888;}
+        .enc-btn.flee:hover{background:#888;color:#000;}
+        .enc-btn.defend{border-color:#5599ff;color:#5599ff;}
+        .enc-btn.defend:hover{background:#5599ff;color:#000;}
+        .enc-btn.surrender{border-color:#cc6600;color:#cc6600;}
+        .enc-btn.surrender:hover{background:#cc6600;color:#fff;}
+        .enc-btn.special{border-color:#aa44aa;color:#aa44aa;}
+        .enc-btn.special:hover{background:#aa44aa;color:#fff;}
+        .enc-btn:disabled{opacity:0.4;cursor:not-allowed;}
+        .player-hp-bar{height:14px;background:#003300;border:1px solid #666;margin:6px 0;position:relative;}
+        .player-hp-fill{height:100%;background:linear-gradient(90deg,#004400,#33cc33);transition:width .5s;}
+        .player-hp-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;}
+        /* ── VIAGGIO OVERLAY ── */
+        .travel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);
+            z-index:170;padding:20px;overflow-y:auto;max-width:500px;margin:60px auto;
+            border:3px solid var(--c64-gold);max-height:calc(100vh - 120px);}
+        .travel-overlay.open{display:block;}
+        .travel-phase{font-size:1.1em;color:var(--c64-gold);text-align:center;margin-bottom:10px;letter-spacing:2px;}
+        .travel-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+
+        @media(max-width:900px){
+            .main-container{grid-template-columns:1fr;}
+            .loc-shops{grid-template-columns:1fr 1fr;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-header">
+    <div class="game-title">❄ CONAN II – L'URLO DI YMIR</div>
+    <div class="frammenti-hud">
+        <span style="color:#888;font-size:0.8em;">FRAMMENTI:</span>
+        <div id="frag-pips"></div>
+        <span class="frag-count" id="frag-count-hud">0/12</span>
+    </div>
+    <div style="font-size:10px;color:#888;">
+        <span id="hud-zecchini-top">💰 0 ZEC</span> &nbsp;
+        <span id="hud-destino-top">⭐ 0 DEST</span>
+    </div>
+</div>
+
+<div class="main-container">
+
+<div class="panel">
+
+    <div id="view-map" class="active-view">
+        <div class="hud">
+            <div id="hud-pos">POS: VENARIUM</div>
+            <div id="hud-type">TIPO: CAMPO</div>
+            <div id="hud-biome">BIOMA: TUNDRA</div>
+            <div id="hud-dist">DIST: 0 LG</div>
+            <div id="hud-days">TEMPO: 0 GG</div>
+        </div>
+
+        <div class="map-viewport" id="map-cont">
+            <div id="biome-layer"></div>
+            <svg id="route-svg">
+                <defs>
+                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                        <path d="M0,0 L10,5 L0,10 Z" class="arrow-head"/>
+                    </marker>
+                </defs>
+                <line id="the-line" x1="0" y1="0" x2="0" y2="0" class="route-line" marker-end="url(#arrow)"/>
+            </svg>
+            <div id="markers-layer"></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 200px;gap:8px;margin-top:8px;">
+            <select class="sel-main" id="sel-dest" onchange="updatePathUI()"></select>
+            <button class="btn-action" onclick="startTravel()">▶ AVVIA SPEDIZIONE</button>
+        </div>
+        <div class="log-box" id="log-map" style="margin-top:6px;">PRONTO. SELEZIONA UNA DESTINAZIONE.</div>
+    </div>
+
+    <div id="view-location">
+        <h1 class="loc-name" id="loc-name">---</h1>
+        <div class="loc-art" id="loc-art"></div>
+        <div class="loc-desc" id="loc-desc"></div>
+
+        <div class="loc-shops" id="loc-shops"></div>
+
+        <div class="dialog-box" id="dialog-box">
+            <div class="dialog-speaker" id="dialog-speaker"></div>
+            <div class="dialog-text" id="dialog-text"></div>
+            <div class="dialog-choices" id="dialog-choices"></div>
+        </div>
+
+        <div id="loc-btns" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;"></div>
+
+        <div class="log-box" id="log-local"></div>
+        <button class="btn-back" onclick="backToMap()">← TORNA ALLA MAPPA</button>
+
+        <div class="shop-overlay" id="shop-fabbro"></div>
+        <div class="shop-overlay" id="shop-mistico"></div>
+        <div class="shop-overlay" id="shop-maga"></div>
+    </div>
+
+    <!-- OVERLAYS GLOBALI: fuori da view-location per funzionare anche durante il viaggio -->
+    <div class="encounter-overlay" id="enc-overlay"></div>
+    <div class="travel-overlay" id="travel-overlay"></div>
+
+</div><div>
+    <div class="sidebar-box">
+        <h3>LEGENDA BIOMA</h3>
+        <div style="font-size:10px;line-height:1.6;">
+            <span style="color:#fff">^</span> MONTI/TUNDRA &nbsp;
+            <span style="color:var(--c64-yellow)">░</span> DESERTO &nbsp;
+            <span style="color:var(--c64-cyan)">▒</span> OASI<br>
+            <span style="color:var(--c64-green)">♣</span> FORESTA &nbsp;
+            <span style="color:var(--c64-ice)">~</span> PALUDI &nbsp;
+            <span style="color:#ff6633">*</span> VULCANO<br>
+            <span style="color:var(--c64-cyan)">█</span> LAGHI &nbsp;
+            <span style="color:var(--col-unique)">!</span> PERICOLO
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <h3>INVENTARIO RAPIDO</h3>
+        <div class="inv-hud" id="inv-hud-mini">
+            <div class="inv-slot-mini">ARMA: <span id="inv-mini-arma">—</span></div>
+            <div class="inv-slot-mini">ARMOR: <span id="inv-mini-armor">—</span></div>
+            <div class="inv-slot-mini">AMUL: <span id="inv-mini-amul">—</span></div>
+            <div class="inv-slot-mini">ANELLO: <span id="inv-mini-anello">—</span></div>
+        </div>
+        <div style="font-size:10px;color:#888;margin-bottom:4px;">ZAINO:</div>
+        <div class="bag-area" id="bag-area-mini"></div>
+        <div style="display:flex;gap:6px;margin-top:6px;font-size:10px;">
+            <span>💰 <span id="zecchini-display">0</span> ZEC</span>
+            <span style="margin-left:auto;">⭐ DESTINO: <span id="destino-display">0</span></span>
+        </div>
+    </div>
+
+    <div class="sidebar-box">
+        <h3>📖 QUEST MAGGIORI</h3>
+        <div id="quest-major-log" style="font-size:10px;max-height:180px;overflow-y:auto;"></div>
+    </div>
+
+    <div class="sidebar-box">
+        <h3>📌 QUEST MINORI ATTIVE</h3>
+        <div id="quest-minor-log" style="font-size:10px;max-height:120px;overflow-y:auto;color:#ccc;"></div>
+    </div>
+
+    <div class="sidebar-box">
+        <h3>🤝 ALLEANZE</h3>
+        <div id="alleanze-log" style="font-size:10px;color:#aaa;line-height:1.6;">NESSUNA ALLEANZA ANCORA.</div>
+    </div>
+</div>
+
+</div><script>
+// =============================================================
+// ★ DATABASE LOCAZIONI COMPLETE – L'URLO DI YMIR
+// =============================================================
+const LOCATIONS = [
+  { n:"Venarium",      t:"camp",    x:12, y:15, biome:"tundra",
+    d:"Fortezza di confine. Il ghiaccio ha colpito il forte — i soldati si trasformano in statue viventi.",
+    art:"   /\\   \n  /+\\  \n /+++\\ \n/______\\",
+    locked:false, questMajor:1,
+    shops:["fabbro"], // campo → 1 solo negozio scelto dal SEED
+    npcs:["Spettro di Acheron"],
+    loot_minor:[8] },
+
+  { n:"Gurth",         t:"village", x:10, y:10, biome:"picchi",
+    d:"Villaggio montano cimmero. Il Mistico cieco vive qui. I clan sono inquieti.",
+    art:"  _H_  \n /   \\ \n |   | \n ----- ",
+    locked:false, questMajor:2,
+    shops:["fabbro","mistico"],
+    npcs:["Mistico"],
+    loot_minor:[1,12] },
+
+  { n:"Paludi Oscure", t:"dungeon", x:22, y:35, biome:"palude",
+    d:"Nebbia eterna. La Strega delle Paludi dimora qui. Il Serpente sorveglia il Frammento 3.",
+    art:"  ~*~  \n ~~~~~ \n ~~~~~  \n~~~~~~~",
+    locked:true,  questMajor:3,
+    shops:["maga"],
+    npcs:["Strega"],
+    loot_minor:[7] },
+
+  { n:"Terre Vulcaniche", t:"dungeon", x:55, y:60, biome:"vulcano",
+    d:"Lava viva. Il Golem di Magma e il Djinn si scontrano. La Forgia Perduta è qui.",
+    art:"  *** \n *^^^* \n*^^^^^*\n *****",
+    locked:true,  questMajor:4,
+    shops:["fabbro","maga"],
+    npcs:["Djinn"],
+    loot_minor:[11] },
+
+  { n:"Koppar",        t:"city",    x:65, y:55, biome:"picchi",
+    d:"Città mineraria. La Principessa Elara è stata trasformata in statua di ghiaccio.",
+    art:" _____\n/KOPPA\\\n|R    |\n|_____/",
+    locked:true,  questMajor:5,
+    shops:["fabbro","mistico","maga"],
+    npcs:["PrincipessaElara"],
+    loot_minor:[9] },
+
+  { n:"Foreste Oscure", t:"dungeon", x:30, y:48, biome:"foresta",
+    d:"Foreste millenarie. Il Re dei Troll regna qui. Alberi alti come montagne.",
+    art:" ♣♣♣♣♣ \n♣♣♣♣♣♣♣\n  | | |\n  |___|",
+    locked:true,  questMajor:6,
+    shops:["mistico"],
+    npcs:["ReTroll"],
+    loot_minor:[4] },
+
+  { n:"Shadizar",      t:"city",    x:75, y:25, biome:"rovine",
+    d:"La Città dei Ladri. Il Mercante dell'Ombra ha il Frammento 7 nel suo palazzo.",
+    art:" _____\n/SHADI\\\n|ZAR  |\n|_____/",
+    locked:true,  questMajor:7,
+    shops:["fabbro","mistico","maga"],
+    npcs:["MercanteOmbra"],
+    loot_minor:[10] },
+
+  { n:"Khorshemish",   t:"city",    x:60, y:78, biome:"rovine",
+    d:"Città corrotta di Shem. Le rovine maledette sono infestate dagli Spettri di Acheron.",
+    art:" _____\n/KHORS\\\n|HEMISH|\n|_____/",
+    locked:true,  questMajor:8,
+    shops:["fabbro","mistico","maga"],
+    npcs:["SacerdoteSpettrale"],
+    loot_minor:[5] },
+
+  { n:"Conajohara",    t:"camp",    x:25, y:20, biome:"rovine",
+    d:"Avamposto di frontiera. Rovine antiche nascondono segreti di Acheron.",
+    art:"   /\\   \n  /  \\  \n /++++\\ \n/______\\",
+    locked:false, questMajor:null,
+    shops:["fabbro"],
+    npcs:[],
+    loot_minor:[2,5] },
+
+  { n:"Tarantia",      t:"city",    x:35, y:38, biome:"any",
+    d:"Capitale dell'Aquilonia. Marmi bianchi e intrighi politici.",
+    art:" _____\n/TARAN\\\n|TIA  |\n|_____/",
+    locked:false, questMajor:null,
+    shops:["fabbro","mistico","maga"],
+    npcs:[],
+    loot_minor:[] },
+
+  { n:"Zuarir",        t:"oasis",   x:88, y:72, biome:"deserto",
+    d:"Oasi ai margini del deserto di Stygia. Carovane e spie si incrociano qui.",
+    art:"  \\|/  \n --*-- \n  /|\\  \n  _|_  ",
+    locked:true,  questMajor:null,
+    shops:["mistico","maga"],
+    npcs:["CarovonieraDeserto"],
+    loot_minor:[6] },
+
+  { n:"Messantia",     t:"city",    x:20, y:75, biome:"any",
+    d:"Porto di Argos. Taverne, marinai e mercanti di ogni terra.",
+    art:" _____\n/MESSA\\\n|NTIA |\n|_____/",
+    locked:false, questMajor:null,
+    shops:["fabbro","mistico","maga"],
+    npcs:[],
+    loot_minor:[] },
+
+  { n:"Montagna Luminosa", t:"dungeon", x:50, y:5, biome:"montagna",
+    d:"La Montagna Luminosa dove Re Valthor è imprigionato. Solo chi ha il Martello del Destino può salire.",
+    art:"  /\\  \n /||\\  \n /☆|\\ \n/====\\",
+    locked:true,  questMajor:11,
+    shops:[],
+    npcs:["Valthor"],
+    loot_minor:[] }
+];
+
+// =============================================================
+// ★ DATABASE PERSONAGGI & DIALOGHI
+// =============================================================
+const PNG_DIALOGHI = {
+    "Mistico": {
+        nome: "Mistico Cieco di Gurth",
+        icona: "🧙",
+        dialoghi: {
+            intro: "Il ghiaccio... sta urlando. Tu sei l'unico che Crom ha scelto nel sogno di sangue. Ascolta bene: i Frammenti dell'Urlo sono sparsi per Cimmeria. Raccoglili. Poi sali sulla Montagna.",
+            dopoM1: "Hai preso il primo Frammento. Il prezzo sarà alto... molto alto. I morti camminano già verso Venarium.",
+            dopoM2: "Il clan del tradimento è caduto. Prendi il Corno. Usalo solo quando il ghiaccio sta per inghiottirti.",
+            avviso: "Attento al Mercante di Shadizar. Porta il volto di un amico, ma l'anima di Valthor.",
+            avvertimento_tradimento: "Io sono... il figlio di Valthor. Scegli ora: uccidimi e perdi la verità. Perdonami e otterrai un alleato per la cima.",
+            perdono: "Grazie... il peso di mille anni si solleva. Ti guiderò sul sentiero segreto della Montagna. Insieme."
+        }
+    },
+    "Strega": {
+        nome: "Strega delle Paludi",
+        icona: "🔮",
+        dialoghi: {
+            intro: "Ahahah! Un barbaro! O vuoi il mio sangue... o vuoi il mio Frammento. Fai in fretta — i serpenti hanno fame.",
+            alleanza: "Bene. Ti do il Frammento e il Mantello. In cambio: sei mio sposo per una notte e alleato per sempre. Accetti?",
+            rifiuto: "Allora morirai qui, tra le mie serpi! Nessuno porta via il Frammento senza pagare il mio prezzo.",
+            post_alleanza: "Alleato. Non dimenticarlo mai. Quando salirai sulla Montagna, le mie serpi ti apriranno un varco tra i non-morti.",
+            figlio: "Mio figlio è stato preso dal Serpente delle Paludi. Riportamelo vivo. Ti darò il Mantello e la mia eterna gratitudine."
+        }
+    },
+    "PrincipessaElara": {
+        nome: "Principessa Elara di Koppar",
+        icona: "👸",
+        dialoghi: {
+            intro: "Voce incrinata dal ghiaccio... Il mio corpo è diventato statua. Solo un cuore caldo può spezzare questa maledizione. Scendi nelle miniere, Conan. Prendi il Frammento 5. Salvami.",
+            salvata: "Mi hai salvata... Prendi il mio anello e il Frammento. E se vorrai... resta con me. Diventa mio sposo e difensore di Koppar.",
+            rifiuto_romantico: "Capisco. Un re barbaro non ha bisogno di una principessa di ghiaccio. Prendi il Frammento. Una parte di me resterà per sempre fredda.",
+            miniera: "Le miniere sono vive di Golem e spiriti. Ripuliscile e ti darò le Piastre di Ghiaccio Eterno di mio padre. E forse... un bacio.",
+            finale_eroe: "Se hai scelto di diventare Re, io sarò al tuo fianco sul trono. Sempre."
+        }
+    },
+    "ReTroll": {
+        nome: "Re dei Troll delle Foreste Oscure",
+        icona: "👹",
+        dialoghi: {
+            intro: "CARNE FRESCA! But... odori di destino, barbaro. Valthor vuole il tuo cuore. Io voglio il tuo cuore nel mio piatto. Ma forse... possiamo fare un patto? Il Frammento 6 per la tua alleanza. O il tuo cuore.",
+            alleanza: "HAH! Un barbaro che non scappa! Mi piaci! Prendi il Frammento. Quando salirai sulla Montagna, io e i miei Troll saremo lì a spaccare ossa insieme!",
+            rifiuto: "ALLORA CREPA, PICCOLO UOMO! I miei Troll ti divoreranno vivo e useranno le tue ossa come stuzzicadenti!",
+            finale: "Il Re dei Troll non dimentica i patti. Né i tradimenti."
+        }
+    },
+    "MercanteOmbra": {
+        nome: "Mercante dell'Ombra di Shadizar",
+        icona: "🎭",
+        dialoghi: {
+            intro: "Tutto ha un prezzo, barbaro. Io posso darti tutti i Frammenti rimasti in cambio della tua anima. Firmi qui col sangue? O preferisci morire lentamente come gli altri?",
+            rifiuto: "Errore fatale. Ora il tuo nome è sulla lista dei morti. Buona fortuna.",
+            scoperta: "Bravo... hai scoperto che sono il traditore di Valthor da mille anni. Ma sapevi che ho ancora il Frammento 7 nascosto nell'altare segreto?"
+        }
+    },
+    "Djinn": {
+        nome: "Djinn della Tempesta",
+        icona: "⚡",
+        dialoghi: {
+            intro: "Osi venire qui? Ho tradito Ymir per primo! Il Frammento è mio. Ma se mi sconfiggi in duello elementale, ti darò l'Essenza di Ghiaccio Eterno. E forse un giorno potrò tradire anche te.",
+            sconfitta: "Ricorda: tutti tradiscono... prima o poi."
+        }
+    },
+    "SacerdoteSpettrale": {
+        nome: "Voce Spettrale del Sacerdote",
+        icona: "👻",
+        dialoghi: {
+            intro: "Sei venuto a profanare la mia tomba? Il patto con Valthor non è mai finito. Il Frammento è qui... ma dovrai danzare con i miei Spettri per prenderlo.",
+            sfida: "La polvere spettrale ti entra nei polmoni. +2 RES permanente. Il sacerdote sussurra: «Ora anche tu sei legato al ghiaccio...»"
+        }
+    },
+    "CarovonieraDeserto": {
+        nome: "Capo Carovana di Zuarir",
+        icona: "🐪",
+        dialoghi: {
+            intro: "Gli assassini Hyrkaniani ci hanno attaccati all'alba. Se li cacci, ti darò la mia daga migliore e tutto il veleno che ho. Il deserto non perdona i deboli."
+        }
+    },
+    "Valthor": {
+        nome: "Re Valthor il Gelido",
+        icona: "👑",
+        dialoghi: {
+            intro: "FINALMENTE... Un guerriero degno di morire per me. Mille anni ho atteso questo momento. Deponile le armi. Servimi. Diventa il mio campione di ghiaccio... o brucia nel freddo eterno.",
+            combattimento: "Il tuo sangue si congelerà nelle vene. Il tuo nome verrà dimenticato. Cimmeria è MIA.",
+            sconfitta: "Impossibile... il Martello... Ymir... hai vinto, barbaro. Scegli il tuo destino."
+        }
+    }
+};
+
+// =============================================================
+// ★ QUEST MAGGIORI
+// =============================================================
+const QUEST_MAJOR = [
+  { id:1, nome:"Il Primo Urlo",            luogo:"Venarium",       stato:"attiva",
+    desc:"Purifica il pozzo sacro. Sconfiggi lo Spettro di Acheron.",
+    ricompensa:"Frammento 1 • 120 Zec • Spada Cimmera del Sangue",
+    sblocca:["Gurth","Picchi Tempestosi"] },
+  { id:2, nome:"Il Canto dei Clan Traditi",luogo:"Gurth",          stato:"bloccata",
+    desc:"Uccidi il capo clan corrotto. Parla col Mistico Cieco.",
+    ricompensa:"Frammento 2 • Corno dell'Urlo • Forgia del Mistico",
+    sblocca:["Conajohara","Paludi Oscure"] },
+  { id:3, nome:"La Sposa del Serpente",    luogo:"Paludi Oscure",  stato:"bloccata",
+    desc:"Salva la figlia del capo o allea con la Strega. Sconfiggi il Serpente.",
+    ricompensa:"Frammento 3 • Mantello di Scaglie Viventi",
+    sblocca:["Terre Vulcaniche"] },
+  { id:4, nome:"Il Cuore che Brucia",      luogo:"Terre Vulcaniche",stato:"bloccata",
+    desc:"Scegli tra Golem di Magma e Djinn della Tempesta. Uno sopravviverà.",
+    ricompensa:"Frammento 4 • Cuore di Vulcano",
+    sblocca:["Koppar","Zuarir"] },
+  { id:5, nome:"La Principessa di Ghiaccio",luogo:"Koppar",        stato:"bloccata",
+    desc:"Scendi nelle miniere. Spezza la maledizione. Non uccidere Elara.",
+    ricompensa:"Frammento 5 • Anello della Principessa",
+    sblocca:["Foreste Oscure"] },
+  { id:6, nome:"Il Re dei Troll",          luogo:"Foreste Oscure", stato:"bloccata",
+    desc:"Patto o combattimento col Re dei Troll. Recupera il Frammento 6.",
+    ricompensa:"Frammento 6 • Ascia dei Troll",
+    sblocca:["Shadizar"] },
+  { id:7, nome:"Il Mercante dell'Ombra",   luogo:"Shadizar",       stato:"bloccata",
+    desc:"Infiltrati nel palazzo. Scopri il traditore millenario. Recupera il Frammento.",
+    ricompensa:"Frammento 7 • 300 Zec • Daga dell'Ombra",
+    sblocca:["Khorshemish"] },
+  { id:8, nome:"La Danza dei Morti",       luogo:"Khorshemish",    stato:"bloccata",
+    desc:"Danza con gli Spettri di Acheron. Risolvi l'enigma. Sconfiggi il Re Spettrale.",
+    ricompensa:"Frammento 8 • Polvere Spettrale",
+    sblocca:["Gurth (ritorno)"] },
+  { id:9, nome:"Il Tradimento del Mistico",luogo:"Gurth",          stato:"bloccata",
+    desc:"Il Mistico è il figlio di Valthor. Uccidilo o perdonalo. La scelta cambia il finale.",
+    ricompensa:"Frammento 9 • (alleato eterno se perdonato)",
+    sblocca:["Forgia Perduta"] },
+  { id:10,nome:"La Forgia Perduta",        luogo:"Terre Vulcaniche",stato:"bloccata",
+    desc:"Forgia i 9 Frammenti nel Martello del Destino usando la lava viva.",
+    ricompensa:"Martello del Destino (Leggendario)",
+    sblocca:["Montagna Luminosa"] },
+  { id:11,nome:"La Scalata dell'Addio",    luogo:"Montagna Luminosa",stato:"bloccata",
+    desc:"Salita epica. Incontri i fantasmi di tutti i PNG. Trova gli ultimi due Frammenti.",
+    ricompensa:"Frammento 10 + 11 • +5 Destino",
+    sblocca:["Cima della Montagna"] },
+  { id:12,nome:"Il Trono di Ghiaccio",     luogo:"Montagna Luminosa",stato:"bloccata",
+    desc:"Affronta Re Valthor il Gelido. Tre finali possibili. Decidi il destino di Cimmeria.",
+    ricompensa:"Corona di Ymir • Fine Gioco",
+    sblocca:[] }
+];
+
+// =============================================================
+// ★ QUEST MINORI
+// =============================================================
+const QUEST_MINOR = [
+  { id:1,  nome:"Caccia al Lupo Mannaro",      bioma:"Gurth",         stato:"disponibile",
+    npc:"Vecchio Cacciatore di Gurth",
+    intro:"Il lupo mannaro ha sbranato tre bambini questa luna. Uccidilo prima dell'alba e ti darò la mia pelliccia e questa zanna argentata.",
+    scelta1:"Accetto la caccia", scelta2:"Non è il mio problema",
+    ris1:"Pelle di Lupo Mannaro + Zanna Argentata + 40 Zec + 1 Destino",
+    ris2:"Il vecchio sputa a terra. I bambini moriranno stanotte.",
+    chiusura1:"La pelliccia ancora calda. Crom ti ha visto stanotte. Prendi anche la zanna — brilla come il ghiaccio.",
+    chiusura2:"Il vecchio sputa a terra. Allora i bambini moriranno. E quando il mannaro verrà per te, ricorderai questa notte." },
+
+  { id:2,  nome:"Il Caravaniere Scomparso",    bioma:"Conajohara",    stato:"disponibile",
+    npc:"Caravaniere Ferito",
+    intro:"I cultisti del ghiaccio mi hanno preso tutto. Riportami la merce dalle rovine e ti do metà del guadagno e la mia cotta di maglia.",
+    scelta1:"Aiuterò il mercante", scelta2:"Saccheggio da solo",
+    ris1:"Cotta di Maglia + 60 Zec + Pergamena +2 INT",
+    ris2:"I cultisti non perdonano i ladri solitari.",
+    chiusura1:"Grazie, barbaro! Prendi la cotta e questa pergamena — vale più dell'oro per chi conosce il vero nome di Ymir.",
+    chiusura2:"Risata gelida. Allora morirai tra le rovine come me." },
+
+  { id:3,  nome:"La Vendetta del Djinn",       bioma:"Picchi",        stato:"disponibile",
+    npc:"Djinn del Ghiaccio Traditore",
+    intro:"Ho tradito Ymir per primo! Il Frammento è mio. But if you defeat me in aerial duel, I will give you the Essence of Eternal Ice.",
+    scelta1:"Sfida il Djinn", scelta2:"Lascia perdere",
+    ris1:"Essenza di Ghiaccio Eterno (Anello Fulmine) • +1 Destino",
+    ris2:"Il Djinn ride: Codardo! Il ghiaccio ti prenderà lo stesso!",
+    chiusura1:"Il Djinn svanisce. Ricorda: tutti tradiscono… prima o poi.",
+    chiusura2:"Il Djinn ride: Codardo! Il ghiaccio ti prenderà lo stesso!" },
+
+  { id:4,  nome:"Il Ponte dei Troll",          bioma:"Foreste Oscure",stato:"disponibile",
+    npc:"Re dei Troll",
+    intro:"Nessuno passa il mio ponte senza pagare! O mi dai il tuo cuore... o mi dai la tua alleanza contro il Re di Ghiaccio. Scegli!",
+    scelta1:"Patto con il Re Troll", scelta2:"Combatti per passare",
+    ris1:"Ascia dei Troll + Alleanza Troll",
+    ris2:"Ascia dei Troll (recuperata dal corpo) — i Troll non dimenticano.",
+    chiusura1:"HAH! Mi piaci, barbaro! Prendi l'ascia. Quando salirai sulla montagna, i miei Troll saranno al tuo fianco!",
+    chiusura2:"Il ponte trema mentre raccogli l'ascia dal corpo del Re." },
+
+  { id:5,  nome:"La Tomba del Sacerdote",      bioma:"Khorshemish",   stato:"disponibile",
+    npc:"Voce Spettrale",
+    intro:"Sei venuto a profanare la mia tomba? Il patto con Valthor non è mai finito. Danza con i miei Spettri per prendere il Frammento.",
+    scelta1:"Accetto la sfida spettrale", scelta2:"Me ne vado",
+    ris1:"Frammento Minore + +2 RES permanente",
+    ris2:"La voce ride: Tornerai. Tutti tornano da me.",
+    chiusura1:"La polvere spettrale ti entra nei polmoni. +2 RES permanente. Ora anche tu sei legato al ghiaccio...",
+    chiusura2:"La voce ride: Tornerai. Tutti tornano da me." },
+
+  { id:6,  nome:"La Carovana delle Sabbie",    bioma:"Zuarir",        stato:"disponibile",
+    npc:"Capo Carovana di Zuarir",
+    intro:"Gli assassini Hyrkaniani ci hanno attaccati all'alba. Se li cacci, ti darò la mia daga migliore e tutto il veleno che ho.",
+    scelta1:"Difendo la carovana", scelta2:"Saccheggio i cadaveri",
+    ris1:"Daga Stigiana + Veleno Raro + 30 Zec",
+    ris2:"I mercanti morti ti guardano. Il deserto non dimentica i predatori.",
+    chiusura1:"Grazie, guerriero del nord! La daga è tua. Nel deserto anche il ghiaccio ha sete.",
+    chiusura2:"I mercanti morti ti guardano con occhi vuoti." },
+
+  { id:7,  nome:"Il Figlio Perduto della Strega",bioma:"Paludi Oscure",stato:"disponibile",
+    npc:"Strega delle Paludi",
+    intro:"Mio figlio è stato preso dal Serpente delle Paludi. Riportamelo vivo e ti darò il mio mantello di scaglie e la mia eterna gratitudine.",
+    scelta1:"Salvo il figlio", scelta2:"Uccido tutto",
+    ris1:"Mantello di Scaglie Viventi + Alleanza Strega permanente",
+    ris2:"La Strega urla: Hai ucciso mio figlio! Il veleno ti consumerà!",
+    chiusura1:"Hai riportato mio figlio. Il mantello è tuo. Ora siamo legati dal sangue.",
+    chiusura2:"La Strega urla di rabbia: Hai ucciso mio figlio! Il veleno che ti darò stanotte ti consumerà lentamente!" },
+
+  { id:8,  nome:"Bounty: Il Cacciatore di Teschi",bioma:"any",        stato:"disponibile",
+    npc:"Bacheca di Venarium",
+    intro:"«500 ZECCHINI PER LA TESTA DEL CACCIATORE DI TESCHI». La taglia è vecchia ma ancora valida.",
+    scelta1:"Accetto la taglia", scelta2:"Non mi interessa",
+    ris1:"Testa come Trofeo • +1 Destino permanente • 500 Zec",
+    ris2:"La taglia resta lì. Il Cacciatore continua a collezionare crani.",
+    chiusura1:"La testa è tua. +1 Destino. La gente di Venarium ti guarda con rispetto misto a paura.",
+    chiusura2:"La taglia resta lì. Il Cacciatore di Teschi continua a collezionare crani... forse il prossimo sarà il tuo." },
+
+  { id:9,  nome:"La Miniera Infestata di Koppar",bioma:"Koppar",      stato:"disponibile",
+    npc:"Principessa Elara",
+    intro:"Le miniere sono vive di Golem e spiriti. Ripuliscile e ti darò le Piastre di Ghiaccio Eterno che mio padre nascondeva.",
+    scelta1:"Ripulisco le miniere", scelta2:"Passo",
+    ris1:"Piastre di Ghiaccio Eterno + 150 Zec",
+    ris2:"Elara sospira: Le miniere continueranno a mangiare i miei minatori...",
+    chiusura1:"Le piastre sono tue. Elara arrossisce: Torna quando vuoi... il mio cuore è ancora caldo grazie a te.",
+    chiusura2:"Elara sospira: Allora le miniere continueranno a mangiare i miei minatori..." },
+
+  { id:10, nome:"Il Duello con l'Assassino",    bioma:"Shadizar",     stato:"disponibile",
+    npc:"Assassino Hyrkaniano",
+    intro:"Ti aspettavo, barbaro. Il tuo nome vale oro a Shadizar. Danza con me... o muori come tutti gli altri.",
+    scelta1:"Accetto il duello", scelta2:"Attacco a tradimento",
+    ris1:"Arco Hyrkaniano Leggendario + 1 Destino",
+    ris2:"Arco Hyrkaniano — but lose 1 Destino (senza onore).",
+    chiusura1:"L'arco leggendario è tuo. L'assassino muore ridendo: Bravo… but the next one will be faster.",
+    chiusura2:"Hai vinto senza onore. L'arco è tuo, but lose 1 Destino permanente." },
+
+  { id:11, nome:"Il Ritorno del Golem",         bioma:"Terre Vulcaniche",stato:"disponibile",
+    npc:"Voce della Forgia",
+    intro:"Il Golem è tornato più forte. La lava canta il tuo nome. Sconfiggilo di nuovo e ti darò un secondo Cuore di Vulcano.",
+    scelta1:"Affronto il Golem rigenerato", scelta2:"Non ora",
+    ris1:"Cuore di Vulcano extra + 100 Zec",
+    ris2:"La voce della forgia si spegne. Tornerai... o morirai freddo come gli altri.",
+    chiusura1:"La forgia pulsa di potere. Un secondo Cuore di Vulcano è tuo.",
+    chiusura2:"La voce della forgia si spegne: Tornerai… o morirai freddo come gli altri." },
+
+  { id:12, nome:"L'Ultima Profezia del Mistico", bioma:"Gurth",       stato:"bloccata",
+    npc:"Mistico Cieco di Gurth",
+    intro:"Ora che hai quasi tutti i Frammenti... vuoi sapere la verità? Io sono il figlio di Valthor. Uccidimi o ascoltami. La scelta cambierà il tuo finale sulla Montagna.",
+    scelta1:"Ascolto la verità", scelta2:"Uccido il Mistico subito",
+    ris1:"3 oggetti unici sbloccati nella Forgia + Alleanza Mistico + +2 INT",
+    ris2:"Perdi 2 Destino permanente. Il Mistico muore con un sorriso.",
+    chiusura1:"Il Mistico ti rivela tutto. Ora sai... e il destino è nelle tue mani.",
+    chiusura2:"Il Mistico muore con un sorriso: Troppo tardi, barbaro… il ghiaccio ha già vinto." }
+];
+
+// =============================================================
+// ★ SHOP DATABASE PER LOCAZIONE
+// =============================================================
+const SHOPS = {
+    fabbro: {
+        nome: "⚒ FABBRO",
+        voce: "Acciaio e fuoco, barbaro. Quello che serve per sopravvivere a Cimmeria.",
+        armi: [
+            { nome:"Spada di Ferro Grezzo",  prezzo:20,  rar:"normal",  effetto:"ATT+1 DAN+3" },
+            { nome:"Ascia Bipenne",          prezzo:35,  rar:"normal",  effetto:"DAN+6 ATT-1" },
+            { nome:"Lancia Lunga",           prezzo:28,  rar:"normal",  effetto:"ATT+1 DAN+4 DEF+2" },
+            { nome:"Spada di Akbitana",      prezzo:80,  rar:"special", effetto:"ATT+2 DAN+5 DEF+1" },
+            { nome:"Ascia dei Nordheim",     prezzo:70,  rar:"special", effetto:"ATT+1 DAN+6 Freddo+1" },
+            { nome:"Cotta di Maglia Nordica",prezzo:200, rar:"rare",    effetto:"RD+6 INI-2 RES Freddo+2" },
+            { nome:"Daga del Culto di Set",  prezzo:180, rar:"rare",    effetto:"ATT+3 DAN+4 Veleno+2" },
+            { nome:"Elmo di Ferro",          prezzo:18,  rar:"normal",  effetto:"DEF+1" },
+            { nome:"Pelli di Lupo",          prezzo:15,  rar:"normal",  effetto:"RD+1 Freddo+1" },
+            { nome:"Piastre Pesanti",        prezzo:120, rar:"special", effetto:"RD+6 INI-4" }
+        ]
+    },
+    mistico: {
+        nome: "📜 MISTICO",
+        voce: "La conoscenza ha un prezzo. Ma l'ignoranza ne ha uno più alto.",
+        armi: [
+            { nome:"Pozione di Guarigione",  prezzo:20,  rar:"normal",  effetto:"+15 HP" },
+            { nome:"Intruglio del Vecchio",  prezzo:12,  rar:"normal",  effetto:"+8 HP" },
+            { nome:"Acqua Ghiaccio Sacro",   prezzo:50,  rar:"special", effetto:"+5 Rid. Freddo (sessione)" },
+            { nome:"Filtro Antimagico",      prezzo:120, rar:"rare",    effetto:"+7 Rid. Magia" },
+            { nome:"Pergamena Tattica",      prezzo:25,  rar:"normal",  effetto:"ATT+1 permanente" },
+            { nome:"Rune di Protezione",     prezzo:80,  rar:"special", effetto:"Rid. Magia+3 perma" },
+            { nome:"Codice Ladri Shadizar",  prezzo:150, rar:"rare",    effetto:"INI+2 ATT+1 perma" },
+            { nome:"Elisir del Berserker",   prezzo:150, rar:"rare",    effetto:"+50 HP (INT-1 sessione)" },
+            { nome:"Corno dell'Urlo",        prezzo:0,   rar:"special", effetto:"QUEST: +10 INI once" },
+            { nome:"Amuleto Protezione",     prezzo:60,  rar:"special", effetto:"Rid.Magia+2 Rid.Vel+2" }
+        ]
+    },
+    maga: {
+        nome: "🔮 MAGA / ANTRO",
+        voce: "Il ghiaccio e il fuoco parlano lingue diverse. Io le conosco entrambe.",
+        armi: [
+            { nome:"Olio del Fuoco Eterno",  prezzo:55,  rar:"special", effetto:"+5 Rid. Fuoco (sessione)" },
+            { nome:"Antidoto di Tigre Nera", prezzo:25,  rar:"normal",  effetto:"+4 Rid. Veleno (sessione)" },
+            { nome:"Pozione di Antracite",   prezzo:45,  rar:"special", effetto:"+4 Rid. Acido" },
+            { nome:"Pergamena di Guarigione",prezzo:65,  rar:"special", effetto:"+20 HP once" },
+            { nome:"Segreti di Erboristeria",prezzo:20,  rar:"normal",  effetto:"Rid.Veleno+2 perma" },
+            { nome:"Trattato Veleni Stigiani",prezzo:140,rar:"rare",    effetto:"Rid.Vel+4 Rid.Mag+2 perma" },
+            { nome:"Dente di Drago Bianco",  prezzo:250, rar:"rare",    effetto:"+1 Destino +1 FOR" },
+            { nome:"Sigillo di Mitra",       prezzo:180, rar:"rare",    effetto:"+1 Destino Rid.Mag+3" },
+            { nome:"Frammento Cristallo Nero",prezzo:200,rar:"rare",    effetto:"+1 Destino Rid.Mag+4" },
+            { nome:"Essenza Elettrica",      prezzo:120, rar:"rare",    effetto:"Arma Fulmine +3 (sessione)" }
+        ]
+    }
+};
+
+// =============================================================
+// ★ STATO GLOBALE
+// =============================================================
+let currentIdx = 0;
+let zecchini = 50;
+let destino = 0;
+let frammenti = [];
+let alleanze = [];
+let questMajorStato = QUEST_MAJOR.map(q => ({...q}));
+let questMinorStato = QUEST_MINOR.map(q => ({...q}));
+let questMinorCompletate = [];
+let equippedItems = { arma:null, armor:null, amuleto:null, anello:null };
+let bagItems = [];
+let currentShop = null;
+let currentDialogo = null;
+let currentEnc = null;
+let encHP = 0, encMaxHP = 0;
+let playerHP = 80, playerMaxHP = 80;
+let playerDefBonus = 0;   // set by "Difenditi", reset after enemy attacks
+let activeMajorQuest = 1;
+// Abilità speciale di Conan (sbloccata dal tier nemico / arma equipaggiata)
+let playerSpeciale = { nome: 'FURIA CIMMERA', desc: 'Colpo devastante: 15-25 danni ignorando armatura', usato: false };
+
+// Travel state
+let travelDestIdx = null;
+let travelSteps = [];   // remaining encounter checks during journey
+let travelBiome = 'any';
+let travelInProgress = false;
+
+// SEED per determinare shop disponibili nei campi
+let worldSeed = Math.floor(Math.random() * 9999);
+
+// =============================================================
+// ★ INIT
+// =============================================================
+function init() {
+    genBiome();
+    renderMarkers();
+    fillSelect();
+    updatePathUI();
+    renderAllSidebars();
+    updateHUDTop();
+    buildFragPips();
+}
+
+function buildFragPips() {
+    const pips = document.getElementById('frag-pips');
+    pips.innerHTML = '';
+    for (let i = 0; i < 12; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'frag-pip' + (frammenti.includes(i+1) ? ' lit' : '');
+        sp.title = `Frammento ${i+1}`;
+        pips.appendChild(sp);
+    }
+    document.getElementById('frag-count-hud').textContent = frammenti.length + '/12';
+}
+
+function updateHUDTop() {
+    document.getElementById('hud-zecchini-top').textContent = '💰 ' + zecchini + ' ZEC';
+    document.getElementById('hud-destino-top').textContent = '⭐ ' + destino + ' DEST';
+    document.getElementById('zecchini-display').textContent = zecchini;
+    document.getElementById('destino-display').textContent = destino;
+}
+
+// =============================================================
+// ★ BIOMA GENERATOR (Nuova logica pixel-art più "naturale")
+// =============================================================
+function genBiome() {
+    const layer = document.getElementById('biome-layer');
+    layer.innerHTML = '';
+    let seed = worldSeed;
+    // Due generatori LCG intercalati per varietà
+    const rng  = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const rng2 = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+
+    // Pre-build a noise map per la sfocatura dei confini
+    const noise = [];
+    for (let i = 0; i < 40 * 60; i++) noise.push(rng());
+
+    // River path: genera una rete ramificata e complessa
+    const riverX = Math.floor(38 + rng2() * 10);
+    const riverCells = new Set();
+    let rx = riverX;
+    // Ramo principale verticale
+    for (let r = 0; r < 40; r++) {
+        if (rx >= 0 && rx < 60) {
+            // Larghezza del fiume variabile e frastagliata
+            const width = Math.floor(1 + rng2() * 3);
+            for (let w = -width; w <= width; w++) {
+                if (rx + w >= 0 && rx + w < 60) riverCells.add(r * 60 + rx + w);
+            }
+        }
+        // Deviazione casuale
+        rx += Math.floor(rng2() * 3) - 1;
+        rx = Math.max(30, Math.min(55, rx));
+        // Ramificazione casuale
+        if (rng2() < 0.1) {
+            let bx = rx;
+            for (let br = r; br < r + Math.floor(5 + rng2() * 10) && br < 40; br++) {
+                if (bx >= 0 && bx < 60) {
+                    for (let bw = -1; bw <= 1; bw++) {
+                        if (bx + bw >= 0 && bx + bw < 60) riverCells.add(br * 60 + bx + bw);
+                    }
+                }
+                bx += Math.floor(rng2() * 3) - 1;
+            }
+        }
+    }
+    // Secondo ramo ramificato
+    rx = Math.floor(30 + rng2() * 10);
+    for (let r = 20; r < 40; r++) {
+        if (rx >= 0 && rx < 60) {
+            const width = Math.floor(1 + rng2() * 2);
+            for (let w = -width; w <= width; w++) {
+                if (rx + w >= 0 && rx + w < 60) riverCells.add(r * 60 + rx + w);
+            }
+        }
+        rx += Math.floor(rng2() * 3) - 1;
+        rx = Math.max(20, Math.min(45, rx));
+    }
+
+    // Palette di colori pixel-art esatti dall'immagine
+    const COL = {
+        mtn: '#aaaaaa', // montagne grigie
+        mtn_sn: '#cccccc', // montagne con neve
+        mtn_rk: '#888899', // montagne rocciose
+        grs: '#2a6b30', // foresta scura/erba
+        grs_w: '#1e4a18', // foresta ancora più scura
+        grs_s: '#3a7030', // foresta più chiara
+        des: '#c8a96e', // deserto sabbia
+        des_o: '#88bb44', // oasi verde chiaro
+        swp: '#1a3322', // palude scura
+        swp_m: '#2a4433', // palude muschiata
+        wat: '#3388cc' // fiumi blu
+    };
+
+    for (let r = 0; r < 40; r++) {
+        for (let c = 0; c < 60; c++) {
+            const idx = r * 60 + c;
+            const v   = noise[idx];
+            const v2  = noise[(idx + 127) % (40*60)];
+            let bg = COL.grs; // default foresta
+
+            if (riverCells.has(idx)) {
+                // Acqua fluttuante
+                bg = v > 0.5 ? '#4499dd' : COL.wat;
+            } else {
+                // Logica a "confine diffuso" (dithering) per i biomi principali
+
+                // 1. Montagne/Tundra (Alto)
+                // Punteggio probabilità montagna: max(0, 10 - r + v * 5)
+                // Confine diffuso per le prime 7 righe
+                if (r < 7 + v * 3) {
+                    bg = v < 0.45 ? COL.mtn_rk : (v < 0.7 ? COL.mtn : COL.mtn_sn);
+                }
+                // 2. Mix Tundra e Foresta (Centro-sinistra)
+                else if (r < 14 + v * 3 && v < 0.55 + c/60 * 0.2) {
+                    bg = v < 0.25 ? COL.mtn_rk : COL.grs_w;
+                }
+                // 3. Montagne a destra
+                else if (c > 48 - v * 5 && r < 14 + v * 2) {
+                    bg = v < 0.5 ? COL.mtn_rk : COL.mtn;
+                }
+                // 4. Deserto e Oasi (Destra-basso)
+                // Confine diffuso: noise < (c - 45) / 15
+                else if (c > 48 - v * 4 && r > 25 - v * 5) {
+                    if (v > 0.82) bg = COL.des_o; // oasi
+                    else bg = v < 0.5 ? COL.des : '#b89858';
+                }
+                // 5. Palude (Basso-sinistra)
+                else if (r > 28 + v * 5 && c < 35 + v * 3 && v < 0.35 + (35-c)/35 * 0.1) {
+                    bg = v2 < 0.5 ? COL.swp : COL.swp_m;
+                }
+                // 6. Prateria / Savana (Centro-basso)
+                else if (r > 20 + v * 3 && r < 34 - v * 3 && c > 20 + v * 3 && c < 45 - v * 3 && v > 0.65 - c/60 * 0.1) {
+                    bg = COL.grs_s;
+                }
+                // 7. Mix Foresta Densa
+                else if (v < 0.38 + c/60 * 0.1) {
+                    bg = v < 0.18 ? COL.grs_w : COL.grs;
+                }
+                // 8. Laghi sparsi
+                else if (v > 0.92) {
+                    bg = '#3388cc';
+                }
+                // 9. Rocce affioranti
+                else if (v > 0.88 && v2 > 0.7) {
+                    bg = '#6a6a7a';
+                }
+                // 10. Foresta / Prateria predefinita
+                else {
+                    bg = v < 0.62 ? COL.grs : COL.grs_s;
+                }
+            }
+
+            const d = document.createElement('div');
+            d.className = 'cell';
+            d.style.background = bg;
+            d.textContent = '';
+            layer.appendChild(d);
+        }
+    }
+}
+
+// =============================================================
+// ★ MARKERS
+// =============================================================
+function renderMarkers() {
+    const cont = document.getElementById('markers-layer');
+    cont.innerHTML = '';
+    LOCATIONS.forEach((l, i) => {
+        if (l.locked && !isUnlocked(i)) return;
+
+        const m = document.createElement('div');
+        m.className = 'marker';
+        m.style.left = l.x + '%';
+        m.style.top  = l.y + '%';
+
+        let icon = '🏰';
+        if (l.t === 'camp')    icon = '⛺';
+        if (l.t === 'village') icon = '🏘️';
+        if (l.t === 'oasis')   icon = '🌴';
+        if (l.t === 'dungeon') icon = '💀';
+
+        const isActive  = i === currentIdx;
+        const hasQM     = l.questMajor && getQuestMajor(l.questMajor)?.stato === 'attiva';
+        const labelCls  = hasQM ? 'quest-active' : isActive ? '' : 'locked';
+
+        m.innerHTML = `<div style="font-size:16px;color:${isActive ? 'var(--c64-gold)' : '#fff'}">${icon}</div>
+                       <div class="marker-label ${labelCls}">${l.n}</div>`;
+        m.onclick = () => { document.getElementById('sel-dest').value = i; updatePathUI(); };
+        cont.appendChild(m);
+    });
+}
+
+function isUnlocked(idx) {
+    const l = LOCATIONS[idx];
+    if (!l.locked) return true;
+    // Sbloccato se la quest maggiore precedente è stata completata
+    if (l.questMajor) {
+        const prev = getQuestMajor(l.questMajor - 1);
+        return !prev || prev.stato === 'completata';
+    }
+    return false;
+}
+
+function getQuestMajor(id) { return questMajorStato.find(q => q.id === id); }
+
+// =============================================================
+// ★ SELECT & PATH
+// =============================================================
+function fillSelect() {
+    const s = document.getElementById('sel-dest');
+    s.innerHTML = '<option value="">-- SELEZIONA META --</option>';
+    LOCATIONS.forEach((l, i) => {
+        if (i !== currentIdx) {
+            const locked = l.locked && !isUnlocked(i);
+            s.innerHTML += `<option value="${i}" ${locked ? 'disabled style="color:#444"' : ''}>${l.n} (${l.t.toUpperCase()})${locked ? ' 🔒' : ''}</option>`;
+        }
+    });
+}
+
+function updatePathUI() {
+    const start   = LOCATIONS[currentIdx];
+    const destIdx = document.getElementById('sel-dest').value;
+    const line    = document.getElementById('the-line');
+
+    document.getElementById('hud-pos').textContent   = 'POS: ' + start.n.toUpperCase();
+    document.getElementById('hud-type').textContent  = 'TIPO: ' + start.t.toUpperCase();
+    document.getElementById('hud-biome').textContent = 'BIOMA: ' + (start.biome||'any').toUpperCase();
+
+    if (!destIdx) {
+        line.setAttribute('x1',0); line.setAttribute('y1',0);
+        line.setAttribute('x2',0); line.setAttribute('y2',0);
+        return;
+    }
+    const end = LOCATIONS[destIdx];
+    const svg = document.getElementById('route-svg');
+    const w = svg.clientWidth, h = svg.clientHeight;
+    line.setAttribute('x1', (start.x * w / 100));
+    line.setAttribute('y1', (start.y * h / 100));
+    line.setAttribute('x2', (end.x * w / 100));
+    line.setAttribute('y2', (end.y * h / 100));
+
+    const dist = Math.floor(Math.sqrt(Math.pow(end.x-start.x,2)+Math.pow(end.y-start.y,2))*15);
+    document.getElementById('hud-dist').textContent = 'DIST: ' + dist + ' LG';
+    document.getElementById('hud-days').textContent = 'TEMPO: ' + Math.ceil(dist/40) + ' GG';
+}
+
+// =============================================================
+// ★ TRAVEL
+// =============================================================
+function startTravel() {
+    if (travelInProgress) {
+        logMap('> Spedizione già in corso!');
+        return;
+    }
+    const dIdx = document.getElementById('sel-dest').value;
+    if (!dIdx) return;
+
+    const dest = LOCATIONS[dIdx];
+    if (dest.locked && !isUnlocked(parseInt(dIdx))) {
+        logMap(`> DESTINAZIONE BLOCCATA. Completa la quest precedente.`);
+        return;
+    }
+
+    travelInProgress = true;
+    travelDestIdx = parseInt(dIdx);
+    travelBiome   = dest.biome;
+
+    const start = LOCATIONS[currentIdx];
+    const dist  = Math.floor(Math.sqrt(Math.pow(dest.x - start.x, 2) + Math.pow(dest.y - start.y, 2)) * 15);
+    const days  = Math.ceil(dist / 40);
+    const numChecks = Math.max(1, Math.min(5, Math.ceil(days / 2)));
+
+    travelSteps = [];
+    for (let i = 0; i < numChecks; i++) {
+        if (Math.random() < 0.35) travelSteps.push('encounter');
+        else travelSteps.push('safe');
+    }
+
+    logMap(`> SPEDIZIONE AVVIATA → ${dest.n.toUpperCase()} | ${dist} LG | ${days} GG`);
+    setTimeout(() => advanceTravelStep(), 600);
+}
+
+function advanceTravelStep() {
+    if (travelSteps.length === 0) {
+        travelInProgress = false;
+        currentIdx = travelDestIdx;
+        logMap(`> SEI ARRIVATO A ${LOCATIONS[currentIdx].n.toUpperCase()}!`);
+        showLocation();
+        return;
+    }
+
+    const step = travelSteps.shift();
+    const rimasti = travelSteps.length;
+    const stepInfo = rimasti === 0 ? 'ultimo tratto' : `ancora ${rimasti} tratt${rimasti > 1 ? 'i' : 'o'}`;
+
+    if (step === 'encounter') {
+        triggerRandomEncounter(travelBiome);
+    } else {
+        showTravelOptions(stepInfo);
+    }
+}
+
+function showTravelOptions(stepInfo) {
+    const overlay = document.getElementById('travel-overlay');
+    const pct     = Math.round(playerHP / playerMaxHP * 100);
+    overlay.innerHTML = `
+        <div class="travel-phase">🗺 VIAGGIO IN CORSO</div>
+        <div style="font-size:11px;color:#aaa;text-align:center;margin-bottom:8px;">
+            Il cammino è tranquillo per ora. (${stepInfo})
+        </div>
+        <div style="font-size:10px;color:#888;margin-bottom:2px;">CONAN HP</div>
+        <div class="player-hp-bar">
+            <div class="player-hp-fill" style="width:${pct}%"></div>
+            <div class="player-hp-text">${playerHP}/${playerMaxHP}</div>
+        </div>
+        <div id="travel-log" style="font-size:10px;color:var(--c64-yellow);min-height:24px;margin:8px 0;"></div>
+        <div class="travel-btns">
+            <button class="enc-btn attack" onclick="travelContinue()">▶ CONTINUA IL VIAGGIO</button>
+            <button class="enc-btn defend" onclick="travelRest()">💤 RIPOSA (recupera HP)</button>
+        </div>`;
+    overlay.classList.add('open');
+}
+
+function travelContinue() {
+    document.getElementById('travel-overlay').classList.remove('open');
+    logMap(`> Prosegui il cammino...`);
+    setTimeout(() => advanceTravelStep(), 400);
+}
+
+function travelRest() {
+    const heal = Math.floor(Math.random() * 12) + 8; // 8-19 HP
+    playerHP   = Math.min(playerMaxHP, playerHP + heal);
+    const log  = document.getElementById('travel-log');
+    if (log) log.textContent = `Riposo breve. Recuperi ${heal} HP. HP: ${playerHP}/${playerMaxHP}`;
+    // Dopo il riposo, un ulteriore controllo per incontro (riposo disturbato)
+    if (Math.random() < 0.2) {
+        setTimeout(() => {
+            document.getElementById('travel-overlay').classList.remove('open');
+            logMap(`> Il riposo viene interrotto! Un nemico!`);
+            triggerRandomEncounter(travelBiome);
+        }, 1200);
+    } else {
+        setTimeout(() => travelContinue(), 1000);
+    }
+}
+
+// =============================================================
+// ★ RANDOM ENCOUNTER TRIGGER
+// =============================================================
+function triggerRandomEncounter(biome) {
+    const NEMICI_VIAGGIO = {
+        tundra:   { nome:"Cimmero Rinnegato",    hp:28, att:3, dan:4, tier:"Normale",
+            speciale:{ nome:"Grido di Guerra", desc:"Intimidisce: ti fa perdere 1 turno di attacco", effetto:"skip" }},
+        picchi:   { nome:"Lupo Mannaro di Gurth", hp:32, att:4, dan:5, tier:"Normale",
+            speciale:{ nome:"Morso Rabbioso", desc:"Infligge 8 danni extra e ti fa sanguinare (-2 HP turno)", effetto:"bleed" }},
+        palude:   { nome:"Serpente delle Paludi", hp:28, att:3, dan:4, tier:"Normale",
+            speciale:{ nome:"Veleno Paralizzante", desc:"30% di saltare il tuo prossimo turno", effetto:"poison" }},
+        vulcano:  { nome:"Cultista del Ghiaccio", hp:24, att:2, dan:3, tier:"Normale",
+            speciale:{ nome:"Maledizione del Ghiaccio", desc:"Riduce il tuo ATT di 2 per 2 turni", effetto:"weaken" }},
+        rovine:   { nome:"Spettro di Acheron",    hp:20, att:4, dan:3, tier:"Normale",
+            speciale:{ nome:"Tocco Spettrale", desc:"Drena 5 HP e li aggiunge ai propri", effetto:"drain" }},
+        deserto:  { nome:"Assassino Hyrkaniano",  hp:20, att:5, dan:3, tier:"Normale",
+            speciale:{ nome:"Colpo alle Spalle", desc:"Doppio danno se il tuo HP è sotto il 50%", effetto:"backstab" }},
+        foresta:  { nome:"Troll delle Foreste",   hp:45, att:3, dan:6, tier:"Elite",
+            speciale:{ nome:"Rigenerazione", desc:"Recupera 8 HP a fine turno", effetto:"regen" }},
+        montagna: { nome:"Guardiano di Ghiaccio", hp:40, att:5, dan:6, tier:"Elite",
+            speciale:{ nome:"Aura di Gelo", desc:"Tutti i tuoi attacchi infliggono 2 danni in meno", effetto:"freeze" }},
+        any:      { nome:"Cimmero Rinnegato",     hp:28, att:3, dan:4, tier:"Normale",
+            speciale:{ nome:"Grido di Guerra", desc:"Intimidisce: prossimo attacco nemico +3 danni", effetto:"skip" }}
+    };
+    const nemico = NEMICI_VIAGGIO[biome] || NEMICI_VIAGGIO.any;
+    logMap(`> INCONTRO! ${nemico.nome} sbarra il cammino!`);
+    openEncounter(nemico);
+}
+
+// =============================================================
+// ★ ENCOUNTER SYSTEM (COMPLETO)
+// =============================================================
+function openEncounter(nemico) {
+    currentEnc   = nemico;
+    encMaxHP     = nemico.hp;
+    encHP        = nemico.hp;
+    playerDefBonus = 0;
+    enemySpecialCooldown = 0;
+    if (playerSpeciale) playerSpeciale.usato = false;
+    renderEncounter();
+}
+
+function renderEncounter(logMsg) {
+    if (!currentEnc) return;
+    const overlay = document.getElementById('enc-overlay');
+    overlay.classList.add('open');
+
+    // Se l'overlay è già renderizzato col combattimento in corso,
+    // aggiorna solo le barre HP e il log senza ricostruire i bottoni
+    const existingLog = document.getElementById('enc-log');
+    if (existingLog && logMsg) {
+        existingLog.innerHTML = logMsg;
+        // Aggiorna barra HP nemico
+        const encPct = Math.round(encHP / encMaxHP * 100);
+        const fill = document.querySelector('.enc-hp-fill');
+        const txt  = document.querySelector('.enc-hp-text');
+        if (fill) fill.style.width = encPct + '%';
+        if (txt)  txt.textContent  = `HP: ${encHP}/${encMaxHP}`;
+        // Aggiorna barra HP giocatore
+        const plrPct   = Math.round(playerHP / playerMaxHP * 100);
+        const plrColor = playerHP < playerMaxHP * 0.3 ? '#cc3333' : playerHP < playerMaxHP * 0.6 ? '#cc9933' : '#33cc33';
+        const pFill = document.querySelector('.player-hp-fill');
+        const pTxt  = document.querySelector('.player-hp-text');
+        if (pFill) { pFill.style.width = plrPct + '%'; pFill.style.background = `linear-gradient(90deg,${plrColor}88,${plrColor})`; }
+        if (pTxt)  pTxt.textContent = `${playerHP}/${playerMaxHP}`;
+        // Aggiorna label difesa
+        const defLabel = document.getElementById('enc-def-label');
+        if (defLabel) defLabel.textContent = `CONAN HP${playerDefBonus > 0 ? ' 🛡 +' + playerDefBonus : ''}`;
+        return;
+    }
+
+    // Prima render: costruisce tutto da zero (pulsanti SEMPRE abilitati)
+    const encPct   = Math.round(encHP / encMaxHP * 100);
+    const plrPct   = Math.round(playerHP / playerMaxHP * 100);
+    const plrColor = playerHP < playerMaxHP * 0.3 ? '#cc3333' : playerHP < playerMaxHP * 0.6 ? '#cc9933' : '#33cc33';
+
+    overlay.innerHTML = `
+        <div class="enc-name">⚔ ${currentEnc.nome}</div>
+        <div style="text-align:center;font-size:10px;color:#888;margin-bottom:4px;">
+            ${currentEnc.tier} | ATT: ${currentEnc.att} &nbsp; DAN: ${currentEnc.dan}
+            ${currentEnc.speciale ? `&nbsp;✦ <span style="color:#5599ff">${currentEnc.speciale.nome}</span>` : ''}
+        </div>
+        <div style="font-size:10px;color:#cc4444;margin-bottom:2px;">NEMICO HP</div>
+        <div class="enc-hp-bar">
+            <div class="enc-hp-fill" style="width:${encPct}%"></div>
+            <div class="enc-hp-text">HP: ${encHP}/${encMaxHP}</div>
+        </div>
+        <div id="enc-def-label" style="font-size:10px;color:#44aa44;margin-bottom:2px;">CONAN HP${playerDefBonus > 0 ? ' 🛡 +' + playerDefBonus : ''}</div>
+        <div class="player-hp-bar">
+            <div class="player-hp-fill" style="width:${plrPct}%;background:linear-gradient(90deg,${plrColor}88,${plrColor});"></div>
+            <div class="player-hp-text" style="color:#fff;">${playerHP}/${playerMaxHP}</div>
+        </div>
+        <div id="enc-log" style="font-size:11px;color:var(--c64-yellow);min-height:40px;margin:8px 0;padding:6px;background:#0a0a0a;border:1px solid #333;">
+            ${logMsg || '⚔ Scegli la tua azione!'}
+        </div>
+        <div class="enc-btns">
+            <button class="enc-btn attack"    onclick="combatAttack()">⚔ ATTACCA</button>
+            <button class="enc-btn defend"    onclick="combatDefend()">🛡 DIFENDITI</button>
+            <button class="enc-btn flee"      onclick="combatFlee()">🏃 FUGGI</button>
+            <button class="enc-btn surrender" onclick="combatSurrender()">🏳 ARRENDITI</button>
+        </div>
+        ${currentEnc.speciale ? `
+        <div style="margin-top:8px;">
+            <button class="enc-btn special" onclick="combatSpecialEnemy()" style="border-color:#cc44cc;color:#cc44cc;width:100%;font-size:10px;">
+                ⚡ ABILITÀ SPECIALE NEMICO (info): ${currentEnc.speciale.nome}
+            </button>
+        </div>` : ''}
+        ${playerSpeciale ? `
+        <div style="margin-top:4px;">
+            <button class="enc-btn special" onclick="combatPlayerSpecial()" style="border-color:#5599ff;color:#5599ff;width:100%;">
+                ✦ ${playerSpeciale.nome} ${playerSpeciale.usato ? '<span style="color:#444">(USATO)</span>' : ''}
+            </button>
+        </div>` : ''}`;
+}
+
+// Helper: il nemico attacca il giocatore
+function enemyAttacks() {
+    const rawDmg  = currentEnc.dan + Math.floor(Math.random() * 4);
+    const finalDmg = Math.max(1, rawDmg - playerDefBonus);
+    playerHP = Math.max(0, playerHP - finalDmg);
+    playerDefBonus = 0;
+    return { rawDmg, finalDmg };
+}
+
+// ⚔ ATTACCA — player attacca, poi il mostro contrattacca (+ eventuale speciale)
+function combatAttack() {
+    if (!currentEnc) return;
+    const weapBonus = equippedItems.arma ? 3 : 0;
+    const myDmg = 4 + weapBonus + Math.floor(Math.random() * 6);
+    encHP = Math.max(0, encHP - myDmg);
+
+    let msg = `⚔ Attacchi per <b style="color:#ff9944">${myDmg} danni</b>. `;
+
+    if (encHP <= 0) {
+        renderEncounter(msg + '💀 <b style="color:#44ff44">NEMICO SCONFITTO!</b>');
+        setTimeout(() => endEncounter(true), 1000);
+        return;
+    }
+
+    // Mostro contrattacca normalmente
+    const { finalDmg, rawDmg } = enemyAttacks();
+    const blocked = rawDmg - finalDmg;
+    msg += blocked > 0
+        ? `Il nemico colpisce per <b style="color:#ff4444">${finalDmg} danni</b> (${blocked} bloccati). `
+        : `Il nemico contrattacca per <b style="color:#ff4444">${finalDmg} danni</b>! `;
+
+    // Eventuale abilità speciale nemico
+    const spMsg = maybeEnemySpecial();
+    if (spMsg) msg += '<br>' + spMsg;
+
+    if (playerHP <= 0) {
+        renderEncounter(msg + '<br>💀 <b style="color:#ff4444">SEI CADUTO!</b>');
+        setTimeout(() => playerDefeated(), 1200);
+    } else {
+        renderEncounter(msg);
+    }
+}
+
+// 🛡 DIFENDITI — nessun attacco, bonus difesa, il mostro colpisce ridotto (+ eventuale speciale)
+function combatDefend() {
+    if (!currentEnc) return;
+    playerDefBonus = 3 + Math.floor(Math.random() * 3);
+
+    const { finalDmg, rawDmg } = enemyAttacks();
+    const blocked = rawDmg - finalDmg;
+    let msg = `🛡 Ti difendi (+${blocked + playerDefBonus} riduzione totale). `
+            + `Il nemico infligge solo <b style="color:#ff9944">${finalDmg} danni</b> (${blocked} bloccati)! `;
+
+    const spMsg = maybeEnemySpecial();
+    if (spMsg) msg += '<br>' + spMsg;
+
+    if (playerHP <= 0) {
+        renderEncounter(msg + '<br>💀 <b style="color:#ff4444">SEI CADUTO!</b>');
+        setTimeout(() => playerDefeated(), 1200);
+    } else {
+        renderEncounter(msg);
+    }
+}
+
+// 🏃 FUGGI — dado D20, soglia basata su ATT nemico; se fallisce il mostro ti insegue
+function combatFlee() {
+    if (!currentEnc) return;
+    const diceRoll = Math.floor(Math.random() * 20) + 1;
+    const threshold = Math.max(3, 5 + Math.floor(currentEnc.att / 2));
+
+    if (diceRoll > threshold) {
+        // FUGA RIUSCITA
+        const msg = `🏃 <b style="color:#88ffaa">FUGA RIUSCITA!</b> (🎲 ${diceRoll} vs soglia ${threshold}) — Lasci il nemico alle spalle!`;
+        renderEncounter(msg);
+        setTimeout(() => {
+            document.getElementById('enc-overlay').classList.remove('open');
+            currentEnc = null;
+            logMap(`> Fuggito! Il viaggio riprende con cautela.`);
+            setTimeout(() => advanceTravelStep(), 600);
+        }, 1200);
+    } else {
+        // FUGA FALLITA — il mostro ti insegue e colpisce
+        const { finalDmg } = enemyAttacks();
+        const msg = `🏃 <b style="color:#ff9944">FUGA FALLITA!</b> (🎲 ${diceRoll} vs soglia ${threshold}) — `
+                  + `Il nemico ti insegue e colpisce per <b style="color:#ff4444">${finalDmg} danni</b>!`;
+        if (playerHP <= 0) {
+            renderEncounter(msg + '<br>💀 <b style="color:#ff4444">SEI CADUTO NELLA FUGA!</b>');
+            setTimeout(() => playerDefeated(), 1200);
+        } else {
+            renderEncounter(msg + '<br><i style="color:#ff9944">Bloccato! Devi combattere.</i>');
+        }
+    }
+}
+
+// 🏳 ARRENDITI — dado D10: 1-6 il mostro accetta (prende oggetto), 7-10 rifiuta e attacca
+function combatSurrender() {
+    if (!currentEnc) return;
+    const diceRoll = Math.floor(Math.random() * 10) + 1;
+    const accepts  = diceRoll <= 6;
+
+    if (accepts && bagItems.length > 0) {
+        const lostIdx  = Math.floor(Math.random() * bagItems.length);
+        const lostItem = bagItems.splice(lostIdx, 1)[0];
+        renderBagMini();
+        const msg = `🏳 (🎲 ${diceRoll}/10) Il nemico accetta! Prende <b style="color:#ffdd44">${lostItem.nome}</b> e ti lascia passare.`;
+        renderEncounter(msg);
+        setTimeout(() => {
+            document.getElementById('enc-overlay').classList.remove('open');
+            currentEnc = null;
+            logMap(`> Resa accettata. Perdi: ${lostItem.nome}.`);
+            setTimeout(() => advanceTravelStep(), 600);
+        }, 1400);
+    } else if (accepts && bagItems.length === 0) {
+        // Nulla da offrire — ti graffia per pietà ma ti lascia
+        const drainHp = 5;
+        playerHP = Math.max(1, playerHP - drainHp);
+        const msg = `🏳 (🎲 ${diceRoll}/10) Non hai nulla! Il nemico ti graffia (-${drainHp} HP) per disprezzo e ti lascia andare.`;
+        renderEncounter(msg);
+        setTimeout(() => {
+            document.getElementById('enc-overlay').classList.remove('open');
+            currentEnc = null;
+            logMap(`> Resa senza loot. HP: ${playerHP}/${playerMaxHP}.`);
+            setTimeout(() => advanceTravelStep(), 600);
+        }, 1400);
+    } else {
+        // Rifiuta — attacca furioso (danno extra)
+        const rawDmg   = currentEnc.dan + Math.floor(Math.random() * 4) + 3;
+        const finalDmg = Math.max(1, rawDmg - playerDefBonus);
+        playerHP = Math.max(0, playerHP - finalDmg);
+        playerDefBonus = 0;
+        const msg = `🏳 <b style="color:#ff4444">RESA RIFIUTATA!</b> (🎲 ${diceRoll}/10) — `
+                  + `Attacca furioso per <b style="color:#ff4444">${finalDmg} danni</b>!`;
+        if (playerHP <= 0) {
+            renderEncounter(msg + '<br>💀 <b style="color:#ff4444">SEI CADUTO!</b>');
+            setTimeout(() => playerDefeated(), 1200);
+        } else {
+            renderEncounter(msg + '<br><i style="color:#ff9944">Nessuna via d\'uscita — combatti!</i>');
+        }
+    }
+}
+
+// ✦ ABILITÀ SPECIALE DI CONAN — FURIA CIMMERA (una volta per combattimento)
+function combatPlayerSpecial() {
+    if (!currentEnc) return;
+    if (playerSpeciale.usato) {
+        const log = document.getElementById('enc-log');
+        if (log) log.innerHTML = `<span style="color:#666">✦ ${playerSpeciale.nome} già usata in questo combattimento!</span>`;
+        return;
+    }
+    playerSpeciale.usato = true;
+    const myDmg = 15 + Math.floor(Math.random() * 11); // 15-25, ignora armatura
+    encHP = Math.max(0, encHP - myDmg);
+    const msg = `✦ <b style="color:#5599ff">FURIA CIMMERA!</b> Colpo devastante per <b style="color:#ffdd44">${myDmg} danni</b> (ignora armatura)!`;
+    if (encHP <= 0) {
+        renderEncounter(msg + ' 💀 <b style="color:#44ff44">NEMICO SCONFITTO!</b>');
+        setTimeout(() => endEncounter(true), 1000);
+    } else {
+        // Il nemico contrattacca anche dopo la speciale
+        const { finalDmg } = enemyAttacks();
+        const fullMsg = msg + `<br>Il nemico risponde con ${finalDmg} danni!`;
+        if (playerHP <= 0) {
+            renderEncounter(fullMsg + '<br>💀 <b style="color:#ff4444">SEI CADUTO!</b>');
+            setTimeout(() => playerDefeated(), 1200);
+        } else {
+            renderEncounter(fullMsg);
+        }
+    }
+}
+
+// ⚡ ABILITÀ SPECIALE DEL NEMICO — si attiva automaticamente ogni 3 turni o con 25% di chance
+let enemySpecialCooldown = 0;
+function maybeEnemySpecial() {
+    if (!currentEnc || !currentEnc.speciale) return false;
+    enemySpecialCooldown++;
+    if (enemySpecialCooldown < 3 && Math.random() > 0.25) return false;
+    enemySpecialCooldown = 0;
+    const sp = currentEnc.speciale;
+    let extraMsg = '';
+    // Applica effetto
+    if (sp.effetto === 'drain') {
+        const drain = 5;
+        playerHP = Math.max(0, playerHP - drain);
+        encHP = Math.min(encMaxHP, encHP + drain);
+        extraMsg = `⚡ <b style="color:#cc44cc">${sp.nome}!</b> Drena ${drain} HP da te e li aggiunge a sé!`;
+    } else if (sp.effetto === 'regen') {
+        const regen = 8;
+        encHP = Math.min(encMaxHP, encHP + regen);
+        extraMsg = `⚡ <b style="color:#cc44cc">${sp.nome}!</b> Il nemico si rigenera di ${regen} HP!`;
+    } else if (sp.effetto === 'bleed') {
+        const bleedDmg = 8 + Math.floor(Math.random() * 5);
+        playerHP = Math.max(0, playerHP - bleedDmg);
+        extraMsg = `⚡ <b style="color:#cc44cc">${sp.nome}!</b> Morso che infligge ${bleedDmg} danni e ti fa sanguinare!`;
+    } else if (sp.effetto === 'backstab') {
+        const isLow = playerHP < playerMaxHP * 0.5;
+        const bsDmg = isLow ? currentEnc.dan * 2 : currentEnc.dan;
+        playerHP = Math.max(0, playerHP - bsDmg);
+        extraMsg = `⚡ <b style="color:#cc44cc">${sp.nome}!</b> ${isLow ? 'Doppio danno!' : 'Colpo normale.'} -${bsDmg} HP!`;
+    } else {
+        // skip/poison/weaken/freeze: danno extra
+        const spDmg = 4 + Math.floor(Math.random() * 4);
+        playerHP = Math.max(0, playerHP - spDmg);
+        extraMsg = `⚡ <b style="color:#cc44cc">${sp.nome}!</b> ${sp.desc} — -${spDmg} HP!`;
+    }
+    return extraMsg;
+}
+function endEncounter(vittoria) {
+    if (vittoria) {
+        const loot = Math.floor(Math.random() * 30) + 10;
+        const bonus = [];
+        if (Math.random() < 0.3) {
+            const drop = [
+                { nome:'Pozione di Guarigione', rar:'normal', effetto:'+15 HP', prezzo:0 },
+                { nome:'Zanna di Lupo',          rar:'normal', effetto:'+1 ATT', prezzo:0 },
+                { nome:'Pelliccia Grezza',        rar:'normal', effetto:'+1 RD',  prezzo:0 },
+            ];
+            bonus.push(drop[Math.floor(Math.random() * drop.length)]);
+        }
+        zecchini += loot;
+        bonus.forEach(i => bagItems.push(i));
+        updateHUDTop();
+        renderBagMini();
+
+        const overlay = document.getElementById('enc-overlay');
+        overlay.innerHTML = `
+            <div style="text-align:center;padding:20px;">
+                <div style="font-size:2em;margin-bottom:6px;">⚔</div>
+                <div style="font-size:1.3em;color:#44cc44;letter-spacing:2px;margin-bottom:12px;">VITTORIA!</div>
+                <div style="background:#0a0a0a;border:1px solid #444;padding:12px;margin-bottom:14px;font-size:11px;color:#ccc;line-height:1.9;">
+                    <span style="color:#ffd700">+${loot} Zecchini trovati</span><br>
+                    ${bonus.length > 0 ? `<span style="color:#5599ff">Bottino: ${bonus[0].nome}</span><br>` : ''}
+                    <span style="color:#88ff88">HP attuali: ${playerHP}/${playerMaxHP}</span>
+                </div>
+                <button onclick="continueAfterVictory()" style="background:#1a4a1a;color:#fff;border:2px solid #44cc44;padding:10px 20px;cursor:pointer;font-family:'Courier New';font-size:12px;font-weight:bold;text-transform:uppercase;width:100%;">
+                    ▶ CONTINUA IL VIAGGIO
+                </button>
+            </div>`;
+        logMap(`> NEMICO SCONFITTO! +${loot} Zec${bonus.length ? ' + ' + bonus[0].nome : ''}.`);
+    }
+    currentEnc     = null;
+    playerDefBonus = 0;
+}
+
+function continueAfterVictory() {
+    document.getElementById('enc-overlay').classList.remove('open');
+    setTimeout(() => advanceTravelStep(), 400);
+}
+
+// Sconfitta giocatore: schermata morte con penalità
+function playerDefeated() {
+    currentEnc     = null;
+    playerDefBonus = 0;
+    travelInProgress = false;
+    travelSteps    = [];
+
+    const penalty = Math.floor(zecchini * 0.25);
+    zecchini = Math.max(0, zecchini - penalty);
+    let lostItemTxt = 'nessun oggetto';
+    if (bagItems.length > 0) {
+        lostItemTxt = bagItems.splice(Math.floor(Math.random() * bagItems.length), 1)[0].nome;
+        renderBagMini();
+    }
+    playerHP = Math.max(5, Math.floor(playerMaxHP * 0.25));
+    updateHUDTop();
+
+    const overlay = document.getElementById('enc-overlay');
+    overlay.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+            <div style="font-size:2.5em;margin-bottom:8px;">💀</div>
+            <div style="font-size:1.4em;color:#ff4444;letter-spacing:3px;margin-bottom:12px;">SEI CADUTO!</div>
+            <div style="font-size:11px;color:#ccc;line-height:1.9;margin-bottom:16px;background:#0a0a0a;padding:10px;border:1px solid #333;">
+                Crom ride del tuo fallimento...<br>
+                <span style="color:#ff9944">Perdi: ${penalty} Zecchini</span><br>
+                <span style="color:#ffdd44">Oggetto perduto: ${lostItemTxt}</span><br>
+                <span style="color:#44cc44">Ti risvegli ferito — HP: ${playerHP}/${playerMaxHP}</span>
+            </div>
+            <button onclick="afterPlayerDeath()" style="background:#8b4513;color:#fff;border:2px solid #ffd700;padding:10px 20px;cursor:pointer;font-family:'Courier New';font-size:12px;font-weight:bold;text-transform:uppercase;width:100%;">
+                ⚔ RIALZATI — TORNA ALLA MAPPA
+            </button>
+        </div>`;
+    overlay.classList.add('open');
+}
+
+function afterPlayerDeath() {
+    document.getElementById('enc-overlay').classList.remove('open');
+    document.getElementById('travel-overlay').classList.remove('open');
+    document.getElementById('view-location').classList.remove('active-view');
+    document.getElementById('view-map').classList.add('active-view');
+    init();
+    logMap(`> 💀 Sconfitto. Ti risvegli malconcio. HP: ${playerHP}/${playerMaxHP}`);
+}
+
+// =============================================================
+// ★ SHOW LOCATION
+// =============================================================
+function showLocation() {
+    document.getElementById('view-map').classList.remove('active-view');
+    document.getElementById('view-location').classList.add('active-view');
+
+    const l = LOCATIONS[currentIdx];
+    document.getElementById('loc-name').textContent = l.n;
+    document.getElementById('loc-desc').textContent = l.d;
+    document.getElementById('loc-art').textContent  = l.art;
+
+    buildShopButtons(l);
+    buildActionButtons(l);
+    closeDialog();
+
+    const logEl = document.getElementById('log-local');
+    logEl.innerHTML = `> ARRIVATO A ${l.n.toUpperCase()}. ${l.biome.toUpperCase()} — BIOMA ATTIVO.`;
+
+    // Auto-mostra dialogo PNG principale se disponibile e quest attiva
+    if (l.npcs && l.npcs.length > 0) {
+        const firstNpc = l.npcs[0];
+        if (PNG_DIALOGHI[firstNpc]) {
+            setTimeout(() => autoDialogo(firstNpc, l), 600);
+        }
+    }
+
+    renderAllSidebars();
+}
+
+// =============================================================
+// ★ SHOP BUTTONS per location
+// =============================================================
+function buildShopButtons(l) {
+    const container = document.getElementById('loc-shops');
+    container.innerHTML = '';
+
+    const tipoShops = getShopsForLocation(l);
+
+    ['fabbro','mistico','maga'].forEach(tipo => {
+        const btn = document.createElement('button');
+        btn.className = `shop-btn ${tipo}`;
+        const s = SHOPS[tipo];
+
+        if (tipoShops.includes(tipo)) {
+            btn.innerHTML = s.nome;
+            btn.onclick = () => openShop(tipo, l);
+        } else {
+            btn.innerHTML = tipo === 'fabbro' ? '⚒ —' : tipo === 'mistico' ? '📜 —' : '🔮 —';
+            btn.className = 'shop-btn disabled';
+        }
+        container.appendChild(btn);
+    });
+}
+
+function getShopsForLocation(l) {
+    if (l.t === 'city') return ['fabbro','mistico','maga'];
+    if (l.t === 'village') {
+        // Due negozi scelti dal SEED
+        const options = ['fabbro','mistico','maga'];
+        const rng = () => { worldSeed = (worldSeed * 1664525 + 1013904223) % 4294967296; return worldSeed / 4294967296; };
+        const picked = l.shops && l.shops.length ? l.shops : options.filter(() => rng() > 0.4);
+        return picked.length >= 2 ? picked.slice(0,2) : options.slice(0,2);
+    }
+    if (l.t === 'camp') {
+        // 1 negozio dal SEED
+        const options = ['fabbro','mistico','maga'];
+        const rng = (worldSeed + currentIdx * 31) % 3;
+        return l.shops && l.shops.length ? l.shops.slice(0,1) : [options[rng]];
+    }
+    if (l.t === 'oasis') return l.shops || ['mistico'];
+    if (l.t === 'dungeon') return l.shops || [];
+    return l.shops || [];
+}
+
+// =============================================================
+// ★ SHOP SYSTEM
+// =============================================================
+function openShop(tipo, loc) {
+    currentShop = tipo;
+    const overlay = document.getElementById(`shop-${tipo}`);
+    const s = SHOPS[tipo];
+    let html = `
+        <div class="shop-title">
+            <span>${s.nome} — ${loc.n}</span>
+            <button class="btn-close-shop" onclick="closeShop('${tipo}')">✗ CHIUDI</button>
+        </div>
+        <div style="font-style:italic;font-size:10px;color:#aaa;margin-bottom:8px;">"${s.voce}"</div>
+        <div class="shop-grid">`;
+
+    s.armi.forEach((item, idx) => {
+        const free = item.prezzo === 0;
+        html += `<div class="shop-item rar-${item.rar}" onclick="${free ? '' : `selectShopItem(${idx},'${tipo}')`}">
+            <div class="item-name" style="color:${rarColor(item.rar)}">${item.nome}</div>
+            <div class="item-price">${free ? '🎁 QUEST' : item.prezzo + ' Zec'}</div>
+            <div class="item-effect">${item.effetto}</div>
+        </div>`;
+    });
+
+    html += `</div>
+        <div class="shop-buy-bar" id="shop-buy-bar-${tipo}">
+            <div id="shop-buy-name-${tipo}" style="color:var(--c64-gold);font-weight:bold;margin-bottom:6px;"></div>
+            <div id="shop-buy-price-${tipo}" style="font-size:10px;color:#aaa;margin-bottom:6px;"></div>
+            <button class="btn-buy" onclick="buyItem('${tipo}')">💰 PAGA E ACQUISTA</button>
+        </div>
+        <div id="shop-msg-${tipo}" style="font-size:10px;min-height:14px;margin-top:6px;"></div>`;
+
+    overlay.innerHTML = html;
+    overlay.classList.add('open');
+}
+
+function closeShop(tipo) {
+    document.getElementById(`shop-${tipo}`).classList.remove('open');
+    currentShop = null;
+}
+
+let shopSelectedItem = null;
+let shopSelectedType = null;
+
+function selectShopItem(idx, tipo) {
+    const item = SHOPS[tipo].armi[idx];
+    shopSelectedItem = item;
+    shopSelectedType = tipo;
+    const bar = document.getElementById(`shop-buy-bar-${tipo}`);
+    if (bar) bar.style.display = 'block';
+    const nameEl = document.getElementById(`shop-buy-name-${tipo}`);
+    if (nameEl) nameEl.textContent = item.nome;
+    const priceEl = document.getElementById(`shop-buy-price-${tipo}`);
+    if (priceEl) priceEl.textContent = `Prezzo: ${item.prezzo} Zecchini | Effetto: ${item.effetto}`;
+}
+
+function buyItem(tipo) {
+    if (!shopSelectedItem) return;
+    if (zecchini < shopSelectedItem.prezzo) {
+        showShopMsg(tipo, '❌ ZECCHINI INSUFFICIENTI!', false);
+        return;
+    }
+    zecchini -= shopSelectedItem.prezzo;
+    bagItems.push({ ...shopSelectedItem });
+    updateHUDTop();
+    renderBagMini();
+    showShopMsg(tipo, `✓ ACQUISTATO: ${shopSelectedItem.nome}`, true);
+    const bar = document.getElementById(`shop-buy-bar-${tipo}`);
+    if (bar) bar.style.display = 'none';
+    shopSelectedItem = null;
+}
+
+function showShopMsg(tipo, msg, ok) {
+    const el = document.getElementById(`shop-msg-${tipo}`);
+    if (el) { el.textContent = msg; el.style.color = ok ? '#7f7' : '#f77'; }
+    setTimeout(() => { if (el) el.textContent = ''; }, 3000);
+}
+
+function rarColor(r) {
+    return {normal:"#aaa",special:"#5599ff",rare:"#ddcc22",legend:"#44cc44",unique:"#ff4444"}[r] || '#fff';
+}
+
+// =============================================================
+// ★ DIALOGO SYSTEM
+// =============================================================
+function autoDialogo(pngKey, loc) {
+    const png = PNG_DIALOGHI[pngKey];
+    if (!png) return;
+
+    // Scegli ramo dialogo in base allo stato quest
+    let ramo = 'intro';
+    if (pngKey === 'Mistico') {
+        const q1 = getQuestMajor(1);
+        const q9 = getQuestMajor(9);
+        if (q9 && q9.stato === 'attiva') ramo = 'avvertimento_tradimento';
+        else if (q1 && q1.stato === 'completata') ramo = 'dopoM1';
+    }
+
+    const testo = png.dialoghi[ramo] || png.dialoghi.intro;
+    openDialog(png.nome, png.icona, testo, pngKey, ramo);
+}
+
+function openDialog(nome, icona, testo, pngKey, ramo) {
+    const box = document.getElementById('dialog-box');
+    const speaker = document.getElementById('dialog-speaker');
+    const textEl = document.getElementById('dialog-text');
+    const choices = document.getElementById('dialog-choices');
+
+    speaker.textContent = `${icona} ${nome}`;
+    textEl.textContent  = testo;
+
+    // Costruisci scelte in base al PNG e al ramo
+    choices.innerHTML = '';
+
+    const choicesMap = {
+        'Mistico-avvertimento_tradimento': [
+            { txt:'Perdono il Mistico', fn:'scegliMisticoP' },
+            { txt:'Uccido il Mistico',  fn:'scegliMisticoU' }
+        ],
+        'Strega-intro': [
+            { txt:'Accetto il patto della Strega', fn:'scegliStregaA' },
+            { txt:'Rifiuto — combatto',            fn:'scegliStregaR' }
+        ],
+        'ReTroll-intro': [
+            { txt:'Patto con il Re Troll', fn:'scegliTrollA' },
+            { txt:'Combatti per il Frammento', fn:'scegliTrollR' }
+        ],
+        'MercanteOmbra-intro': [
+            { txt:'Rifiuto il patto col sangue', fn:'scegliMercanteR' },
+            { txt:'Infiltro il palazzo', fn:'scegliMercanteI' }
+        ],
+        'PrincipessaElara-salvata': [
+            { txt:'Resto con Elara', fn:'scegliElaraS' },
+            { txt:'Continuo il viaggio', fn:'scegliElaraR' }
+        ],
+        'Valthor-intro': [
+            { txt:'Mi inginocchio — servo Valthor', fn:'scegliValthorS' },
+            { txt:'COMBATTI CON IL MARTELLO DEL DESTINO', fn:'scegliValthorC' }
+        ]
+    };
+
+    const key = `${pngKey}-${ramo}`;
+    const ch = choicesMap[key] || [{ txt:'Ascolta', fn:'closeDialog' }];
+    ch.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'dialog-choice';
+        btn.textContent = `▶ ${c.txt}`;
+        btn.onclick = () => { if (window[c.fn]) window[c.fn](); else closeDialog(); };
+        choices.appendChild(btn);
+    });
+
+    box.classList.add('open');
+}
+
+function closeDialog() {
+    document.getElementById('dialog-box').classList.remove('open');
+}
+
+// Scelte narrative
+function scegliMisticoP() {
+    closeDialog();
+    aggiungiAlleanza('Mistico Cieco di Gurth');
+    addFragmento(9);
+    destino += 2;
+    logLocal('> HAI PERDONATO IL MISTICO. +2 DESTINO. ALLEANZA OTTENUTA. FRAMMENTO 9 OTTENUTO.');
+    updateHUDTop();
+    completaQuestMajor(9);
+}
+function scegliMisticoU() {
+    closeDialog();
+    addFragmento(9);
+    destino -= 2;
+    logLocal('> HAI UCCISO IL MISTICO. -2 DESTINO. FRAMMENTO 9 OTTENUTO. ALCUNE PORTE RIMARRANNO CHIUSE.');
+    updateHUDTop();
+    completaQuestMajor(9);
+}
+
+function scegliStregaA() {
+    closeDialog();
+    aggiungiAlleanza('Strega delle Paludi');
+    addFragmento(3);
+    logLocal('> HAI STRETTO IL PATTO CON LA STREGA. ALLEANZA OTTENUTA. FRAMMENTO 3 OTTENUTO.');
+    completaQuestMajor(3);
+}
+function scegliStregaR() {
+    closeDialog();
+    addFragmento(3);
+    logLocal('> HAI SCELTO LA VIA DEL SANGUE. COMBATTIMENTO CON LA STREGA. FRAMMENTO 3 OTTENUTO.');
+    completaQuestMajor(3);
+}
+
+function scegliTrollA() {
+    closeDialog();
+    aggiungiAlleanza('Re dei Troll');
+    addFragmento(6);
+    logLocal('> PATTO COL RE DEI TROLL. ALLEANZA TROLL OTTENUTA. FRAMMENTO 6 OTTENUTO.');
+    completaQuestMajor(6);
+}
+function scegliTrollR() {
+    closeDialog();
+    addFragmento(6);
+    logLocal('> COMBATTIMENTO COL RE DEI TROLL. FRAMMENTO 6 OTTENUTO. I TROLL NON DIMENTICHERANNO.');
+    completaQuestMajor(6);
+}
+
+function scegliMercanteR() {
+    closeDialog();
+    logLocal('> HAI RIFIUTATO. IL MERCANTE DELL\'OMBRA TI METTE SULLA LISTA DEI MORTI.');
+    openDialog('Mercante dell\'Ombra','🎭','Errore fatale. Ora il tuo nome è sulla lista dei morti. Buona fortuna.','MercanteOmbra','rifiuto');
+}
+function scegliMercanteI() {
+    closeDialog();
+    addFragmento(7);
+    zecchini += 300;
+    logLocal('> INFILTRAZIONE RIUSCITA! FRAMMENTO 7 OTTENUTO. +300 ZECCHINI.');
+    updateHUDTop();
+    completaQuestMajor(7);
+}
+
+function scegliElaraS() {
+    closeDialog();
+    aggiungiAlleanza('Principessa Elara di Koppar');
+    logLocal('> HAI SCELTO DI RESTARE CON ELARA. ALLEANZA PRINCIPESSA OTTENUTA.');
+}
+function scegliElaraR() {
+    closeDialog();
+    logLocal('> CONTINUI IL VIAGGIO. ELARA TI GUARDA ANDARE VIA.');
+}
+
+function scegliValthorS() {
+    closeDialog();
+    showFinale('servo');
+}
+function scegliValthorC() {
+    closeDialog();
+    if (!frammenti.includes(12) && frammenti.length < 12) {
+        logLocal('> IL MARTELLO DEL DESTINO NON È STATO ANCORA FORGIATO! RACCOGLI TUTTI I 12 FRAMMENTI PRIMA.');
+        return;
+    }
+    // Combattimento finale
+    triggerBossFinale();
+}
+
+function triggerBossFinale() {
+    openEncounter({ nome:"Re Valthor il Gelido", hp:120, att:8, dan:12, tier:"Boss" });
+    // Dopo la vittoria → finale
+    const origEnd = endEncounter;
+    endEncounter = function(vittoria) {
+        document.getElementById('enc-overlay').classList.remove('open');
+        currentEnc = null;
+        if (vittoria) showFinale('eroe');
+    };
+    setTimeout(() => { endEncounter = origEnd; }, 30000);
+}
+
+// =============================================================
+// ★ ACTION BUTTONS per location
+// =============================================================
+function buildActionButtons(l) {
+    const btns = document.getElementById('loc-btns');
+    btns.innerHTML = '';
+
+    // Azioni generiche per tipo location
+    const azioni = [];
+
+    if (l.t === 'city' || l.t === 'village') {
+        azioni.push({ txt:'🍺 TAVERNA', fn:'azioneTaverna' });
+    }
+    if (l.t === 'camp' || l.t === 'village') {
+        azioni.push({ txt:'🔥 RIPOSO', fn:'azioneRiposo' });
+    }
+    if (l.t === 'dungeon') {
+        azioni.push({ txt:'⚔ ESPLORA', fn:'azioneEsplora' });
+    }
+
+    // Quest minori disponibili in questa location
+    const qminori = questMinorStato.filter(q =>
+        (q.bioma === l.n || q.bioma === l.biome || q.bioma === 'any') &&
+        q.stato === 'disponibile' &&
+        !questMinorCompletate.includes(q.id)
+    );
+    qminori.slice(0,2).forEach(q => {
+        azioni.push({ txt:`📌 ${q.nome.substring(0,16)}…`, fn:`avviaQuestMinore_${q.id}` });
+        window[`avviaQuestMinore_${q.id}`] = () => avviaQuestMinore(q.id);
+    });
+
+    // NPC della location
+    if (l.npcs && l.npcs.length > 0) {
+        l.npcs.forEach(npc => {
+            if (PNG_DIALOGHI[npc]) {
+                const n = PNG_DIALOGHI[npc];
+                azioni.push({ txt:`${n.icona} PARLA CON ${npc.substring(0,10).toUpperCase()}`, fn:`parla_${npc}` });
+                window[`parla_${npc}`] = () => autoDialogo(npc, l);
+            }
+        });
+    }
+
+    azioni.slice(0,6).forEach(a => {
+        const b = document.createElement('button');
+        b.className = 'btn-action';
+        b.textContent = a.txt;
+        b.onclick = () => { if (window[a.fn]) window[a.fn](); };
+        btns.appendChild(b);
+    });
+
+    // Pulsanti quest maggiore della location
+    if (l.questMajor) {
+        const qm = getQuestMajor(l.questMajor);
+        if (qm && qm.stato === 'attiva') {
+            const bq = document.createElement('button');
+            bq.className = 'btn-action';
+            bq.style.cssText = 'background:#cc6600;border-color:var(--c64-gold);font-size:10px;';
+            bq.textContent = `🗡 QUEST: ${qm.nome.substring(0,22).toUpperCase()}`;
+            bq.onclick = () => iniziaQuestMajor(l.questMajor);
+            btns.appendChild(bq);
+        }
+    }
+}
+
+function azioneTaverna() {
+    logLocal('> TAVERNA: voci, birra amara e leggende di Valthor il Gelido. Recuperi 5 HP.');
+}
+function azioneRiposo() {
+    logLocal('> RIPOSO: Ti svegli riposato. Il ghiaccio non scende stanotte. Recuperi 10 HP.');
+}
+function azioneEsplora() {
+    logLocal('> ESPLORI IL DUNGEON. PERICOLO! Potrebbe esserci un incontro...');
+    if (Math.random() < 0.6) triggerRandomEncounter(LOCATIONS[currentIdx].biome);
+}
+
+// =============================================================
+// ★ QUEST MAGGIORI – AVVIA E COMPLETA
+// =============================================================
+function iniziaQuestMajor(id) {
+    const q = getQuestMajor(id);
+    if (!q) return;
+
+    const scenari = {
+        1: "Il Pozzo Sacro di Venarium ribolle di energia spettrale. Quattro Cimmeri Rinnegati si avventano su di te. Poi emerge lo Spettro di Acheron...",
+        2: "Il Mistico ti rivela che il capo clan ha venduto l'anima a Valthor. Il Gigante dei Ghiacci blocca il sentiero...",
+        3: "La Strega ti fissa attraverso la nebbia. Il Serpente delle Paludi avvolge l'albero del Frammento...",
+        4: "La lava canta. Il Golem e il Djinn si fronteggiano. Devi scegliere chi distruggere per primo.",
+        5: "Elara è una statua di ghiaccio nelle miniere profonde. Golem e cultisti la sorvegliano.",
+        6: "Il Re dei Troll emerge dagli alberi con il Frammento 6 nella zanna.",
+        7: "Il Mercante dell'Ombra ti accoglie nel suo palazzo. Qualcosa non va...",
+        8: "Gli Spettri di Acheron danzano tra le rovine di Khorshemish. Devono sfidarti.",
+        9: "Il Mistico cade in ginocchio. \"Sono il figlio di Valthor\". Il Frammento brilla nella sua mano.",
+        10:"La Forgia Perduta si apre. Nove Frammenti aspettano di essere uniti. La lava urla.",
+        11:"La Montagna Luminosa. Ogni passo porta un ricordo. Ogni ombra è un PNG del passato.",
+        12:"La Cima. Re Valthor il Gelido ti fissa dall'alto del suo trono di ghiaccio eterno."
+    };
+
+    logLocal(`> QUEST MAGGIORE ${id} INIZIATA: "${q.nome}"\n> ${scenari[id] || q.desc}`);
+
+    // Trigger combattimento o dialogo
+    const encTrigger = [1,3,4,5,6,9,10,12];
+    const dialogTrigger = [2,7,8,11];
+
+    if (encTrigger.includes(id)) {
+        const bosses = {
+            1:{ nome:"Spettro di Acheron",   hp:40, att:4,dan:6, tier:"Boss" },
+            3:{ nome:"Serpente delle Paludi", hp:50, att:4,dan:5, tier:"Boss" },
+            4:{ nome:"Golem di Magma",        hp:70, att:5,dan:8, tier:"Boss" },
+            5:{ nome:"Golem di Ghiaccio",     hp:55, att:4,dan:6, tier:"Boss" },
+            6:{ nome:"Troll Reale di Ymir",   hp:80, att:5,dan:10,tier:"Boss" },
+            9:{ nome:"Mistico Corrotto",      hp:60, att:6,dan:7, tier:"Boss" },
+            10:{ nome:"Golem di Magma II",    hp:90, att:6,dan:9, tier:"Boss" },
+            12:{ nome:"Re Valthor il Gelido", hp:120,att:8,dan:12,tier:"Boss" }
+        };
+        if (bosses[id]) {
+            setTimeout(() => openEncounter(bosses[id]), 800);
+            const questId = id;
+            const origEnd = endEncounter;
+            endEncounter = function(vittoria) {
+                currentEnc = null;
+                if (vittoria) {
+                    const loot = Math.floor(Math.random() * 50) + 30;
+                    zecchini += loot;
+                    updateHUDTop();
+                    completaQuestMajor(questId);
+                    if (questId === 12) showFinale('eroe');
+                    const overlay = document.getElementById('enc-overlay');
+                    overlay.innerHTML = `
+                        <div style="text-align:center;padding:20px;">
+                            <div style="font-size:1.8em;color:#ffd700;margin-bottom:8px;">⚔ BOSS SCONFITTO!</div>
+                            <div style="font-size:11px;color:#ccc;background:#0a0a0a;border:1px solid #444;padding:10px;margin-bottom:14px;line-height:1.9;">
+                                <span style="color:#ffd700">+${loot} Zecchini</span><br>
+                                <span style="color:#44cc44">Quest completata!</span>
+                            </div>
+                            <button onclick="document.getElementById('enc-overlay').classList.remove('open')" style="background:#1a4a1a;color:#fff;border:2px solid #44cc44;padding:10px 20px;cursor:pointer;font-family:'Courier New';font-size:12px;font-weight:bold;text-transform:uppercase;width:100%;">✓ CONTINUA</button>
+                        </div>`;
+                } else {
+                    document.getElementById('enc-overlay').classList.remove('open');
+                }
+                endEncounter = origEnd;
+            };
+        }
+    } else if (dialogTrigger.includes(id)) {
+        const l = LOCATIONS[currentIdx];
+        if (l.npcs && l.npcs.length > 0) autoDialogo(l.npcs[0], l);
+    }
+}
+
+function completaQuestMajor(id) {
+    const q = getQuestMajor(id);
+    if (!q) return;
+    q.stato = 'completata';
+
+    // Sblocca prossima quest
+    const next = getQuestMajor(id + 1);
+    if (next) next.stato = 'attiva';
+
+    // Sblocca locazioni
+    if (q.sblocca) {
+        q.sblocca.forEach(nomeL => {
+            const idx = LOCATIONS.findIndex(l => l.n.toLowerCase() === nomeL.toLowerCase());
+            if (idx >= 0) LOCATIONS[idx].locked = false;
+        });
+    }
+
+    zecchini += 50;
+    updateHUDTop();
+    renderAllSidebars();
+    buildFragPips();
+    renderMarkers();
+    fillSelect();
+
+    logLocal(`> ✓ QUEST MAGGIORE ${id} COMPLETATA! "${q.nome}"\n> RICOMPENSA: ${q.ricompensa}`);
+}
+
+// =============================================================
+// ★ QUEST MINORI
+// =============================================================
+function avviaQuestMinore(id) {
+    const q = questMinorStato.find(q => q.id === id);
+    if (!q) return;
+
+    const box = document.getElementById('dialog-box');
+    const speaker = document.getElementById('dialog-speaker');
+    const textEl = document.getElementById('dialog-text');
+    const choices = document.getElementById('dialog-choices');
+
+    speaker.textContent = `📌 ${q.npc}`;
+    textEl.textContent  = q.intro;
+    choices.innerHTML   = '';
+
+    const b1 = document.createElement('button');
+    b1.className = 'dialog-choice';
+    b1.textContent = `▶ ${q.scelta1}`;
+    b1.onclick = () => completaQuestMinore(id, 1);
+    choices.appendChild(b1);
+
+    const b2 = document.createElement('button');
+    b2.className = 'dialog-choice';
+    b2.textContent = `▶ ${q.scelta2}`;
+    b2.onclick = () => completaQuestMinore(id, 2);
+    choices.appendChild(b2);
+
+    box.classList.add('open');
+}
+
+function completaQuestMinore(id, scelta) {
+    const q = questMinorStato.find(q => q.id === id);
+    if (!q) return;
+    closeDialog();
+
+    const chiusura = scelta === 1 ? q.chiusura1 : q.chiusura2;
+    const ricomp   = scelta === 1 ? q.ris1 : q.ris2;
+
+    logLocal(`> QUEST MINORE "${q.nome}" — SCELTA ${scelta}\n> ${chiusura}\n> RICOMPENSA: ${ricomp}`);
+
+    // Applica ricompense automatiche
+    if (scelta === 1) {
+        if (q.ris1.includes('Destino')) { destino++; }
+        const zecMatch = q.ris1.match(/(\d+)\s*Zec/);
+        if (zecMatch) zecchini += parseInt(zecMatch[1]);
+        if (q.ris1.includes('Mantello')) bagItems.push({ nome:'Mantello di Scaglie Viventi', rar:'rare', effetto:'RD+4 ACI+8' });
+        if (q.ris1.includes('Ascia dei Troll')) bagItems.push({ nome:'Ascia dei Troll', rar:'legend', effetto:'DAN+8 Freddo+3' });
+        if (q.ris1.includes('Arco Hyrkaniano')) bagItems.push({ nome:'Arco Hyrkaniano Leggendario', rar:'legend', effetto:'ATT+4 DAN+8' });
+    } else {
+        if (q.ris2.includes('perdi') && q.ris2.includes('Destino')) destino = Math.max(0, destino-1);
+    }
+
+    questMinorCompletate.push(id);
+    updateHUDTop();
+    renderBagMini();
+    renderAllSidebars();
+}
+
+// =============================================================
+// ★ FRAMMENTI
+// =============================================================
+function addFragmento(n) {
+    if (!frammenti.includes(n)) {
+        frammenti.push(n);
+        frammenti.sort((a,b) => a-b);
+        buildFragPips();
+        logLocal(`> ❄ FRAMMENTO ${n} DELL'URLO OTTENUTO! (${frammenti.length}/12)`);
+        if (frammenti.length >= 12) {
+            logLocal('> ✦ TUTTI I FRAMMENTI RACCOLTI! FORGIA IL MARTELLO DEL DESTINO!');
+        }
+        renderAllSidebars();
+    }
+}
+
+// =============================================================
+// ★ ALLEANZE
+// =============================================================
+function aggiungiAlleanza(nome) {
+    if (!alleanze.includes(nome)) {
+        alleanze.push(nome);
+        renderAllSidebars();
+    }
+}
+
+// =============================================================
+// ★ INVENTARIO / ZAINO RAPIDO
+// =============================================================
+function renderBagMini() {
+    const area = document.getElementById('bag-area-mini');
+    area.innerHTML = '';
+    if (bagItems.length === 0) {
+        area.innerHTML = '<span style="color:#333;font-size:9px;">VUOTO</span>';
+        return;
+    }
+    bagItems.forEach((item, idx) => {
+        const sp = document.createElement('span');
+        sp.className = `bag-item rar-${item.rar || 'normal'}`;
+        sp.textContent = item.nome;
+        sp.title = item.effetto || '';
+        sp.onclick = () => useBagItemMini(idx);
+        area.appendChild(sp);
+    });
+}
+
+function useBagItemMini(idx) {
+    const item = bagItems[idx];
+    logLocal(`> USO: ${item.nome} — ${item.effetto || 'Nessun effetto'}`);
+    bagItems.splice(idx, 1);
+    renderBagMini();
+}
+
+// =============================================================
+// ★ SIDEBAR RENDERING
+// =============================================================
+function renderAllSidebars() {
+    renderQuestMajorLog();
+    renderQuestMinorLog();
+    renderBagMini();
+    renderAlleanze();
+}
+
+function renderQuestMajorLog() {
+    const el = document.getElementById('quest-major-log');
+    if (!el) return;
+    el.innerHTML = questMajorStato.map(q => {
+        let cls = 'quest-entry major ';
+        cls += q.stato === 'completata' ? 'done' : q.stato === 'attiva' ? 'active' : 'locked';
+        const icon = q.stato === 'completata' ? '✓' : q.stato === 'attiva' ? '▶' : '○';
+        return `<div class="${cls}">${icon} M${q.id}: ${q.nome.substring(0,24)}</div>`;
+    }).join('');
+}
+
+function renderQuestMinorLog() {
+    const el = document.getElementById('quest-minor-log');
+    if (!el) return;
+    const disp = questMinorStato.filter(q => !questMinorCompletate.includes(q.id)).slice(0,6);
+    el.innerHTML = disp.map(q => {
+        const done = questMinorCompletate.includes(q.id);
+        return `<div style="color:${done?'#44cc44':'#aaa'}">${done?'✓':'○'} ${q.nome}</div>`;
+    }).join('') || '<div style="color:#444">Nessuna disponibile</div>';
+}
+
+function renderAlleanze() {
+    const el = document.getElementById('alleanze-log');
+    if (!el) return;
+    el.innerHTML = alleanze.length === 0
+        ? '<span style="color:#444">NESSUNA ALLEANZA ANCORA.</span>'
+        : alleanze.map(a => `<div>✦ ${a}</div>`).join('');
+}
+
+// =============================================================
+// ★ LOG HELPERS
+// =============================================================
+function logMap(txt) {
+    const el = document.getElementById('log-map');
+    el.innerHTML += `<br>${txt}`;
+    el.scrollTop = el.scrollHeight;
+}
+
+function logLocal(txt) {
+    const el = document.getElementById('log-local');
+    el.innerHTML += `<br>${txt}`;
+    el.scrollTop = el.scrollHeight;
+}
+
+// =============================================================
+// ★ TORNA ALLA MAPPA
+// =============================================================
+function backToMap() {
+    document.getElementById('view-location').classList.remove('active-view');
+    document.getElementById('view-map').classList.add('active-view');
+    ['fabbro','mistico','maga'].forEach(t => {
+        const ov = document.getElementById(`shop-${t}`);
+        if (ov) ov.classList.remove('open');
+    });
+    document.getElementById('enc-overlay').classList.remove('open');
+    document.getElementById('travel-overlay').classList.remove('open');
+    travelSteps = [];
+    travelInProgress = false;
+    currentEnc  = null;
+    init();
+}
+
+// =============================================================
+// ★ FINALI
+// =============================================================
+function showFinale(tipo) {
+    let titolo, testo;
+    const alEla = alleanze.includes('Principessa Elara di Koppar');
+    const alMis = alleanze.includes('Mistico Cieco di Gurth');
+    const alTro = alleanze.includes('Re dei Troll');
+    const alStr = alleanze.includes('Strega delle Paludi');
+
+    if (tipo === 'eroe') {
+        titolo = '❄ RE DI CIMMERIA ❄';
+        testo = `Hai spezzato le catene di Valthor. I Frammenti dell'Urlo di Ymir si uniscono in una luce accecante.
+        Cimmeria respira di nuovo.
+        ${alEla ? 'La Principessa Elara ti attende al tuo fianco.' : ''}
+        ${alMis ? 'Il Mistico perdonato guida il tuo consiglio.' : ''}
+        ${alTro ? 'I Troll del Re custodiscono i confini.' : ''}
+        ${alStr ? 'La Strega delle Paludi protegge il tuo regno con la magia.' : ''}
+        Ymir sorride. Crom tace. Il tuo nome vivrà nei secoli.`;
+    } else if (tipo === 'servo') {
+        titolo = '💀 SERVO DEL GHIACCIO 💀';
+        testo = 'Hai scelto di servire Valthor. Cimmeria congela per sempre. Il tuo nome diventerà una leggenda oscura — il campione del Re di Ghiaccio. Fine.';
+    } else {
+        titolo = '🔥 IL DISTRUTTORE 🔥';
+        testo = 'Hai distrutto Valthor e con lui Cimmeria. Le terre bruciano nel ghiaccio eterno. Sei diventato il nuovo Dio della Guerra. Vittoria assoluta. Solitudine assoluta.';
+    }
+
+    document.body.innerHTML += `
+        <div id="finale-screen" style="position:fixed;inset:0;background:#000;z-index:999;
+            display:flex;align-items:center;justify-content:center;flex-direction:column;padding:40px;">
+            <div style="font-family:'Impact';font-size:2em;color:#ffd700;letter-spacing:4px;margin-bottom:20px;">${titolo}</div>
+            <div style="color:#ccc;font-size:0.9em;max-width:500px;text-align:center;line-height:2;white-space:pre-line;">${testo}</div>
+            <div style="margin-top:30px;font-size:12px;color:#555;">FRAMMENTI RACCOLTI: ${frammenti.length}/12 | ZECCHINI: ${zecchini} | DESTINO: ${destino}</div>
+            <button onclick="document.getElementById('finale-screen').remove()" style="margin-top:20px;background:#cc3333;color:#fff;border:none;padding:10px 30px;cursor:pointer;font-family:'Courier New';font-size:12px;">↩ NUOVA PARTITA</button>
+        </div>`;
+}
+
+// =============================================================
+// ★ AVVIO
+// =============================================================
+window.onload = init;
+window.onresize = updatePathUI;
+</script>
+</body>
+</html>

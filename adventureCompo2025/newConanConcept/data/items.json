@@ -1,0 +1,150 @@
+{
+  "Testa": [
+    { "id":"e_none",   "nome":"Nessuno",                "rar":"normal",  "slot":"Testa",     "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"e1",       "nome":"Cuffia di Cuoio",         "rar":"normal",  "slot":"Testa",     "attr":{},               "comb":{"rd":1},      "res":{}, "lore":"Rozza protezione di pelle conciata." },
+    { "id":"e2",       "nome":"Elmo di Ferro",           "rar":"normal",  "slot":"Testa",     "attr":{},               "comb":{"def":1},     "res":{}, "lore":"Elmetto di fattura cimmera." },
+    { "id":"e3",       "nome":"Maschera Stigiana",       "rar":"special", "slot":"Testa",     "attr":{"INT":1},        "comb":{},            "res":{"magia":2}, "lore":"Bronzo dorato cesellato con i simboli di Set." },
+    { "id":"e4",       "nome":"Elmo del Grande Orso",    "rar":"rare",    "slot":"Testa",     "attr":{"FOR":1,"COS":1},"comb":{},            "res":{"freddo":4}, "lore":"Forgiato dalle tribu' nordheimer." },
+    { "id":"e5",       "nome":"Corona di Xaltotun",      "rar":"legend",  "slot":"Testa",     "attr":{"INT":2,"FRT":1},"comb":{"rd":1},      "res":{"magia":6}, "dio":"set",  "lore":"Nessun incanto puo' penetrare chi la porta. [SET]" },
+    { "id":"e_unique1","nome":"Elmo della Tempesta Nera","rar":"unique",  "slot":"Testa",     "attr":{"FOR":1,"INT":1,"DES":1},"comb":{"att":1,"def":1},"res":{"fulmine":10,"magia":4}, "dio":"ymir", "lore":"Rifiuta ogni maledizione. [YMIR]" }
+  ],
+  "Collo": [
+    { "id":"a_none",   "nome":"Nessuno",                 "rar":"normal",  "slot":"Collo",     "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"a1",       "nome":"Dente di Lupo",            "rar":"normal",  "slot":"Collo",     "attr":{},               "comb":{"att":1},     "res":{}, "lore":"Un dente di lupo-mannaro." },
+    { "id":"a2",       "nome":"Amuleto di Giada",         "rar":"special", "slot":"Collo",     "attr":{"RES":1},        "comb":{},            "res":{"veleno":2}, "lore":"Giada verde levigata dai sacerdoti." },
+    { "id":"a3",       "nome":"Occhio del Serpente",      "rar":"rare",    "slot":"Collo",     "attr":{"INT":1},        "comb":{"ini":2},     "res":{"magia":4}, "lore":"Dona una lucidita' soprannaturale." },
+    { "id":"a4",       "nome":"Cuore di Ahriman",         "rar":"legend",  "slot":"Collo",     "attr":{"FRT":3},        "comb":{},            "res":{"magia":10}, "dio":"mitra", "lore":"Assorbe ogni attacco magico come una spugna. [MITRA]" },
+    { "id":"a_unique1","nome":"Occhio di Ibis",           "rar":"unique",  "slot":"Collo",     "attr":{"INT":2,"FRT":2},"comb":{"ini":3},     "res":{"magia":8,"incanto":6}, "dio":"mitra", "lore":"Rivela l'invisibile e svela le menzogne. [MITRA]" }
+  ],
+  "Bracciali": [
+    { "id":"b_none",   "nome":"Nessuno",                 "rar":"normal",  "slot":"Bracciali", "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"b1",       "nome":"Polsini di Cuoio",         "rar":"normal",  "slot":"Bracciali", "attr":{"FOR":1},        "comb":{},            "res":{}, "lore":"Semplici rinforzi di cuoio." },
+    { "id":"b2",       "nome":"Bracciali d'Acciaio",      "rar":"special", "slot":"Bracciali", "attr":{},               "comb":{"def":1,"rd":1},"res":{}, "lore":"Acciaio temprato di Aquilonia." },
+    { "id":"b3",       "nome":"Bracciali del Re",         "rar":"rare",    "slot":"Bracciali", "attr":{"FOR":1,"DES":1},"comb":{"att":1},     "res":{}, "lore":"Simbolo di potere e precisione." },
+    { "id":"b4",       "nome":"Morsa di Crom",            "rar":"legend",  "slot":"Bracciali", "attr":{"FOR":2},        "comb":{"dan":2},     "res":{}, "dio":"crom", "lore":"Chi li indossa non lascia la presa. [CROM]" },
+    { "id":"b_unique1","nome":"Catene Spezzate",          "rar":"unique",  "slot":"Bracciali", "attr":{"FOR":2,"RES":2},"comb":{"dan":3,"def":-1},"res":{"acido":4}, "lore":"Il metallo porta ira e resistenza." }
+  ],
+  "Cintura": [
+    { "id":"c_none",   "nome":"Nessuna",                 "rar":"normal",  "slot":"Cintura",   "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"c1",       "nome":"Cintura di Corda",         "rar":"normal",  "slot":"Cintura",   "attr":{"COS":1},        "comb":{},            "res":{}, "lore":"Leggera e robusta." },
+    { "id":"c2",       "nome":"Cintura di Cuoio",         "rar":"special", "slot":"Cintura",   "attr":{"RES":1},        "comb":{},            "res":{}, "lore":"Cuoio di toro nero Kushita." },
+    { "id":"c3",       "nome":"Fascia dello Sciamano",    "rar":"rare",    "slot":"Cintura",   "attr":{"INT":1,"FRT":1},"comb":{},            "res":{"magia":3}, "lore":"Amplifica i rituali spirituali." },
+    { "id":"c_unique1","nome":"Cintura delle Sabbie",     "rar":"unique",  "slot":"Cintura",   "attr":{"DES":2,"RES":1},"comb":{"ini":2},     "res":{"fuoco":5,"acido":3}, "lore":"Rende leggeri come il vento." }
+  ],
+  "AnelloDX": [
+    { "id":"an_none",  "nome":"Vuoto",                   "rar":"normal",  "slot":"AnelloDX",  "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"an1",      "nome":"Anello di Bronzo",         "rar":"normal",  "slot":"AnelloDX",  "attr":{},               "comb":{"att":1},     "res":{}, "lore":"Portato per buona sorte." },
+    { "id":"an2",      "nome":"Sigillo del Ladro",        "rar":"special", "slot":"AnelloDX",  "attr":{"DES":1},        "comb":{"ini":1},     "res":{}, "lore":"Apre porte chiuse." },
+    { "id":"an3",      "nome":"Anello d'Argento di Set",  "rar":"rare",    "slot":"AnelloDX",  "attr":{"INT":1},        "comb":{},            "res":{"veleno":4,"magia":2}, "lore":"Simbolo di potere oscuro." },
+    { "id":"an4",      "nome":"Anello Nero di Thoth-Amon","rar":"legend",  "slot":"AnelloDX",  "attr":{"INT":2},        "comb":{"dan":1},     "res":{"magia":8}, "dio":"set", "lore":"Chi lo indossa comanda i serpenti. [SET]" },
+    { "id":"an_unique1","nome":"Anello del Re Immortale", "rar":"unique",  "slot":"AnelloDX",  "attr":{"FRT":3,"INT":1},"comb":{"def":2},     "res":{"magia":6,"incanto":8}, "lore":"Protegge dalla morte certa." }
+  ],
+  "Stivali": [
+    { "id":"s_none",   "nome":"Nessuno",                 "rar":"normal",  "slot":"Stivali",   "attr":{},               "comb":{},            "res":{}, "lore":"" },
+    { "id":"s1",       "nome":"Stivali Leggeri",          "rar":"normal",  "slot":"Stivali",   "attr":{"DES":1},        "comb":{},            "res":{}, "lore":"Silenziosi come passi su neve." },
+    { "id":"s2",       "nome":"Stivali di Ferro",         "rar":"special", "slot":"Stivali",   "attr":{},               "comb":{"rd":1},      "res":{}, "lore":"Un calcio porta il peso di una mazza." },
+    { "id":"s3",       "nome":"Passo del Ghepardo",       "rar":"rare",    "slot":"Stivali",   "attr":{"DES":2},        "comb":{"ini":2},     "res":{}, "lore":"Il portatore si muove come il felino." },
+    { "id":"s_unique1","nome":"Sandali di Set",           "rar":"unique",  "slot":"Stivali",   "attr":{"DES":2,"INT":1},"comb":{"ini":3,"att":1},"res":{"veleno":6}, "lore":"Grazia e velocita' di serpente." }
+  ],
+  "Torso": [
+    { "id":"arm_none", "nome":"Nessuna",                 "rar":"normal",  "slot":"Torso",     "attr":{},               "comb":{"rd":0,"ini":0},"res":{}, "lore":"" },
+    { "id":"arm1",     "nome":"Pelli di Lupo",            "rar":"normal",  "slot":"Torso",     "attr":{},               "comb":{"rd":1,"ini":-1},"res":{}, "lore":"Calda e resistente." },
+    { "id":"arm2",     "nome":"Cuoio di Aquilonia",       "rar":"normal",  "slot":"Torso",     "attr":{},               "comb":{"rd":2,"ini":-1},"res":{}, "lore":"Armatura di cuoio indurito." },
+    { "id":"arm3",     "nome":"Scaglie di Bronzo",        "rar":"normal",  "slot":"Torso",     "attr":{},               "comb":{"rd":3,"ini":-2},"res":{}, "lore":"Squame di bronzo sovrapposte." },
+    { "id":"arm4",     "nome":"Piastre Cimmere",          "rar":"normal",  "slot":"Torso",     "attr":{},               "comb":{"rd":5,"ini":-4},"res":{}, "lore":"Ferro scuro dei fabbri cimmeri." },
+    { "id":"arm5",     "nome":"Seta Nera Stigiana",       "rar":"special", "slot":"Torso",     "attr":{},               "comb":{"rd":2,"ini":1}, "res":{"magia":2}, "lore":"Fili impregnati di protezione magica." },
+    { "id":"arm6",     "nome":"Cotta di Maglia Nordica",  "rar":"rare",    "slot":"Torso",     "attr":{"RES":1},        "comb":{"rd":6,"ini":-2},"res":{"freddo":2}, "lore":"Acciaio rinforzato con ossa di drago bianco." },
+    { "id":"arm7",     "nome":"Corazza d'Ossa di Drago",  "rar":"legend",  "slot":"Torso",     "attr":{"COS":1},        "comb":{"rd":8,"ini":-1},"res":{"fuoco":4,"freddo":2}, "lore":"Resistenza soprannaturale." },
+    { "id":"arm_unique1","nome":"Pelle di Dragone Nero",  "rar":"unique",  "slot":"Torso",     "attr":{"COS":2,"RES":2},"comb":{"rd":10,"ini":0},"res":{"fuoco":8,"magia":5}, "lore":"Immunita' al fuoco." }
+  ],
+  "Scudo": [
+    { "id":"sc_none",  "nome":"Nessuno",                 "rar":"normal",  "slot":"Scudo",     "attr":{},               "comb":{"def":0,"att":0},"res":{}, "lore":"" },
+    { "id":"sc1",      "nome":"Scudo Rotondo di Legno",   "rar":"normal",  "slot":"Scudo",     "attr":{},               "comb":{"def":1,"att":0},"res":{}, "lore":"Economico e affidabile." },
+    { "id":"sc2",      "nome":"Scudo Rinforzato",         "rar":"normal",  "slot":"Scudo",     "attr":{},               "comb":{"def":2,"att":-1},"res":{}, "lore":"Pesante ma impenetrabile." },
+    { "id":"sc3",      "nome":"Egida di Mitra",           "rar":"rare",    "slot":"Scudo",     "attr":{"FRT":1},        "comb":{"def":3,"att":0},"res":{"magia":3}, "lore":"Respinge i colpi magici come pioggia." },
+    { "id":"sc4",      "nome":"Scudo del Leone Aquiloniano","rar":"legend","slot":"Scudo",     "attr":{"INT":1,"FRT":1},"comb":{"def":4,"att":-1},"res":{"fuoco":2,"magia":2}, "lore":"Chi lo porta sente la responsabilita' del trono." },
+    { "id":"sc_unique1","nome":"Vortice di Kull",         "rar":"unique",  "slot":"Scudo",     "attr":{"FRT":2,"RES":1},"comb":{"def":5,"att":1},"res":{"magia":6,"incanto":4}, "lore":"Devia ogni attacco." }
+  ],
+  "Arma": [
+    { "id":"arma_none","nome":"Nessuna",                  "rar":"normal",  "slot":"Arma",      "attr":{},               "comb":{"att":0,"dan":0,"def":0},"res":{}, "elemDan":{}, "lore":"" },
+    { "id":"w1",       "nome":"Spada Corta",               "rar":"normal",  "slot":"Arma",      "attr":{},               "comb":{"att":1,"dan":3,"def":1},"res":{}, "elemDan":{}, "lore":"Facile da portare." },
+    { "id":"w2",       "nome":"Spada Lunga",               "rar":"normal",  "slot":"Arma",      "attr":{},               "comb":{"att":1,"dan":4,"def":0},"res":{}, "elemDan":{}, "lore":"La lama di un soldato." },
+    { "id":"w3",       "nome":"Lama di Akbitanan",         "rar":"special", "slot":"Arma",      "attr":{},               "comb":{"att":2,"dan":5,"def":1},"res":{}, "elemDan":{}, "lore":"Acciaio grigio-blu di qualita' ineguagliabile." },
+    { "id":"w3b",      "nome":"Lama Ardente",              "rar":"special", "slot":"Arma",      "attr":{},               "comb":{"att":2,"dan":4,"def":0},"res":{}, "elemDan":{"fuoco":2}, "lore":"La lama irradia calore. Danno Fuoco +2." },
+    { "id":"w4",       "nome":"Daga del Culto di Set",     "rar":"rare",    "slot":"Arma",      "attr":{"INT":1},        "comb":{"att":3,"dan":4,"def":2},"res":{}, "elemDan":{"veleno":2}, "lore":"Avvelenata. Danno veleno +2." },
+    { "id":"w5",       "nome":"Lama del Fato di Crom",     "rar":"legend",  "slot":"Arma",      "attr":{"FOR":1},        "comb":{"att":3,"dan":12,"def":-1},"res":{}, "elemDan":{}, "dio":"crom", "lore":"Spada di ferro nero trovata nella cripta di Ben Morgh. [CROM]" },
+    { "id":"w6",       "nome":"Spada della Fenice",        "rar":"legend",  "slot":"Arma",      "attr":{"FRT":1},        "comb":{"att":4,"dan":10,"def":2},"res":{}, "elemDan":{"fuoco":3}, "lore":"Forgiata nel fuoco. Danno Fuoco +3." },
+    { "id":"w_unique1","nome":"Lama di Conan",             "rar":"unique",  "slot":"Arma",      "attr":{"FOR":2,"DES":1},"comb":{"att":5,"dan":14,"def":2},"res":{"magia":4}, "elemDan":{}, "lore":"Taglia il destino stesso." },
+    { "id":"w_unique2","nome":"Falce di Nergal",           "rar":"unique",  "slot":"Arma",      "attr":{"INT":2,"FRT":-1},"comb":{"att":4,"dan":11,"def":-1},"res":{}, "elemDan":{"incanto":4}, "lore":"Colpisce l'anima. Danno Incanto +4." }
+  ],
+  "Arma2M": [
+    { "id":"a2m_none", "nome":"Nessuna",                  "rar":"normal",  "slot":"Arma2M",    "attr":{},               "comb":{"att":0,"dan":0},"res":{}, "elemDan":{}, "lore":"" },
+    { "id":"a2m1",     "nome":"Spadone Barbarico",         "rar":"normal",  "slot":"Arma2M",    "attr":{},               "comb":{"att":-1,"dan":8},"res":{}, "elemDan":{}, "lore":"Lama grezza di ferro cimmero." },
+    { "id":"a2m2",     "nome":"Ascia Bipenne",             "rar":"normal",  "slot":"Arma2M",    "attr":{},               "comb":{"att":-1,"dan":9,"def":-2},"res":{}, "elemDan":{}, "lore":"Piu' adatta a spaccare porte che a deflettere colpi." },
+    { "id":"a2m3",     "nome":"Lancia Lunga",              "rar":"normal",  "slot":"Arma2M",    "attr":{},               "comb":{"att":1,"dan":5,"def":2},"res":{}, "elemDan":{}, "lore":"Il bastone d'asta dei guerrieri tribali." },
+    { "id":"a2m4",     "nome":"Ascia dei Nordheim",        "rar":"special", "slot":"Arma2M",    "attr":{},               "comb":{"att":1,"dan":6,"def":0},"res":{}, "elemDan":{"freddo":1}, "lore":"Incisa con rune. Danno Freddo +1." },
+    { "id":"a2m4b",    "nome":"Ascia Infuocata",           "rar":"special", "slot":"Arma2M",    "attr":{},               "comb":{"att":0,"dan":7,"def":-1},"res":{}, "elemDan":{"fuoco":2}, "lore":"Forgiata con minerale vulcanico. Danno Fuoco +2." },
+    { "id":"a2m5",     "nome":"Spada Atlantea Antica",     "rar":"rare",    "slot":"Arma2M",    "attr":{"INT":1},        "comb":{"att":2,"dan":8,"def":0},"res":{}, "elemDan":{"magia":2}, "lore":"Il metallo vibra. Danno Magia +2." },
+    { "id":"a2m6",     "nome":"Maglio di Ymir",            "rar":"legend",  "slot":"Arma2M",    "attr":{"FOR":2,"COS":1},"comb":{"att":0,"dan":15,"def":-2},"res":{}, "elemDan":{"freddo":4}, "dio":"ymir", "lore":"Ogni colpo porta tempesta. Danno Freddo +4. [YMIR]" },
+    { "id":"a2m_unique1","nome":"Alabarda del Drago Rosso","rar":"unique",  "slot":"Arma2M",    "attr":{"FOR":2,"DES":1},"comb":{"att":2,"dan":13,"def":1},"res":{}, "elemDan":{"fuoco":5}, "lore":"Brucia all'impatto. Danno Fuoco +5." }
+  ],
+  "Arco": [
+    { "id":"arc_none", "nome":"Nessuno",                  "rar":"normal",  "slot":"Arco",      "attr":{},               "comb":{"att":0,"dan":0},"res":{}, "elemDan":{}, "lore":"" },
+    { "id":"arc1",     "nome":"Arco Corto",                "rar":"normal",  "slot":"Arco",      "attr":{},               "comb":{"att":1,"dan":2},"res":{}, "elemDan":{}, "lore":"Adatto a distanze brevi." },
+    { "id":"arc2",     "nome":"Arco Lungo Shemita",        "rar":"normal",  "slot":"Arco",      "attr":{},               "comb":{"att":1,"dan":4},"res":{}, "elemDan":{}, "lore":"I migliori del mondo conosciuto." },
+    { "id":"arc3",     "nome":"Arco del Vento",            "rar":"special", "slot":"Arco",      "attr":{"DES":1},        "comb":{"att":2,"dan":4},"res":{}, "elemDan":{}, "lore":"Non perde mai la mira." },
+    { "id":"arc4",     "nome":"Arco di Corno di Drago",    "rar":"rare",    "slot":"Arco",      "attr":{"DES":1,"FOR":1},"comb":{"att":3,"dan":6},"res":{}, "elemDan":{}, "lore":"Le frecce volano dritte anche controvento." },
+    { "id":"arc_unique1","nome":"Arco della Stella Cadente","rar":"unique", "slot":"Arco",      "attr":{"DES":3},        "comb":{"att":4,"dan":8,"ini":2},"res":{}, "elemDan":{"magia":3}, "lore":"Frecce come luce. Danno Magia +3." }
+  ],
+  "Arma_Urlo": [
+    { "id":"urlo_a1",  "nome":"Ascia dei Troll Reali",     "rar":"legend",  "slot":"Arma2M",    "attr":{"FOR":2},        "comb":{"att":-2,"dan":8,"def":-1},"res":{}, "elemDan":{"freddo":3}, "lore":"L'ascia forgiata dai Troll Reali nelle profondita' delle Foreste Oscure." },
+    { "id":"urlo_a2",  "nome":"Spada del Sangue Cimmero",  "rar":"rare",    "slot":"Arma",      "attr":{"FOR":1},        "comb":{"att":1,"dan":4,"def":2},"res":{}, "elemDan":{"veleno":2}, "lore":"Forgiata con il sangue dei caduti della Battaglia di Venarium." },
+    { "id":"urlo_a3",  "nome":"Martello del Destino",      "rar":"unique",  "slot":"Arma2M",    "attr":{"FOR":5,"COS":2},"comb":{"att":0,"dan":10,"def":-3},"res":{"freddo":5}, "elemDan":{"freddo":5}, "lore":"Forgiato nella Forgia Perduta. L'unica arma in grado di ferire Re Valthor." },
+    { "id":"urlo_a4",  "nome":"Daga dell'Ombra",           "rar":"rare",    "slot":"Arma",      "attr":{"DES":2},        "comb":{"att":3,"dan":3,"def":1,"ini":2},"res":{}, "elemDan":{"veleno":4}, "lore":"Sottratta al Mercante dell'Ombra di Shadizar." },
+    { "id":"urlo_a5",  "nome":"Cuore di Vulcano",          "rar":"legend",  "slot":"Arma",      "attr":{"FOR":2,"FRT":1},"comb":{"att":2,"dan":7,"def":0},"res":{"fuoco":4}, "elemDan":{"fuoco":5}, "lore":"L'arma del cuore del Golem di Magma. Brucia cio' che tocca." }
+  ],
+  "Torso_Urlo": [
+    { "id":"urlo_t1",  "nome":"Mantello di Scaglie Viventi","rar":"rare",   "slot":"Torso",     "attr":{"COS":1},        "comb":{"rd":4,"ini":-1},"res":{"acido":8,"veleno":3}, "lore":"Scaglie vive del Serpente delle Paludi." },
+    { "id":"urlo_t2",  "nome":"Piastre di Ghiaccio Eterno", "rar":"legend", "slot":"Torso",     "attr":{"COS":2,"RES":2},"comb":{"rd":8,"ini":-5},"res":{"freddo":10,"magia":3}, "lore":"Armatura forgiata nel ghiaccio vivo della Montagna Luminosa." },
+    { "id":"urlo_t3",  "nome":"Tunica del Cultista",        "rar":"special","slot":"Torso",     "attr":{"INT":1},        "comb":{"rd":1,"ini":2}, "res":{"freddo":3,"magia":2}, "lore":"Tessuta con fili di brina dai Cultisti del Ghiaccio Eterno." }
+  ],
+  "Frammento": [
+    { "id":"fr0",  "nome":"Nessuno",                         "rar":"normal", "slot":"Frammento", "attr":{},                                       "res":{}, "lore":"" },
+    { "id":"fr1",  "nome":"Frammento 1 - L'Urlo del Sangue", "rar":"unique", "slot":"Frammento", "attr":{"FRT":3},                                "res":{"freddo":5}, "lore":"Una scheggia di ghiaccio vivo che urla quando la tocchi." },
+    { "id":"fr2",  "nome":"Frammento 2 - Il Canto dei Clan", "rar":"unique", "slot":"Frammento", "attr":{"RES":3},                                "res":{}, "comb":{"ini":2}, "lore":"Risuona con le voci dei clan traditi di Gurth." },
+    { "id":"fr3",  "nome":"Frammento 3 - La Sposa Serpente", "rar":"unique", "slot":"Frammento", "attr":{"COS":4},                                "res":{"acido":4}, "lore":"Odora di palude e veleno dolce." },
+    { "id":"fr4",  "nome":"Frammento 4 - Il Cuore di Fuoco", "rar":"unique", "slot":"Frammento", "attr":{"FOR":3},                                "res":{"fuoco":6}, "lore":"Ancora caldo della lava della Forgia Perduta." },
+    { "id":"fr5",  "nome":"Frammento 5 - Il Ghiaccio Rotto", "rar":"unique", "slot":"Frammento", "attr":{"INT":1,"DES":1,"FOR":1,"RES":1,"COS":1,"FRT":1},"res":{"freddo":3}, "lore":"L'anello della principessa Elara, trasformato in frammento." },
+    { "id":"fr6",  "nome":"Frammento 6 - La Zanna del Troll","rar":"unique", "slot":"Frammento", "attr":{"FOR":4,"COS":2},                        "res":{"freddo":5}, "lore":"Strappato al Re dei Troll." },
+    { "id":"fr7",  "nome":"Frammento 7 - L'Ombra Rubata",   "rar":"unique", "slot":"Frammento", "attr":{"DES":3,"INT":1},                        "res":{"veleno":4,"magia":2}, "lore":"Il frammento nascosto nel palazzo del Mercante dell'Ombra." },
+    { "id":"fr8",  "nome":"Frammento 8 - La Danza dei Morti","rar":"unique", "slot":"Frammento", "attr":{"FRT":4},                                "res":{"magia":5}, "comb":{"ini":3}, "lore":"La Polvere Spettrale di Khorshemish cristallizzata." },
+    { "id":"fr9",  "nome":"Frammento 9 - Il Tradimento",     "rar":"unique", "slot":"Frammento", "attr":{"INT":3,"FRT":2},                        "res":{"magia":6}, "lore":"Portava il Mistico Corrotto." },
+    { "id":"fr10", "nome":"Frammento 10 - La Scalata",       "rar":"unique", "slot":"Frammento", "attr":{"FOR":2,"RES":2},                        "res":{"freddo":8}, "comb":{"rd":2}, "lore":"Trovato a meta' della Montagna Luminosa." },
+    { "id":"fr11", "nome":"Frammento 11 - L'Addio",          "rar":"unique", "slot":"Frammento", "attr":{"COS":3,"FRT":2},                        "res":{"freddo":8,"magia":4}, "lore":"L'ultimo frammento prima della cima." },
+    { "id":"fr12", "nome":"Frammento 12 - L'Urlo Finale",    "rar":"unique", "slot":"Frammento", "attr":{"FOR":6,"DES":6,"COS":6,"RES":6,"INT":6,"FRT":6},"comb":{"rd":10},"res":{"freddo":20,"magia":10}, "lore":"La Corona di Ymir spezzata." }
+  ],
+  "Consumabili": [
+    { "id":"pot1",  "nome":"Pozione di Guarigione",  "rar":"normal",  "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"hp":15},                       "desc":"Recupera 15 HP." },
+    { "id":"pot2",  "nome":"Intruglio del Vecchio",  "rar":"normal",  "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"hp":8},                        "desc":"Recupera 8 HP." },
+    { "id":"pot3",  "nome":"Balsamo di Guerriero",   "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"hp":30},                       "desc":"Recupera 30 HP." },
+    { "id":"pot4",  "nome":"Antidoto Tigra Nera",    "rar":"normal",  "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"curePoison":true,"res":{"veleno":4},"temp":true},"desc":"Cura veleno persistente + +4 Rid. Veleno." },
+    { "id":"pot5",  "nome":"Olio del Fuoco Eterno",  "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"res":{"fuoco":5},"temp":true}, "desc":"+5 Rid. Fuoco per sessione." },
+    { "id":"pot6",  "nome":"Acqua Ghiaccio Sacro",   "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"res":{"freddo":5},"temp":true},"desc":"+5 Rid. Freddo per sessione." },
+    { "id":"pot7",  "nome":"Filtro Antimagico",      "rar":"rare",    "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"res":{"magia":7},"temp":true}, "desc":"+7 Rid. Magia per sessione." },
+    { "id":"pot8",  "nome":"Elisir del Berserker",   "rar":"rare",    "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"hp":50},                       "desc":"Recupera 50 HP." },
+    { "id":"pot9",  "nome":"Filtro della Furia",     "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"comb":{"att":1},"temp":true},  "desc":"+1 ATT in combattimento." },
+    { "id":"pot10", "nome":"Filtro della Forza",     "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"comb":{"dan":2},"temp":true},  "desc":"+2 DAN in combattimento." },
+    { "id":"pot11", "nome":"Pozione di Antracite",   "rar":"special", "tipo":"consumabile", "usableInCombat":true,  "cat":"pozioni",   "effetto":{"res":{"acido":4},"temp":true}, "desc":"+4 Rid. Acido per sessione." }
+  ],
+  "Pergamene": [
+    { "id":"perg1",  "nome":"Pergamena Tattica",        "rar":"normal",  "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"comb":{"att":1},"permanent":true},              "desc":"+1 ATT permanente." },
+    { "id":"perg2",  "nome":"Segreti della Forza",      "rar":"normal",  "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"attr":{"FOR":1},"permanent":true},               "desc":"+1 FOR permanente." },
+    { "id":"perg3",  "nome":"Runa di Agilita'",         "rar":"normal",  "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"attr":{"DES":1},"permanent":true},               "desc":"+1 DES permanente." },
+    { "id":"perg4",  "nome":"Tomo della Resistenza",    "rar":"normal",  "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"attr":{"COS":1},"permanent":true},               "desc":"+1 COS permanente (+2 MaxHP)." },
+    { "id":"perg5",  "nome":"Pergamena del Guerriero",  "rar":"special", "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"comb":{"att":2},"permanent":true},               "desc":"+2 ATT permanente." },
+    { "id":"perg6",  "nome":"Runa Ancestrale",          "rar":"special", "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"comb":{"dan":1,"def":1},"permanent":true},       "desc":"+1 DAN +1 DEF permanenti." },
+    { "id":"perg7",  "nome":"Libro dei Segreti Arcani", "rar":"special", "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"attr":{"INT":2},"permanent":true},               "desc":"+2 INT permanente." },
+    { "id":"perg8",  "nome":"Rune di Protezione",       "rar":"rare",    "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"res":{"magia":3},"permanent":true},              "desc":"+3 Rid. Magia permanente." },
+    { "id":"perg9",  "nome":"Codice Ladri di Shadizar", "rar":"rare",    "tipo":"consumabile", "usableInCombat":false, "cat":"pergamene", "effetto":{"comb":{"ini":2,"att":1},"permanent":true},       "desc":"+2 INI +1 ATT permanenti." }
+  ]
+}

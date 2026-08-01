@@ -1,0 +1,9 @@
+[
+  {"id":"crom","nome":"Crom","bonus":{"FOR":2,"INT":-1},"trait":"Dona forza e nient'altro. Non risponde alle preghiere, ma i seguaci non temono la morte.","skills":["Volonta' di Ferro","Intimidire"],"combBonus":{"dan":1},"res":{"freddo":1}},
+  {"id":"mitra","nome":"Mitra","bonus":{"WIS":1,"DES":-1},"trait":"Dio della luce e della giustizia. Protezione contro la magia oscura.","skills":["Scudo di Mitra","Fede"],"combBonus":{"def":1},"res":{"magia":1}},
+  {"id":"set","nome":"Set","bonus":{"INT":1,"FOR":-1},"trait":"Il grande serpente. Potenzia la magia ma richiede sacrifici.","skills":["Tocco del Serpente","Sotterfugio"],"combBonus":{"att":1},"res":{"veleno":2,"magia":1},"hpMod":-2},
+  {"id":"ishtar","nome":"Ishtar","bonus":{"CHA":1,"COS":1,"FOR":-1},"trait":"Dea dell'amore e della guerra. Alleati NPC piu' facili da convincere.","skills":["Fascino Divino","Empatia"],"combBonus":{"def":1},"res":{},"hpMod":5},
+  {"id":"ymir","nome":"Ymir","bonus":{"FOR":1,"COS":1,"INT":-1},"trait":"Il padre dei giganti. Resistenza al freddo aumentata.","skills":["Sangue di Ghiaccio","Resistenza"],"combBonus":{"dan":1,"rd":1},"res":{"freddo":2},"hpMod":2},
+  {"id":"bel","nome":"Bel","bonus":{"DES":1,"WIS":-1},"trait":"Dio dei ladri. Furto e fuga piu' facili.","skills":["Dita di Vento","Furtivita'"],"combBonus":{"ini":2},"res":{}},
+  {"id":"antenati","nome":"Antenati","bonus":{"WIS":1,"DES":1},"trait":"Fiducia solo nell'acciaio. Bonus a combattimento.","skills":["Tradizione","Armi"],"combBonus":{"att":1,"def":1},"res":{}}
+]

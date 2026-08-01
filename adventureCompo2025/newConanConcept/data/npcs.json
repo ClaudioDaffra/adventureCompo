@@ -1,0 +1,147 @@
+{
+  "Mistico": {
+    "id": "Mistico",
+    "nome": "Mistico Cieco di Gurth",
+    "icona": "M",
+    "location": 1,
+    "dialoghi": {
+      "intro": "Il ghiaccio... sta urlando. Tu sei l'unico che Crom ha scelto nel sogno di sangue. Ascolta bene: i Frammenti dell'Urlo sono sparsi per Cimmeria. Raccoglili. Poi sali sulla Montagna.",
+      "dopoM1": "Hai preso il primo Frammento. Il prezzo sara' alto... molto alto. I morti camminano gia' verso Venarium.",
+      "dopoM2": "Il clan del tradimento e' caduto. Prendi il Corno. Usalo solo quando il ghiaccio sta per inghiottirti.",
+      "avviso": "Attento al Mercante di Shadizar. Porta il volto di un amico, ma l'anima di Valthor.",
+      "avvertimento_tradimento": "Io sono... il figlio di Valthor. Scegli ora: uccidimi e perdi la verita'. Perdonami e otterrai un alleato per la cima.",
+      "perdono": "Grazie... il peso di mille anni si solleva. Ti guidero' sul sentiero segreto della Montagna. Insieme."
+    },
+    "choices": [
+      {"id":"intro","text":"Parla con il Mistico","nextDialogo":"intro"},
+      {"id":"chiedi_frammenti","text":"Dove si trovano i Frammenti?","nextDialogo":"avviso"},
+      {"id":"congedo","text":"Addio, vecchio saggio","nextDialogo":null}
+    ]
+  },
+  "Strega": {
+    "id": "Strega",
+    "nome": "Strega delle Paludi",
+    "icona": "S",
+    "location": 2,
+    "dialoghi": {
+      "intro": "Ahahah! Un barbaro! O vuoi il mio sangue... o vuoi il mio Frammento. Fai in fretta — i serpenti hanno fame.",
+      "alleanza": "Bene. Ti do il Frammento e il Mantello. In cambio: sei mio sposo per una notte e alleato per sempre. Accetti?",
+      "rifiuto": "Allora morirai qui, tra le mie serpi! Nessuno porta via il Frammento senza pagare il mio prezzo.",
+      "post_alleanza": "Alleato. Non dimenticarlo mai. Quando salirai sulla Montagna, le mie serpi ti apriranno un varco tra i non-morti.",
+      "figlio": "Mio figlio e' stato preso dal Serpente delle Paludi. Riportamelo vivo. Ti daro' il Mantello e la mia eterna gratitudine."
+    },
+    "choices": [
+      {"id":"intro","text":"Parla con la Strega","nextDialogo":"intro"},
+      {"id":"alleanza","text":"Proponi un patto","nextDialogo":"alleanza"},
+      {"id":"congedo","text":"Andartene","nextDialogo":null}
+    ]
+  },
+  "PrincipessaElara": {
+    "id": "PrincipessaElara",
+    "nome": "Principessa Elara di Koppar",
+    "icona": "E",
+    "location": 4,
+    "dialoghi": {
+      "intro": "Voce incrinata dal ghiaccio... Il mio corpo e' diventato statua. Solo un cuore caldo puo' spezzare questa maledizione. Scendi nelle miniere, Conan. Prendi il Frammento 5. Salvami.",
+      "salvata": "Mi hai salvata... Prendi il mio anello e il Frammento. E se vorrai... resta con me. Diventa mio sposo e difensore di Koppar.",
+      "rifiuto_romantico": "Capisco. Un re barbaro non ha bisogno di una principessa di ghiaccio. Prendi il Frammento.",
+      "miniera": "Le miniere sono vive di Golem e spiriti. Ripuliscile e ti daro' le Piastre di Ghiaccio Eterno di mio padre.",
+      "finale_eroe": "Se hai scelto di diventare Re, io saro' al tuo fianco sul trono. Sempre."
+    },
+    "choices": [
+      {"id":"intro","text":"Parla con Elara","nextDialogo":"intro"},
+      {"id":"miniera","text":"Chiedi delle miniere","nextDialogo":"miniera"},
+      {"id":"congedo","text":"Vai","nextDialogo":null}
+    ]
+  },
+  "ReTroll": {
+    "id": "ReTroll",
+    "nome": "Re dei Troll delle Foreste Oscure",
+    "icona": "T",
+    "location": 5,
+    "dialoghi": {
+      "intro": "CARNE FRESCA! Ma... odori di destino, barbaro. Valthor vuole il tuo cuore. Io voglio il tuo cuore nel mio piatto. Ma forse... possiamo fare un patto? Il Frammento 6 per la tua alleanza. O il tuo cuore.",
+      "alleanza": "HAH! Un barbaro che non scappa! Mi piaci! Prendi il Frammento. Quando salirai sulla Montagna, io e i miei Troll saremo li' a spaccare ossa insieme!",
+      "rifiuto": "ALLORA CREPA, PICCOLO UOMO! I miei Troll ti divoreeranno vivo e useranno le tue ossa come stuzzicadenti!",
+      "finale": "Il Re dei Troll non dimentica i patti. Ne' i tradimenti."
+    },
+    "choices": [
+      {"id":"intro","text":"Avvicinati al Re dei Troll","nextDialogo":"intro"},
+      {"id":"patto","text":"Proponi il patto","nextDialogo":"alleanza"},
+      {"id":"sfida","text":"Sfidalo in combattimento","questAction":"M6_choice2","nextDialogo":null}
+    ]
+  },
+  "MercanteOmbra": {
+    "id": "MercanteOmbra",
+    "nome": "Mercante dell'Ombra di Shadizar",
+    "icona": "O",
+    "location": 6,
+    "dialoghi": {
+      "intro": "Tutto ha un prezzo, barbaro. Io posso darti tutti i Frammenti rimasti in cambio della tua anima. Firmi qui col sangue? O preferisci morire lentamente come gli altri?",
+      "rifiuto": "Errore fatale. Ora il tuo nome e' sulla lista dei morti. Buona fortuna.",
+      "scoperta": "Bravo... hai scoperto che sono il traditore di Valthor da mille anni. Ma sapevi che ho ancora il Frammento 7 nascosto nell'altare segreto?"
+    },
+    "choices": [
+      {"id":"intro","text":"Entra nel palazzo del Mercante","nextDialogo":"intro"},
+      {"id":"scoperta","text":"Accusa il Mercante","nextDialogo":"scoperta"},
+      {"id":"congedo","text":"Esci dal palazzo","nextDialogo":null}
+    ]
+  },
+  "Djinn": {
+    "id": "Djinn",
+    "nome": "Djinn della Tempesta",
+    "icona": "D",
+    "location": 3,
+    "dialoghi": {
+      "intro": "Osi venire qui? Ho tradito Ymir per primo! Il Frammento e' mio. Ma se mi sconfiggi in duello elementale, ti daro' l'Essenza di Ghiaccio Eterno. E forse un giorno potro' tradire anche te.",
+      "sconfitta": "Ricorda: tutti tradiscono... prima o poi."
+    },
+    "choices": [
+      {"id":"intro","text":"Affronta il Djinn","nextDialogo":"intro"},
+      {"id":"duello","text":"Accetta il duello","questAction":"M4_choice1","nextDialogo":null}
+    ]
+  },
+  "SacerdoteSpettrale": {
+    "id": "SacerdoteSpettrale",
+    "nome": "Voce Spettrale del Sacerdote",
+    "icona": "V",
+    "location": 7,
+    "dialoghi": {
+      "intro": "Sei venuto a profanare la mia tomba? Il patto con Valthor non e' mai finito. Il Frammento e' qui... ma dovrai danzare con i miei Spettri per prenderlo.",
+      "sfida": "La polvere spettrale ti entra nei polmoni. +2 RES permanente. Il sacerdote sussurra: «Ora anche tu sei legato al ghiaccio...»"
+    },
+    "choices": [
+      {"id":"intro","text":"Ascolta la voce spettrale","nextDialogo":"intro"},
+      {"id":"danza","text":"Danza con gli Spettri","nextDialogo":"sfida"}
+    ]
+  },
+  "CarovonieraDeserto": {
+    "id": "CarovonieraDeserto",
+    "nome": "Capo Carovana di Zuarir",
+    "icona": "C",
+    "location": 10,
+    "dialoghi": {
+      "intro": "Gli assassini Hyrkaniani ci hanno attaccati all'alba. Se li cacci, ti daro' la mia daga migliore e tutto il veleno che ho. Il deserto non perdona i deboli."
+    },
+    "choices": [
+      {"id":"intro","text":"Parla con il Capo Carovana","nextDialogo":"intro"},
+      {"id":"aiuta","text":"Difendi la carovana","questAction":"m6_choice1","nextDialogo":null}
+    ]
+  },
+  "Valthor": {
+    "id": "Valthor",
+    "nome": "Re Valthor il Gelido",
+    "icona": "R",
+    "location": 12,
+    "dialoghi": {
+      "intro": "FINALMENTE... Un guerriero degno di morire per me. Mille anni ho atteso questo momento. Deponile le armi. Servimi. Diventa il mio campione di ghiaccio... o brucia nel freddo eterno.",
+      "combattimento": "Il tuo sangue si congelera' nelle vene. Il tuo nome verra' dimenticato. Cimmeria e' MIA.",
+      "sconfitta": "Impossibile... il Martello... Ymir... hai vinto, barbaro. Scegli il tuo destino."
+    },
+    "choices": [
+      {"id":"intro","text":"Affronta Valthor","nextDialogo":"intro"},
+      {"id":"combatti","text":"Combatti Valthor","questAction":"M12_combat","nextDialogo":null},
+      {"id":"servi","text":"Servi Valthor (FINE: Tradimento)","questAction":"M12_betray","nextDialogo":null}
+    ]
+  }
+}

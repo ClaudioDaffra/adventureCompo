@@ -1,0 +1,899 @@
+{
+  "nome": "HEX",
+  "sesso": "M",
+  "eta": "adulto",
+  "razza": "cimmero",
+  "classe": "guerriero",
+  "sottoclasse": "berserker",
+  "background": "mercenario",
+  "dio": "crom",
+  "evento": "battaglia",
+  "condotta": "onore",
+  "seed": 71419,
+  "attributes": {
+    "FOR": 18,
+    "DES": 18,
+    "COS": 18,
+    "RES": 18,
+    "INT": 18,
+    "FRT": 18
+  },
+  "derived": {
+    "hp": 46,
+    "maxHp": 46,
+    "energia": 36,
+    "maxEnergia": 36,
+    "att": 16,
+    "dan": 25,
+    "def": 15,
+    "rd": 15,
+    "ini": 22
+  },
+  "baseResistances": {
+    "fuoco": 20,
+    "freddo": 20,
+    "acido": 20,
+    "veleno": 20,
+    "magia": 20,
+    "fulmine": 20,
+    "incanto": 20
+  },
+  "resistances": {
+    "fuoco": 33,
+    "freddo": 20,
+    "acido": 27,
+    "veleno": 26,
+    "magia": 53,
+    "fulmine": 30,
+    "incanto": 38
+  },
+  "skills": [
+    "Furia",
+    "Forza Bruta",
+    "Resistenza",
+    "Riflessi"
+  ],
+  "competenze": [
+    "Armi",
+    "Armature"
+  ],
+  "traits": [],
+  "equipment": {
+    "arma": {
+      "instanceId": "geq_arma",
+      "id": "w_unique1",
+      "nome": "Lama di Conan",
+      "rar": "unique",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "FOR": 2,
+        "DES": 1
+      },
+      "comb": {
+        "att": 5,
+        "dan": 14,
+        "def": 2
+      },
+      "res": {
+        "magia": 4
+      },
+      "lore": "Taglia il destino stesso."
+    },
+    "armatura": {
+      "instanceId": "geq_arm",
+      "id": "arm_unique1",
+      "nome": "Pelle di Dragone Nero",
+      "rar": "unique",
+      "slot": "Torso",
+      "tipo": "armatura",
+      "attr": {
+        "COS": 2,
+        "RES": 2
+      },
+      "comb": {
+        "rd": 10,
+        "ini": 0
+      },
+      "res": {
+        "fuoco": 8,
+        "magia": 5
+      },
+      "lore": "Immunita' al fuoco."
+    },
+    "elmo": {
+      "instanceId": "geq_elmo",
+      "id": "e_unique1",
+      "nome": "Elmo della Tempesta Nera",
+      "rar": "unique",
+      "slot": "Testa",
+      "tipo": "elmo",
+      "attr": {
+        "FOR": 1,
+        "INT": 1,
+        "DES": 1
+      },
+      "comb": {
+        "att": 1,
+        "def": 1
+      },
+      "res": {
+        "fulmine": 10,
+        "magia": 4
+      },
+      "lore": "Rifiuta ogni maledizione. [YMIR]"
+    },
+    "amuleto": {
+      "instanceId": "geq_amul",
+      "id": "a_unique1",
+      "nome": "Occhio di Ibis",
+      "rar": "unique",
+      "slot": "Collo",
+      "tipo": "amuleto",
+      "attr": {
+        "INT": 2,
+        "FRT": 2
+      },
+      "comb": {
+        "ini": 3
+      },
+      "res": {
+        "magia": 8,
+        "incanto": 6
+      },
+      "lore": "Rivela l'invisibile. [MITRA]"
+    },
+    "anello": {
+      "instanceId": "geq_anello",
+      "id": "an_unique1",
+      "nome": "Anello del Re Immortale",
+      "rar": "unique",
+      "slot": "AnelloDX",
+      "tipo": "anello",
+      "attr": {
+        "FRT": 3,
+        "INT": 1
+      },
+      "comb": {
+        "def": 2
+      },
+      "res": {
+        "magia": 6,
+        "incanto": 8
+      },
+      "lore": "Protegge dalla morte certa."
+    },
+    "bracciali": {
+      "instanceId": "geq_bracc",
+      "id": "b_unique1",
+      "nome": "Catene Spezzate",
+      "rar": "unique",
+      "slot": "Bracciali",
+      "tipo": "bracciali",
+      "attr": {
+        "FOR": 2,
+        "RES": 2
+      },
+      "comb": {
+        "dan": 3,
+        "def": -1
+      },
+      "res": {
+        "acido": 4
+      },
+      "lore": "Il metallo porta ira e resistenza."
+    },
+    "cintura": {
+      "instanceId": "geq_cint",
+      "id": "c_unique1",
+      "nome": "Cintura delle Sabbie",
+      "rar": "unique",
+      "slot": "Cintura",
+      "tipo": "cintura",
+      "attr": {
+        "DES": 2,
+        "RES": 1
+      },
+      "comb": {
+        "ini": 2
+      },
+      "res": {
+        "fuoco": 5,
+        "acido": 3
+      },
+      "lore": "Rende leggeri come il vento."
+    },
+    "stivali": {
+      "instanceId": "geq_stiv",
+      "id": "s_unique1",
+      "nome": "Sandali di Set",
+      "rar": "unique",
+      "slot": "Stivali",
+      "tipo": "stivali",
+      "attr": {
+        "DES": 2,
+        "INT": 1
+      },
+      "comb": {
+        "ini": 3,
+        "att": 1
+      },
+      "res": {
+        "veleno": 6
+      },
+      "lore": "Grazia e velocita' di serpente."
+    },
+    "scudo": {
+      "instanceId": "geq_scudo",
+      "id": "sc_unique1",
+      "nome": "Vortice di Kull",
+      "rar": "unique",
+      "slot": "Scudo",
+      "tipo": "scudo",
+      "attr": {
+        "FRT": 2,
+        "RES": 1
+      },
+      "comb": {
+        "def": 5,
+        "att": 1
+      },
+      "res": {
+        "magia": 6,
+        "incanto": 4
+      },
+      "lore": "Devia ogni attacco."
+    }
+  },
+  "inventory": [
+    {
+      "instanceId": "gi_w5",
+      "id": "w5",
+      "nome": "Lama del Fato di Crom",
+      "rar": "legend",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "FOR": 1
+      },
+      "comb": {
+        "att": 3,
+        "dan": 12,
+        "def": -1
+      },
+      "res": {},
+      "elemDan": {},
+      "lore": "Spada di ferro nero. [CROM]"
+    },
+    {
+      "instanceId": "gi_w6",
+      "id": "w6",
+      "nome": "Spada della Fenice",
+      "rar": "legend",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "FRT": 1
+      },
+      "comb": {
+        "att": 4,
+        "dan": 10,
+        "def": 2
+      },
+      "res": {},
+      "elemDan": {
+        "fuoco": 3
+      },
+      "lore": "Forgiata nel fuoco. Danno Fuoco +3."
+    },
+    {
+      "instanceId": "gi_wu2",
+      "id": "w_unique2",
+      "nome": "Falce di Nergal",
+      "rar": "unique",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "INT": 2,
+        "FRT": -1
+      },
+      "comb": {
+        "att": 4,
+        "dan": 11,
+        "def": -1
+      },
+      "res": {},
+      "elemDan": {
+        "incanto": 4
+      },
+      "lore": "Colpisce l'anima. Danno Incanto +4."
+    },
+    {
+      "instanceId": "gi_a2m6",
+      "id": "a2m6",
+      "nome": "Maglio di Ymir",
+      "rar": "legend",
+      "slot": "Arma2M",
+      "tipo": "arma2m",
+      "attr": {
+        "FOR": 2,
+        "COS": 1
+      },
+      "comb": {
+        "att": 0,
+        "dan": 15,
+        "def": -2
+      },
+      "res": {},
+      "elemDan": {
+        "freddo": 4
+      },
+      "lore": "Ogni colpo porta tempesta. [YMIR]"
+    },
+    {
+      "instanceId": "gi_a2mu",
+      "id": "a2m_unique1",
+      "nome": "Alabarda del Drago Rosso",
+      "rar": "unique",
+      "slot": "Arma2M",
+      "tipo": "arma2m",
+      "attr": {
+        "FOR": 2,
+        "DES": 1
+      },
+      "comb": {
+        "att": 2,
+        "dan": 13,
+        "def": 1
+      },
+      "res": {},
+      "elemDan": {
+        "fuoco": 5
+      },
+      "lore": "Brucia all'impatto. Danno Fuoco +5."
+    },
+    {
+      "instanceId": "gi_mdes",
+      "id": "urlo_a3",
+      "nome": "Martello del Destino",
+      "rar": "unique",
+      "slot": "Arma2M",
+      "tipo": "arma2m",
+      "attr": {
+        "FOR": 5,
+        "COS": 2
+      },
+      "comb": {
+        "att": 0,
+        "dan": 10,
+        "def": -3
+      },
+      "res": {
+        "freddo": 5
+      },
+      "elemDan": {
+        "freddo": 5
+      },
+      "lore": "Forgiato nella Forgia Perduta. Ferisce Valthor."
+    },
+    {
+      "instanceId": "gi_arcu",
+      "id": "arc_unique1",
+      "nome": "Arco della Stella Cadente",
+      "rar": "unique",
+      "slot": "Arco",
+      "tipo": "arco",
+      "attr": {
+        "DES": 3
+      },
+      "comb": {
+        "att": 4,
+        "dan": 8,
+        "ini": 2
+      },
+      "res": {},
+      "elemDan": {
+        "magia": 3
+      },
+      "lore": "Frecce come luce. Danno Magia +3."
+    },
+    {
+      "instanceId": "gi_ua1",
+      "id": "urlo_a1",
+      "nome": "Ascia dei Troll Reali",
+      "rar": "legend",
+      "slot": "Arma2M",
+      "tipo": "arma2m",
+      "attr": {
+        "FOR": 2
+      },
+      "comb": {
+        "att": -2,
+        "dan": 8,
+        "def": -1
+      },
+      "res": {},
+      "elemDan": {
+        "freddo": 3
+      },
+      "lore": "Forgiata dai Troll Reali."
+    },
+    {
+      "instanceId": "gi_ua4",
+      "id": "urlo_a4",
+      "nome": "Daga dell'Ombra",
+      "rar": "rare",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "DES": 2
+      },
+      "comb": {
+        "att": 3,
+        "dan": 3,
+        "def": 1,
+        "ini": 2
+      },
+      "res": {},
+      "elemDan": {
+        "veleno": 4
+      },
+      "lore": "Sottratta al Mercante di Shadizar."
+    },
+    {
+      "instanceId": "gi_ua5",
+      "id": "urlo_a5",
+      "nome": "Cuore di Vulcano",
+      "rar": "legend",
+      "slot": "Arma",
+      "tipo": "arma",
+      "attr": {
+        "FOR": 2,
+        "FRT": 1
+      },
+      "comb": {
+        "att": 2,
+        "dan": 7,
+        "def": 0
+      },
+      "res": {
+        "fuoco": 4
+      },
+      "elemDan": {
+        "fuoco": 5
+      },
+      "lore": "Brucia ciò che tocca."
+    },
+    {
+      "instanceId": "gi_arm7",
+      "id": "arm7",
+      "nome": "Corazza d'Ossa di Drago",
+      "rar": "legend",
+      "slot": "Torso",
+      "tipo": "armatura",
+      "attr": {
+        "COS": 1
+      },
+      "comb": {
+        "rd": 8,
+        "ini": -1
+      },
+      "res": {
+        "fuoco": 4,
+        "freddo": 2
+      },
+      "lore": "Resistenza soprannaturale."
+    },
+    {
+      "instanceId": "gi_ut2",
+      "id": "urlo_t2",
+      "nome": "Piastre di Ghiaccio Eterno",
+      "rar": "legend",
+      "slot": "Torso",
+      "tipo": "armatura",
+      "attr": {
+        "COS": 2,
+        "RES": 2
+      },
+      "comb": {
+        "rd": 8,
+        "ini": -5
+      },
+      "res": {
+        "freddo": 10,
+        "magia": 3
+      },
+      "lore": "Forgiata nel ghiaccio della Montagna."
+    },
+    {
+      "instanceId": "gi_e5",
+      "id": "e5",
+      "nome": "Corona di Xaltotun",
+      "rar": "legend",
+      "slot": "Testa",
+      "tipo": "elmo",
+      "attr": {
+        "INT": 2,
+        "FRT": 1
+      },
+      "comb": {
+        "rd": 1
+      },
+      "res": {
+        "magia": 6
+      },
+      "lore": "Nessun incanto può penetrare. [SET]"
+    },
+    {
+      "instanceId": "gi_a4",
+      "id": "a4",
+      "nome": "Cuore di Ahriman",
+      "rar": "legend",
+      "slot": "Collo",
+      "tipo": "amuleto",
+      "attr": {
+        "FRT": 3
+      },
+      "comb": {},
+      "res": {
+        "magia": 10
+      },
+      "lore": "Assorbe ogni attacco magico. [MITRA]"
+    },
+    {
+      "instanceId": "gi_an4",
+      "id": "an4",
+      "nome": "Anello Nero di Thoth-Amon",
+      "rar": "legend",
+      "slot": "AnelloDX",
+      "tipo": "anello",
+      "attr": {
+        "INT": 2
+      },
+      "comb": {
+        "dan": 1
+      },
+      "res": {
+        "magia": 8
+      },
+      "lore": "Chi lo indossa comanda i serpenti. [SET]"
+    },
+    {
+      "instanceId": "gi_b4",
+      "id": "b4",
+      "nome": "Morsa di Crom",
+      "rar": "legend",
+      "slot": "Bracciali",
+      "tipo": "bracciali",
+      "attr": {
+        "FOR": 2
+      },
+      "comb": {
+        "dan": 2
+      },
+      "res": {},
+      "lore": "Chi li indossa non lascia la presa. [CROM]"
+    },
+    {
+      "instanceId": "gi_sc4",
+      "id": "sc4",
+      "nome": "Scudo del Leone Aquiloniano",
+      "rar": "legend",
+      "slot": "Scudo",
+      "tipo": "scudo",
+      "attr": {
+        "INT": 1,
+        "FRT": 1
+      },
+      "comb": {
+        "def": 4,
+        "att": -1
+      },
+      "res": {
+        "fuoco": 2,
+        "magia": 2
+      },
+      "lore": "Chi lo porta sente la responsabilità del trono."
+    },
+    {
+      "instanceId": "gi_fr1",
+      "id": "fr1",
+      "nome": "Frammento 1 — L'Urlo del Sangue",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FRT": 3
+      },
+      "comb": {},
+      "res": {
+        "freddo": 5
+      },
+      "lore": "Una scheggia di ghiaccio vivo che urla."
+    },
+    {
+      "instanceId": "gi_fr2",
+      "id": "fr2",
+      "nome": "Frammento 2 — Il Canto dei Clan",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "RES": 3
+      },
+      "comb": {
+        "ini": 2
+      },
+      "res": {},
+      "lore": "Risuona con le voci dei clan di Gurth."
+    },
+    {
+      "instanceId": "gi_fr3",
+      "id": "fr3",
+      "nome": "Frammento 3 — La Sposa Serpente",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "COS": 4
+      },
+      "comb": {},
+      "res": {
+        "acido": 4
+      },
+      "lore": "Odora di palude e veleno dolce."
+    },
+    {
+      "instanceId": "gi_fr4",
+      "id": "fr4",
+      "nome": "Frammento 4 — Il Cuore di Fuoco",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FOR": 3
+      },
+      "comb": {},
+      "res": {
+        "fuoco": 6
+      },
+      "lore": "Ancora caldo della lava."
+    },
+    {
+      "instanceId": "gi_fr5",
+      "id": "fr5",
+      "nome": "Frammento 5 — Il Ghiaccio Rotto",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FOR": 1,
+        "DES": 1,
+        "COS": 1,
+        "RES": 1,
+        "INT": 1,
+        "FRT": 1
+      },
+      "comb": {},
+      "res": {
+        "freddo": 3
+      },
+      "lore": "L'anello di Elara, trasformato."
+    },
+    {
+      "instanceId": "gi_fr6",
+      "id": "fr6",
+      "nome": "Frammento 6 — La Zanna del Troll",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FOR": 4,
+        "COS": 2
+      },
+      "comb": {},
+      "res": {
+        "freddo": 5
+      },
+      "lore": "Strappato al Re dei Troll."
+    },
+    {
+      "instanceId": "gi_fr7",
+      "id": "fr7",
+      "nome": "Frammento 7 — L'Ombra Rubata",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "DES": 3,
+        "INT": 1
+      },
+      "comb": {},
+      "res": {
+        "veleno": 4,
+        "magia": 2
+      },
+      "lore": "Nascosto nel palazzo di Shadizar."
+    },
+    {
+      "instanceId": "gi_fr8",
+      "id": "fr8",
+      "nome": "Frammento 8 — La Danza dei Morti",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FRT": 4
+      },
+      "comb": {
+        "ini": 3
+      },
+      "res": {
+        "magia": 5
+      },
+      "lore": "Polvere Spettrale cristallizzata."
+    },
+    {
+      "instanceId": "gi_fr9",
+      "id": "fr9",
+      "nome": "Frammento 9 — Il Tradimento",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "INT": 3,
+        "FRT": 2
+      },
+      "comb": {},
+      "res": {
+        "magia": 6
+      },
+      "lore": "Portava il Mistico Corrotto."
+    },
+    {
+      "instanceId": "gi_fr10",
+      "id": "fr10",
+      "nome": "Frammento 10 — La Scalata",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FOR": 2,
+        "RES": 2
+      },
+      "comb": {
+        "rd": 2
+      },
+      "res": {
+        "freddo": 8
+      },
+      "lore": "Trovato a metà Montagna Luminosa."
+    },
+    {
+      "instanceId": "gi_fr11",
+      "id": "fr11",
+      "nome": "Frammento 11 — L'Addio",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "COS": 3,
+        "FRT": 2
+      },
+      "comb": {},
+      "res": {
+        "freddo": 8,
+        "magia": 4
+      },
+      "lore": "L'ultimo prima della cima."
+    },
+    {
+      "instanceId": "gi_fr12",
+      "id": "fr12",
+      "nome": "Frammento 12 — L'Urlo Finale",
+      "rar": "unique",
+      "slot": "Frammento",
+      "tipo": "frammento",
+      "attr": {
+        "FOR": 6,
+        "DES": 6,
+        "COS": 6,
+        "RES": 6,
+        "INT": 6,
+        "FRT": 6
+      },
+      "comb": {
+        "rd": 10
+      },
+      "res": {
+        "freddo": 20,
+        "magia": 10
+      },
+      "lore": "La Corona di Ymir spezzata."
+    },
+    {
+      "instanceId": "gi_p8",
+      "id": "pot8",
+      "nome": "Elisir del Berserker",
+      "rar": "rare",
+      "tipo": "consumabile",
+      "effetto": {
+        "hp": 50
+      }
+    },
+    {
+      "instanceId": "gi_p8b",
+      "id": "pot8",
+      "nome": "Elisir del Berserker",
+      "rar": "rare",
+      "tipo": "consumabile",
+      "effetto": {
+        "hp": 50
+      }
+    },
+    {
+      "instanceId": "gi_p7",
+      "id": "pot7",
+      "nome": "Filtro Antimagico",
+      "rar": "rare",
+      "tipo": "consumabile",
+      "effetto": {
+        "res": {
+          "magia": 7
+        },
+        "temp": true
+      }
+    }
+  ],
+  "gold": 9999,
+  "destino": 10,
+  "destinoGemsFound": [],
+  "frammenti": [],
+  "alleanze": [],
+  "currentLocation": 0,
+  "visitedLocations": [
+    0
+  ],
+  "unlockedLocations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "questMajorStato": {
+    "M1": "attiva"
+  },
+  "questMinorStato": {},
+  "activeQuest": "M1",
+  "travelDestination": null,
+  "travelProgress": 0,
+  "travelDistance": 0,
+  "combatState": null,
+  "gameOver": false,
+  "ending": null,
+  "onore": {
+    "vinte": 0,
+    "fuggite": 0,
+    "rese": 0
+  },
+  "durata": 0,
+  "pbState": null,
+  "createdAt": "2026-04-30T17:31:23.266Z",
+  "savedAt": "2026-04-30T17:31:23.268Z"
+}

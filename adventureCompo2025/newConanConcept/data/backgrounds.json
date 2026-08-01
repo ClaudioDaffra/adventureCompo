@@ -1,0 +1,11 @@
+[
+  {"id":"orfano","nome":"Orfano di Guerra","bonus":{"COS":1},"gold_mod":0,"trait":"Cresciuto nella durezza. Non puo' essere intimidito.","event":"Tuo villaggio fu bruciato quando avevi 5 anni.","hpBonus":5,"skills":["Sopportazione","Furtivita'"]},
+  {"id":"nobile","nome":"Nobile Decaduto","bonus":{"CHA":1},"gold_mod":30,"trait":"Conosce il protocollo delle corti. Accesso a mercati esclusivi.","event":"La tua famiglia fu esiliata per tradimento.","hpBonus":0,"skills":["Etichetta","Scherma"]},
+  {"id":"soldato","nome":"Soldato di Fortuna","bonus":{"FOR":1},"gold_mod":20,"trait":"Conosce le tattiche militari. +1 INI nel primo turno.","event":"Hai servito tre eserciti diversi in dieci anni.","hpBonus":3,"skills":["Combattimento","Disciplina"]},
+  {"id":"criminale","nome":"Criminale Ricercato","bonus":{"DES":1},"gold_mod":15,"trait":"Sa come evitare le guardie. Sconti dai mercanti neri.","event":"Stai fuggendo da una taglia di 500 zecchini.","hpBonus":1,"skills":["Acrobazia","Equipaggio"]},
+  {"id":"sacerdote","nome":"Sacerdote Apostata","bonus":{"WIS":1},"gold_mod":10,"trait":"Conosce i rituali. Bonus con gli NPC religiosi.","event":"Hai abbandonato il tuo tempio dopo una visione oscura.","hpBonus":0,"skills":["Riti Tribali","Curare"]},
+  {"id":"commerciante","nome":"Commerciante Rovinato","bonus":{"INT":1},"gold_mod":40,"trait":"Sa valutare gli oggetti. Prezzi d'acquisto -10%.","event":"Un socio ti ha truffato e hai perso tutto.","hpBonus":0,"skills":["Valutazione","Commercio"]},
+  {"id":"schiavo","nome":"Schiavo Liberato","bonus":{"WIS":1},"gold_mod":-10,"trait":"Sopravvissuto all'impensabile. Resistenza straordinaria.","event":"Hai spezzato le catene con le tue stesse mani.","hpBonus":5,"skills":["Sopportazione","Furtivita'"]},
+  {"id":"cacciatore","nome":"Cacciatore Selvaggio","bonus":{"DES":1},"gold_mod":5,"trait":"Conosce la natura. Tracce e prede.","event":"Cresciuto da solo nei boschi dopo la morte del clan.","hpBonus":2,"skills":["Sopravvivenza","Tracciamento"]},
+  {"id":"pirata","nome":"Pirata/Corsaro","bonus":{"DES":1},"gold_mod":25,"trait":"Esperto di navigazione e combattimento navale.","event":"La tua nave e' affondata. Sei l'unico sopravvissuto.","hpBonus":1,"skills":["Acrobazia","Navigazione"]}
+]

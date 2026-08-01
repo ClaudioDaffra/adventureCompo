@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONAN II - L'URLO DI YMIR</title>
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+
+<!-- GLOBAL HUD (sempre visibile dopo il login) -->
+<div id="global-hud" style="display:none;position:fixed;top:0;left:0;right:0;z-index:1000;background:#0a0010;border-bottom:1px solid var(--c64-border);padding:4px 12px;font-size:10px;gap:16px;align-items:center;justify-content:center;">
+  <span style="color:var(--c64-gold);font-weight:bold;">CONAN II</span>
+  <span id="hud-hp" style="color:var(--c64-green);">HP: ?/?</span>
+  <span id="hud-gold" style="color:var(--c64-yellow);">0 ZEC</span>
+  <span id="hud-dest" style="color:var(--c64-cyan);">DEST: 0</span>
+  <span id="hud-frags-count" style="color:var(--c64-ice);">FRAG: 0/12</span>
+  <span id="hud-onore" style="color:#ffaa44;">ONORE: —</span>
+  <span id="hud-durata" style="color:#888;">DURATA: 0g</span>
+  <span id="hud-pos" style="color:#888;">POS: ---</span>
+  <span id="hud-poison" style="display:none;color:#aaff33;font-weight:bold;animation:blink 1s infinite;">☠ VELENO: -? HP/g</span>
+  <div id="frag-pips" style="display:flex;gap:2px;"></div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: TITOLO                             -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-title" class="screen active-screen">
+  <div class="title-container">
+    <pre id="title-art" class="title-art"></pre>
+    <div class="title-sub">❄ L'URLO DI YMIR — HYBORIA EDITION ❄</div>
+    <div class="title-menu">
+      <button class="btn-title" id="btn-new-game">[ N ] NUOVA PARTITA</button>
+      <button class="btn-title" id="btn-walkthrough">[ W ] WALKTHROUGH</button>
+      <button class="btn-title" id="btn-exit">[ E ] ESCI</button>
+      <!-- GOD MODE hidden — attivato con [G] dalla tastiera -->
+      <button class="btn-title" id="btn-god-mode" style="display:none;">[ G ] GOD MODE</button>
+    </div>
+    <div id="saves-list" class="saves-list"></div>
+    <div class="title-footer">
+      CROM NON SENTE LE TUE PREGHIERE. MA HA DATO TUTTO IL RESTO.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: WALKTHROUGH                        -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-walkthrough" class="screen">
+  <div class="game-header">
+    <div class="game-title">❄ L'URLO DI YMIR — WALKTHROUGH</div>
+    <button class="btn-back-header" onclick="Game.goTitle()">← INDIETRO</button>
+  </div>
+  <div id="walkthrough-content" style="max-width:860px;margin:0 auto;padding:16px;overflow-y:auto;max-height:calc(100vh - 80px);font-family:monospace;font-size:12px;line-height:1.7;color:#ccc;">
+    <!-- Populated by Screens.renderWalkthrough() -->
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: CREAZIONE PERSONAGGIO              -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-new-char" class="screen">
+  <div class="game-header">
+    <div class="game-title">❄ CREAZIONE PERSONAGGIO</div>
+    <button class="btn-back-header" onclick="Game.goTitle()">← INDIETRO</button>
+  </div>
+
+  <div class="sheet-container">
+
+    <!-- ── Identità ── -->
+    <div class="panel full-width">
+      <h2 class="panel-title">Identita'</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:15px;">
+        <div class="form-group">
+          <label>Sesso</label>
+          <select id="sel-sesso" onchange="updateNames()">
+            <option value="maschi">Maschio</option>
+            <option value="femmine">Femmina</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Nome</label><select id="sel-nome"></select></div>
+        <div class="form-group">
+          <label>Fascia d'Eta'</label>
+          <select id="sel-eta" onchange="calcAll()">
+            <option value="18">18 Anni (+DES, -FRT)</option>
+            <option value="24">24 Anni (+FOR, -INT)</option>
+            <option value="34" selected>34 Anni (+RES, -FRT)</option>
+            <option value="45">45 Anni (+INT, -FOR)</option>
+            <option value="55">55 Anni (+FRT, -DES)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Seed Mondo</label>
+          <input type="text" id="inp-seed" readonly style="cursor:pointer;" title="Clicca per nuovo seed">
+        </div>
+      </div>
+    </div>
+
+    <!-- hidden frammenti stubs (charsheet.js needs these IDs) -->
+    <div style="display:none" id="frammenti-panel">
+      <div id="frammenti-grid"></div>
+      <div id="frammenti-bar"></div>
+      <span id="frammenti-label"></span>
+      <div id="frammenti-martello-msg"></div>
+    </div>
+
+    <!-- ── Origini e Fede ── -->
+    <div class="panel">
+      <h2 class="panel-title">Origini e Fede</h2>
+      <div class="form-group"><label>Razza</label><select id="sel-razza" onchange="calcAll()"></select></div>
+      <div class="form-group"><label>Classe</label><select id="sel-classe" onchange="aggiornaSottoclasse()"></select></div>
+      <div class="form-group"><label>Sottoclasse</label><select id="sel-sottoclasse" onchange="calcAll()"></select></div>
+      <div class="form-group"><label>Background</label><select id="sel-bg" onchange="calcAll()"></select></div>
+      <div class="form-group"><label>Deita'</label><select id="sel-dio" onchange="calcAll()"></select></div>
+      <div class="form-group"><label>Evento Formativo</label><select id="sel-evento" onchange="calcAll()"></select></div>
+      <div class="form-group"><label>Codice di Condotta</label><select id="sel-condotta" onchange="calcAll()"></select></div>
+    </div>
+
+    <!-- ── Attributi (Point Buy) ── -->
+    <div class="panel">
+      <h2 class="panel-title">Attributi (Point Buy)</h2>
+      <div class="pool-info">
+        Pool Primario: <span id="pool-prim-display">6</span> &nbsp;|&nbsp;
+        Pool Scambio: <span id="pool-sec-display">0</span>
+      </div>
+      <div class="attr-grid" id="attr-grid-container"></div>
+    </div>
+
+    <!-- ── Abilità & Competenze ── -->
+    <div class="panel">
+      <h2 class="panel-title">Abilita' &amp; Competenze</h2>
+      <div id="skills-container"></div>
+      <div class="trait-box" id="trait-box" style="display:none;">
+        <strong>Tratti Passivi:</strong><br><span id="trait-text"></span>
+      </div>
+      <div class="trait-box" id="trait-attivi-box" style="display:none;margin-top:8px;border-left-color:#aaa;">
+        <strong>Tratti Attivi:</strong><br><span id="trait-attivi-text"></span>
+      </div>
+    </div>
+
+    <!-- ── Combattimento (Attacco + Difesa) ── -->
+    <div class="panel">
+      <h2 class="panel-title">Combattimento</h2>
+      <div style="font-size:.8em;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Attacco</div>
+      <div class="stat-row"><span class="stat-label">Vita (HP)</span><span class="stat-value" id="val-hp">10</span></div>
+      <div class="stat-row"><span class="stat-label">Energia</span><span class="stat-value" id="val-energia">10</span></div>
+      <div class="stat-row">
+        <span class="stat-label">Attacco (ATT)</span>
+        <span><span class="stat-value" id="val-att">0</span><span class="comb-delta" id="delta-att"></span></span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Danno (DAN)</span>
+        <span><span class="stat-value" id="val-dan">0</span><span class="comb-delta" id="delta-dan"></span></span>
+      </div>
+      <div style="font-size:.8em;color:#888;margin:8px 0 6px;text-transform:uppercase;letter-spacing:1px;">Difesa</div>
+      <div class="stat-row">
+        <span class="stat-label">Difesa (DEF)</span>
+        <span><span class="stat-value" id="val-def">0</span><span class="comb-delta" id="delta-def"></span></span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Armatura (RD)</span>
+        <span><span class="stat-value" id="val-rd">0</span><span class="comb-delta" id="delta-rd"></span></span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Iniziativa (INI)</span>
+        <span><span class="stat-value" id="val-ini">0</span><span class="comb-delta" id="delta-ini"></span></span>
+      </div>
+    </div>
+
+    <!-- ── Resistenze Elementali ── -->
+    <div class="panel">
+      <h2 class="panel-title">Riduzione Danni Elementali</h2>
+      <p style="font-size:.8em;color:#aaa;margin-top:0;">Sottrae un valore fisso ai danni elementali subiti.</p>
+      <div class="res-grid">
+        <div class="stat-row"><span class="stat-label">Rid. Fuoco</span><span class="stat-value" id="res-fuoco">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Freddo</span><span class="stat-value" id="res-freddo">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Acido</span><span class="stat-value" id="res-acido">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Veleno</span><span class="stat-value" id="res-veleno">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Magia</span><span class="stat-value" id="res-magia">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Fulmine</span><span class="stat-value" id="res-fulmine">0</span></div>
+        <div class="stat-row"><span class="stat-label">Rid. Incanto</span><span class="stat-value" id="res-incanto">0</span></div>
+      </div>
+    </div>
+
+    <!-- ── Equipaggiamento Attivo ── -->
+    <div class="panel">
+      <h2 class="panel-title">Equipaggiamento Attivo</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div id="inv-left">
+          <div class="inv-slot"><span class="inv-label">Elmo</span><span class="inv-item-name rar-normal" id="inv-name-elmo">--- Vuoto ---</span><button class="inv-remove-btn" onclick="removeEquip('elmo')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-elmo"></div>
+          <div class="inv-slot"><span class="inv-label">Armatura</span><span class="inv-item-name rar-normal" id="inv-name-armatura">--- Vuota ---</span><button class="inv-remove-btn" onclick="removeEquip('armatura')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-armatura"></div>
+          <div class="inv-slot"><span class="inv-label">Bracciali</span><span class="inv-item-name rar-normal" id="inv-name-bracciali">--- Vuoti ---</span><button class="inv-remove-btn" onclick="removeEquip('bracciali')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-bracciali"></div>
+          <div class="inv-slot"><span class="inv-label">Cintura</span><span class="inv-item-name rar-normal" id="inv-name-cintura">--- Vuota ---</span><button class="inv-remove-btn" onclick="removeEquip('cintura')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-cintura"></div>
+        </div>
+        <div id="inv-right">
+          <div class="inv-slot"><span class="inv-label">Amuleto</span><span class="inv-item-name rar-normal" id="inv-name-amuleto">--- Vuoto ---</span><button class="inv-remove-btn" onclick="removeEquip('amuleto')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-amuleto"></div>
+          <div class="inv-slot"><span class="inv-label">Anello</span><span class="inv-item-name rar-normal" id="inv-name-anello">--- Vuoto ---</span><button class="inv-remove-btn" onclick="removeEquip('anello')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-anello"></div>
+          <div class="inv-slot"><span class="inv-label">Stivali</span><span class="inv-item-name rar-normal" id="inv-name-stivali">--- Vuoti ---</span><button class="inv-remove-btn" onclick="removeEquip('stivali')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-stivali"></div>
+          <div class="inv-slot"><span class="inv-label">Arma</span><span class="inv-item-name rar-normal" id="inv-name-arma">--- Nessuna ---</span><button class="inv-remove-btn" onclick="removeEquip('arma')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-arma"></div>
+          <div class="inv-slot"><span class="inv-label">Scudo</span><span class="inv-item-name rar-normal" id="inv-name-scudo">--- Nessuno ---</span><button class="inv-remove-btn" onclick="removeEquip('scudo')">x</button></div>
+          <div class="inv-bonus-line" id="inv-bonus-scudo"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- hidden stubs for charsheet.js IDs (shop/forgia used elsewhere) -->
+    <div style="display:none">
+      <input id="val-zecchini" type="number" value="1">
+      <input id="val-fate"     type="number" value="0">
+      <span id="shop-msg"></span>
+      <div id="inv-bag-display"></div>
+      <div id="bag-detail-bar"><div id="bag-detail-name"></div><div id="bag-detail-desc"></div><div id="bag-detail-eff"></div></div>
+      <div id="ss-armi"><div id="shop-grid-armi"></div></div>
+      <div id="ss-pozioni"><div id="shop-grid-pozioni"></div></div>
+      <div id="ss-pergamene"><div id="shop-grid-pergamene"></div></div>
+      <div id="ss-oggetti"><div id="shop-grid-oggetti"></div></div>
+      <div id="shop-buy-bar"><div id="shop-buy-name"></div><div id="shop-buy-desc"></div><div id="shop-buy-eff"></div></div>
+      <div id="fs-random"><div id="item-card-random"></div><button id="btn-equip-random"></button><div id="rarity-bar"></div><div id="slot-filter-random"></div></div>
+      <div id="fs-scegli"><div id="item-card-scegli"></div><button id="btn-equip-scegli"></button><div id="slot-filter-scegli"></div><div id="item-list-container"></div></div>
+    </div>
+
+    <!-- ── Conferma ── -->
+    <div class="full-width" style="margin-top:10px;display:flex;gap:8px;">
+      <button class="btn-action" style="flex:1;" id="btn-confirm-char">⚔ INIZIA L'AVVENTURA</button>
+      <button class="btn-back" style="flex:0 0 120px;" onclick="Game.goTitle()">← ANNULLA</button>
+    </div>
+
+  </div><!-- /.sheet-container -->
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: MENU PRINCIPALE                    -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-main-menu" class="screen">
+  <div class="game-header">
+    <div class="game-title" id="mm-title">❄ CONAN II — L'URLO DI YMIR</div>
+    <div style="font-size:10px;color:#888;">
+      <span id="mm-gold">💰 0 ZEC</span> &nbsp;
+      <span id="mm-destino">⭐ 0 DEST</span>
+    </div>
+  </div>
+
+  <div class="main-menu-layout">
+    <div class="menu-left">
+      <div class="panel">
+        <div class="panel-title" id="char-summary-name">CONAN</div>
+        <div style="font-size:11px;color:#aaa;" id="char-summary-info"></div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:8px;" id="char-summary-stats"></div>
+      </div>
+      <div class="panel" id="mm-location-info"></div>
+      <div class="panel" id="mm-quest-active">
+        <div class="panel-title">QUEST ATTIVA</div>
+        <div id="mm-quest-text" style="font-size:11px;color:#ffdd55;line-height:1.4;"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">LOG</div>
+        <div class="log-box" id="log-main"></div>
+      </div>
+    </div>
+    <div class="menu-right">
+      <div class="main-menu-buttons">
+        <button class="btn-menu" onclick="Game.showCharSheet()">📜 SCHEDA</button>
+        <button class="btn-menu" onclick="Game.showMap()">🗺 MAPPA</button>
+        <button class="btn-menu" onclick="Game.showQuestLog()">📖 DIARIO QUEST</button>
+        <button class="btn-menu" id="btn-travel" onclick="Game.travelMenu()">⚔ VIAGGIA</button>
+        <button class="btn-menu" onclick="Game.showLocation()">🏰 ESPLORA</button>
+        <button class="btn-menu" onclick="Game.saveGame()">💾 SALVA</button>
+        <button class="btn-menu btn-danger" onclick="Game.goTitle()">🚪 MENU</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: SCHEDA PERSONAGGIO                 -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-character" class="screen">
+  <div class="game-header">
+    <div class="game-title">📜 SCHEDA PERSONAGGIO</div>
+    <button class="btn-back-header" onclick="Game.showMainMenu()">← MENU</button>
+  </div>
+  <div class="char-sheet-container">
+    <!-- Identità -->
+    <div class="panel full-width" id="cs-identity"></div>
+
+    <!-- Attributi -->
+    <div class="panel" id="cs-attributes"></div>
+
+    <!-- Combattimento -->
+    <div class="panel" id="cs-combat"></div>
+
+    <!-- Abilità & Resistenze -->
+    <div class="panel full-width" id="cs-skills"></div>
+
+    <!-- Equipaggiamento -->
+    <div class="panel full-width" id="cs-equipment"></div>
+
+    <!-- Inventario zaino -->
+    <div class="panel full-width" id="cs-inventory"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: MAPPA                              -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-map" class="screen">
+  <div class="game-header">
+    <div class="game-title">🗺 MAPPA DELLA CIMMERIA</div>
+    <div class="frammenti-hud">
+      <div id="frag-pips-map"></div>
+      <span class="frag-count" id="frag-count-map">0/12</span>
+    </div>
+    <button class="btn-back-header" onclick="Game.showMainMenu()">← MENU</button>
+  </div>
+  <div class="main-container">
+    <div class="panel">
+      <div class="hud" id="map-hud">
+        <div id="hud-pos">POS: ---</div>
+        <div id="hud-type">TIPO: ---</div>
+        <div id="hud-biome">BIOMA: ---</div>
+        <div id="hud-dist">DIST: 0 LG</div>
+        <div id="hud-days">PASSI: 0</div>
+      </div>
+      <div class="map-viewport" id="map-cont">
+        <div id="biome-layer"></div>
+        <svg id="route-svg" style="position:absolute;inset:0;z-index:5;pointer-events:none;width:100%;height:100%;">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#fff"/>
+            </marker>
+          </defs>
+          <line id="the-line" x1="0" y1="0" x2="0" y2="0"
+            stroke="#fff" stroke-width="3" stroke-dasharray="8" fill="none"
+            marker-end="url(#arrow)"/>
+        </svg>
+        <div id="markers-layer"></div>
+      </div>
+    </div>
+
+    <!-- Sidebar mappa -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="sidebar-box panel">
+        <div class="panel-title">LEGENDA BIOMA</div>
+        <div style="font-size:10px;line-height:1.8;">
+          <span style="color:#fff">^</span> MONTI/TUNDRA &nbsp;
+          <span style="color:var(--c64-yellow)">░</span> DESERTO &nbsp;
+          <span style="color:var(--c64-cyan)">▒</span> OASI<br>
+          <span style="color:var(--c64-green)">♣</span> FORESTA &nbsp;
+          <span style="color:var(--c64-ice)">~</span> PALUDI &nbsp;
+          <span style="color:#ff6633">*</span> VULCANO<br>
+          <span style="color:#00aacc">≈</span> COSTA &nbsp;
+          <span style="color:var(--col-unique)">!</span> PERICOLO
+        </div>
+      </div>
+      <div class="sidebar-box panel">
+        <div style="font-size:10px;color:var(--c64-orange);letter-spacing:1px;margin-bottom:4px;">⚔ DESTINAZIONI QUEST ATTIVE</div>
+        <div id="quest-dest-list"></div>
+        <div style="margin-top:8px;">
+          <select class="sel-main" id="sel-dest" style="width:100%;margin-bottom:6px;"></select>
+          <button class="btn-action" onclick="Game.startTravel()" style="width:100%;">▶ AVVIA SPEDIZIONE</button>
+        </div>
+        <div class="log-box" id="log-map" style="margin-top:6px;">PRONTO. SELEZIONA UNA DESTINAZIONE.</div>
+      </div>
+      <div class="sidebar-box panel">
+        <div class="panel-title">QUEST MAGGIORI</div>
+        <div id="quest-major-log" style="font-size:10px;max-height:200px;overflow-y:auto;"></div>
+      </div>
+      <div class="sidebar-box panel">
+        <div class="panel-title">ALLEANZE</div>
+        <div id="alleanze-log" style="font-size:10px;color:#aaa;line-height:1.6;">NESSUNA ALLEANZA.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: VIAGGIO                            -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-travel" class="screen">
+  <div class="game-header">
+    <div class="game-title">⚔ VIAGGIO IN CIMMERIA</div>
+    <div id="travel-progress-hud" style="font-size:11px;color:var(--c64-yellow);">TAPPA 0 / 0</div>
+  </div>
+  <div style="max-width:800px;margin:0 auto;padding:10px;">
+    <div class="panel" style="margin-bottom:10px;text-align:center;font-size:12px;">
+      <span id="travel-from" style="color:var(--c64-gold);">---</span>
+      <span style="color:#555;margin:0 10px;">→→→</span>
+      <span id="travel-to" style="color:var(--c64-gold);">---</span>
+    </div>
+    <div class="travel-progress-bar">
+      <div id="travel-progress-fill" style="height:100%;background:linear-gradient(90deg,var(--c64-orange),var(--c64-gold));transition:width .5s;width:0%;"></div>
+    </div>
+    <div style="text-align:center;font-size:11px;color:#888;margin:4px 0;" id="travel-progress-text">TAPPA 0 / 0</div>
+    <div class="panel" id="travel-event-box" style="margin-top:10px;min-height:150px;"></div>
+    <div id="travel-action-btns" style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <button class="btn-action" id="travel-btn-continue">▶ AVANZA</button>
+      <button class="btn-action" onclick="Game.campRest()">⛺ ACCAMPA</button>
+    </div>
+    <div class="log-box" id="log-travel" style="margin-top:8px;height:120px;"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: COMBATTIMENTO                      -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-combat" class="screen">
+  <div class="game-header">
+    <div class="game-title" id="combat-title">⚔ BATTAGLIA</div>
+    <div id="combat-turn-hud" style="font-size:11px;color:var(--c64-yellow);">TURNO 1</div>
+  </div>
+  <div class="combat-layout">
+    <!-- Nemico -->
+    <div class="panel combat-enemy-panel">
+      <div class="enemy-header">
+        <div class="enemy-name" id="enemy-combat-name">NEMICO</div>
+        <div class="enemy-type" id="enemy-tier"></div>
+      </div>
+      <div class="enc-hp-bar">
+        <div class="enc-hp-fill" id="enemy-hp-fill" style="width:100%;"></div>
+        <div class="enc-hp-text" id="enemy-hp-text">HP: ?/?</div>
+      </div>
+      <div class="enc-stats" id="comb-enemy-stats">
+        <div class="enc-stat">ATT <div class="enc-stat-val" id="cstat-enemy-att">0</div></div>
+        <div class="enc-stat">DAN <div class="enc-stat-val" id="cstat-enemy-dan">0</div></div>
+        <div class="enc-stat">DEF <div class="enc-stat-val" id="cstat-enemy-def">0</div></div>
+        <div class="enc-stat">RD <div class="enc-stat-val" id="cstat-enemy-rd">0</div></div>
+      </div>
+      <div id="enemy-skills" style="margin-top:8px;font-size:10px;color:#aaa;"></div>
+      <div id="comb-enemy-attrs" style="margin-top:8px;"></div>
+      <div id="comb-enemy-elem" style="margin-top:4px;"></div>
+      <div id="comb-enemy-res" style="margin-top:4px;"></div>
+      <div id="comb-enemy-lore" style="font-style:italic;font-size:10px;color:#888;margin-top:8px;border-left:2px solid var(--c64-border);padding-left:8px;"></div>
+    </div>
+
+    <!-- Centro: log + azioni -->
+    <div class="combat-center">
+      <div class="combat-log" id="combat-log"></div>
+      <div style="font-size:10px;color:var(--c64-yellow);text-align:center;padding:4px;" id="combat-turn">TURNO 1</div>
+      <div class="enc-btns" id="comb-action-btns">
+        <button class="enc-btn attack" id="btn-attack" onclick="Game.combatAction('attack')">⚔ ATTACCA</button>
+        <button class="enc-btn special" id="btn-defend" onclick="Game.combatAction('defend')">🛡 DIFENDITI</button>
+        <button class="enc-btn special" id="btn-skill" onclick="Game.showCombatSkills()">✨ ABILITÀ</button>
+        <button class="enc-btn special" id="btn-potion" onclick="Game.showCombatPotions()">🧪 POZIONE</button>
+        <button class="enc-btn flee" id="btn-flee" onclick="Game.combatAction('flee')">🏃 FUGA (dado)</button>
+        <button class="enc-btn flee" id="btn-surrender" onclick="Game.combatAction('surrender')">🏳 RESA (dado)</button>
+      </div>
+      <div id="comb-skill-menu" style="display:none;margin-top:8px;" class="panel"></div>
+      <div id="comb-result-box" style="display:none;" class="panel"></div>
+    </div>
+
+    <!-- Giocatore -->
+    <div class="panel combat-player-panel">
+      <div class="enemy-header">
+        <div class="enemy-name" id="comb-player-name" style="color:var(--c64-gold);">EROE</div>
+        <div class="enemy-type" id="comb-player-class"></div>
+      </div>
+      <div class="enc-hp-bar">
+        <div class="enc-hp-fill" id="player-hp-fill-c" style="width:100%;background:linear-gradient(90deg,#004400,#00aa00);"></div>
+        <div class="enc-hp-text" id="player-hp-text-c">HP: ?/?</div>
+      </div>
+      <div class="enc-stats" id="comb-player-stats">
+        <div class="enc-stat">ATT <div class="enc-stat-val" id="cstat-player-att">0</div></div>
+        <div class="enc-stat">DAN <div class="enc-stat-val" id="cstat-player-dan">0</div></div>
+        <div class="enc-stat">DEF <div class="enc-stat-val" id="cstat-player-def">0</div></div>
+        <div class="enc-stat">RD <div class="enc-stat-val" id="cstat-player-rd">0</div></div>
+      </div>
+      <div id="comb-player-attrs" style="margin-top:8px;"></div>
+      <div id="comb-player-elem" style="margin-top:4px;"></div>
+      <div id="comb-player-res" style="margin-top:4px;"></div>
+      <div id="comb-player-skills" style="margin-top:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: LOCATION                           -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-location" class="screen">
+  <div class="game-header">
+    <div class="game-title" id="loc-header-name">🏰 LOCATION</div>
+    <div style="font-size:10px;color:var(--c64-yellow);" id="loc-header-type"></div>
+    <button class="btn-back-header" onclick="Game.showMainMenu()">← MENU</button>
+  </div>
+  <div class="main-container">
+    <div class="panel" style="position:relative;">
+      <div class="loc-name" id="loc-name"></div>
+      <pre class="loc-art" id="loc-art"></pre>
+      <div class="loc-desc" id="loc-desc"></div>
+
+      <!-- Negozi -->
+      <div class="loc-shops" id="loc-shops"></div>
+
+      <!-- Azioni location -->
+      <div id="loc-btns" style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;"></div>
+
+      <!-- Dialogo NPC -->
+      <div class="dialog-box" id="dialog-box">
+        <div class="dialog-speaker" id="dialog-speaker"></div>
+        <div class="dialog-text" id="dialog-text"></div>
+        <div class="dialog-choices" id="dialog-choices"></div>
+      </div>
+
+      <!-- Bacheca Quest -->
+      <div id="loc-quest-board" class="panel" style="margin-top:10px;background:#0d0800;border-color:var(--c64-orange);">
+        <div class="panel-title" style="color:var(--c64-orange);">📌 BACHECA MISSIONI</div>
+        <div id="loc-quest-list" style="font-size:11px;"></div>
+      </div>
+
+      <!-- Log locale -->
+      <div class="log-box" id="log-local" style="margin-top:8px;"></div>
+
+      <!-- Shop overlays -->
+      <div class="shop-overlay" id="shop-fabbro"></div>
+      <div class="shop-overlay" id="shop-mistico"></div>
+      <div class="shop-overlay" id="shop-maga"></div>
+    </div>
+
+    <!-- Sidebar location -->
+    <div>
+      <div class="sidebar-box panel">
+        <div class="panel-title">NPC PRESENTI</div>
+        <div id="loc-npcs" style="font-size:11px;"></div>
+        <div style="font-size:10px;margin-top:8px;border-top:1px solid #333;padding-top:6px;">
+          💰 <span id="loc-gold">0</span> ZEC &nbsp; ⭐ <span id="loc-destino">0</span> DEST
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: QUEST LOG                          -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-quest" class="screen">
+  <div class="game-header">
+    <div class="game-title">📖 DIARIO QUEST</div>
+    <button class="btn-back-header" onclick="Game.showMainMenu()">← MENU</button>
+  </div>
+  <div style="max-width:1000px;margin:0 auto;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div class="panel">
+      <div class="panel-title" style="color:var(--c64-gold);">QUEST MAGGIORI (12)</div>
+      <div id="quest-log-major" style="font-size:11px;"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title" style="color:var(--c64-orange);">QUEST MINORI</div>
+      <div id="quest-log-minor" style="font-size:11px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCREEN: FINALE                             -->
+<!-- ══════════════════════════════════════════ -->
+<div id="screen-finale" class="screen">
+  <pre id="finale-art" style="color:var(--c64-gold);font-size:14px;text-align:center;padding:20px;"></pre>
+  <div class="panel" style="max-width:600px;margin:0 auto;text-align:center;">
+    <div class="panel-title" id="ending-title">FINE</div>
+    <div id="ending-text" style="color:#ccc;line-height:1.8;font-size:13px;font-family:Georgia,serif;text-transform:none;"></div>
+    <div id="ending-frags" style="color:#ffd700;margin-top:12px;font-size:12px;"></div>
+    <button class="btn-action" style="margin-top:20px;" onclick="Game.goTitle()">TORNA AL MENU</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SCRIPTS                                    -->
+<!-- ══════════════════════════════════════════ -->
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/charsheet.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/game.js"></script>
+
+</body>
+</html>

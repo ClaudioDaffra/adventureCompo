@@ -1,0 +1,17 @@
+{
+  "name": "conan-ii-urlo-di-ymir",
+  "version": "1.0.0",
+  "description": "CONAN II - L'Urlo di Ymir - Browser RPG",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "stop": "node stop.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.4",
+    "express": "^4.22.1",
+    "express.js": "^1.0.0",
+    "uuid": "^9.0.0"
+  }
+}

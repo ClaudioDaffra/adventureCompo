@@ -1,0 +1,195 @@
+{
+  "nome": "Conan",
+  "sesso": "maschi",
+  "eta": "34",
+  "razza": "cimmero",
+  "classe": "barbaro",
+  "sottoclasse": "berserker",
+  "background": "schiavo",
+  "dio": "crom",
+  "evento": "villaggio",
+  "condotta": "acciaio",
+  "seed": 1660348,
+  "attributes": {
+    "FOR": 16,
+    "DES": 10,
+    "COS": 12,
+    "RES": 11,
+    "INT": 6,
+    "FRT": 7
+  },
+  "derived": {
+    "hp": 55,
+    "maxHp": 55,
+    "energia": 24,
+    "maxEnergia": 24,
+    "att": 4,
+    "dan": 10,
+    "def": 2,
+    "rd": 2,
+    "ini": 3
+  },
+  "baseResistances": {
+    "fuoco": 4,
+    "freddo": 5,
+    "acido": 3,
+    "veleno": 3,
+    "magia": 2,
+    "fulmine": 2,
+    "incanto": 5
+  },
+  "resistances": {
+    "fuoco": 4,
+    "freddo": 5,
+    "acido": 3,
+    "veleno": 3,
+    "magia": 2,
+    "fulmine": 2,
+    "incanto": 5
+  },
+  "skills": [
+    "Sopravvivenza",
+    "Furia",
+    "Intimidire",
+    "Sopportazione",
+    "Fermezza"
+  ],
+  "competenze": [
+    "Forza Bruta",
+    "Armi a 2 mani",
+    "Sfondamento",
+    "Furtivita'",
+    "Resistenza",
+    "Resistenza Fuoco",
+    "Armatura"
+  ],
+  "traits": [
+    "Infrangibile: ignora un KO a sessione.",
+    "Il dio non ascolta, ma da' Forza."
+  ],
+  "equipment": {
+    "elmo": null,
+    "armatura": null,
+    "bracciali": null,
+    "cintura": null,
+    "amuleto": null,
+    "anello": null,
+    "stivali": null,
+    "arma": {
+      "id": "sw1",
+      "nome": "Ascia da Guerra",
+      "rar": "normal",
+      "slot": "Arma2M",
+      "attr": {},
+      "comb": {
+        "dan": 3,
+        "att": -1
+      },
+      "res": {},
+      "lore": "Pesante ascia cimmera a due mani."
+    },
+    "scudo": null
+  },
+  "inventory": [
+    {
+      "id": "pot11",
+      "nome": "Pozione di Antracite",
+      "rar": "special",
+      "tipo": "consumabile",
+      "usableInCombat": true,
+      "cat": "pozioni",
+      "effetto": {
+        "res": {
+          "acido": 4
+        },
+        "temp": true
+      },
+      "desc": "+4 Rid. Acido per sessione.",
+      "prezzo": 65,
+      "instanceId": "pot11_1777652033147"
+    }
+  ],
+  "gold": 37,
+  "destino": 1,
+  "destinoGemsFound": [],
+  "frammenti": [],
+  "alleanze": [],
+  "currentLocation": 9,
+  "visitedLocations": [
+    0,
+    13,
+    9
+  ],
+  "unlockedLocations": [
+    0,
+    1,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "questMajorStato": {
+    "M1": "attiva"
+  },
+  "questMinorStato": {
+    "rnd_9_20574_0": "completata",
+    "rnd_9_20574_1": "completata"
+  },
+  "activeQuest": "M1",
+  "travelDestination": 9,
+  "travelProgress": 5,
+  "travelDistance": 5,
+  "combatState": null,
+  "gameOver": false,
+  "ending": null,
+  "onore": {
+    "vinte": 2,
+    "fuggite": 1,
+    "rese": 0
+  },
+  "durata": 12,
+  "pbState": {
+    "FOR": {
+      "base": 9,
+      "prim": 1,
+      "sec": 1
+    },
+    "DES": {
+      "base": 9,
+      "prim": 1,
+      "sec": 0
+    },
+    "COS": {
+      "base": 9,
+      "prim": 1,
+      "sec": 1
+    },
+    "RES": {
+      "base": 8,
+      "prim": 1,
+      "sec": 0
+    },
+    "INT": {
+      "base": 8,
+      "prim": 1,
+      "sec": 0
+    },
+    "FRT": {
+      "base": 9,
+      "prim": 1,
+      "sec": 0
+    }
+  },
+  "createdAt": "2026-05-01T16:10:58.847Z",
+  "_venariumIntroDone": true,
+  "saveSlot": "conan",
+  "savedAt": "2026-05-01T16:14:00.717Z",
+  "destinoEverFound": true
+}

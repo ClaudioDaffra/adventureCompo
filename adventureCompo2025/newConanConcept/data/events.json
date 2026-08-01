@@ -1,0 +1,10 @@
+[
+  {"id":"padre_ucciso","nome":"Il Padre Ucciso","desc":"Tuo padre fu assassinato davanti ai tuoi occhi da un guerriero di un clan nemico.","bonus":{"FOR":1},"oro_mod":0,"trait":"Odio verso i traditori: +1 ATT contro umanoidi che tradiscono alleanze."},
+  {"id":"villaggio_bruciato","nome":"Villaggio Bruciato","desc":"Il tuo villaggio fu distrutto dal fuoco di un esercito invasore. Sei l'unico sopravvissuto.","bonus":{"RES":1},"oro_mod":0,"trait":"Sopravvissuto nato: una volta per sessione, sopravvivi con 1 HP a un colpo letale."},
+  {"id":"iniziazione","nome":"Rito di Iniziazione","desc":"Hai superato il rito cimmero: tre giorni e tre notti sulle montagne ghiacciate da solo.","bonus":{"COS":1},"oro_mod":10,"trait":"Resistenza al freddo aumentata. Ignori le penalità di clima glaciale."},
+  {"id":"prigioniero","nome":"Prigioniero di Guerra","desc":"Fosti catturato da giovane e venduto come schiavo. Sei fuggito dopo anni.","bonus":{"DES":1},"oro_mod":5,"trait":"Evasione: +2 ai tiri per fuggire da situazioni di prigionia o accerchiamento."},
+  {"id":"visione","nome":"La Visione di Crom","desc":"In un sogno febbricitante, Crom ti parlò direttamente. Un'esperienza che cambia l'anima.","bonus":{"INT":1},"oro_mod":0,"trait":"Ispirazione divina: una volta al giorno puoi ripetere un tiro fallito."},
+  {"id":"commercio","nome":"Carovana Saccheggiata","desc":"La carovana dei tuoi genitori fu attaccata. Imparasti a combattere per necessità.","bonus":{"FRT":1},"oro_mod":20,"trait":"Mercante d'armi: prezzi d'acquisto -5% nelle città."},
+  {"id":"duello","nome":"Il Primo Duello","desc":"A 15 anni uccidesti il tuo primo avversario in duello. La voce si sparse.","bonus":{"FOR":1},"oro_mod":0,"trait":"Reputazione: gli NPC guerrieri ti rispettano dal primo incontro."},
+  {"id":"maledizione","nome":"La Maledizione della Strega","desc":"Una strega ti maledì in gioventù. La maledizione ti perseguita ma ti ha anche indurito.","bonus":{"RES":1},"oro_mod":0,"trait":"Resistenza alle maledizioni: +3 Rid. Magia permanente."}
+]
