@@ -1,0 +1,7 @@
+Return to Claymorgue's Castle: Changelog
+
+This lists all the changes the author(s) of this game made to it in
+the course of IFComp 2024, in their own words. (May contain spoilers.)
+
+September 5, 11:03 AM (UTC)
+  fix bug : already take by 0

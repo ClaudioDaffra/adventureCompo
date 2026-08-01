@@ -1,0 +1,180 @@
+Ecco soluzione completa e ottimizzata per completare "The Abandoned Farm House Adventure".
+
+Il gioco ha diverse meccaniche nascoste e limiti di tempo che possono portare al game over:
+
+* Capacità dell'inventario: Puoi trasportare al massimo 5 oggetti contemporaneamente.
+* Fame e Sete: Devi bere acqua entro turno 50 e mangiare entro turno 40, altrimenti sverrai.
+* Oscurità: Devi avere una fonte di luce accesa entro turno 60.
+* Topi nel tunnel: Se entri nel tunnel senza lasciare del formaggio a terra, topi ti attaccheranno per 3 turni di fila, uccidendoti al quarto.
+
+### ## 1. Preparazione e Risorse Base
+
+In questa fase raccoglieremo gli oggetti necessari per sopravvivere e chiave per avanzare.
+
+* drop flashlight: Lascia subito torcia; non ha batterie ed è completamente inutile, ti occuperebbe solo spazio.
+* take key: Raccogli chiave nel vialetto.
+* go north: Vai al vialetto 2 (Driveway2).
+* take bottle: Raccogli bottiglia.
+* go east: Vai al vialetto 3.
+* go east: Entra nel garage.
+* take oil: Raccogli l'olio.
+* go west: Torna al vialetto 3.
+* go west: Torna al vialetto 2.
+* go north: Vai al vialetto 4.
+* go north: Entra nel laboratorio (Workroom).
+* take lamp: Raccogli lampada.
+* use oil: Riempi lampada con l'olio.
+* drop oil: Lascia l'olio vuoto per liberare spazio nell'inventario.
+
+
+
+### ## 2. Recupero Armi e Cibo
+
+Ora dobbiamo assicurarci di non morire di fame o di sete e recuperare l'arma per finale.
+
+* go up: Sali nel fienile (Hayloft).
+* take pitchfork: Raccogli forcone, ti servirà contro lupo.
+* go down: Scendi nel laboratorio.
+* go south: Torna al vialetto 4.
+* go south: Torna al vialetto 2.
+* go west: Vai al vialetto 5 (di fronte alla porta di casa).
+* go west: Entra in cucina (Kitchen).
+* take candybar: Raccogli barretta di cioccolato.
+* use candybar: Mangia barretta per non svenire dalla fame.
+* drop candybar: Lascia l'involucro per liberare spazio.
+* go down: Scendi nella lavanderia (Laundry Room) nel seminterrato.
+* take cheese: Raccogli formaggio (ti salverà dai topi).
+* go west: Vai nella stanza della caldaia (Furnace Room).
+* go north: Vai nella stanza vuota con porta chiusa (Vacant Room).
+* go west: Entra nella cisterna (Cistern).
+* use bottle: Riempi bottiglia con l'acqua della cisterna e bevila per placare sete.
+* drop bottle: Lascia bottiglia vuota.
+
+
+
+### ## 3. Luce, Accesso al Tunnel e Giocattolo
+
+Ci servono fiammiferi per accendere lampada (è nascosta in una stanza segreta) e giocattolo per salvare bambino.
+
+* go east: Torna nella stanza vuota.
+* use key: Usa chiave per sbloccare porta che conduce al tunnel.
+* drop key: Lascia chiave, non ti serve più.
+* go south: Torna alla stanza della caldaia.
+* go east: Torna in lavanderia.
+* go up: Sali in cucina.
+* go south: Vai nella sala da pranzo (Dining Room).
+* go west: Vai in fondo alle scale (Bottom Stairs).
+* go up: Vai in cima alle scale (Top Stairs).
+* go east: Entra nella camera del bambino (Boy's Bedroom).
+* take toy car: Raccogli macchinina.
+* go west: Torna alle scale.
+* go west: Entra nella camera da letto principale (Master Bedroom) vicino alla libreria.
+* examine bookcase: Esamina libreria per rivelare stanza segreta.
+* go north: Entra negli alloggi della servitù (Servant's Quarters).
+* take matches: Raccogli fiammiferi.
+* use matches: Accendi lampada.
+* drop matches: Lascia fiammiferi.
+
+### ## 4. Tunnel e Salvataggio (Finale)
+
+Ora che hai lampada accesa, forcone, macchinina e formaggio, puoi affrontare l'ultima parte.
+
+* go south: Torna nella camera da letto principale.
+* go east: Torna alle scale.
+* go down: Scendi al piano terra.
+* go east: Vai in sala da pranzo.
+* go north: Vai in cucina.
+* go down: Scendi in lavanderia.
+* go west: Vai nella stanza della caldaia.
+* go north: Vai nella stanza vuota.
+* go north: Entra nel tunnel.
+* drop cheese: Lascia immediatamente cadere formaggio per distrarre topi, altrimenti ti attaccheranno.
+* go north: Esci dal tunnel nei boschi (Woods24).
+* go west: Prosegui nei boschi (Woods26).
+* go north: Arriva all'albero del lupo (Wolf Tree).
+* use pitchfork: Infilza lupo con forcone per farlo scappare via.
+* use toy car: Mostra a Matthew macchinina per convincerlo a scendere dall'albero, salvandolo.
+
+
+
+A questo punto avrai vinto gioco!
+
+---------------------------------------------------
+
+🔥 TRADUZIONE DIRETTA DEI COMANDI IN INGLESE → ITALIANO
+1. Preparazione e Risorse Base
+
+drop flashlight → lascia torcia
+take key → prendi chiave
+go north → vai a nord
+take bottle → prendi bottiglia
+go east → vai a est
+go east → vai a est
+take oil → prendi olio
+
+go west → vai a ovest
+go west → vai a ovest
+go north → vai a nord
+go north → vai a nord
+take lamp → prendi lampada
+use oil → usa olio
+drop oil → lascia olio
+
+2. Recupero Armi e Cibo
+
+go up → sali
+take pitchfork → prendi forcone
+go down → scendi
+go south → vai a sud
+go south → vai a sud
+go west → vai a ovest
+go west → vai a ovest
+take candybar → prendi barretta di cioccolato
+use candybar → mangia barretta di cioccolato
+drop candybar → lascia barretta
+go down → scendi
+take cheese → prendi formaggio
+go west → vai a ovest
+go north → vai a nord
+go west → vai a ovest
+use bottle → usa bottiglia
+drop bottle → lascia bottiglia
+
+3. Luce, Accesso al Tunnel e Giocattolo
+
+go east → vai a est
+use key → usa chiave
+drop key → lascia chiave
+go south → vai a sud
+go east → vai a est
+go up → sali
+go south → vai a sud
+go west → vai a ovest
+go up → sali
+go east → vai a est
+take toy car → prendi macchinina
+go west → vai a ovest
+go west → vai a ovest
+examine bookcase → esamina libreria
+go north → vai a nord
+take matches → prendi fiammiferi
+use matches → usa fiammiferi
+drop matches → lascia fiammiferi
+
+4. Tunnel e Salvataggio (Finale)
+
+go south → vai a sud
+go east → vai a est
+go down → scendi
+go east → vai a est
+go north → vai a nord
+go down → scendi
+go west → vai a ovest
+go north → vai a nord
+go north → vai a nord
+drop cheese → lascia formaggio
+go north → vai a nord
+go west → vai a ovest
+go north → vai a nord
+use pitchfork → usa forcone
+use toy car → usa macchinina

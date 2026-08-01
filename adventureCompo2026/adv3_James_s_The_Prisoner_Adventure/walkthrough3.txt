@@ -1,0 +1,40 @@
+Il gioco è "The Prisoner Adventure" di Jeff Tranter, ambientato nel Villaggio della serie TV "Il Prigioniero". Ecco l'obiettivo e la soluzione completa.
+
+Logica chiave del gioco (dedotta dal codice):
+
+Si parte a "No.6 Private" senza uscite finché non si prende il #6 badge: 
+doActions() apre automaticamente la porta.
+Per entrare nella Town Hall serve il pass (controllo in doGo()).
+Portando il seal (con dentro una bomba) alla Town Hall e usando lì il remote control (già presente), 
+si apre un passaggio verso la Control Room.
+Nella Control Room, usando il transmitter, l'elicottero atterra sul Lawn.
+Per fuggire con l'elicottero serve avere addosso il #2 badge.
+
+Soluzione passo-passo (20 mosse, ottimale):
+
+take #6 badge → la porta si apre
+go south → Tower
+go west → Stone Ship
+take pass
+go north → Lawn
+go east → No.6 Private
+go east → General Stores
+take seal
+go north → Band Stand
+go north → The Green Dome
+take #2 badge
+go south → Band Stand
+go west → Chess Lawn
+go west → Town Hall (con il pass entri)
+use remote control → esplosione, si apre il passaggio verso il basso
+go down → Control Room
+use transmitter → l'elicottero atterra sul Lawn
+go up → Town Hall
+go south → Lawn
+take helicopter → "You have escaped!" — vittoria
+
+Curiosità dal codice: la funzione doTake() ha un caso speciale per "helicopter" 
+che non controlla affatto la posizione — 
+basta avere il #2 badge in inventario e digitare take helicopter da qualunque luogo per vincere subito. 
+È probabilmente una svista di programmazione più che un enigma voluto, ma con la soluzione "vera" 
+(quella sopra) il gioco si risolve comunque in modo pulito e coerente con la trama.

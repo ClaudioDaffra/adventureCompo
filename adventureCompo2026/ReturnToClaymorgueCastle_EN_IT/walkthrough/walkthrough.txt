@@ -1,0 +1,293 @@
+
+*** WALKTHROUGH ***
+
+Return To Claymorgue's Castle
+
+
+The adventure begins in the castle, more precisely in the courtyard where there is a fountain, and a building that is likely the kitchens but with barred doors that cannot be entered. At the moment we can’t do anything here except to examine.
+First, we examine some rooms of the castle, in particular the hall, ball room and return to the starting point. By exploring the castle, we will be able to give more precise directions to our companions.
+
+EAST => ( Hall )
+
+Hall
+
+
+Take a moment to examine the fireplace. You will find it lit, as you can also see from the descriptions. It will slowly turn off. We will return here later.
+
+ME EXAMINE FIREPLACE
+EAST => ( Ball )
+WEST => ( Hall )
+WEST => ( Courtyard )
+
+It is necessary to leave the castle, cross the bridge, and enter the forest.
+
+WEST => ( Entrance )
+WEST => ( DrawBridge )
+WEST => ( Castle )
+
+Heading west from the castle, you encounter Tom busy with maintenance work on his van. After a brief conversation, you suggest that he should visit the library.
+
+TOM GO TO LIBRARY
+
+WEST => ( Forest )
+
+Forest
+
+
+Here, the forest is quite dense with intricate paths, it almost seems enchanted, the directions always change, you need to go towards one of them until NORTH EAST appears to go to another part of the forest ( Clearing ) or SOUTH EAST to return in front of the castle.
+
+(random direction ... )
+
+NORT-EAST => ( Clearing )
+
+Clearing
+
+
+From the clearing, you can see the castle and here the moat is lower and can be crossed.
+
+DOWN -> ( Moat North )
+
+The castle’s walls have crumbled, and towering weeds have taken hold. These vigorous plants have encroached upon the castle’s perimeter, marking nature’s reclaim. A thorough inspection is required to discover a fissure in the wall, serving as a secret pathway into the castle’s heart.
+
+ME EXAMINE WEEDS
+ME EXAMINE WEEDS
+
+Upon closer inspection of the overgrown weeds, a hidden passage within the castle wall is revealed.
+
+SOUTH -> ( Kitchen )
+
+Kitchen
+
+
+In the kitchen, there are a couple of things to do before opening the cabinet. Given that it’s old and rotten wood, it breaks, causing a large knife to fall. Then, we have to pull the bolt of the wooden door to open it and return to the courtyard. The second step is not essential, but it saves time.
+
+ME OPEN CABINET
+ME TAKE KNIFE
+ME PULL BOLT
+SOUTH => ( Courtyard )
+
+Before we go into the library, we need the help of a historian. So, go east to the hall room and tell Jack to come to the library.
+
+EAST => ( Hall )
+
+JACK GOTO LIBRARY
+
+WEST => ( Courtyard )
+SOUTH => ( Library )
+
+Library
+
+
+Here, Jack is indispensable as he will allow us to find a secret passage by examining the walls. He will also be helpful later in reading a book.
+
+JACK EXAMINE WESTERN
+
+Obvioulsly, it is discovered that a wall can be moved, but it requires Tom’s strength to do it!
+
+TOM PUSH WESTERN
+
+So, we go to an internal room used as a warehouse and take the shovel, then return to the library. For now, that’s all.
+
+WEST => ( Warehouse )
+
+Warehouse
+
+
+ME TAKE SHOWEL
+EAST => ( Library )
+
+Library
+
+
+Right now Tom doesn’t have to do anything else, so we’ll tell him to wait for us in the ball room.
+
+ME GIVE KNIFE TO TOM
+TOM GO TO BALL ROOM
+
+Now let’s examine the shelves and we will find other books to consult. Only the historian will be able to understand that a book is missing.
+
+JACK EXAMINE SHELVES
+ME TALK TO JACK
+(optional : to say in particular about the missing book)
+JACK READ ANCIENT MANUSCRIPTS , ...
+
+There are others books that Jack can read that will help him understand the adventure the mistery. Then ...
+
+NORTH => ( Courtyard )
+EAST => ( Hall )
+
+Hall
+
+
+Returning to the east wing of the castle, at this point the fireplace should be extinguished, revealing a locked door within the fireplace.
+Here we find Lisa again, but she will have a more important role later on. In the meantime, we need to figure out how to climb onto the railing in the ballroom.
+
+EAST => ( Ball Room )
+
+Ball
+
+
+Here we can see a candlestick tied with a rope. We use the knife to cut the rope and drop the candlestick. We take the rope. From the remnants of the shattered chandelier, a series of hook-like forms emerge. These will be essential in crafting a grappling hook, which we can subsequently secure to the railing.
+
+TOM USE KNIFE WITH ROPE
+ME TALK TO TOM
+(optional : to say ability about lasso)
+TOM TAKE ROPE
+TOM USE ROPE WITH HOOK
+TOM TAKE GRAPPLING HOOK
+
+Although everyone can perform these actions, only Tom has the ability to use the grappling hook to its fullest potential to hook it onto the railing.
+
+TOM USE GRAPPLING HOOK WITH RAILING
+
+Before continuing, it is necessary to gather the whole gang and tell them to be careful at every step
+
+FOllOW ME
+UP => ( Loft )
+
+Now we are heading towards the tall tower
+
+NORTH
+NORTH
+UP
+ME EXAMINE DIARY
+JACK READ DIARY
+
+Jack, reading the diary, manages to get an idea of what happened and will refer to a strange object that fell from the sky and the place where it hit the ground.
+
+ME READ PARCHMENT
+
+In this part of the adventure, an ancient parchment stands out on the table. It’s a parchment by ... , dedicated to ...
+
+Laboratory
+
+
+It’s Lisa’s turn, we are in the wizard’s magical laboratory,
+here as it emerges something went wrong. Here Lisa rules, being a hacker.
+
+ME EXAMINE COMPUTER
+
+It’s additional information as it will tell us that it is indeed turned on, but by whom.
+
+LISA EXAMINE PHONE
+
+Lisa’s cell phone batteryis discharged
+
+LISA EXAMINE COMPUTER
+
+She will find that behind the cables there is a USB cable, perfect for a quick charge.
+
+LISA USE PHONE WITH USB CABLE
+
+And the cell phone will be quickly recharged
+
+LISA USE KEYBOARD WITH PASSWORD
+
+Alas, there is nothing to be done, no password can be used with this computer
+
+LISA USE PHONE WITH PASSWORD
+
+However, Lisa is a hacker and she can use the tools on her phone to hack the computer.
+She will reveal within the files 1, 2, 3.
+Also, a small drawer containing a small skull-shaped key will open under the desk.
+
+ME TAKE SKULL KEY
+
+I will need it to unlock the fireplace now, which is surely off. Will allow us to discover the so-called last will of the writer and will give us a clue about what happened. Now let’s proceed to the west moat, but first, we’ll take a leap into the cellars or the prisons of the time!
+
+( top tower ) DOWN
+( middle tower ) DOWN
+( bottom tower ) WEST
+
+Cellar
+
+
+Here there is a random event, it could appear immediately or we might have to wait a few turns.
+In the meantime, we can: WAIT or EXAMINE the room.
+
+Event: A ghost will appear for a brief moment, but will effectively disappear into thin air,
+leaving those present in awe. Now if we asked Jack to read some books found in the library, he probably,
+if here with us in the room, will be able to provide more clues about the evanescent figure.
+From here on, we continue.
+
+( cellar ) EAST
+( bottom tower ) UP
+( middle tower ) SOUTH
+( east wall ) SOUTH
+( loft ) DOWN
+( ball room ) WEST
+( hall room ) WEST
+( courtyard ) NORTH
+( kitchen ) DOWN
+( moat north ) WEST
+
+West Moat
+
+TOM DIG SHOVEL
+ME TAKE SPHERE
+
+and you will find the object indicated by Solon. You couldn’t do it before,
+as there were no clues on where to dig and why to dig.
+Thanks to the diary, we have made a very precious discovery
+
+( moat west ) EAST
+( moat north ) SOUTH
+( kitchen ) SOUTH
+( courtyard ) EAST
+( hall room ) ...
+
+Hall room
+
+
+USE SKULL KEY WITH HUMAN SIZED DOOR
+DOWN
+
+Staircase
+
+DOWN
+
+Damp Cavern
+
+EAST
+
+Grotto
+
+
+JACK EXAMNINE RUNES
+
+ME USE SPHERE WITH CHEST
+
+Gran finale
+
+
+As the sphere of power touches the chest, an overwhelming energy is released, illuminating the cave with blinding light.
+A human figure emerges from the glow, his features evoking the image of a powerful sorcerer. His piercing eyes stare at the adventurers,
+one last challenge, one last mystery to decipher.
+Then, just as he appeared, the being dissolves into the air, leaving behind only an echo of power and a sense of wonder.
+The adventurers stand there, stunned, their hearts beating in unison with the rhythm of the ancient cave.
+This is the grand finale of their adventure, a moment they will carry with them forever. They have faced the unknown,
+deciphered ancient mysteries, and now, with the treasure in hand, they are ready for the return journey.
+But they know that the real wealth is not in the chest, but in the experiences lived and the lessons learned.
+With a last look at the cave, they head for the exit.
+The daylight welcomes them, a reminder that every end is just a new beginning.
+And so, with hearts full of gratitude and eyes full of determination, our adventurers set off towards the next adventure.
+
+WEST ( damp cavern )
+UP ( Staircase )
+UP ( hall room )
+WEST ( courtyard )
+WEST ( entrance )
+WEST ( drawbridge )
+WEST ( castle )
+
+enter VAN
+
+The End
+
+but an unexpected event...
+
+
+And so, the adventurers, enriched by their own adventure, were about to return home,
+but an unexpected event...
+
+But… Will everything truly be over at the end of the adventure?! Will there be an event in these places that will occur on a specific date at a specific location in a few years? The adventure is yours to discover ...

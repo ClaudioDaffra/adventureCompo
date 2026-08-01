@@ -1,0 +1,28 @@
+
+### Walkthrough Completo
+
+Ecco la sequenza esatta dei comandi da inserire nel prompt per arrivare rapidamente alla vittoria. 
+Puoi digitare le parole intere in inglese o 
+usare semplicemente l'iniziale per le direzioni (es. `e`, `d`, `s`, `u`):
+
+east - Ti sposti dall'area Decontamination alle scale del livello 400 (Stairs 400 level).
+
+
+* down - Scendi alle scale del livello 300.
+* down - Scendi alle scale del livello 200.
+* down - Scendi alle scale del livello 100.
+* south - Entri nella locazione Bank of Canada Vault.
+* take key - Raccogli la chiave necessaria per fuggire.
+* north - Esci dal caveau e torni alle scale del livello 100.
+* up - Sali alle scale del livello 200.
+* up - Sali alle scale del livello 300.
+* up - Sali alle scale del livello 400.
+* west - Torni nella locazione iniziale Decontamination.
+* west - Avanzi nel Medical Centre.
+* north - Prosegui verso la stanza Confinement and Hospital Overflow.
+* north - Raggiungi il Dental Office.
+* north - Entri nel Message Control Centre.
+* north - Arrivi finalmente davanti all'Emergency Escape Hatch.
+* use key - Usi la chiave per sbloccare la porta; il sistema sbloccherà il passaggio verso l'alto srotolando una scala.
+* up - Sali in superficie ("Surface"); questo innescherà il messaggio di congratulazioni e la vittoria del gioco.
+
