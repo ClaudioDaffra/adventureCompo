@@ -35,6 +35,8 @@ parte 1 :	https://www.youtube.com/watch?v=_inxasFfI6Q&t=163s
 parte 2 :	https://www.youtube.com/watch?v=MR8EBxH80Mc&t=829s
 parte 3 : 	https://www.youtube.com/watch?v=kNw1z3xMclY&t=262s
 
+@1001avventura : https://www.youtube.com/@1001avventura
+
 link : https://www.youtube.com/watch?v=aInmuGTEb9c&t=1s
 
 English :
@@ -81,5 +83,7 @@ github : https://github.com/ClaudioDaffra/adventureCompo
 parte 1 :	https://www.youtube.com/watch?v=_inxasFfI6Q&t=163s
 parte 2 :	https://www.youtube.com/watch?v=MR8EBxH80Mc&t=829s
 parte 3 : 	https://www.youtube.com/watch?v=kNw1z3xMclY&t=262s
+
+@1001avventura : https://www.youtube.com/@1001avventura
 
 link : https://www.youtube.com/watch?v=aInmuGTEb9c&t=1s
