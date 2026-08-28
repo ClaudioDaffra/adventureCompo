@@ -1,6 +1,6 @@
 
 Adventure Compo oct'26 Text e Non
-ProjecCD Chronicles
+ProjectCD Chronicles
 
 Italiano : 
 
