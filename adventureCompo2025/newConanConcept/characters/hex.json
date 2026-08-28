@@ -24,7 +24,7 @@
     "energia": 36,
     "maxEnergia": 36,
     "att": 16,
-    "dan": 25,
+    "dan": 26,
     "def": 15,
     "rd": 15,
     "ini": 22
@@ -894,6 +894,7 @@
   },
   "durata": 0,
   "pbState": null,
-  "createdAt": "2026-04-30T17:31:23.266Z",
-  "savedAt": "2026-04-30T17:31:23.268Z"
+  "createdAt": "2026-08-20T12:19:41.528Z",
+  "savedAt": "2026-08-20T12:19:41.530Z",
+  "saveSlot": "hex"
 }
