@@ -10,7 +10,7 @@ Italiano :
 
 3 formato giocabile : esampio commodore .prg .d64 oppure index.html o altro
 
-4 decrizione della proprio avventura, immagine copertina
+4 decrizione della propria avventura, immagine copertina
 
 5 walkthrough : primi passi , per farla vedere in azione
 
