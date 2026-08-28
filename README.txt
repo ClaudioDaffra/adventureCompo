@@ -6,7 +6,7 @@ Italiano :
 
 1 da settembre a prima settimana di ottobre
 
-2 post : cd.commodore64@gamail.com
+2 post : cd.commodore64@gmail.com
 
 3 formato giocabile : esampio commodore .prg .d64 oppure index.html o altro
 
