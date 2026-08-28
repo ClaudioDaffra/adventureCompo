@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_9.html">Previous</a><br><a href="source_11.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 11 - Old Man River, That Old Man River</b>
+<br>
+
+<br>
+Down from Flood Control Dam #3 is a room called Dam Base.  The description of Dam Base is &quot;<font color=#000080>You are at the base of Flood Control Dam #3, which looms above you
+<br>
+</font><font color=#000080>and to the north.  The river Frigid is flowing by here.  Across the river are the White Cliffs which seem to form a giant wall stretching from north to south along the east shore of the river as it winds its way downstream.</font>&quot;
+<br>
+
+<br>
+A broken sharp stick is in Dam Base.  The initial appearance of the broken sharp stick is &quot;<font color=#000080>A sharp stick, which appears to have been broken at one end, is here.</font>&quot;
+<br>
+The later appearance of the broken sharp stick is &quot;<font color=#000080>There is a broken sharp stick here.</font>&quot;
+<br>
+The size of the broken sharp stick is 3.
+<br>
+The pile of plastic is inflammable.  The magic boat is inflammable.  The dboat is inflammable.
+<br>
+A pile of plastic is in Dam Base.  The later appearance of the pile of plastic is &quot;<font color=#000080>There is a folded pile of plastic here which has a small valve
+<br>
+</font><font color=#000080>attached.</font>&quot;  The size of the pile of plastic is 20.  Understand &quot;<font color=#000080>boat</font>&quot; as the pile of plastic.
+<br>
+A dboat is a thing.  The printed name of the dboat is &quot;<font color=#000080>plastic boat (with hole)</font>&quot;.  Understand &quot;<font color=#000080>pile</font>&quot; and &quot;<font color=#000080>boat</font>&quot; and &quot;<font color=#000080>plastic</font>&quot; as the dboat.
+<br>
+Carry out plugging the dboat with the viscous material:
+<br>
+  say &quot;<font color=#000080>Well done.  The boat is repaired.</font>&quot;;
+<br>
+  move the pile of plastic to the holder of the dboat;
+<br>
+  remove the dboat from play.
+<br>
+A magic boat is a vehicle.  Understand &quot;<font color=#000080>plastic</font>&quot; and &quot;<font color=#000080>raft</font>&quot; and &quot;<font color=#000080>seaworthy</font>&quot; as the magic boat.  The later appearance of the magic boat is &quot;<font color=#000080>There is an inflated boat here.</font>&quot; The size of the magic boat is 20.  The capacity of the magic boat is 100.
+<br>
+Carry out inflating it with:
+<br>
+  say &quot;<font color=#000080>The boat inflates and appears seaworthy.</font>&quot;;
+<br>
+  now the magic boat is in the holder of the pile of plastic;
+<br>
+  remove the pile of plastic from play.
+<br>
+Check entering the boat when the player is carrying the sharp stick:
+<br>
+  say &quot;<font color=#000080>There is a hissing sound and the boat deflates.</font>&quot;;
+<br>
+  move the dboat to the holder of the boat;
+<br>
+  remove the boat from play instead.
+<br>
+Definition: a room is offroad if it does not contain a nondrainable watersource. 
+<br>
+Check going by the magic boat when the player is in somewhere offroad: 
+<br>
+    say &quot;<font color=#000080>You can't go there in a magic boat.</font>&quot; instead.
+<br>
+The tan label is inflammable.
+<br>
+A tan label is in the magic boat.  Understand &quot;<font color=#000080>fine print</font>&quot; and &quot;<font color=#000080>fineprint</font>&quot; as the tan label.  The description of the tan label is &quot;<font color=#000080>[tan label text]</font>&quot;.
+<br>
+To say tan label text:
+<br>
+center &quot;<font color=#000080>!!!!  FROBOZZ MAGIC BOAT COMPANY  !!!!</font>&quot;;
+<br>
+say paragraph break;
+<br>
+say &quot;<font color=#000080>Hello, Sailor![paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Instructions for use:[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[four spaces]To get into boat, type 'BOARD BOAT'[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[four spaces]To leave boat, say 'DISEMBARK'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[four spaces]To get into a body of water, say 'LAUNCH'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[four spaces]To get to shore, say 'LAND'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>This boat is guaranteed against all defects in parts and
+<br>
+</font><font color=#000080>workmanship for a period of 76 milliseconds from date of purchase or
+<br>
+</font><font color=#000080>until first used, whichever comes first.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>WARNING:  This boat is made of plastic.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Good Luck!</font>&quot;.
+<br>
+A river is a kind of room. The printed name of a river is usually &quot;<font color=#000080>Frigid River</font>&quot;.  Check going up from a river:  say &quot;<font color=#000080>You cannot go upstream due to strong currents.</font>&quot; instead.
+<br>
+East of Dam Base is a river called River1.  The description of River1 is &quot;<font color=#000080>You are on the River Frigid in the vicinity of the Dam.  The river flows quietly here.  There is a landing on the west shore.</font>&quot;
+<br>
+A nondrainable watersource called the pdl5 is in River1.
+<br>
+Down from River1 is a river called River2.  The description of River2 is &quot;<font color=#000080>The River turns a corner here making it impossible to see the
+<br>
+</font><font color=#000080>Dam.  The White Cliffs loom on the east bank and large rocks prevent
+<br>
+</font><font color=#000080>landing on the west.</font>&quot;
+<br>
+
+<br>
+A nondrainable watersource called the pdl6 is in River2.
+<br>
+Down from River2 is a river called River3.  The description of River3 is &quot;<font color=#000080>The river descends here into a valley.  There is a narrow beach on
+<br>
+</font><font color=#000080>the east below the cliffs and there is some shore on the west which may be suitable.  In the distance a faint rumbling can be heard.</font>&quot;
+<br>
+A nondrainable watersource called the pdl7 is in River3.
+<br>
+Down from River3 is a river called River4.  The description of River4 is &quot;<font color=#000080>The river is running faster here and the sound ahead appears to bethat of rushing water.  On the west shore is a sandy beach.  A small area of beach can also be seen below the Cliffs.</font>&quot;
+<br>
+A nondrainable watersource called the pdl8 is in River4.
+<br>
+Down from River4 is a river called River5.  The description of River5 is &quot;<font color=#000080>The sound of rushing water is nearly unbearable here.  On the west
+<br>
+</font><font color=#000080>shore is a large landing area.</font>&quot;
+<br>
+A nondrainable watersource called the pdl9 is in River5.
+<br>
+Down from River5 is a dungeon called Moby Lossage.
+<br>
+The rusty iron key is in Moby Lossage.  The initial appearance of the rusty iron key is &quot;<font color=#000080> </font>&quot;.
+<br>
+Every turn when the magic boat is in Moby Lossage and the player is in the magic boat:  say &quot;<font color=#000080>Unfortunately, a rubber raft doesn't provide much protection from the unfriendly sorts of rocks and boulders one meets at the bottom of many waterfalls.  Including this one.</font>&quot;; end the game in death; remove the magic boat from play.
+<br>
+
+<br>
+A closed openable container called a red buoy is in River4.  The initial appearance of the red buoy is &quot;<font color=#000080>There is a red buoy here (probably a warning).</font>&quot; 
+<br>
+The capacity of the buoy is 20.  The size of the buoy is 10.
+<br>
+A large emerald is in the buoy.  After taking the emerald: award 5 points; continue the action.
+<br>
+The case-points of the emerald is 10.
+<br>
+Check going east from River2:  say &quot;<font color=#000080>The White Cliffs prevent your landing here.</font>&quot; instead.
+<br>
+South of Tiny Cave is northwest of a room called Rocky Shore.  The description of Rocky Shore is &quot;<font color=#000080>You are on the west shore of the river.  An entrance to a cave is
+<br>
+</font><font color=#000080>to the northwest.  The shore is very rocky here.</font>&quot;
+<br>
+East of Rocky Shore is River3.
+<br>
+WCLF1 is a room.  The description of WCLF1 is &quot;<font color=#000080>You are on a narrow strip of beach which runs along the base of the White Cliffs. The only path here is a narrow one, heading south
+<br>
+</font><font color=#000080>along the Cliffs.</font>&quot;  WCLF1 is west of River3.  The printed name of WCLF1 is &quot;<font color=#000080>White Cliffs Beach</font>&quot;.
+<br>
+South of WCLF1 is a room called WCLF2. The description of WCLF2 is &quot;<font color=#000080>You are on a rocky, narrow strip of beach beside the Cliffs.  A narrow path leads north along the shore.</font>&quot;
+<br>
+The printed name of WCLF2 is &quot;<font color=#000080>White Cliffs Beach</font>&quot;.  East of WCLF2 is River4.
+<br>
+
+<br>
+West of River4 is a room called Sandy Beach.  The description of Sandy Beach is &quot;<font color=#000080>You are on a large sandy beach at the shore of the river, which is flowing quickly by.  A path runs beside the river to the south here.</font>&quot;
+<br>
+
+<br>
+South of Sandy Beach is a room called Shore.  The description of Shore is &quot;<font color=#000080>You are on the shore of the River.  The river here seems somewhat treacherous.  A path travels from north to south here, the south end quickly turning around a sharp corner.</font>&quot; East of Shore is River5.
+<br>
+
+<br>
+South of Shore is a room called Aragain Falls.  The description of Aragain Falls is &quot;<font color=#000080>You are at the top of Aragain Falls, an enormous waterfall with a drop of about 450 feet.  The only path here is on the north end.  [if rainbow flag is true]A solid rainbow spans the falls.[otherwise]A beautiful rainbow can be seen over the falls and to the east.[end if]</font>&quot;.
+<br>
+
+<br>
+Rainbow Room is a room.  The description of Rainbow Room is &quot;<font color=#000080>You are on top of a rainbow (I bet you never thought you would walk on a rainbow), with a magnificent view of the Falls.  The rainbow travels east-west here.  There is an NBC Commissary here.</font>&quot;
+<br>
+
+<br>
+Rainbow flag is a truth state that varies.  Rainbow flag is usually false.
+<br>
+
+<br>
+Check waving the stick:
+<br>
+  if the player is in Aragain Falls or the player is in End of Rainbow begin;
+<br>
+   if rainbow flag is true begin;
+<br>
+   say &quot;<font color=#000080>The rainbow seems to have become somewhat run-of-the-mill.</font>&quot;;
+<br>
+   change the east exit of Aragain Falls to nowhere;
+<br>
+   change the west exit of Rainbow Room to nowhere;
+<br>
+   change the west exit of End of Rainbow to nowhere;
+<br>
+   change the east exit of Rainbow Room to nowhere;
+<br>
+   change rainbow flag to false instead;
+<br>
+   else;
+<br>
+   say &quot;<font color=#000080>Suddenly, the rainbow appears to become solid and, I venture,
+<br>
+</font><font color=#000080>walkable (I think the giveaway was the stairs and bannister).</font>&quot;;
+<br>
+   if the pot of gold is untouched, move the pot of gold to End of Rainbow;
+<br>
+   change the east exit of Aragain Falls to Rainbow Room;
+<br>
+   change the west exit of Rainbow Room to Aragain Falls;
+<br>
+   change the west exit of End of Rainbow to Rainbow Room;
+<br>
+   change the east exit of Rainbow Room to End of Rainbow;
+<br>
+   change rainbow flag to true instead;
+<br>
+   end if;
+<br>
+ else if the player is in Rainbow Room;
+<br>
+    say &quot;<font color=#000080>The structural integrity of the rainbow seems to have left it,
+<br>
+</font><font color=#000080>leaving you about 450 feet in the air, supported by water vapor.</font>&quot;;
+<br>
+   end the game in death instead;
+<br>
+ else;
+<br>
+   say &quot;<font color=#000080>Very good.</font>&quot; instead;
+<br>
+ end if.
+<br>
+
+<br>
+A pot of gold is a thing.  The initial appearance of the pot of gold is &quot;<font color=#000080>At the end of the rainbow is a pot of gold.</font>&quot; The later appearance of the pot of gold is &quot;<font color=#000080>There is a pot of gold here.</font>&quot; The size of the pot of gold is 15. The case-points of the pot of gold is 10.  After taking the pot of gold:  award 10 points; continue the action.
+<br>
+A statue is a thing.
+<br>
+Understand &quot;<font color=#000080>beautiful</font>&quot; and &quot;<font color=#000080>sculpture</font>&quot; and &quot;<font color=#000080>rock</font>&quot; as the statue.
+<br>
+The size of the statue is 8.
+<br>
+After taking the statue: award 11 points; continue the action.
+<br>
+The case-points of the statue is 13.
+<br>
+Every turn while in Rainbow Room:  change exit found to true.
+<br>
+
+<br>
+After taking the buoy for the first time:
+<br>
+  say &quot;<font color=#000080>Something seems funny about the feel of the buoy.</font>&quot;.
+<br>
+
+<br>
+An open unopenable enterable container called a man-sized wooden barrel is in Aragain Falls.  The printed name of the man-sized wooden barrel is &quot;<font color=#000080>wooden barrel</font>&quot;.  The later appearance of the man-sized wooden barrel is &quot;<font color=#000080>There is a man-sized barrel here which you might be able to enter.</font>&quot;  The barrel is fixed in place.  The capacity of the man-sized wooden barrel is 100.
+<br>
+Check looking when the player is inside the barrel: say &quot;<font color=#000080>You are inside a barrel.  Congratulations.  Etched into the side of the barrel is the word 'Geronimo!'.  From your position, you cannot see the falls.</font>&quot; instead.
+<br>
+After entering the barrel: try looking.
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

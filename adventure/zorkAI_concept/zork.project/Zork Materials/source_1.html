@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_0.html">Previous</a><br><a href="source_2.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 2 - Above Ground Stuff</b>
+<br>
+
+<br>
+A room called West of House is an outdoors room. &quot;<font color=#000080>You are in an open field on the west side of a white house with a boarded front door.</font>&quot;
+<br>
+Figure of HOUSEWEST  is the file &quot;<font color=#000080>zorkhousewest.png</font>&quot;. 
+<br>
+
+<br>
+The small mailbox is a container in West of House. The mailbox is fixed in place, closed, and openable. 
+<br>
+Understand &quot;<font color=#000080>box</font>&quot; and &quot;<font color=#000080>mail box</font>&quot; and &quot;<font color=#000080>mail-box</font>&quot; as the mailbox.
+<br>
+
+<br>
+Before looking when the location is the West of House:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;display the Figure of HOUSEWEST;
+<br>
+
+<br>
+The size of the leaflet is 2.
+<br>
+The capacity of the mailbox is 10.
+<br>
+A leaflet is in the mailbox. The description of the leaflet is &quot;<font color=#000080>[leaflet text]</font>&quot;.
+<br>
+To say leaflet text:
+<br>
+center &quot;<font color=#000080>Welcome to Zork!</font>&quot;;
+<br>
+say paragraph break;
+<br>
+say &quot;<font color=#000080>   Zork is a game of adventure, danger, and low cunning.  In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>   In Zork, the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps![paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>   No system should be without one![paragraph break]</font>&quot;;
+<br>
+<font color=#404040><sup><a href="#note1">[1]</a></sup></font>
+<br>
+say &quot;<font color=#000080>   Zork was created at the MIT Laboratory for Computer Science by
+<br>
+</font><font color=#000080>Tim Anderson, Marc Blank, Bruce Daniels, and Dave Lebling.  It was inspired by the Adventure game of Crowther and Woods, and the long tradition of fantasy and science fiction games.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>   On-line information may be obtained with the command HELP (synonyms are ABOUT, INFO, HINT, etc.).</font>&quot;
+<br>
+The leaflet is inflammable.
+<br>
+
+<br>
+An electric lamp is a kind of device. Carry out switching on an electric lamp: now the noun is lit. Carry out switching off an electric lamp: now the noun is unlit.
+<br>
+
+<br>
+A portable supporter called a rubber welcome mat is here. &quot;<font color=#000080>A rubber mat saying 'Welcome to Zork' lies by the door.</font>&quot; The description of the mat is &quot;<font color=#000080>The mat says 'Welcome to Zork'.</font>&quot;
+<br>
+The size of the rubber welcome mat is 
+<br>
+12.
+<br>
+
+<br>
+Mat under is a truth state that varies. Mat under is usually false.
+<br>
+After taking, pushing, or pulling the rubber welcome mat:
+<br>
+  if something (called the thingy) is on the mat begin;
+<br>
+    say &quot;<font color=#000080>As the mat is moved, [a thingy] falls from it and onto the floor.</font>&quot;;
+<br>
+    move the thingy to the location;
+<br>
+    change mat under to false;
+<br>
+  else;
+<br>
+     change mat under to false;
+<br>
+     continue the action;
+<br>
+  end if.
+<br>
+Check removing something from the mat when mat under is true:
+<br>
+  print the you can't see message instead.
+<br>
+
+<br>
+An outdoors room called North of House is north of West of House.  &quot;<font color=#000080>You are facing the north side of a white house.  There is no door here, and all the windows are barred.</font>&quot; South of North of House is nowhere.  West of North of House is West of House. 
+<br>
+
+<br>
+An outdoors room called South of House is south of West of House.  &quot;<font color=#000080>You are facing the south side of a white house.  There is no door here, and all the windows are barred.</font>&quot;  North of South of House is nowhere. West of South of House is West of House.
+<br>
+
+<br>
+An outdoors room called Behind House is east of North of House and east of South of House. &quot;<font color=#000080>You are behind the white house.  In one corner of the house is a window that is [if the window is closed]slightly ajar. [otherwise]open.</font>&quot; 
+<br>
+North of Behind House is North of House.  South of Behind House is South of House. Behind House is outdoors.
+<br>
+
+<br>
+The white house is a backdrop.  The white house is in West of House and North of House and South of House and Behind House. The description of the white house is &quot;<font color=#000080>The house is a beautiful colonial house which is painted white.  It is clear that the owners must have been extremely wealthy.</font>&quot;
+<br>
+
+<br>
+The front door is scenery in West of House.
+<br>
+Check entering the front door: say &quot;<font color=#000080>The door is locked, and there is evidently no key.</font>&quot; instead.
+<br>
+Check going east from West of House: say &quot;<font color=#000080>The door is locked, and there is evidently no key.</font>&quot; instead.
+<br>
+Check opening the front door: say &quot;<font color=#000080>The door cannot be opened.</font>&quot; instead.
+<br>
+Check unlocking the front door with something: say &quot;<font color=#000080>It doesn't seem to work.</font>&quot; instead.
+<br>
+
+<br>
+The window is a door.  The window is west of Behind House and east of Kitchen. The window is closed and openable. The window is scenery.
+<br>
+Check climbing the window: try entering the noun instead.
+<br>
+Check going inside while in Behind House: try entering the window instead. Check exiting while in Kitchen:  try entering the window instead.
+<br>
+Report opening the window: say &quot;<font color=#000080>With great effort, you open the window far enough to allow entry.</font>&quot; instead.
+<br>
+Report closing the window: say &quot;<font color=#000080>The window closes (more easily than it opened).</font>&quot; instead.
+<br>
+After going through the window for the first time: award 10 points; continue the action.
+<br>
+The description of Kitchen is &quot;<font color=#000080>This is the kitchen of the white house.  A table seems to have been used recently for the preparation of food.  A passage leads to the west, and a dark staircase can be seen leading upward.  A dark chimney leads down and to the east is a small window which is [if the window is open]open. [otherwise]closed.</font>&quot;
+<br>
+The sack is in Kitchen. &quot;<font color=#000080>On the table is an enlongated brown sack, smelling of hot peppers.</font>&quot; The sack is a closed openable container.
+<br>
+The sack is inflammable.
+<br>
+The capacity of the sack is 15. The size of the sack is 3.
+<br>
+Inside the sack is a lunch and a clove of garlic.  The lunch and the garlic are edible.
+<br>
+Report eating something: say &quot;<font color=#000080>Thank you very much.  That reallly hit the spot.</font>&quot; instead.
+<br>
+A closed openable transparent container called a bottle is in Kitchen. &quot;<font color=#000080>Sitting on the table is a small bottle.</font>&quot; 
+<br>
+Check destroying the bottle:
+<br>
+  say &quot;<font color=#000080>A brilliant maneuver destroys the bottle.</font>&quot;;
+<br>
+  remove the bottle from play instead.
+<br>
+The capacity of the bottle is 4.
+<br>
+Check dropping the bottle when the player's command includes &quot;<font color=#000080>throw</font>&quot;:
+<br>
+  try throwing the noun at the player instead.
+<br>
+Check throwing the bottle at something:
+<br>
+  say &quot;<font color=#000080>The bottle hits the far wall and shatters.</font>&quot;;
+<br>
+  remove the bottle from play instead.
+<br>
+Understand &quot;<font color=#000080>bottle of [something related by containment]</font>&quot; as the bottle.
+<br>
+The Living Room is west of the Kitchen.  &quot;<font color=#000080>This is the living room.  There is a door to the east. [if the wooden door is closed] To the west, there is a wooden door with strange gothic lettering, which appears to be nailed shut. [otherwise] To the west, there is a wooden door with strange gothic lettering and a cyclops-sized hole in it.</font>&quot;
+<br>
+The description of the wooden door is &quot;<font color=#000080>The engravings translate to 'This space intentionally left blank.' [if the door is open]The door has a cyclops-sized hole in it.</font>&quot; 
+<br>
+An oriental rug is here. &quot;<font color=#000080>In center of the room is [if the trap door is not revealed]a large oriental rug.[otherwise][status of the trap door] trap door.</font>&quot; Understand &quot;<font color=#000080>carpet</font>&quot; as the rug.
+<br>
+A closed openable transparent container called a trophy case is here.
+<br>
+Check  taking the case: say &quot;<font color=#000080>The trophy case is securely fastened to the wall (perhaps to foil any attempt by robbers to remove it).</font>&quot; instead.
+<br>
+A weapon called an elvish sword is here.  &quot;<font color=#000080>On hooks above the mantelpiece hangs an elvish sword of great antiquity.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>glamdring</font>&quot; and &quot;<font color=#000080>orcrist</font>&quot; as the elvish sword.
+<br>
+Understand &quot;<font color=#000080>lamp</font>&quot; as the battery-powered brass lantern.
+<br>
+The capacity of the trophy case is 32767.
+<br>
+The size of the sword is 30.
+<br>
+An electric lamp called a battery-powered brass lantern is here.  &quot;<font color=#000080>A battery powered brass lantern is on the trophy case.</font>&quot; 
+<br>
+The size of the battery-powered brass lantern is 15.
+<br>
+A broken lamp is a thing. Understand &quot;<font color=#000080>lantern</font>&quot; and &quot;<font color=#000080>brass</font>&quot; as the broken lamp.
+<br>
+Check throwing the lamp at something:
+<br>
+  say &quot;<font color=#000080>The lamp smashes into the ground and is ruined.</font>&quot;;
+<br>
+  remove the battery-powered brass lantern from play;
+<br>
+  now the broken lamp is in the location instead.
+<br>
+Check dropping the battery-powered brass lantern when the player's command includes &quot;<font color=#000080>throw</font>&quot;:
+<br>
+  say &quot;<font color=#000080>The lamp smashes into the ground and is ruined.</font>&quot;;
+<br>
+  remove the battery-powered brass lantern from play;
+<br>
+  now the broken lamp is in the location instead.
+<br>
+Instead of switching on or switching off the broken lamp: say &quot;<font color=#000080>The lamp is broken.  Some idiot must have smashed it.</font>&quot;.
+<br>
+A newspaper is here. &quot;<font color=#000080>There is an issue of US NEWS &amp; DUNGEON REPORT here.</font>&quot;
+<br>
+The description of the newspaper is
+<br>
+&quot;<font color=#000080> [masthead]This is the Inform 7 version of Dungeon (Zork).  For more information on Inform 7, see &lt;http://inform-fiction.org&gt;.  Please report all bugs to Dean Menezes &lt;samanddeanus@yahoo.com&gt;.
+<br>
+</font><font color=#000080>
+<br>
+</font><font color=#000080>Lots and lots and lots and LOTS of bugs have been fixed.
+<br>
+</font><font color=#000080>
+<br>
+</font><font color=#000080>Aspiring adventurers should avail themselves of every opportunity to broaden their intellectual horizons and increase their perspicacity.
+<br>
+</font><font color=#000080>
+<br>
+</font><font color=#000080>Fatal events have somewhat more convoluted results than previously.</font>&quot;
+<br>
+The newspaper is inflammable.
+<br>
+To say masthead:
+<br>
+center &quot;<font color=#000080>US NEWS AND DUNGEON REPORT</font>&quot;;
+<br>
+center &quot;<font color=#000080>2007[12 spaces]Late Dungeon Edition</font>&quot;;
+<br>
+say paragraph break.
+<br>
+
+<br>
+Understand &quot;<font color=#000080>news</font>&quot;, &quot;<font color=#000080>report</font>&quot;, and &quot;<font color=#000080>paper</font>&quot; as the newspaper.
+<br>
+
+<br>
+Forest is a region.  Forest 1, Forest 2, Forest 3, Forest 4, Forest 5, and Up a Tree are in Forest.
+<br>
+
+<br>
+North of North of House is Forest 4 with printed name &quot;<font color=#000080>Forest</font>&quot; and description &quot;<font color=#000080>This is a dimly lit forest, with large trees all around.  One particularly large tree with some low branches stands here.</font>&quot;
+<br>
+Every turn while in Forest: 
+<br>
+if a random chance of 1 in 5 succeeds, say &quot;<font color=#000080>You hear in the distance the chirping of a song bird.</font>&quot;.
+<br>
+Up a Tree is an outdoors room.
+<br>
+
+<br>
+A door called the tree is a door. The tree is scenery. The tree is open and not openable.  The tree is up from Forest 4 and down from Up a Tree.
+<br>
+
+<br>
+
+<br>
+
+<br>
+The description of Up a Tree is &quot;<font color=#000080>You are about ten feet above the ground nestled among some large branches. The nearest branch above you is beyond your reach.</font>&quot;
+<br>
+Check climbing the tree: try entering the noun instead.
+<br>
+A container called a birds nest is here. &quot;<font color=#000080>On the branch is a small birds nest.  </font>&quot;.  A closed unopenable container called a jewel-encrusted egg is in the nest. The initial appearance of the jewel-encrusted egg is &quot;<font color=#000080>In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged somewhere by a childless songbird.  The egg is covered with fine gold inlay and ornamented in lapis lazuli and mother-of-pearl.  Unlike most eggs, this one is hinged and has a delicate looking clasp holding it closed. The egg appears extremely fragile.</font>&quot; The description of the egg is &quot;<font color=#000080>The egg is covered with fine gold inlay and ornamented in lapis lazuli and mother-of-pearl.  Unlike most eggs, this one is hinged and has a delicate looking clasp holding it closed. The egg appears extremely fragile.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>whole</font>&quot; as the jewel-encrusted egg.
+<br>
+The birds nest is inflammable.
+<br>
+The capacity of the nest is 20.
+<br>
+The capacity of the jewel-encrusted egg is 6.
+<br>
+Check dropping something while in Up a Tree:
+<br>
+if the noun is not the jewel-encrusted egg begin;
+<br>
+  say &quot;<font color=#000080>[The noun] falls to the ground.</font>&quot;;
+<br>
+  move the noun to Forest 4 instead;
+<br>
+else if the golden clockwork canary is not in the jewel-encrusted egg;
+<br>
+  say &quot;<font color=#000080>The jewel-encrusted egg falls to the ground and is ruined.</font>&quot;;
+<br>
+  move the broken jewel-encrusted egg to Forest 4;
+<br>
+  remove the broken canary from play;
+<br>
+  remove the jewel-encrusted egg from play instead;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>The jewel-encrusted egg falls to the ground and is ruined.</font>&quot;;
+<br>
+  move the broken jewel-encrusted egg to Forest 4;
+<br>
+  remove the jewel-encrusted egg from play instead;
+<br>
+end if.
+<br>
+The broken jewel-encrusted egg is an open openable container. The broken clockwork canary is inside the broken egg.
+<br>
+The golden clockwork canary is inside the jewel-encrusted egg.
+<br>
+Check dropping the jewel-encrusted egg when the player's command includes &quot;<font color=#000080>throw</font>&quot;: try destroying the broken egg instead.
+<br>
+Check throwing the jewel-encrusted egg at something:
+<br>
+try destroying the jewel-encrusted egg instead.
+<br>
+Check destroying the jewel-encrusted egg when the jewel-encrusted egg is not openable:
+<br>
+   say &quot;<font color=#000080>Your rather indelicate handling of the egg has caused it some damage.[line break]The egg is now open.</font>&quot;;
+<br>
+   move the broken egg to the holder of the jewel-encrusted egg;
+<br>
+   remove the jewel-encrusted egg from play;
+<br>
+     say &quot;<font color=#000080>There is a golden clockwork canary nestled in the egg.  It seems to have recently had a bad experience.  The mountings for its jewel-like eyes are empty, and its silver beak is crumpled.  Through a cracked crystal window below its left wing you can see the remains of intricate machinery.  It is not clear what result winding it would have, as the mainspring appears sprung.</font>&quot; instead.
+<br>
+Carry out winding the broken canary:
+<br>
+  say &quot;<font color=#000080>There is an unpleasant grinding noise from inside the canary.</font>&quot;
+<br>
+
+<br>
+The description of the broken canary is &quot;<font color=#000080>There is a golden clockwork canary nestled in the egg.  It seems to have recently had a bad experience.  The mountings for its jewel-like eyes are empty, and its silver beak is crumpled.  Through a cracked crystal window below its left wing you can see the remains of intricate machinery.  It is not clear what result winding it would have, as the mainspring appears sprung.</font>&quot;
+<br>
+The description of the golden clockwork canary is &quot;<font color=#000080>This is a golden clockwork canary.  It has ruby eyes and a silver beak.  Through a crystal window below its left wing you can see intricate machinery inside.  It appears to have wound down.</font>&quot;
+<br>
+Check destroying the jewel-encrusted egg with something:
+<br>
+try destroying the jewel-encrusted egg instead.
+<br>
+After taking the jewel-encrusted egg for the first time: award 5 points; continue the action.
+<br>
+A beautiful brass bauble is a thing.
+<br>
+Bauble flag is a truth state that varies. Bauble flag is false.
+<br>
+The case-points of the jewel-encrusted egg is 7.
+<br>
+Carry out winding the golden clockwork canary:
+<br>
+if the player is in Forest and bauble flag is false begin;
+<br>
+  say &quot;<font color=#000080>The canary chirps, slightly off key, an aria from a forgotten opera.
+<br>
+</font><font color=#000080>From out of the greenery flies a lovely song bird.  It perches on a
+<br>
+</font><font color=#000080>limb just over your head and opens its beak to sing.  As it does so,
+<br>
+</font><font color=#000080>a beautiful brass bauble drops from its mouth, bounces off the top
+<br>
+</font><font color=#000080>of your head, and lands glimmering in the grass.  As the canary winds
+<br>
+</font><font color=#000080>down, the song bird flies away.</font>&quot;;
+<br>
+  change bauble flag to true;
+<br>
+  move the bauble to the location;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>The canary chirps blithely, if somewhat tinnily, for a short time.</font>&quot;;
+<br>
+end if.
+<br>
+After taking the golden clockwork canary for the first time: award 6 points; continue the action.
+<br>
+After taking the bauble for the first time: award 1 point; continue the action.
+<br>
+The case-points of the golden clockwork canary is 2.
+<br>
+The case-points of the bauble is 1.
+<br>
+North of an outdoors room called Clearing is nowhere. West of Clearing is Forest 4. 
+<br>
+Southwest of Clearing is Behind House. Northeast of Behind House is nowhere. East of Behind House is Clearing.
+<br>
+
+<br>
+Forest 3 is an outdoors room.
+<br>
+South of Clearing is Forest 3.  North of Forest 3 is South of House. East of Forest 3 is Clearing.  &quot;<font color=#000080>This is a dimly lit forest, with large trees all around.  To the east, there appears to be sunlight.</font>&quot; The printed name of Forest 3 is &quot;<font color=#000080>Forest</font>&quot;.
+<br>
+West of Forest 4 is North of House. Clearing is south of Forest 4. North of Forest 4 is Forest 3. South of Forest 3 is Forest 5. Forest 5 has printed name &quot;<font color=#000080>Forest</font>&quot; . Forest 5 has description &quot;<font color=#000080>This is a large forest, with trees obstructing all views except to the east, where a small clearing may be seen through the trees.</font>&quot; North of Forest 5 is Forest 2. The description of Forest 2 is &quot;<font color=#000080>This is a forest with trees in all directions around you.</font>&quot; The printed name of Forest 2 is &quot;<font color=#000080>Forest</font>&quot;. South of Forest 5 is Forest 5. West of Forest 5 is Forest 3.  North of Forest 2 is Forest 2. West of Forest 2 is Forest 3. Southeast of Clearing is Forest 2. Northwest of Forest 2 is nowhere. South of Forest 1 is west of Forest 3.
+<br>
+West of West of House is Forest 1. East of Forest 1 is Forest 4. North of Forest 1 is Forest 1. West of Forest 1 is Forest 1. The printed name of Forest 1 is &quot;<font color=#000080>Forest</font>&quot;. The description of Forest 1 is &quot;<font color=#000080>This is a forest with trees in all directions around you.</font>&quot;
+<br>
+
+<br>
+Clearing has description &quot;<font color=#000080>This is a clearing, with a forest surrounding you on the west and south.</font>&quot; A pile of leaves is here.
+<br>
+The pile of leaves is inflammable.
+<br>
+The later appearance of the pile of leaves is &quot;<font color=#000080>There is a pile of leaves on the ground.</font>&quot;
+<br>
+The size of the leaves is 25.
+<br>
+The grating is a secret door.  The grating is down from Clearing and up from Grating Room.  The grating is closed, openable, locked, and lockable.  
+<br>
+After taking or pushing or pulling the leaves for the first time:
+<br>
+say &quot;<font color=#000080>Moving the pile of leaves reveals a grating.</font>&quot;;
+<br>
+now the grating is revealed.
+<br>
+The attic stairs is a door. The attic stairs are open and not openable.The attic stairs is scenery.
+<br>
+A dark room called the Attic is up from the attic stairs. &quot;<font color=#000080>This is the Attic.  The only exit is stairs that lead down.</font>&quot;
+<br>
+
+<br>
+A rope called a large coil of rope is here.  &quot;<font color=#000080>A large coil of rope is in the corner.</font>&quot; A square brick feeling like clay is here. 
+<br>
+The brick is inflammable.
+<br>
+The later appearance of the square brick is &quot;<font color=#000080>There is a square brick here which feels like clay.</font>&quot; 
+<br>
+The size of the rope is 10.
+<br>
+The size of the brick is 15.
+<br>
+A weapon called a nasty-looking knife is here. &quot;<font color=#000080>On a table is a nasty-looking knife.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>nasty knife</font>&quot; as the nasty-looking knife.
+<br>
+Down from the attic stairs is the Kitchen. Check climbing the attic stairs: try entering the noun instead.
+<br>
+The wooden door is a door.  The wooden door is scenery.  The wooden door is west of Living Room and east of Strange Passage.  The wooden door is closed and not openable.
+<br>
+
+<br>
+Down from the Living Room is a secret door called the trap door.
+<br>
+To say status of the trap door:
+<br>
+say &quot;<font color=#000080>[if the trap door is open]an open[otherwise]a closed</font>&quot;.
+<br>
+
+<br>
+The trap door is up from the Cellar. Understand &quot;<font color=#000080>trapdoor</font>&quot; and &quot;<font color=#000080>trap-door</font>&quot; as the trap door.
+<br>
+After opening the trap door:
+<br>
+say &quot;<font color=#000080>The door reluctantly opens to reveal a rickety staircase descending into darkness.</font>&quot;
+<br>
+After closing the trap door:
+<br>
+say &quot;<font color=#000080>The door swings shut and closes.</font>&quot;
+<br>
+Exit found is a truth state variable.  Exit found is false.
+<br>
+The rval of Cellar is 25.
+<br>
+
+<br>
+After going through the trap door:
+<br>
+if exit found is false, shut the player in;
+<br>
+continue the action.
+<br>
+To shut the player in:
+<br>
+say &quot;<font color=#000080>The trap door crashes shut, and you hear someone barring it.</font>&quot;;
+<br>
+now the trap door is closed. 
+<br>
+Check opening the trap door when the player is in the Cellar and exit found is false:
+<br>
+ say &quot;<font color=#000080>The trap door is locked from above.</font>&quot; instead.
+<br>
+Check looking under the rug: say &quot;<font color=#000080>There's a trap door under the rug.</font>&quot; instead.
+<br>
+Check going through the closed trap door: say &quot;<font color=#000080>The trap door is closed.</font>&quot; instead.
+<br>
+Check taking the rug: say &quot;<font color=#000080>The rug is too heavy to lift.</font>&quot; instead.
+<br>
+After pushing or pulling the rug for the first time: say &quot;<font color=#000080>With a great effort, the rug is moved to one side of the room. With the rug moved, the dusty cover of a closed trap door appears.</font>&quot;; now the trap door is revealed.
+<br>
+After pushing or pulling the rug: say &quot;<font color=#000080>Having moved the carpet previously, you find it impossible to move it again.</font>&quot;
+<br>
+
+<br>
+Southeast of Forest 2 is west of a room called Canyon View.  South from Canyon View is east of Forest 5.  The description of Canyon View is &quot;<font color=#000080>You are at the top of the Great Canyon on its south wall.  From here there is a marvelous view of the Canyon and parts of the Frigid River
+<br>
+</font><font color=#000080>upstream.  Across the canyon, the walls of the White Cliffs still
+<br>
+</font><font color=#000080>appear to loom far above.  Following the Canyon upstream (north and
+<br>
+</font><font color=#000080>northwest), Aragain Falls may be seen, complete with rainbow. 
+<br>
+</font><font color=#000080>Fortunately, my vision is better than average and I can discern the
+<br>
+</font><font color=#000080>top of the Flood Control Dam #3 far to the distant north.  To the
+<br>
+</font><font color=#000080>west and south can be seen an immense forest, stretching for miles
+<br>
+</font><font color=#000080>around.  It is possible to climb down into the canyon from here.</font>&quot;
+<br>
+
+<br>
+Down from Canyon View is a room called Rocky Ledge.  The description of Rocky Ledge is &quot;<font color=#000080>You are on a ledge about halfway up the wall of the river canyon.
+<br>
+</font><font color=#000080>You can see from here that the main flow from Aragain Falls twists
+<br>
+</font><font color=#000080>along a passage which it is impossible to enter.  Below you is the
+<br>
+</font><font color=#000080>canyon bottom.  Above you is more cliff, which still appears
+<br>
+</font><font color=#000080>climbable.</font>&quot;
+<br>
+
+<br>
+Down from Rocky Ledge is a room called Canyon Bottom.  The description of Canyon Bottom is &quot;<font color=#000080>You are beneath the walls of the river canyon which may be climbable
+<br>
+</font><font color=#000080>here.  There is a small stream here, which is the lesser part of the
+<br>
+</font><font color=#000080>runoff of Aragain Falls. To the north is a narrow path.</font>&quot;
+<br>
+
+<br>
+North of Canyon Bottom is southeast of a room called End of Rainbow.  The description of End of Rainbow is &quot;<font color=#000080>You are on a small, rocky beach on the continuation of the Frigid River past the Falls.  The beach is narrow due to the presence of the White Cliffs.  The river canyon opens here and sunlight shines in from above. A rainbow crosses over the falls to the west and a narrow path continues to the southeast.</font>&quot;
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><p><i>Note</i><p>
+<A name="note1"><font color=#404040>[1].  Originally, this said "No PDP-10 should be without one" but the user is probably not playing ZORK on a PDP-10</font><p>
+</font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

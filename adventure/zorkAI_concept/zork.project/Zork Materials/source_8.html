@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_7.html">Previous</a><br><a href="source_9.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 9 - Coal Mine Area</b>
+<br>
+
+<br>
+Mirror Room No 2 is a dungeon. The printed name of Mirror Room No 2 is &quot;<font color=#000080>Mirror Room</font>&quot;. The description of Mirror Room No 2 is &quot;<font color=#000080>This is a large square room with tall ceilings.  On the south wall is a gigantic mirror which fills the entire wall.  There are exits on the other three sides of the room.</font>&quot;
+<br>
+An gigantic mirror is in Mirror Room No 2.  It is scenery.
+<br>
+The description of the gigantic mirror is &quot;<font color=#000080>[if the gigantic mirror is whole]There is an ugly person staring back at you.[otherwise]The mirror is broken into many pieces.[end if]</font>&quot;.
+<br>
+Instead of touching or rubbing the gigantic mirror:
+<br>
+  say &quot;<font color=#000080>There is a rumble from deep within the earth and the room shakes.</font>&quot;;
+<br>
+ move the player to Mirror Room No 1.
+<br>
+West of Mirror Room No 2 is a dungeon called Cold Passage. The description of Cold Passage is &quot;<font color=#000080>This is a cold and damp corridor where a long east-west passageway intersects with a northward path.</font>&quot;
+<br>
+North of Cold Passage is southwest of a dungeon called Steep Crawlway. The description of Steep Crawlway is &quot;<font color=#000080>This is a steep and narrow crawlway.  There are two exits nearby to
+<br>
+</font><font color=#000080>the south and southwest.</font>&quot;
+<br>
+South of Steep Crawlway is Mirror Room No 2.
+<br>
+East of Mirror Room No 2 is north of a dungeon called Cave2. The printed name of Cave2 is &quot;<font color=#000080>Tiny Cave</font>&quot;. The description of Cave2 is &quot;<font color=#000080>This is a tiny cave with entrances west and north, and a dark, forbidding staircase leading down.</font>&quot;
+<br>
+Down from Cave2 is a dungeon called Atlantis Room.  The description of Atlantis Room is &quot;<font color=#000080>This is an ancient room, long under water.  There are exits here to the southeast and upward.</font>&quot;
+<br>
+Southeast of Atlantis Room is north of a dungeon called Reservoir North. A drainable watersource called the pdl3 is in Reservoir North. The description of Reservoir North is &quot;<font color=#000080>[if the pdl3 is on-stage]You are in a large cavernous room, north of a large reservoir.[otherwise]You are in a large cavernous room, the south of which was formerly a reservoir.[end if]  There is a tunnel leaving the room to the north.</font>&quot;
+<br>
+A nondrainable watersource called the pdl4 is in Reservoir. Down from In Stream is Reservoir.
+<br>
+Check going southeast from Atlantis Room: move the player to Reservoir North instead.
+<br>
+A crystal trident is in Atlantis Room.  The initial appearance of the crystal trident is &quot;<font color=#000080>On the shore lies Poseidon's own crystal trident.</font>&quot; The later appearance of the crystal trident is &quot;<font color=#000080>Poseidon's own crystal trident is here.</font>&quot; The size of the crystal trident is 20.  The case-points of the crystal trident is 11. After taking the crystal trident for the first time: award 4 points; continue the action.
+<br>
+West of Cold Passage is a dungeon called Slide Room.  The description of Slide Room is &quot;<font color=#000080>This is a small chamber, which appears to have been part of a coal mine. On the south wall of the chamber the letters 'Granite Wall' are etched in the rock. To the east is a long passage and there is a steep metal slide twisting downward. To the north is a small opening.</font>&quot;
+<br>
+
+<br>
+The enormous mirror can be whole or trashed.  The gigantic mirror can be whole or trashed.
+<br>
+The enormous mirror is whole.  The gigantic mirror is whole.
+<br>
+Check destroying the enormous mirror:
+<br>
+  if the enormous mirror is trashed begin;
+<br>
+    say &quot;<font color=#000080>It's already broken.</font>&quot; instead;
+<br>
+  else if the gigantic mirror is trashed;
+<br>
+    say &quot;<font color=#000080>Haven't you done enough damage already?</font>&quot; instead;
+<br>
+  else;
+<br>
+    now the enormous mirror is trashed;
+<br>
+     say &quot;<font color=#000080>You have broken the mirror.  I hope you have a seven years supply of
+<br>
+</font><font color=#000080>good luck handy.</font>&quot; instead;
+<br>
+  end if.
+<br>
+Check destroying the gigantic mirror:
+<br>
+  if the gigantic mirror is trashed begin;
+<br>
+    say &quot;<font color=#000080>It's already broken.</font>&quot; instead;
+<br>
+  else if the enormous mirror is trashed;
+<br>
+    say &quot;<font color=#000080>Haven't you done enough damage already?</font>&quot; instead;
+<br>
+  else;
+<br>
+    now the gigantic mirror is trashed;
+<br>
+     say &quot;<font color=#000080>You have broken the mirror.  I hope you have a seven years supply of
+<br>
+</font><font color=#000080>good luck handy.</font>&quot; instead;
+<br>
+  end if.
+<br>
+Check taking the enormous mirror:
+<br>
+  if the enormous mirror is trashed, say &quot;<font color=#000080>Nobody but a greedy surgeon would allow you to attempt that trick.</font>&quot; instead.
+<br>
+Check taking the gigantic mirror:
+<br>
+  if the enormous mirror is trashed, say &quot;<font color=#000080>Nobody but a greedy surgeon would allow you to attempt that trick.</font>&quot; instead.
+<br>
+The long slide is a door. The long slide is open and unopenable. The long slide is down from Slide Room.  The long slide is scenery.  Down from the Long Slide is Cellar.
+<br>
+
+<br>
+Check going through the long slide:
+<br>
+if the coil of rope is attached to something in Slide Room, move the player to Slide1 instead.
+<br>
+
+<br>
+Before climbing the rope:
+<br>
+if the coil of rope is attached to the coffin or the coil of rope is attached to the timber and the rope is in Slide Room, try going down instead.
+<br>
+
+<br>
+Sllide1 is a dark room.  The printed name of Slide1 is &quot;<font color=#000080>Slide</font>&quot;.  The description of Slide1 is &quot;<font color=#000080>This is an uncomfortable spot within the coal chute.  The rope to which you are clinging can be seen rising into the darkness above. There is more rope dangling below you.</font>&quot;
+<br>
+
+<br>
+Up from Slide1 is Slide Room.
+<br>
+Down from Slide1 is a dark room called Slide2.  The printed name of Slide2 is &quot;<font color=#000080>Slide</font>&quot;.  The description of Slide2 is &quot;<font color=#000080>This is another spot within the coal chute.  Above you the rope
+<br>
+</font><font color=#000080>climbs into darkness and the end of the rope is dangling five feet beneath you.</font>&quot;
+<br>
+
+<br>
+Down from Slide2 is a dark room called Slide3.  The printed name of Slide3 is &quot;<font color=#000080>Slide</font>&quot;. The description of Slide3 is &quot;<font color=#000080>You have reached the end of your rope.  Below you is darkness as
+<br>
+</font><font color=#000080>the chute makes a sharp turn.  On the east here is a small ledge which you might be able to stand on.</font>&quot;
+<br>
+
+<br>
+Down from Slide3 is Cellar.
+<br>
+East of Slide3 is a dark room called Slide Ledge.  The description of Slide Ledge is &quot;<font color=#000080>This is a narrow ledge abutting the coal chute, in which a rope can be seen passing downward.  Behind you, to the south, is a small room.</font>&quot;
+<br>
+West of Slide Ledge is nowhere.  
+<br>
+Down from Slide Ledge is Cellar.
+<br>
+South of Slide Ledge is a dark room called Sooty Room.  The description of Sooty Room is &quot;<font color=#000080>This is a small room with rough walls, and a ceiling which is steeply
+<br>
+</font><font color=#000080>sloping from north to south. There is coal dust covering almost
+<br>
+</font><font color=#000080>everything, and little bits of coal are scattered around the only exit
+<br>
+</font><font color=#000080>(which is a narrow passage to the north). In one corner of the room is
+<br>
+</font><font color=#000080>an old coal stove which lights the room with a cheery red glow.  There
+<br>
+</font><font color=#000080>is a very narrow crack in the north wall.</font>&quot;
+<br>
+Check exiting while in Sooty Room:
+<br>
+try going north instead.
+<br>
+A red crystal sphere is in Sooty Room.  The initial appearance of the crystal sphere is &quot;<font color=#000080>On the floor sits a red crystal sphere.</font>&quot; The later appearance of the crystal sphere is &quot;<font color=#000080>There is red crystal sphere here.</font>&quot; 
+<br>
+Understand &quot;<font color=#000080>PALANTHIR</font>&quot; and &quot;<font color=#000080>STONE</font>&quot; and &quot;<font color=#000080>SEEING</font>&quot; and &quot;<font color=#000080>GLASS</font>&quot; and &quot;<font color=#000080>BALL</font>&quot; as the white crystal sphere.
+<br>
+The case-points of the red crystal sphere is 10.  After taking the red crystal sphere: award 5 points; continue the action.
+<br>
+
+<br>
+The description of the red crystal sphere is &quot;<font color=#000080>[red sphere text]</font>&quot;.
+<br>
+To say red sphere text:
+<br>
+if the white crystal sphere is in something which is closed and opaque begin;
+<br>
+  say &quot;<font color=#000080>You see only darkness.</font>&quot;;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>As you peer into the sphere, a strange vision takes shape of
+<br>
+</font><font color=#000080>a distant room, which can be described clearly....[paragraph break]</font>&quot;;
+<br>
+  say &quot;<font color=#000080>[description of the location of the white crystal sphere][paragraph break]</font>&quot;;
+<br>
+  say &quot;<font color=#000080>The vision fades, revealing only an ordinary crystal sphere.</font>&quot;;
+<br>
+end if.
+<br>
+Check searching the blue crystal sphere:  try examining the noun instead.
+<br>
+North of Slide Room is a dungeon called Mine Entrance.  The description of Mine Entrance is &quot;<font color=#000080>You are standing at the entrance of what might have been a coal
+<br>
+</font><font color=#000080>mine. To the northeast and the northwest are entrances to the mine,
+<br>
+</font><font color=#000080>and there is another exit on the south end of the room.</font>&quot;
+<br>
+Northwest of Mine Entrance is south of a dungeon called Squeaky Room.  The description of Squeaky Room is &quot;<font color=#000080>You are a small room.  Strange squeaky sounds may be heard coming from
+<br>
+</font><font color=#000080>the passage at the west end.  You may also escape to the south.</font>&quot;
+<br>
+West of Squeaky Room is a dungeon called Bat Room.  The description of Bat Room is &quot;<font color=#000080>You are in a small room which has only one door, to the east.  In the corner of the room on the ceiling is a large vampire bat who is obviously deranged and holding his nose.</font>&quot;
+<br>
+Instead of going west from Bat Room when dead flag is false and when the player is not holding the garlic: 
+<br>
+  say &quot;<font color=#000080>A deranged giant vampire bat (a reject from WUMPUS) swoops down
+<br>
+</font><font color=#000080>from his belfry and lifts you away....</font>&quot;;
+<br>
+  move the player to a random coal mine.
+<br>
+A coal mine is a kind of dungeon.  A coal mine usually has printed name &quot;<font color=#000080>Coal Mine</font>&quot;.  A coal mine usually has description &quot;<font color=#000080>This is a non-descript part of a coal mine.</font>&quot;
+<br>
+A deranged giant vampire bat is in Bat Room.  The deranged giant vampire bat is scenery.  Check taking the deranged giant vampire bat:
+<br>
+  say &quot;<font color=#000080>A deranged giant vampire bat (a reject from WUMPUS) swoops down
+<br>
+</font><font color=#000080>from his belfry and lifts you away....</font>&quot;;
+<br>
+  move the player to a random coal mine instead.
+<br>
+A jade figurine is in Bat Room.  The size of the jade figurine is 10.  The case-points of the jade figurine is 5. After taking the jade figurine for the first time: award 5 points.
+<br>
+Northeast of Mine Entrance is west of a dungeon called Shaft Room.  The description of Shaft Room is &quot;<font color=#000080>This is a large room, in the middle of which is a small shaft
+<br>
+</font><font color=#000080>descending through the floor into darkness below.  To the west and
+<br>
+</font><font color=#000080>the north are exits from this room.  Constructed over the top of the
+<br>
+</font><font color=#000080>shaft is a metal framework to which a heavy iron chain is attached.</font>&quot;
+<br>
+A container called the tbasket is in Shaft Room.  The printed name of the tbasket is &quot;<font color=#000080>basket</font>&quot;. The later appearance of the tbasket is &quot;<font color=#000080>At the end of the chain is a basket.</font>&quot; The capacity of the tbasket is 50. Understand &quot;<font color=#000080>dumbwaiter</font>&quot; and &quot;<font color=#000080>cage</font>&quot; and &quot;<font color=#000080>basket</font>&quot; as the tbasket. The tbasket is fixed in place.
+<br>
+Lower Shaft is a dark room.  The description of Lower Shaft is 
+<br>
+&quot;<font color=#000080>This is a small square room which is at the bottom of a long
+<br>
+</font><font color=#000080>shaft. To the east is a passageway and to the northeast a very narrow
+<br>
+</font><font color=#000080>passage. In the shaft can be seen a heavy iron chain.</font>&quot;
+<br>
+A thing called the fbasket is in Lower Shaft.  The fbasket is scenery. Understand &quot;<font color=#000080>basket</font>&quot; and &quot;<font color=#000080>dumbwaiter</font>&quot; and &quot;<font color=#000080>cage</font>&quot; as the fbasket.
+<br>
+Instead of going down while in Shaft Room: say &quot;<font color=#000080>You wouldn't fit and would die if you could.</font>&quot;
+<br>
+After deciding the scope of the player when in darkness:
+<br>
+  if the fbasket is in the location, place the fbasket in scope;
+<br>
+  if the tbasket is in the location, place the tbasket in scope.
+<br>
+North of Shaft Room is a dungeon called Wooden Tunnel.  The description of Wooden Tunnel is &quot;<font color=#000080>This is a narrow tunnel with large wooden beams running across
+<br>
+</font><font color=#000080>the ceiling and around the walls.  A path from the south splits into
+<br>
+</font><font color=#000080>paths running west and northeast.</font>&quot;
+<br>
+West of Wooden Tunnel is a dungeon called Smelly Room.  The description of Smelly Room is &quot;<font color=#000080>This is a small non-descript room.  However, from the direction
+<br>
+</font><font color=#000080>of a small descending staircase a foul odor can be detected.  To the
+<br>
+</font><font color=#000080>east is a narrow path.</font>&quot;
+<br>
+Down from Smelly Room is a dark room called Gas Room.  The description of Gas Room is &quot;<font color=#000080>This is a small room which smells strongly of coal gas.</font>&quot;
+<br>
+A sapphire bracelet is in Gas Room.  The later appearance of the sapphire bracelet is &quot;<font color=#000080>There is a sapphire-encrusted bracelet here.</font>&quot;
+<br>
+The sapphire bracelet is wearable. The size of the bracelet is 10.  The case-points of the bracelet is 3.  After taking the bracelet for the first time: award 5 points; continue the action.
+<br>
+Every turn when the player is in Gas Room and dead flag is false:
+<br>
+  if the player is carrying the ivory torch and the ivory torch is lit begin;
+<br>
+  say &quot;<font color=#000080>Oh dear.  It appears that the smell coming from this room was coal gas.  I would have thought twice about carrying a torch in here.</font>&quot;;
+<br>
+  end the game in death;
+<br>
+end if.
+<br>
+
+<br>
+Northeast of Wooden Tunnel is east of a coal mine called Mine1.
+<br>
+Southwest of Mine1 is south from a coal mine called Mine2.
+<br>
+Up from Mine2 is west of a coal mine called Mine3.
+<br>
+Northeast of Mine2 is west of a coal mine called Mine4.
+<br>
+North of Mine1 is Mine4.
+<br>
+Northeast of Mine3 is up from a coal mine called Mine5.
+<br>
+East of Mine3 is south of Mine5.
+<br>
+West of Mine2 is west of Mine5.
+<br>
+East of Mine5 is up from Mine4.
+<br>
+Northeast of Mine4 is southeast of a coal mine called Mine6.
+<br>
+Up from Mine6 is Mine5.
+<br>
+North of Mine5 is west of a coal mine called Mine7.
+<br>
+South of Mine7 is northwest of Mine6.
+<br>
+East of Mine7 is Mine1.
+<br>
+Down from Mine7 is a dungeon called Ladder Top.
+<br>
+The description of Ladder Top is &quot;<font color=#000080>This is a very small room.  In the corner is a rickety wooden
+<br>
+</font><font color=#000080>ladder, leading downward.  It might be safe to descend.  There is
+<br>
+</font><font color=#000080>also a staircase leading upward.</font>&quot;
+<br>
+Down from Ladder Top is a dungeon called Ladder Bottom.
+<br>
+The description of Ladder Bottom is &quot;<font color=#000080>This is a rather wide room.  On one side is the bottom of a narrow wooden ladder.  To the northeast and the south are passages
+<br>
+</font><font color=#000080>leaving the room.</font>&quot;
+<br>
+Northeast of Ladder Bottom is south of a dead end called DE2.  A pile of coal is in DE2. Understand &quot;<font color=#000080>heap</font>&quot; and &quot;<font color=#000080>small</font>&quot; as the pile of coal.  The later appearance of the pile of coal is &quot;<font color=#000080>There is a small heap of coal here.</font>&quot;
+<br>
+The coal is inflammable.
+<br>
+South of Ladder Bottom is north of a dark room called Timber Room.  The description of Timber Room is &quot;<font color=#000080>This is a long and narrow passage, which is cluttered with broken
+<br>
+</font><font color=#000080>timbers.  A wide passage comes from the north and turns at the 
+<br>
+</font><font color=#000080>southwest corner of the room into a very narrow passageway.</font>&quot;
+<br>
+An unevenly shaped thing called a broken timber is in Timber Room.  Understand &quot;<font color=#000080>pile</font>&quot; and &quot;<font color=#000080>wooden</font>&quot; as the broken timber.  The size of the broken timber is 50.
+<br>
+The later appearance of the broken timber is &quot;<font color=#000080>There is a wooden timber on the ground here.</font>&quot;
+<br>
+The narrow passageway is a door.  The narrow passageway is open and unopenable. Inside from Timber Room is the narrow passageway.  Outside from Lower Shaft is the narrow passageway.
+<br>
+Check going southwest while in Timber Room: try going inside instead.
+<br>
+Check going northeast while in Lower Shaft: try going outside instead.
+<br>
+Before of going through the narrow passageway when the player is carrying something: say &quot;<font color=#000080>You cannot fit through this passage with that load.</font>&quot; instead.
+<br>
+Check going up from Lower Shaft: say &quot;<font color=#000080>The chain is not climbable.</font>&quot; instead.
+<br>
+East of lower shaft is northwest of a dark room called Machine2 Room.  The printed name of Machine2 Room is &quot;<font color=#000080>Machine Room</font>&quot;.
+<br>
+The description of Machine2 Room is &quot;<font color=#000080>This is a large room which seems to be air-conditioned.  In one corner there is a machine (?) which is shaped somewhat like a clothes dryer.  On the 'panel' there is a switch which is labelled in a dialect of Swahili.  Fortunately, I know this dialect and the label translates to START.  The switch does not appear to be manipulable by any human hand (unless the fingers are about 1/16 by 1/4 inch).  On
+<br>
+</font><font color=#000080>the front of the machine is a large lid, which is [if the machine is open]open[otherwise]closed[end if].</font>&quot;
+<br>
+The PDP-10 is a closed openable container in Machine2 Room.  The PDP-10 is scenery.  A thing called the switch is part of the PDP-10.  The printed name of the PDP-10 is &quot;<font color=#000080>lid</font>&quot;.
+<br>
+Understand &quot;<font color=#000080>dryer</font>&quot; and &quot;<font color=#000080>pdp10</font>&quot; and &quot;<font color=#000080>vax</font>&quot; and &quot;<font color=#000080>machine</font>&quot; and &quot;<font color=#000080>lid</font>&quot; as the PDP-10.
+<br>
+Check  turning the switch:
+<br>
+  say &quot;<font color=#000080>You'll cannot manipulate the switch with your hands.</font>&quot; instead.
+<br>
+Carry out turning the switch with something:
+<br>
+  if the second noun is not the screwdriver begin;
+<br>
+    say &quot;<font color=#000080>It seems that [a second noun] won't do.</font>&quot;;
+<br>
+  else if the PDP-10 is open;
+<br>
+    say &quot;<font color=#000080>The machine doesn't seem to want to do anything.</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The machine comes to life (figuratively) with a dazzling display of colored lights and bizarre noises.  After a few moments, the excitement abates.</font>&quot;;
+<br>
+    if the pile of coal is in the PDP-10 begin;
+<br>
+      remove the junk;
+<br>
+      now the diamond is in the PDP-10;
+<br>
+    else if the diamond is in the PDP-10;
+<br>
+        do nothing;
+<br>
+    else;
+<br>
+      remove the junk;
+<br>
+      now the piece of vitreous slag is in the PDP-10;
+<br>
+  end if;
+<br>
+end if.
+<br>
+To remove the junk:
+<br>
+  repeat with thingy running through things contained by the PDP-10 begin;
+<br>
+  remove the thingy from play;
+<br>
+ end repeat.
+<br>
+A piece of vitreous slag is a thing.
+<br>
+Understand &quot;<font color=#000080>gunk</font>&quot; as the piece of vitreous slag.
+<br>
+A huge diamond is a thing.
+<br>
+The later appearance of the huge diamond is &quot;<font color=#000080>There is an enormous diamond (perfectly cut) here.</font>&quot;
+<br>
+The case-points of the huge diamond is 6.  Understand &quot;<font color=#000080>enormous</font>&quot; as the huge diamond.
+<br>
+After taking the huge diamond for the first time:
+<br>
+  award 10 points; continue the action.
+<br>
+Check taking the slag:  say &quot;<font color=#000080>The slag turns out to be rather insubstantial, and crumbles into dust at your touch.  It must not have been very valuable.</font>&quot; instead.
+<br>
+The capacity of the PDP-10 is 50.
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

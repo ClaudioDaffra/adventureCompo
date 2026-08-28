@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+    <story>
+        <identification>
+            <ifid>C01834F5-C0C1-41F6-BB4B-F002E140BC28</ifid>
+            <format>glulx</format>
+        </identification>
+        <bibliographic>
+            <title>Zork</title>
+            <author>Infocom -- Ported by Dean Menezes</author>
+            <headline>A Computerized Fantasy Simulation Game</headline>
+            <genre>Fantasy</genre>
+            <firstpublished>1979</firstpublished>
+            <language>en</language>
+            <group>Inform</group>
+        </bibliographic>
+        <releases>
+            <attached>
+                <release>
+                    <releasedate>2023-06-19</releasedate>
+                    <version>3</version>
+                    <compiler>Inform 7</compiler>
+                    <compilerversion>5J39</compilerversion>
+                </release>
+            </attached>
+        </releases>
+        <colophon>
+            <generator>Inform 7</generator>
+            <generatorversion>5J39</generatorversion>
+            <originated>2023-06-19</originated>
+        </colophon>
+        <glulx>
+            <serial>230619</serial>
+            <release>3</release>
+            <compiler>Inform 7 build 5J39</compiler>
+        </glulx>
+    </story>
+</ifindex>

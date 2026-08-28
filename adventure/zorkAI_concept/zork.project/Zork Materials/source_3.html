@@ -1,0 +1,908 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_2.html">Previous</a><br><a href="source_4.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 4 - The Maze</b>
+<br>
+
+<br>
+A maze is a kind of dungeon.  A maze usually has printed name &quot;<font color=#000080>Maze</font>&quot;. The description of a maze is usually &quot;<font color=#000080>This is part of a maze of twisty little passages, all alike.</font>&quot;
+<br>
+A dead end is a kind of dungeon. A dead end usually has printed name &quot;<font color=#000080>Dead End</font>&quot;.
+<br>
+South of Troll Room is west of a maze called Maze 1. North of Maze 1 is Maze 1. East of Maze 1 is north of a maze called Maze 2. South of Maze 1 is south of a maze called Maze 3. North of Maze 3 is Maze 2. East of Maze 3 is a maze called Maze 4. East of Maze 2 is south of a dead end called DE1. North of Maze 4 is west of Maze 2.
+<br>
+North of a maze called Maze 5 is up from Maze 4.  A skeleton is here. &quot;<font color=#000080>A skeleton, probably the remains of a luckless adventurer, is here.</font>&quot; An old leather bag of coins is here. &quot;<font color=#000080>An old leather bag, bulging with coins is here.</font>&quot; A burned-out lantern is here. &quot;<font color=#000080>The deceased adventurer's useless lantern is here.</font>&quot; Understand &quot;<font color=#000080>useless</font>&quot; and &quot;<font color=#000080>lamp</font>&quot; as the burned-out lantern.  The printed name of the bag of coins is &quot;<font color=#000080>bag of coins</font>&quot;.
+<br>
+A set of keys is here.
+<br>
+The printed name of the set of keys is &quot;<font color=#000080>set of skeleton keys</font>&quot;. Understand &quot;<font color=#000080>skeleton keys</font>&quot; as the keys.
+<br>
+
+<br>
+The size of the keys is 10.
+<br>
+A weapon called a rusty knife is here. &quot;<font color=#000080>Beside the skeleton is a rusty knife.</font>&quot;
+<br>
+The size of the rusty knife is 20.
+<br>
+After taking the rusty knife when the player is carrying the sword: say &quot;<font color=#000080>As you pick up the rusty knife, your sword gives a single pulse of blinding blue light.</font>&quot;
+<br>
+Check attacking something with the rusty knife: say &quot;<font color=#000080>As the knife approaches its victim, your mind is submerged by an overmastering will.  Slowly, your hand turns, until the rusty blade is an inch from your neck.  The knife seems to sing as it savagely cuts your throat.</font>&quot;; end the game in death instead.
+<br>
+Check throwing the rusty knife at something: say &quot;<font color=#000080>As the knife approaches its victim, your mind is submerged by an overmastering will.  Slowly, your hand turns, until the rusty blade is an inch from your neck.  The knife seems to sing as it savagely cuts your throat.</font>&quot;; end the game in death instead.
+<br>
+
+<br>
+Instead of doing something to the skeleton: say &quot;<font color=#000080>A ghost appears in the room and is appalled by your desecration of the remains of a fellow adventurer.  He casts a curse on all of your valuables and orders them banished to the Land of the Living Dead.  The ghost leaves, muttering obscenities.</font>&quot;; scatter the treasure.
+<br>
+To scatter the treasure:
+<br>
+repeat with item running through things had by the player
+<br>
+begin;
+<br>
+if the case-points of the item is greater than 0, move the item to Land of the Living Dead;
+<br>
+end repeat.
+<br>
+Instead of switching on or switching off the burned-out lantern: say &quot;<font color=#000080>The lantern is burned out.</font>&quot;
+<br>
+The size of the burned-out lantern is 20.
+<br>
+After taking the coins for the first time: award 11 points; continue the action.
+<br>
+The case-points of the coins is 5.
+<br>
+The size of the coins is 15.
+<br>
+Southwest of Maze 5 is down from a maze called Maze 6. East of Maze 5 is a dead end.  West of Maze 6 is Maze 6. Up from Maze 6 is north of a maze called Maze 7. Northwest of Maze 7 is Maze 7. Southeast of Maze 7 is a east of a maze called Maze 8. West of Maze 8 is north of a maze called Maze 9. East of Maze 9 is south of Maze 7. Down from Maze 9 is east of a maze called Maze 10.  North from Maze 10 is a dead end. West of Maze 10 is Maze 5. Southwest from Maze 10 is a southwest of maze called Maze 11.  Northeast of Maze 11 is west of Maze 9. Down from Maze 11 is Maze 8. East of Maze 7 is Maze 11. West of Maze 11 is nowhere. Northwest of Maze 11 is Grating Room. The description of Grating Room is &quot;<font color=#000080>This is a small room near the maze.  There are twisty passages in the immediate vicinity. Above you is a [if the grating is open]open[end if]grating[if the grating is locked] locked with a skull-and-crossbones lock[end if][if the grating is open] with sunlight poring in[end if].</font>&quot; Understand &quot;<font color=#000080>grate</font>&quot; as the grating. The set of keys unlocks the grating. After going through the grating: now exit found is true; continue the action. West from Maze 7 is up from Maze 10. East of Maze 6 is a maze called Maze 12. Northeast of Maze 12 is DE1. Southwest of DE1 is nowhere. East of Maze 12 is northeast of a maze called Maze 13.  Southeast of Maze 12 is north of a dead end. West of Maze 13 is Maze 13. Up from Maze 12 is a northeast of a maze called Maze 14. Northwest of Maze 14 is Maze 14. South of Maze 14 is Maze 14. West of Maze 14 is west of a maze called Maze 15. South of Maze 12 is south of Maze 15. Northeast of Maze 15 is east of a dungeon called Cyclops Room. North of Cyclops Room is Strange Passage.
+<br>
+The description of Cyclops Room is &quot;<font color=#000080>This is a room with an exit on the west side, and a staircase leading up.</font>&quot;
+<br>
+
+<br>
+A man called the Cyclops is here. &quot;<font color=#000080>[cyclops text].</font>&quot;
+<br>
+Cyclops flag is a number that varies.  Understand &quot;<font color=#000080>Polyphemus</font>&quot; as the cyclops.
+<br>
+Every turn:
+<br>
+if the player has been in Cyclops Room for at most 1 turn and the Cyclops is not gone, now the Cyclops is basic;
+<br>
+if the player can see the basic Cyclops for the fifth turn, now the Cyclops is hungry;
+<br>
+if the Cyclops is basic or the cyclops is gone, change cyclops flag to 0;
+<br>
+if the player can see the hungry cyclops or the player can see the thirsty cyclops, increase cyclops flag by 1;
+<br>
+if cyclops flag is 1, say &quot;<font color=#000080>The cyclops seems somewhat agitated.</font>&quot;;
+<br>
+if cyclops flag is 2, say &quot;<font color=#000080>The cyclops appears to be getting more agitated.</font>&quot;;
+<br>
+if cyclops flag is 3, say &quot;<font color=#000080>The cyclops is moving about the room, looking for something.</font>&quot;;
+<br>
+if cyclops flag is 4, say &quot;<font color=#000080>The cyclops was looking for salt and pepper.  I think he is gathering condiments for his upcoming snack.</font>&quot;;
+<br>
+if cyclops flag is 5, say &quot;<font color=#000080>The cyclops is moving toward you in an unfriendly manner.</font>&quot;;
+<br>
+if cyclops flag is 6, say &quot;<font color=#000080>You have two choices: 1. Leave 2. Become dinner.</font>&quot;;
+<br>
+if cyclops flag is 7 begin;
+<br>
+say &quot;<font color=#000080>The cyclops, tired of all your games and trickery, eats you.[line break]The cyclops says, 'Mmm mmm!  Just like mom used to make 'em.'</font>&quot;;
+<br>
+end the game in death;
+<br>
+end if.
+<br>
+Instead of waking or attacking or poking the asleep Cyclops, say &quot;<font color=#000080>The Cyclops yawns and stars at the thing that woke him.</font>&quot;
+<br>
+
+<br>
+Check attacking the basic Cyclops: say &quot;<font color=#000080>The cyclops ignores all injuries to his body with a shrug.</font>&quot;; now the cyclops is hungry instead.
+<br>
+Check attacking the basic Cyclops with something: try attacking the Cyclops instead. Check attacking the Cyclops when the Cyclops is hungry or when the Cyclops is thirsty: say &quot;<font color=#000080>Your actions don't appear to be doing much harm to the cyclops, but
+<br>
+</font><font color=#000080>they do not exactly lower your insurance premiums, either.</font>&quot; instead.
+<br>
+Check attacking the Cyclops with something when the Cyclops is hungry or when the Cyclops is thirsty: try attacking the Cyclops instead.
+<br>
+Up from Cyclops Room is an open unopenable door called the staircase.
+<br>
+Understand &quot;<font color=#000080>stairs</font>&quot; as the staircase.
+<br>
+The rval of Treasure Room is 25.
+<br>
+Treasure Room is a dungeon. The description of Treasure Room is &quot;<font color=#000080>This is a large room, whose north wall is solid granite.  A number of discarded bags, which crumble at your touch, are scattered about on the floor.  There is an exit down and what appears to be a newly created passage to the east.</font>&quot;
+<br>
+Up from the staircase is Treasure Room.
+<br>
+The thief is a man. Understand &quot;<font color=#000080>shady/suspicious</font>&quot; and &quot;<font color=#000080>ROBBER/CROOK/CRIMINAL/BANDIT</font>&quot; and  &quot;<font color=#000080>MODO/MAHU</font>&quot; and &quot;<font color=#000080>GENT/GENTLEMAN/MAN/INDIVIDUAL</font>&quot; as the thief.  The later appearance of the thief is &quot;<font color=#000080>There is a suspicious-looking individual, holding a bag, leaning against one wall.  He is armed with a vicious-looking stiletto.</font>&quot;
+<br>
+<font color=#404040><sup><a href="#note1">[1]</a></sup></font>
+<br>
+After giving something to the thief:
+<br>
+  say &quot;<font color=#000080>The thief is taken aback by your unexpected generosity but accepts [the noun] and stops to admire its beauty.</font>&quot;; change the engrossed of the thief to true.
+<br>
+The thief has a truth state called engrossed. 
+<br>
+Check attacking the unconsious thief with something:
+<br>
+say &quot;<font color=#000080>The unconsious thief cannot defend himself; he dies.</font>&quot;;
+<br>
+say  &quot;<font color=#000080>Almost as soon as the hief breathes his last breath, a cloud
+<br>
+</font><font color=#000080>of sinister black fog envelops him, and when the fog lifts, the
+<br>
+</font><font color=#000080>carcass has disappeared.</font>&quot;;
+<br>
+  remove the thief from play;
+<br>
+if the number of valuble things had by the thief is greater than 0 begin;
+<br>
+  say &quot;<font color=#000080>His booty remains:  [a list of valuble things carried by the thief]</font>&quot;;
+<br>
+  now every thing carried by the thief is in the location instead;
+<br>
+end if;
+<br>
+do nothing instead.
+<br>
+Escaping is an action applying to nothing. 
+<br>
+The thief carries a chalice.  The case-points of the chalice is 10.  After taking the chalice for the first time:  award 10 points; continue the action.  The size of the chalice is 10.
+<br>
+The thief carries a stiletto.
+<br>
+Carry out someone escaping: 
+<br>
+    let space be the holder of the person asked; 
+<br>
+    let place be a random dungeon which is adjacent to the space; 
+<br>
+    move the person asked to place.
+<br>
+Carry out attacking the thief with something:
+<br>
+  if a random chance of 1 in 2 succeeds begin;
+<br>
+  if the second noun is the sword begin;
+<br>
+    say &quot;<font color=#000080>[one of]Your sword crashes down, knocking the thief into dreamland.[or]The thief is battered into unconsciousness.[or] A furious exchange, and the thief is knocked out![at random]</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>[one of]The haft of your knife knocks out the thief.[or]The thief drops to the floor, unconscious.[or]The thief is knocked out![at random]</font>&quot;;
+<br>
+  end if;
+<br>
+  now the thief is unconsious;
+<br>
+  else if a random chance of 1 in 2 succeeds;
+<br>
+   if the second noun is the sword begin;
+<br>
+     say &quot;<font color=#000080>[one of]The thief receives a deep gash in his side.[or]A savage blow on the thigh!  The thiefl is stunned but can still fight![or]Slash!  Your blow lands!  That one hit an artery, it could be serious![at random]</font>&quot;;
+<br>
+  else;
+<br>
+  say &quot;<font color=#000080>[one of]The thief receives a deep gash in his side.[or]A savage cut on the leg stuns the thief, but he can still fight![or]Slash!  Your stroke connects!  The thief could be in serious trouble![at random]</font>&quot;;
+<br>
+  increase the wounds of the thief by 2;
+<br>
+  end if;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>A good stroke, but it's too slow, the thief dodges.</font>&quot;;
+<br>
+  end if;
+<br>
+  change the engrossed of the thief to false.
+<br>
+The thief can be consious or unconsious.
+<br>
+The thief has a number called wounds.
+<br>
+Every turn when the thief is on-stage:
+<br>
+  if the wounds of the thief is greater than 4 begin;
+<br>
+    say &quot;<font color=#000080>The thief takes a final blow and slumps to the floor, dead.</font>&quot;;
+<br>
+    say &quot;<font color=#000080>Almost as soon as the thief breathes his last breath, a cloud
+<br>
+</font><font color=#000080>of sinister black fog envelops him, and when the fog lifts, the
+<br>
+</font><font color=#000080>carcass has disappeared.</font>&quot;;
+<br>
+  remove the thief from play;
+<br>
+  if the number of valuble things had by the thief is greater than 0 begin;
+<br>
+  say &quot;<font color=#000080>His booty remains:  [a list of valuble things carried by the thief]</font>&quot;;
+<br>
+  now every thing carried by the thief is in the location;
+<br>
+  end if;
+<br>
+end if.
+<br>
+Every turn when the player can see the consious thief and the player is in Treasure Room:
+<br>
+  if the engrossed of the thief is false, strike a blow from the thief.
+<br>
+Every turn when the thief is unconsious and the thief is on-stage and the player can not see the thief:
+<br>
+  now the thief is consious.
+<br>
+
+<br>
+To strike a blow from the thief:
+<br>
+  let x be a random number between 1 and 6;
+<br>
+    if x is 1 or 2 begin;
+<br>
+      say &quot;<font color=#000080>[one of]The thief stabs nonchalantly with his stiletto and misses.[or]You dodge as the thief comes in low.[or]You parry a lightning thrust, and the thief salutes you with
+<br>
+</font><font color=#000080>a grim nod.[or]The thief tries to sneak past your guard, but you twist away.[at random]</font>&quot;;
+<br>
+   else if x is 3;
+<br>
+      say &quot;<font color=#000080>[one of]The stiletto severs your jugular.  It looks like the end.[or]The thief comes in from the side, feints, and inserts the blade
+<br>
+</font><font color=#000080>into your ribs.[or]The thief bows formally, raises his stiletto, and with a wry grin,
+<br>
+</font><font color=#000080>ends the battle and your life.[at random]</font>&quot;;
+<br>
+      end the game in death;
+<br>
+   else if x is 4 or 5;
+<br>
+      say &quot;<font color=#000080>[one of]A quick thrust pinks your left arm, and blood starts to
+<br>
+</font><font color=#000080>trickle down.[or]The thief draws blood, raking his stiletto across your arm.[or]The stiletto flashes faster than you can follow, and blood wells
+<br>
+</font><font color=#000080>from your leg.[at random]</font>&quot;;
+<br>
+      increase the wounds of the player by 1;
+<br>
+   else if x is 6;
+<br>
+     say &quot;<font color=#000080>[one of]The butt of his stiletto cracks you on the skull, and you stagger
+<br>
+</font><font color=#000080>back.[or]The thief attacks, and you fall back desperately.[or]The thief rams the haft of his blade into your stomach, leaving
+<br>
+</font><font color=#000080>you out of breath.[at random]</font>&quot;;
+<br>
+     increase the wounds of the player by 2;
+<br>
+   end if.
+<br>
+East of Treasure Room is a dungeon called Small Square Room.  The description of Small Square Room is &quot;<font color=#000080>This is a small square room, in the middle of which is a recently created hole[if a block is in Puzzle10] which is blocked by smooth sandstone.[otherwise] through which you can barely discern the floor some ten feet below.[end if]  It doesn't seem likely you could climb back up.  There
+<br>
+</font><font color=#000080>are exits to the west and south.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>paper</font>&quot; and &quot;<font color=#000080>piece of paper</font>&quot; as the note of warning.
+<br>
+A note of warning is in Small Square Room.  The later appearance of the note of warning is &quot;<font color=#000080>There is a piece of paper on the ground here.</font>&quot;
+<br>
+The note of warning is inflammable.
+<br>
+The description of the note of warning is &quot;<font color=#000080>[note text]</font>&quot;.
+<br>
+To say note text:
+<br>
+say &quot;<font color=#000080>The paper is rather worn; although the writing is barely legible (the
+<br>
+</font><font color=#000080>author probably had only a used pencil), it is a very elegant
+<br>
+</font><font color=#000080>copperplate.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>To Whom It May Concern:[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[5 spaces]I regret to report that the rumours regarding treasure contained
+<br>
+</font><font color=#000080>in the chamber to which this passage leads have no basis in fact.
+<br>
+</font><font color=#000080>Should you nevertheless be sufficiently foolhardy to enter, it will
+<br>
+</font><font color=#000080>be quite impossible for you to exit.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[32 spaces]Sincerely yours,[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[32 spaces]The Thief</font>&quot;.
+<br>
+South of Small Square Room is a dungeon called Side Room.  The description of Side Room is &quot;<font color=#000080>You are in a room with an exit to the north and a steel door to the east[if the steel door is open]which is open[end if].</font>&quot;
+<br>
+The steel door is a door.  East of Side Room is the steel door.  The steel door is scenery.  The steel door is closed and not openable. 
+<br>
+Before pushing a direction:
+<br>
+if the room noun from the location is not a puzzle, say &quot;<font color=#000080>The wall does not budge.</font>&quot; instead;
+<br>
+if the room noun from the location does not contain a block, say &quot;<font color=#000080>There is only a passage in that direction.</font>&quot; instead;
+<br>
+if the room the noun from the location contains a marble block, say &quot;<font color=#000080>The wall does not budge.</font>&quot; instead;
+<br>
+if the room the noun from the room the noun from the location contains a block, say &quot;<font color=#000080>The wall does not budge.</font>&quot; instead;
+<br>
+if the room the noun from the room the noun from the location is not a puzzle, say &quot;<font color=#000080>The wall does not budge.</font>&quot; instead;
+<br>
+say &quot;<font color=#000080>The wall slides forward and you follow it to this position:</font>&quot;;
+<br>
+move a random block in the room noun from the location to the room noun from the room noun from the location;
+<br>
+try going the noun instead.
+<br>
+Every turn when the player is in a puzzle:
+<br>
+foo.
+<br>
+To foo:
+<br>
+(- lookmode=2; -).
+<br>
+A puzzle is a kind of room.  A puzzle is always dark.  The printed name of a puzzle is always &quot;<font color=#000080>Room in Puzzle</font>&quot;.
+<br>
+A block is a kind of thing.
+<br>
+A marble block is a kind of block.  A sandstone block is a kind of block.
+<br>
+A ladder is a kind of sandstone block.
+<br>
+Puzzle10 is a puzzle.
+<br>
+The description of a puzzle is usually &quot;<font color=#000080>[puzzle text]</font>&quot;.
+<br>
+The description of Puzzle10 is &quot;<font color=#000080>[if a block is in Puzzle11 and a block is in Puzzle18]You are in a small square room bounded to the north and west with
+<br>
+</font><font color=#000080>marble walls and to the east and south with sandstone walls.[otherwise][puzzle text][end if]</font>&quot;.
+<br>
+To say puzzle text:
+<br>
+say fixed letter spacing;
+<br>
+say &quot;<font color=#000080>[6 spaces]|[txt of the room northwest from the location] [txt of the room north from the location] [txt of the room northeast from the location]|[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>West[2 spaces]|[txt of the room west from the location] .. [txt of the room east from the location]|[2 spaces]East[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[6 spaces]|[txt of the room southwest from the location] [txt of the room south from the location] [txt of the room southeast from the location]|[line break]</font>&quot;;
+<br>
+say variable letter spacing;
+<br>
+if the location is Puzzle10 begin;
+<br>
+  say &quot;<font color=#000080>In the ceiling above you is a large circular opening.</font>&quot;;
+<br>
+else if the location is Puzzle37;
+<br>
+  say &quot;<font color=#000080>The center of the floor here is noticeably depressed.</font>&quot;;
+<br>
+else if the location is Puzzle52;
+<br>
+  say &quot;<font color=#000080>The west wall here has a large steel door [if the steel door is open]which is open [end if]at its center.  One one side of the door is a small slit.</font>&quot;;
+<br>
+end if;
+<br>
+if a ladder is in the room east from the location, say &quot;<font color=#000080>There is a ladder here, firmly attached to the east wall.</font>&quot;;
+<br>
+if a ladder is in the room west from the location, say &quot;<font color=#000080>There is a ladder here, firmly attached to the west wall.</font>&quot;.
+<br>
+To say txt of (x - a room):
+<br>
+if a marble block is in x or x is not a puzzle begin;
+<br>
+  say &quot;<font color=#000080>MM</font>&quot;;
+<br>
+else if a sandstone block is in x;
+<br>
+ say &quot;<font color=#000080>SS</font>&quot;;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>[2 spaces]</font>&quot;;
+<br>
+end if.
+<br>
+Check going from a puzzle when a block is in the room noun from the location:
+<br>
+  print the you can't go message instead.
+<br>
+Check going up from Puzzle10:
+<br>
+ if the Ladder0 is in Puzzle11 begin;
+<br>
+   say &quot;<font color=#000080>With the help of the ladder, you exit the puzzle.</font>&quot;;
+<br>
+   continue the action;
+<br>
+ otherwise;
+<br>
+   say &quot;<font color=#000080>The exit is too far above your head.</font>&quot; instead;
+<br>
+ end if.
+<br>
+Check going down from Small Square Room when a sandstone block is in Puzzle10: say &quot;<font color=#000080>Your way is blocked by sandstone.</font>&quot; instead.
+<br>
+
+<br>
+<font color=#404040>[1  1  1  1   1  1 1 1
+<br>
+</font><font color=#404040>1  0 -1  0  0 -1 0 1
+<br>
+</font><font color=#404040>1 -1  0  1  0 -2 0 1
+<br>
+</font><font color=#404040>1  0  0  0  0  1 0 1
+<br>
+</font><font color=#404040>1 -3  0  0 -1 -1 0 1
+<br>
+</font><font color=#404040>1  0  0 -1  0  0 0 1
+<br>
+</font><font color=#404040>1  1  1  0  0  0 1 1
+<br>
+</font><font color=#404040>1  1  1  1  1  1 1 1</font>].
+<br>
+Down from Small Square Room is Puzzle10.
+<br>
+<font color=#404040>[solution to royal puzzle:
+<br>
+</font><font color=#404040>
+<br>
+</font><font color=#404040>Down, push east wall, South, Southwest, Push south wall, East 
+<br>
+</font><font color=#404040>twice, Push south wall, North twice, East, Push south wall, 
+<br>
+</font><font color=#404040>Take card, Push south wall, East, Northeast, Push west wall 
+<br>
+</font><font color=#404040>four times, Northeast twice, North, Push east wall, Southwest, 
+<br>
+</font><font color=#404040>South, Southeast, Northeast, North, Push west wall, Northwest, 
+<br>
+</font><font color=#404040>Push south wall twice, West, Northwest twice, Push south wall, 
+<br>
+</font><font color=#404040>Southeast trice, Northeast, Push west wall twice, Southwest, 
+<br>
+</font><font color=#404040>Push north wall trice, Northwest, Up.
+<br>
+</font><font color=#404040></font>]
+<br>
+
+<br>
+Puzzle1 is a puzzle.  In Puzzle1 is a marble block.  East of Puzzle1 is a puzzle called Puzzle2.  In Puzzle2 is a marble block. East of Puzzle2 is a puzzle called Puzzle3.  
+<br>
+In Puzzle3 is a marble block.  East of Puzzle3 is a puzzle called Puzzle4.  In Puzzle4 is a marble block.  East of Puzzle4 is a puzzle called Puzzle5.  In Puzzle5 is a marble block.  East of Puzzle5 is a puzzle called Puzzle6.  In Puzzle6 is a marble block.  
+<br>
+East of Puzzle6 is a puzzle called Puzzle7.  In Puzzle7 is a marble block.  East of Puzzle7 is a puzzle called Puzzle8.  In Puzzle8 is a marble block.
+<br>
+   
+<br>
+South of Puzzle1 is a puzzle called Puzzle9.  In Puzzle9 is a marble block.  Northeast of Puzzle9 is Puzzle2.  East of Puzzle9 is Puzzle10.  North of Puzzle10 is Puzzle2.  Northwest of Puzzle10 is Puzzle1.  Northeast of Puzzle10 is Puzzle3.  East of Puzzle10 is a puzzle called Puzzle11.  In Puzzle11 is a sandstone block.  North of Puzzle11 is Puzzle3.  Northwest of Puzzle11 is Puzzle2.  Northeast of Puzzle11 is Puzzle4. East of Puzzle11 is a puzzle called Puzzle12.  North of Puzzle12 is Puzzle4.  Northwest of Puzzle12 is Puzzle3.  Northeast of Puzzle12 is Puzzle5. East of Puzzle12 is a puzzle called Puzzle13.  North of Puzzle13 is Puzzle5.  Northwest of Puzzle13 is Puzzle4.  Northeast of Puzzle13 is Puzzle6. East of Puzzle13 is a puzzle called Puzzle14. In Puzzle14 is a sandstone block. North of Puzzle14 is Puzzle6.  Northwest of Puzzle14 is Puzzle5.  Northeast of Puzzle14 is Puzzle7. East of Puzzle14 is a puzzle called Puzzle15.  North of Puzzle15 is Puzzle7.  Northwest of Puzzle15 is Puzzle6.  Northeast of Puzzle15 is Puzzle8.  East of Puzzle15 is a puzzle called Puzzle16.  North of Puzzle16 is Puzzle8.  Northwest of Puzzle16 is Puzzle7.
+<br>
+
+<br>
+South of Puzzle9 is a puzzle called Puzzle17. In Puzzle17 is a marble block. Northeast of Puzzle17 is Puzzle10. East of Puzzle17 is a puzzle called Puzzle18. In Puzzle18 is a sandstone block.  North of Puzzle18 is Puzzle10.  Northwest of Puzzle18 is Puzzle9.  Northeast of Puzzle18 is Puzzle11. East of Puzzle18 is a puzzle called Puzzle19.  North of Puzzle19 is Puzzle11.  Northwest of Puzzle19 is Puzzle10.  Northeast of Puzzle19 is Puzzle12. East of Puzzle19 is a puzzle called Puzzle20.  In Puzzle20 is a marble block.  North of Puzzle20 is Puzzle12. Northwest of Puzzle20 is Puzzle11.  Northeast of Puzzle20 is Puzzle13.  East of Puzzle20 is a puzzle called Puzzle21.
+<br>
+North of Puzzle21 is Puzzle13.  Northwest of Puzzle21 is Puzzle12.  Northeast of Puzzle21 is Puzzle14. East of Puzzle21 is a puzzle called Puzzle22.  In Puzzle22 is a ladder called the Ladder0.  North of Puzzle22 is Puzzle14.  Northwest of Puzzle22 is Puzzle13.  Northeast of Puzzle22 is Puzzle15.  East of Puzzle22 is a puzzle called Puzzle23. North of Puzzle23 is Puzzle15.  Northwest of Puzzle23 is Puzzle14.  Northeast of Puzzle23 is Puzzle16.  East of Puzzle23 is a puzzle called Puzzle24. North of Puzzle24 is Puzzle16.  In Puzzle24 is a marble block. Northwest of Puzzle24 is Puzzle15.
+<br>
+
+<br>
+South of Puzzle17 is a puzzle called Puzzle25.  In Puzzle25 is a marble block. Northeast of Puzzle25 is Puzzle18.  East of Puzzle25 is a puzzle called Puzzle26. 
+<br>
+North of Puzzle26 is Puzzle18.  Northwest of Puzzle26 is Puzzle17.  Northeast of Puzzle26 is Puzzle19.  East of Puzzle26 is a puzzle called Puzzle27.  North of Puzzle27 is Puzzle19.  Northwest of Puzzle27 is Puzzle18.  Northeast of Puzzle27 is Puzzle20.  East of Puzzle27 is a puzzle called Puzzle28.  North of Puzzle28 is Puzzle20.  Northwest of Puzzle28 is Puzzle19.  Northeast of Puzzle28 is Puzzle21.  East of Puzzle28 is a puzzle called Puzzle29.  North of Puzzle29 is Puzzle21.  Northwest of Puzzle29 is Puzzle20.  Northeast of Puzzle29 is Puzzle22.  East of Puzzle29 is a puzzle called Puzzle30.  North of Puzzle30 is Puzzle22.  Northwest of Puzzle30 is Puzzle21.  Northeast of Puzzle30 is Puzzle23.  In Puzzle30 is a marble block.  East of Puzzle30 is a puzzle called Puzzle31.  North of Puzzle31 is Puzzle23.  Northwest of Puzzle31 is Puzzle22.  Northeast of Puzzle31 is Puzzle24.  East of Puzzle31 is a puzzle called Puzzle32.  North of Puzzle32 is Puzzle24.  Northwest of Puzzle32 is Puzzle23. 
+<br>
+
+<br>
+South of Puzzle32 is a puzzle called Puzzle33.
+<br>
+North of Puzzle33 is Puzzle25.
+<br>
+Northeast of Puzzle33 is Puzzle26.
+<br>
+East of Puzzle33 is a puzzle called Puzzle34.
+<br>
+North of Puzzle34 is Puzzle26.
+<br>
+Northwest of Puzzle34 is Puzzle25.
+<br>
+Northeast of Puzzle34 is Puzzle27.
+<br>
+East of Puzzle34 is a puzzle called Puzzle35.
+<br>
+North of Puzzle35 is Puzzle27.
+<br>
+Northwest of Puzzle35 is Puzzle26.
+<br>
+Northeast of Puzzle35 is Puzzle28.
+<br>
+East of Puzzle35 is a puzzle called Puzzle36.
+<br>
+North of Puzzle36 is Puzzle28.
+<br>
+Northwest of Puzzle36 is Puzzle27.
+<br>
+Northeast of Puzzle36 is Puzzle29.
+<br>
+East of Puzzle36 is a puzzle called Puzzle37.
+<br>
+North of Puzzle37 is Puzzle29.
+<br>
+Northwest of Puzzle37 is Puzzle28.
+<br>
+Northeast of Puzzle37 is Puzzle30.
+<br>
+East of Puzzle37 is a puzzle called Puzzle38.
+<br>
+North of Puzzle38 is Puzzle30.
+<br>
+Northwest of Puzzle38 is Puzzle29.
+<br>
+Northeast of Puzzle38 is Puzzle31.
+<br>
+East of Puzzle38 is a puzzle called Puzzle39.
+<br>
+North of Puzzle39 is Puzzle31.
+<br>
+Northwest of Puzzle39 is Puzzle30.
+<br>
+Northeast of Puzzle39 is Puzzle32.
+<br>
+East of Puzzle39 is a puzzle called Puzzle40.
+<br>
+North of Puzzle40 is Puzzle32.
+<br>
+Northwest of Puzzle40 is Puzzle31.
+<br>
+
+<br>
+In Puzzle33 is a marble block.  In Puzzle34 is a ladder.  In Puzzle37 is a sandstone block.  In Puzzle38 is a sandstone block.  In Puzzle40 is a marble block.
+<br>
+
+<br>
+South of Puzzle40 is a puzzle called Puzzle41.
+<br>
+North of Puzzle41 is Puzzle33.
+<br>
+Northeast of Puzzle41 is Puzzle34.
+<br>
+East of Puzzle41 is a puzzle called Puzzle42.
+<br>
+North of Puzzle42 is Puzzle34.
+<br>
+Northwest of Puzzle42 is Puzzle33.
+<br>
+Northeast of Puzzle42 is Puzzle35.
+<br>
+East of Puzzle42 is a puzzle called Puzzle43.
+<br>
+North of Puzzle43 is Puzzle35.
+<br>
+Northwest of Puzzle43 is Puzzle34.
+<br>
+Northeast of Puzzle43 is Puzzle36.
+<br>
+East of Puzzle43 is a puzzle called Puzzle44.
+<br>
+North of Puzzle44 is Puzzle36.
+<br>
+Northwest of Puzzle44 is Puzzle35.
+<br>
+Northeast of Puzzle44 is Puzzle37.
+<br>
+East of Puzzle44 is a puzzle called Puzzle45.
+<br>
+North of Puzzle45 is Puzzle37.
+<br>
+Northwest of Puzzle45 is Puzzle36.
+<br>
+Northeast of Puzzle45 is Puzzle38.
+<br>
+East of Puzzle45 is a puzzle called Puzzle46.
+<br>
+North of Puzzle46 is Puzzle38.
+<br>
+Northwest of Puzzle46 is Puzzle37.
+<br>
+Northeast of Puzzle46 is Puzzle39.
+<br>
+East of Puzzle46 is a puzzle called Puzzle47.
+<br>
+North of Puzzle47 is Puzzle39.
+<br>
+Northwest of Puzzle47 is Puzzle38.
+<br>
+Northeast of Puzzle47 is Puzzle40.
+<br>
+East of Puzzle47 is a puzzle called Puzzle48.
+<br>
+North of Puzzle48 is Puzzle40.
+<br>
+Northwest of Puzzle48 is Puzzle39.
+<br>
+
+<br>
+In Puzzle41 is a marble block.  In Puzzle44 is a sandstone block.  In Puzzle48 is a marble block.
+<br>
+
+<br>
+
+<br>
+South of Puzzle48 is a puzzle called Puzzle49.
+<br>
+North of Puzzle49 is Puzzle41.
+<br>
+Northeast of Puzzle49 is Puzzle42.
+<br>
+East of Puzzle49 is a puzzle called Puzzle50.
+<br>
+North of Puzzle50 is Puzzle42.
+<br>
+Northwest of Puzzle50 is Puzzle41.
+<br>
+Northeast of Puzzle50 is Puzzle43.
+<br>
+East of Puzzle50 is a puzzle called Puzzle51.
+<br>
+North of Puzzle51 is Puzzle43.
+<br>
+Northwest of Puzzle51 is Puzzle42.
+<br>
+Northeast of Puzzle51 is Puzzle44.
+<br>
+East of the steel door is a puzzle called Puzzle52.
+<br>
+North of Puzzle52 is Puzzle44.
+<br>
+Northwest of Puzzle52 is Puzzle43.
+<br>
+Northeast of Puzzle52 is Puzzle45.
+<br>
+East of Puzzle52 is a puzzle called Puzzle53.
+<br>
+North of Puzzle53 is Puzzle45.
+<br>
+Northwest of Puzzle53 is Puzzle44.
+<br>
+Northeast of Puzzle53 is Puzzle46.
+<br>
+East of Puzzle53 is a puzzle called Puzzle54.
+<br>
+North of Puzzle54 is Puzzle46.
+<br>
+Northwest of Puzzle54 is Puzzle45.
+<br>
+Northeast of Puzzle54 is Puzzle47.
+<br>
+East of Puzzle54 is a puzzle called Puzzle55.
+<br>
+North of Puzzle55 is Puzzle47.
+<br>
+Northwest of Puzzle55 is Puzzle46.
+<br>
+Northeast of Puzzle55 is Puzzle48.
+<br>
+East of Puzzle55 is a puzzle called Puzzle56.
+<br>
+North of Puzzle56 is Puzzle48.
+<br>
+Northwest of Puzzle56 is Puzzle47.
+<br>
+
+<br>
+A small slit is in Puzzle52. The small slit is scenery. The small slit is a container.  The capacity of the small slit is 4.  The carrying capacity of the small slit is 1.
+<br>
+Carry out inserting something into the small slit:
+<br>
+  if the noun is the gold card begin;
+<br>
+    say &quot;<font color=#000080>The card slides easily into the slot and vanishes and the metal door slides open revealing a passageway to the west.  A moment later, a previously unseen sign flashes:[line break] [4 spaces]'Unauthorized/Illegal Use of Pass Card -- Card Confiscated'</font>&quot;;
+<br>
+    remove the gold card from play;
+<br>
+    now the steel door is open;
+<br>
+    now the steel door is openable;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The item vanishes into the slot.  A moment later, a previously unseen sign flashes 'Garbage In, Garbage Out' and spews [the noun] (now atomized) through the slot.</font>&quot;;
+<br>
+    remove the noun from play;
+<br>
+  end if.
+<br>
+In Puzzle49 is a marble block.  In Puzzle50 is a marble block.  In Puzzle51 is a marble block.  In Puzzle55 is a marble block.  In Puzzle56 is a marble block.
+<br>
+
+<br>
+South of Puzzle56 is a puzzle called Puzzle57.
+<br>
+North of Puzzle57 is Puzzle49.
+<br>
+Northeast of Puzzle57 is Puzzle50.
+<br>
+East of Puzzle57 is a puzzle called Puzzle58.
+<br>
+North of Puzzle58 is Puzzle50.
+<br>
+Northwest of Puzzle58 is Puzzle49.
+<br>
+Northeast of Puzzle58 is Puzzle51.
+<br>
+East of Puzzle58 is a puzzle called Puzzle59.
+<br>
+North of Puzzle59 is Puzzle51.
+<br>
+Northwest of Puzzle59 is Puzzle50.
+<br>
+Northeast of Puzzle59 is Puzzle52.
+<br>
+East of Puzzle59 is a puzzle called Puzzle60.
+<br>
+North of Puzzle60 is Puzzle52.
+<br>
+Northwest of Puzzle60 is Puzzle51.
+<br>
+Northeast of Puzzle60 is Puzzle53.
+<br>
+East of Puzzle60 is a puzzle called Puzzle61.
+<br>
+North of Puzzle61 is Puzzle53.
+<br>
+Northwest of Puzzle61 is Puzzle52.
+<br>
+Northeast of Puzzle61 is Puzzle54.
+<br>
+East of Puzzle61 is a puzzle called Puzzle62.
+<br>
+North of Puzzle62 is Puzzle54.
+<br>
+Northwest of Puzzle62 is Puzzle53.
+<br>
+Northeast of Puzzle62 is Puzzle55.
+<br>
+East of Puzzle62 is a puzzle called Puzzle63.
+<br>
+North of Puzzle63 is Puzzle55.
+<br>
+Northwest of Puzzle63 is Puzzle54.
+<br>
+Northeast of Puzzle63 is Puzzle56.
+<br>
+East of Puzzle63 is a puzzle called Puzzle64.
+<br>
+North of Puzzle64 is Puzzle56.
+<br>
+Northwest of Puzzle64 is Puzzle55.
+<br>
+
+<br>
+In Puzzle57 is a marble block. In Puzzle58 is a marble block. In Puzzle59 is a marble block. In Puzzle60 is a marble block. In Puzzle61 is a marble block.  In Puzzle62 is a marble block.  In Puzzle63 is a marble block.  In Puzzle64 is a marble block.
+<br>
+In Puzzle37 is a gold card.  The initial appearance of the gold card is &quot;<font color=#000080>Nestled inside the niche is an engraved gold card.</font>&quot; The later appearance of the gold card is &quot;<font color=#000080>There is a solid gold engraved card here.</font>&quot;
+<br>
+The description of the gold card is &quot;<font color=#000080>[card text]</font>&quot;.
+<br>
+To say card text:
+<br>
+  say fixed letter spacing;
+<br>
+say &quot;<font color=#000080> ____________________________________________________________[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|              FROBOZZ MAGIC SECURITY SYSTEMS                |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|    Door Pass                  Royal Zork Puzzle Museum     |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                     #632-988-496-XTHF                      |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|     USE OF THIS PASS BY UNAUTHORIZED PERSONS OR AFTER      |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|   EXPIRATION DATE WILL RESULT IN IMMEDIATE CONFISCATION    |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                              (approved)                    |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                              Will Weng                     |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                               789 G.U.E.                   |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                                            |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                                        Expires 792 G.U.E.  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|____________________________________________________________|[line break]</font>&quot;;
+<br>
+  say variable letter spacing.
+<br>
+The size of the gold card is 4.
+<br>
+The case-points of the gold card is 10.
+<br>
+After taking the gold card for the first time:
+<br>
+award 15 points;
+<br>
+continue the action.
+<br>
+The Cyclops can be basic, hungry, thirsty, asleep, or gone. 
+<br>
+To say cyclops text:
+<br>
+if the cyclops is basic, say &quot;<font color=#000080>A cyclops, who looks prepared to eat horses (much less mere adventurers), blocks the staircase.  From his state of health
+<br>
+</font><font color=#000080>and the bloodstains on the walls, you gather that he is not very friendly, though he likes people</font>&quot;;
+<br>
+if the cyclops is hungry, say &quot;<font color=#000080>The cyclops is standing in the corner, eyeing you closely.  I don't think he likes you very much.  He looks extremely hungry, even for a cyclops</font>&quot;;
+<br>
+If the cyclops is thirsty, say &quot;<font color=#000080>The cyclops, having eaten the hot peppers, appears to be gasping. His inflamed tongue protrudes from his man-sized mouth</font>&quot;;
+<br>
+If the cyclops is asleep, say &quot;<font color=#000080>The cyclops is sleeping blissfully at the foot of the stairs</font>&quot;;
+<br>
+If the cyclops is gone, say &quot;<font color=#000080>The north wall, previously solid, now has a cyclops-shaped hole in it</font>&quot;.
+<br>
+The description of the cyclops is &quot;<font color=#000080>[cyclops text].</font>&quot;
+<br>
+Carry out odysseusing when the player can see the Cyclops and the Cyclops is not asleep and the Cyclops is not gone: award 10 points; now exit found is true; now the cyclops is gone; now the wooden door is open; say &quot;<font color=#000080>The cyclops, hearing the name of his father's deadly nemesis, flees the room by knocking down the wall on the north side of the room.</font>&quot;; stop the action.
+<br>
+Instead of doing something to the cyclops when the cyclops is gone: print the you can't see message instead.
+<br>
+Instead of doing something when the cyclops is the second noun and the cyclops is gone: say &quot;<font color=#000080>I don't see any cylcops here.</font>&quot; instead.
+<br>
+Check going north from Cyclops Room when the cyclops is in Cyclops Room and the cyclops is not gone: print the you can't go message instead.
+<br>
+Check taking the cyclops when the cyclops is not gone: say &quot;<font color=#000080>The cyclops does not take to kindly to being grabbed.</font>&quot; instead.
+<br>
+Check going through the staircase when the cyclops is in Cyclops Room and the cyclops is not asleep and the cyclops is not gone: say &quot;<font color=#000080>The cyclops doesn't look like he'll let you pass.</font>&quot; instead.
+<br>
+The staircase is scenery. Check climbing the staircase: try entering the noun instead.
+<br>
+Check giving something to the cyclops when the cyclops is not gone and the cyclops is not asleep: say &quot;<font color=#000080>The cyclops may be hungry, but there is a limit.</font>&quot; instead.
+<br>
+Check giving the bottle to the cyclops when the cyclops is not thirsty and the quantity of water is in the bottle or giving the water to the cyclops when the cyclops is not thirsty: say &quot;<font color=#000080>The cyclops is apparently not thirsty and refuses your generosity.</font>&quot; instead.
+<br>
+Check giving the bottle to the cyclops when the cyclops is thirsty and the cyclops is not gone and the quantity of water is in the bottle or giving the water to the cyclops when the cyclops is thirsty and the cyclops is not gone: say &quot;<font color=#000080>The cyclops looks tired and quickly falls fast asleep (what did you put in that drink, anyway?).</font>&quot;; now the cyclops is asleep; remove the bottle from play instead.
+<br>
+Check giving the garlic to the cyclops when the cyclops is not gone: say &quot;<font color=#000080>The cyclops is not so stupid as to eat that!</font>&quot; instead.
+<br>
+Check giving the lunch to the cyclops when the cyclops is not gone: say &quot;<font color=#000080>The cyclops says, 'Mmm mmm!  I love hot peppers!  But oh, could I use a drink.  Perhaps I could drink the blood of that thing.' From the gleam in his eye, it could be surmised that you are 'that thing'.</font>&quot;; now the cyclops is thirsty; remove the bottle from play instead.
+<br>
+The description of Strange Passage is &quot;<font color=#000080>This is a long passage.  To the south is one entrance.  On the east there is an old wooden door with a large hole in it (about
+<br>
+</font><font color=#000080>cyclops sized).</font>&quot;
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><p><i>Note</i><p>
+<A name="note1"><font color=#404040>[1].  KING LEAR, III, iv: The prince of darkness is a gentleman; Modo he's called and Mahu.</font><p>
+</font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

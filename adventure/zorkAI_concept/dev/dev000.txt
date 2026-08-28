@@ -1,0 +1,24 @@
+Example.inform 
+Example Materials 
+    Figures 
+        Woodlands.png 
+        Blackberry.jpg 
+        Red Admiral Butterfly.png 
+		
+
+// inserisci immagine per la locazione
+	
+	Figure of HOUSEWEST  is the file "zorkhousewest.png". 
+
+	The small mailbox is a container in West of House. The mailbox is fixed in place, closed, and openable. 
+	Understand "box" and "mail box" and "mail-box" as the mailbox.
+
+// prima di andare visualizza
+
+	Before looking when the location is the West of House:
+		display the Figure of HOUSEWEST;
+
+
+// dopo di andare visualizza
+
+	After going to North of House:

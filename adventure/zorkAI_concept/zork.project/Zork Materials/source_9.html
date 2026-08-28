@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_8.html">Previous</a><br><a href="source_10.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 10 - The Reservoir</b>
+<br>
+
+<br>
+East of Deep Canyon is south of a dungeon called Flood Control Dam #3.  The description of Flood Control Dam #3 is &quot;<font color=#000080>You are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant.  There are paths to the north, south, east, and down.  There is a control panel here.  There is a large metal bolt on the panel. Above the bolt is a small green plastic bubble.  [if gate flag is true]The green bubble is glowing.[end if]</font>&quot;.
+<br>
+East of Flood Control Dam #3 is east of Damp Cave.
+<br>
+A thing called a bolt is in Flood Control Dam #3.  A thing called a bubble is in Flood Control Dam #3.  The bolt and the bubble are scenery.  Flood Control Dam #3 is not dark.
+<br>
+North of Flood Control Dam #3 is a dungeon called Dam Lobby.      Dam Lobby is not dark. The description of Dam Lobby is &quot;<font color=#000080>This room appears to have been the waiting room for groups touring the dam.  There are exits here to the north and east marked 'Private', though the doors are open, and an exit to the south.</font>&quot;
+<br>
+A tour guidebook is in Dam Lobby.  The initial appearance of the tour guidebook is &quot;<font color=#000080>Some guidebooks entitled 'Flood Control Dam #3' are on the reception
+<br>
+</font><font color=#000080>desk.</font>&quot; The later appearance of the tour guidebook is &quot;<font color=#000080>There are tour guidebooks here.</font>&quot;
+<br>
+The description of the tour guidebooks is &quot;<font color=#000080>[guidebook text]</font>&quot;.
+<br>
+The guidebook is inflammable.
+<br>
+To say guidebook text:
+<br>
+center &quot;<font color=#000080>Guide Book to</font>&quot;;
+<br>
+center &quot;<font color=#000080>Flood Control Dam #3</font>&quot;;
+<br>
+say &quot;<font color=#000080>Flood Control Dam #3 (FCD#3) was constructed in year 783 of the
+<br>
+</font><font color=#000080>Great Underground Empire to harness the destructive power of the
+<br>
+</font><font color=#000080>Frigid River.  This work was supported by a grant of 37 million
+<br>
+</font><font color=#000080>zorkmids from the Central Bureaucracy and your omnipotent local
+<br>
+</font><font color=#000080>tyrant Lord Dimwit Flathead the Excessive. This impressive
+<br>
+</font><font color=#000080>structure is composed of 3.7 cubic feet of concrete, is 256 feet
+<br>
+</font><font color=#000080>tall at the center, and 193 feet wide at the top.  The reservoir
+<br>
+</font><font color=#000080>created behind the dam has a volume of 37 billion cubic feet, an
+<br>
+</font><font color=#000080>area of 12 million square feet, and a shore line of 36 thousand
+<br>
+</font><font color=#000080>feet.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>The construction of FCD#3 took 112 days from ground breaking to
+<br>
+</font><font color=#000080>the dedication. It required a work force of 384 slaves, 34 slave
+<br>
+</font><font color=#000080>drivers, 12 engineers, 2 turtle doves, and a partridge in a pear
+<br>
+</font><font color=#000080>tree. The work was managed by a command team composed of 2345
+<br>
+</font><font color=#000080>bureaucrats, 2347 secretaries (at least two of whom can type),
+<br>
+</font><font color=#000080>12,256 paper shufflers, 52,469 rubber stampers, 245,193 red tape
+<br>
+</font><font color=#000080>processors, and nearly one million dead trees.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>We will now point out some of the more interesting features
+<br>
+</font><font color=#000080>of FCD#3 as we conduct you on a guided tour of the facilities.  You start your tour here in the Dam Lobby.  You will notice on your right that .........</font>&quot;
+<br>
+Match count is a number that varies.  Match count is usually 5.
+<br>
+A matchbook is in Dam Lobby.  Understand &quot;<font color=#000080>matches</font>&quot; and &quot;<font color=#000080>match</font>&quot; and &quot;<font color=#000080>flint</font>&quot; as the matchbook.  The later appearance of the matchbook is &quot;<font color=#000080>There is a matchbook whose cover says 'Visit Beautiful FCD#3' here.</font>&quot;
+<br>
+Check opening the matchbook: try counting the matchbook instead.
+<br>
+The description of the matchbook is &quot;<font color=#000080>[matchbook text]</font>&quot;.
+<br>
+To say matchbook text:
+<br>
+center &quot;<font color=#000080>[unicode 91]close cover before striking BKD[unicode 93]</font>&quot;;
+<br>
+say paragraph break;
+<br>
+center &quot;<font color=#000080>YOU too can make BIG MONEY in the exciting field of</font>&quot;;
+<br>
+center &quot;<font color=#000080>PAPER SHUFFLING!</font>&quot;;
+<br>
+say paragraph break;
+<br>
+say &quot;<font color=#000080>Mr. TAA of Muddle, Mass. says:  'Before I took this course I used
+<br>
+</font><font color=#000080>to be a lowly bit twiddler.  Now with what I learned at MIT Tech
+<br>
+</font><font color=#000080>I feel really important and can obfuscate and confuse with the best.'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Mr. MARC had this to say: 'Ten short days ago all I could look
+<br>
+</font><font color=#000080>forward to was a dead-end job as a doctor.  Now I have a promising
+<br>
+</font><font color=#000080>future and make really big Zorkmids.'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>MIT Tech can't promise these fantastic results to everyone.  But when
+<br>
+</font><font color=#000080>you earn your MDL degree from MIT Tech your future will be brighter.[paragraph break]</font>&quot;;
+<br>
+center &quot;<font color=#000080>Send for our free brochure today</font>&quot;.
+<br>
+North of Dam Lobby is west of a dungeon called Maintenance Room.  East of Dam Lobby is south of Maintenance Room.  The description of Maintenance Room is &quot;<font color=#000080>This is what appears to have been the maintenance room for Flood
+<br>
+</font><font color=#000080>Control Dam #3, judging by the assortment of tool chests around the
+<br>
+</font><font color=#000080>room.  Apparently, this room has been ransacked recently, for most of
+<br>
+</font><font color=#000080>the valuable equipment is gone. On the wall in front of you is a
+<br>
+</font><font color=#000080>group of buttons, which are labelled in EBCDIC. However, they are of
+<br>
+</font><font color=#000080>different colors:  Blue, Yellow, Brown, and Red. The doors to this
+<br>
+</font><font color=#000080>room are in the west and south ends.</font>&quot;
+<br>
+Maintenance Room is not dark.
+<br>
+A thing called a screwdriver is in Maintenance Room.  A thing called a wrench is in Maintenance Room.
+<br>
+A red button, a yellow button, a blue button, and a brown button are in Maintenance Room.  The red button, the blue button, the brown button, and the yellow button are scenery.  
+<br>
+Check pushing the red button:
+<br>
+  if Maintenance Room is not lit begin;
+<br>
+    say &quot;<font color=#000080>The lights within the room come on.</font>&quot;;
+<br>
+    now Maintenance Room is lit instead;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The lights within the room shut off.</font>&quot;;
+<br>
+    now Maintenance Room is dark instead;
+<br>
+  end if.
+<br>
+A closed openable container called a tube is in Maintenance Room.  The later appearance of the tube is &quot;<font color=#000080>There is an object which looks like a tube of toothpaste here.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>tube of toothpaste</font>&quot; as the tube.  The capacity of the tube is 7.  The size of the tube is 10.  The description of the tube is &quot;<font color=#000080>Frobozz Magic Gunk Company:  All Purpose Gunk</font>&quot;.
+<br>
+Some viscous material is in the tube. Understand &quot;<font color=#000080>gunk</font>&quot; and &quot;<font color=#000080>glue</font>&quot; as the viscous material.  The later appearance of the viscous material is &quot;<font color=#000080>There is some gunk here.</font>&quot;.
+<br>
+Instead of inserting something into the tube:  say &quot;<font color=#000080>The tube refuses to accept anything.</font>&quot;
+<br>
+After taking the viscous material from the tube:
+<br>
+say &quot;<font color=#000080>The viscous material oozes into your hand.</font>&quot;
+<br>
+After reading a command:
+<br>
+  if the player's command includes &quot;<font color=#000080>squeeze [tube]</font>&quot;, replace the matched text with &quot;<font color=#000080>get all from [tube]</font>&quot;.
+<br>
+
+<br>
+<b>Table of Drowning Messages</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>message</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your ankles.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your shin.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your knees.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your hips.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your waist.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your chest.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>up to your neck.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>over your head.</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>high in your lungs.</font>&quot;</td></tr>
+</table>
+<br>
+
+<br>
+Water level is a number that varies.  Water level is usually 0.
+<br>
+Understand &quot;<font color=#000080>putty</font>&quot; and &quot;<font color=#000080>toothpaste</font>&quot; as the viscous material.
+<br>
+Check pushing the blue button:
+<br>
+  if water level is not zero begin;
+<br>
+    say &quot;<font color=#000080>The blue button appears to be jammed.</font>&quot; instead;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>There is a rumbling sound and a stream of water appears to burst from the east wall of the room (apparently, a leak has occurred in a pipe.)</font>&quot;;
+<br>
+    change water level to 1;
+<br>
+    move the leak2 to Maintenance Room instead;
+<br>
+ end if.
+<br>
+The leak2 is a thing.  The leak2 is scenery.  The printed name of the leak2 is &quot;<font color=#000080>leak</font>&quot;.
+<br>
+Understand &quot;<font color=#000080>leak</font>&quot; as the leak2.
+<br>
+Every turn when water level is greater than 0 and water level is less than 19:
+<br>
+  increase water level by 1;
+<br>
+  let n be water level / 2;
+<br>
+  if the player is in Maintenance Room begin;
+<br>
+    say &quot;<font color=#000080>The water is [message in row n of the Table of Drowning Messages]</font>&quot;;
+<br>
+    if water level is 18 begin;
+<br>
+      say &quot;<font color=#000080>  I'm afraid you have done drowned yourself.</font>&quot;;
+<br>
+      end the game in death;
+<br>
+    end if;
+<br>
+  end if.
+<br>
+Carry out plugging the leak2 with the viscous material:
+<br>
+  say &quot;<font color=#000080>By some miracle of elven technology, you have managed to stop the
+<br>
+</font><font color=#000080>leak in the dam.</font>&quot;;
+<br>
+  change water level to -1;
+<br>
+  remove the leak2 from play.
+<br>
+Before going north from Dam Lobby when water level is greater than 17:
+<br>
+  say &quot;<font color=#000080>The room is full of water and cannot be entered.</font>&quot;;
+<br>
+  stop the action.
+<br>
+Before going east from Dam Lobby when water level is greater than 17:
+<br>
+ say &quot;<font color=#000080>The room is full of water and cannot be entered.</font>&quot;;
+<br>
+stop the action.
+<br>
+
+<br>
+Check pushing the brown button:
+<br>
+  change gate flag to false;
+<br>
+  say &quot;<font color=#000080>Click.</font>&quot; instead.
+<br>
+Check pushing the yellow button:
+<br>
+  change gate flag to true;
+<br>
+  say &quot;<font color=#000080>Click.</font>&quot; instead.
+<br>
+Check turning the bolt with something:
+<br>
+  if the second noun is not the wrench, say &quot;<font color=#000080>The bolt won't turn using [the second noun].</font>&quot; instead;
+<br>
+  if gate flag is false, say &quot;<font color=#000080>The bolt won't turn with your best effort.</font>&quot; instead.
+<br>
+
+<br>
+Gate flag is a truth state variable. Gate flag is usually false.
+<br>
+Carry out turning the bolt with the wrench:
+<br>
+  if the pdl3 is on-stage begin;
+<br>
+    say &quot;<font color=#000080>The sluice gates open and water pours through the dam.</font>&quot;;
+<br>
+    repeat with thingy running through drainable watersources begin;
+<br>
+      remove the thingy from play;
+<br>
+    end repeat;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The sluice gates close and water starts to collect behind the dam.</font>&quot;;
+<br>
+    move the pdl1 to Reservoir South;
+<br>
+    move the pdl3 to Reservoir North;
+<br>
+  end if.
+<br>
+North of Reservoir South is a dungeon called Reservoir.  The description of Reservoir is     
+<br>
+&quot;<font color=#000080>[if the pdl3 is on-stage]You are on the reservoir.  Beaches can be seen north and south.  Upstream a small stream enters the reservoir through a narrow cleft
+<br>
+</font><font color=#000080>in the rocks.  The dam can be seen downstream.[otherwise]You are on what used to be a large reservoir, but which is now a large mud pile.  There are 'shores' to the north and south.[end if]</font>&quot;.
+<br>
+North of Reservoir is Reservoir North.
+<br>
+Check going north from Reservoir:
+<br>
+move the player to Reservoir North instead.
+<br>
+Check going to a room that is not offroad:
+<br>
+  if the player is not in a vehicle, print the you can't go message instead;
+<br>
+  else continue the action.
+<br>
+A hand-held air-pump is in Reservoir North.  Understand &quot;<font color=#000080>pump</font>&quot; and &quot;<font color=#000080>airpump</font>&quot; as the air-pump.  The later appearance of the air-pump is &quot;<font color=#000080>There is a small pump here.</font>&quot;
+<br>
+
+<br>
+A trunk of jewels is in Reservoir.  Understand &quot;<font color=#000080>chest</font>&quot; as the trunk.  The size of the trunk is 35.  The case-points of the trunk is 8.  After taking the trunk: award 15 points; continue the action. The initial appearance of the trunk of jewels is &quot;<font color=#000080>Lying half buried in the mud is an old trunk, bulging with jewels.</font>&quot; The later appearance of the trunk of jewels is &quot;<font color=#000080>There is an old trunk here, bulging with assorted jewels.</font>&quot;
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

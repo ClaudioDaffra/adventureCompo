@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Graphics</key>
+    <dict>
+        <key>3</key>
+        <string>Figures\zork_house_west.png</string>
+        <key>4</key>
+        <string>Figures\zork_house_north.png</string>
+        <key>5</key>
+        <string>Figures\zork_house_south.png</string>
+        <key>6</key>
+        <string>Figures\zork_house_behind.png</string>
+        <key>7</key>
+        <string>Figures\zork_kitchen.png</string>
+        <key>8</key>
+        <string>Figures\zork_living_room.png</string>
+        <key>9</key>
+        <string>Figures\zork_up_tree.png</string>
+        <key>10</key>
+        <string>Figures\zork_clearing.png</string>
+        <key>11</key>
+        <string>Figures\zork_forest3.png</string>
+        <key>12</key>
+        <string>Figures\zork_forest4.png</string>
+        <key>13</key>
+        <string>Figures\zork_forest5.png</string>
+        <key>14</key>
+        <string>Figures\zork_forest1.png</string>
+        <key>15</key>
+        <string>Figures\zork_attic.png</string>
+        <key>16</key>
+        <string>Figures\zork_forest2.png</string>
+        <key>17</key>
+        <string>Figures\zork_canyon_view.png</string>
+        <key>18</key>
+        <string>Figures\zork_rocky_ledge.png</string>
+        <key>19</key>
+        <string>Figures\zork_canyon_bottom.png</string>
+        <key>20</key>
+        <string>Figures\zork_end_of_rainbow.png</string>
+    </dict>
+</dict>
+</plist>

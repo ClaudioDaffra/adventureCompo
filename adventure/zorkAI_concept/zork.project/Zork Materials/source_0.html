@@ -1,0 +1,2498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_1.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 1 - New Actions and Concepts</b>
+<br>
+
+<br>
+A room has a number called rval. The rval of a room is usually 0.
+<br>
+When play begins, seed the random-number generator with 1234. 
+<br>
+The story genre is &quot;<font color=#000080>Fantasy</font>&quot;. 
+<br>
+The story headline is &quot;<font color=#000080>A Computerized Fantasy Simulation Game</font>&quot;.
+<br>
+The release number is 3.
+<br>
+The story creation year is 1979.
+<br>
+Use the serial comma. 
+<br>
+A thing can be non-flaming or flaming.  A thing is usually non-flaming. A thing can be non-inflammable or inflammable. A thing is usually non-inflammable.
+<br>
+<font color=#404040><sup><a href="#note1">[1]</a></sup></font>
+<br>
+
+<br>
+Release along with the source text and a website.
+<br>
+Digging into it with is an action applying to one thing and one carried thing.
+<br>
+Understand &quot;<font color=#000080>dig into/in [something] with/using [something]</font>&quot; as digging into it with.
+<br>
+Understand &quot;<font color=#000080>dig [something] with/using [something]</font>&quot; as digging into it with.
+<br>
+Understand &quot;<font color=#000080>dig with/using [something] into/in [something]</font>&quot; as digging into it with (with nouns reversed).
+<br>
+Counting is an action applying to one visible thing.  Understand &quot;<font color=#000080>count [something]</font>&quot; as counting.
+<br>
+Check counting:
+<br>
+if the noun is the pile of leaves, say &quot;<font color=#000080>There are 69,105 leaves here.</font>&quot; instead;
+<br>
+<font color=#404040><sup><a href="#note2">[2]</a></sup></font>
+<br>
+<font color=#404040><sup><a href="#note3">[3]</a></sup></font> 
+<br>
+if the noun is the pair of candles, say &quot;<font color=#000080>Let's see, how many objects in a pair?  Don't tell me, I'll get it.</font>&quot; instead;
+<br>
+if the noun is the bills, say &quot;<font color=#000080>Don't you trust me?  There are 200 bills.</font>&quot; instead;
+<br>
+if the noun is the matchbook begin;
+<br>
+  if match count is 1 begin;
+<br>
+    say &quot;<font color=#000080>You have one match.</font>&quot;;
+<br>
+  else if match count is 0;
+<br>
+    say &quot;<font color=#000080>You have no matches.</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>You have [match count] matches.</font>&quot;;
+<br>
+  end if;
+<br>
+end if.
+<br>
+Carry out counting:
+<br>
+say &quot;<font color=#000080>You have lost your mind.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>count blessings</font>&quot; as a mistake (&quot;<font color=#000080>Well, for one, you are playing Zork....</font>&quot;).
+<br>
+Understand  &quot;<font color=#000080>$COUNTREASURE</font>&quot; as a mistake (&quot;<font color=#000080>Your adventure has netted [number of valuble things in the trophy case] treasure[s].  You are carrying [number of valuble things had by the player] valuble[s].</font>&quot;)
+<br>
+
+<br>
+Check digging into it with:
+<br>
+if the noun is not the guano and the noun is not the ground, say &quot;<font color=#000080>Digging into [a noun] is silly.</font>&quot; instead;
+<br>
+if the second noun is not the shovel, say &quot;<font color=#000080>Digging with [the second noun] is slow and tedious.</font>&quot; instead;
+<br>
+if the noun is the ground and the player is not in Sandy Beach, say  &quot;<font color=#000080>The ground is too hard for digging here.</font>&quot;.
+<br>
+
+<br>
+Playing is an action applying to one carried thing.  
+<br>
+Understand &quot;<font color=#000080>play [something]</font>&quot; as playing.
+<br>
+
+<br>
+Exorcising is an action applying to nothing.  Understand &quot;<font color=#000080>exorcise</font>&quot; as exorcising.
+<br>
+Check exorcising:
+<br>
+  if exorcism flag is not -1, say &quot;<font color=#000080>You must perform the ceremony.</font>&quot; instead.
+<br>
+Carry out exorcising:
+<br>
+say &quot;<font color=#000080>There is a clap of thunder, and a voice echoes through the cavern: 'Begone, chomper!'  Apparently, the voice thinks you are an evil spirit and dismisses you from the land of the living.</font>&quot;;
+<br>
+end the game in death.
+<br>
+
+<br>
+Definition: a thing is valuble if the case-points of it is not 0.
+<br>
+
+<br>
+After reading a command:
+<br>
+if the player's command includes &quot;<font color=#000080>COUNT TREASURE/TREASURES/VALUBLES</font>&quot;, replace the matched text with &quot;<font color=#000080>$COUNTREASURE</font>&quot;.
+<br>
+Check playing:
+<br>
+if the noun is the violin, say &quot;<font color=#000080>An amazing offensive noise issues from the violin.</font>&quot; instead;
+<br>
+say &quot;<font color=#000080>That makes no sense.</font>&quot; instead.
+<br>
+
+<br>
+Before playing a person who is not the player:
+<br>
+  say &quot;<font color=#000080>You are so completely engrossed in the role of [the noun] that you kill yourself, just as he would have done.</font>&quot;;
+<br>
+  end the game in death.
+<br>
+
+<br>
+Playing it with is an action applying to two carried things.  Understand &quot;<font color=#000080>play [something] with [something]</font>&quot; as playing it with.
+<br>
+Check playing it with:
+<br>
+if the noun is not the violin, say &quot;<font color=#000080>That makes no sense.</font>&quot; instead;
+<br>
+if the second noun is not a weapon, say &quot;<font color=#000080>An amazing offensive noise issues from the violin.</font>&quot; instead;
+<br>
+say &quot;<font color=#000080>Very good.  The violin is now worthless.</font>&quot;;
+<br>
+change the case-points of the violin to 0.
+<br>
+
+<br>
+Putting it under is an action applying to one carried thing and one thing.  Understand &quot;<font color=#000080>put [something] under [something]</font>&quot; and &quot;<font color=#000080>place [something] under [something]</font>&quot; and &quot;<font color=#000080>slide [something] under [something]</font>&quot; as putting it under.
+<br>
+
+<br>
+Check putting it under:
+<br>
+  if the second noun is not a door, say &quot;<font color=#000080>You can't do that.</font>&quot; instead;
+<br>
+  if the second noun is not the massive wooden door, say &quot;<font color=#000080>There's not enough room under this door.</font>&quot; instead;
+<br>
+  if the noun is the green piece of paper or the noun is the tan label or the noun is the leaflet begin;
+<br>
+    say &quot;<font color=#000080>The paper is very small and vanishes under the door.</font>&quot;;
+<br>
+    move the noun to the other side of the second noun instead;
+<br>
+  end if;
+<br>
+  if the noun is not the mat, say &quot;<font color=#000080>You can't do that.</font>&quot; instead;
+<br>
+  if mat under is true, say &quot;<font color=#000080>Look around.</font>&quot; instead.
+<br>
+Carry out putting it under:
+<br>
+  say &quot;<font color=#000080>The mat fits easily under the door.</font>&quot;;
+<br>
+  move the mat to the location;
+<br>
+  
+<br>
+Geronimoing is an action applying to nothing.  Understand &quot;<font color=#000080>geronimo</font>&quot; as geronimoing.  
+<br>
+Check geronimoing:
+<br>
+if the player is not inside the barrel, say &quot;<font color=#000080>Wasn't he an Indian?</font>&quot;.
+<br>
+Carry out geronimoing:
+<br>
+say &quot;<font color=#000080>I didn't think you would REALLY try to go over the falls in a
+<br>
+</font><font color=#000080>barrel. It seems that some 450 feet below, you were met by a number
+<br>
+</font><font color=#000080>of  unfriendly rocks and boulders, causing your immediate demise.  Is
+<br>
+</font><font color=#000080>this what 'over a barrel' means?</font>&quot;;
+<br>
+end the game in death.
+<br>
+Check digging into the guano with the shovel for the first time:
+<br>
+say &quot;<font color=#000080>You are digging into a pile of bat guano.</font>&quot; instead.
+<br>
+Check digging into the guano with the shovel for the second time:
+<br>
+say &quot;<font color=#000080>You seem to be getting knee deep in guano.</font>&quot; instead.
+<br>
+Check digging into the guano with the shovel for the third time:
+<br>
+say &quot;<font color=#000080>You are covered with bat turds, cretin.</font>&quot; instead.
+<br>
+Check digging into the guano with the shovel more than 3 times:
+<br>
+say &quot;<font color=#000080>This is getting nowhere.</font>&quot; instead.
+<br>
+
+<br>
+Check digging into the ground with the shovel when the player is in Sandy Beach for the first time:
+<br>
+say &quot;<font color=#000080>You seem to be digging a hole here.</font>&quot; instead.
+<br>
+Check digging into the ground with the shovel when the player is in Sandy Beach for the second time:
+<br>
+say &quot;<font color=#000080>The hole is getting deeper, but that's about it.</font>&quot; instead.
+<br>
+Check digging into the ground with the shovel when the player is in Sandy Beach for the third time:
+<br>
+say &quot;<font color=#000080>You are surrounded by a wall of sand on all sides.</font>&quot; instead.
+<br>
+Check digging into the ground with the shovel when the player is in Sandy Beach the fourth time:
+<br>
+say &quot;<font color=#000080>You can see a small statue here in the sand.</font>&quot;;
+<br>
+move the statue to Sandy Beach instead.
+<br>
+Check digging into the ground with the shovel when the player is in Sandy Beach more than 4 times:
+<br>
+say &quot;<font color=#000080>The hole collapses, smothering you.</font>&quot;;
+<br>
+end the game in death instead.
+<br>
+
+<br>
+The ground is a backdrop. The ground is everywhere. Understand &quot;<font color=#000080>sand</font>&quot; and &quot;<font color=#000080>earth</font>&quot; and &quot;<font color=#000080>here</font>&quot; and &quot;<font color=#000080>hole</font>&quot; as the ground.
+<br>
+
+<br>
+The description of yourself is &quot;<font color=#000080>That's difficult unless your eyes are prehensile.</font>&quot;.
+<br>
+Launching is an action applying to nothing.  Understand &quot;<font color=#000080>launch</font>&quot; as launching.
+<br>
+Check launching:
+<br>
+  if the player is not in the magic boat and the player is not in the basket, say &quot;<font color=#000080>You need to be in a vehicle to do that.</font>&quot; instead.
+<br>
+Landing is an action applying to nothing.  Understand &quot;<font color=#000080>land</font>&quot; as landing.
+<br>
+Check landing:
+<br>
+  if the player is not in the magic boat and the player is not in the basket, say &quot;<font color=#000080>You need to be in a vehicle to do that.</font>&quot;.
+<br>
+Carry out landing:
+<br>
+  if the player is in the magic boat begin;
+<br>
+  if the magic boat is in In Stream begin;
+<br>
+    move the magic boat to Stream View;
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in Reservoir;
+<br>
+    say &quot;<font color=#000080>You must specify a direction.</font>&quot; instead;
+<br>
+  else if the magic boat is in River1;
+<br>
+    move the magic boat to Dam Base;
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in River2;
+<br>
+     say &quot;<font color=#000080>The White Cliffs prevent your landing here.</font>&quot; instead;
+<br>
+  else if the magic boat is in River3 or the magic boat is in River4;
+<br>
+    say &quot;<font color=#000080>You must specify which direction here.</font>&quot; instead;
+<br>
+  else if the magic boat is in River5;
+<br>
+    move the magic boat to Dam Base;
+<br>
+    try looking instead;
+<br>
+  end if;
+<br>
+else if the player is in the basket;
+<br>
+  if the basket is in Volcano Near Small Ledge begin;
+<br>
+    move the basket to Narrow Ledge;
+<br>
+    try looking instead;
+<br>
+  else if the basket is in Volcano Near Viewing Ledge;
+<br>
+    say &quot;<font color=#000080>The ledge is too narrow to land on.</font>&quot; instead;
+<br>
+  else if the basket is in Volcano Near WideLedge;
+<br>
+    if the rusty old box is open, say &quot;<font color=#000080>The ledge has collapsed and cannot be landed on.</font>&quot; instead;
+<br>
+    move the basket to Wide Ledge;
+<br>
+    try looking instead;
+<br>
+  end if;
+<br>
+end if;
+<br>
+say &quot;<font color=#000080>You cannot land from here.</font>&quot; instead.
+<br>
+Carry out launching:
+<br>
+  if the player is in the magic boat begin;
+<br>
+  if the magic boat is in Stream View begin;
+<br>
+    move the magic boat to In Stream;
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in Dam Base;
+<br>
+    move the magic boat to River1;
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in Reservoir South or the magic boat is in Reservoir North and the pdl1 is on-stage;
+<br>
+    move the magic boat to Reservoir;
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in Rocky Shore or the magic boat is in WCLF1;
+<br>
+    move the magic boat to River3; 
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in WCLF2 or the magic boat is in Sandy Beach;
+<br>
+    move the magic boat to River4; 
+<br>
+    try looking instead;
+<br>
+  else if the magic boat is in Shore;
+<br>
+    move the magic boat to River5;
+<br>
+    try looking instead;
+<br>
+  end if;
+<br>
+  else if the player is in the basket;
+<br>
+     if the braided wire is attached to a nonrope thing (called the tied object), now the braided wire is not attached to the tied object; 
+<br>
+    if the basket is in Narrow Ledge begin;
+<br>
+      move the basket to Volcano Near Small Ledge;
+<br>
+      try looking instead;
+<br>
+    else if the basket is in Wide Ledge;
+<br>
+      move the basket to Volcano Near WideLedge;
+<br>
+      try looking instead;
+<br>
+    end if;
+<br>
+  end if;
+<br>
+  say &quot;<font color=#000080>You can't launch from here.</font>&quot; instead.
+<br>
+Deflating is an action applying to one thing.  Understand &quot;<font color=#000080>deflate [something]</font>&quot; as deflating.  
+<br>
+Check deflating:
+<br>
+  if the noun is not the boat, say &quot;<font color=#000080>How to you expect to do that?</font>&quot; instead;
+<br>
+  if the player is in the boat, say &quot;<font color=#000080>You can't deflate the boat while you're in it.</font>&quot; instead;
+<br>
+  if the player is carrying the boat, say &quot;<font color=#000080>The boat must be on the ground to be deflated.</font>&quot; instead.
+<br>
+Carry out deflating the boat:
+<br>
+say &quot;<font color=#000080>The boat deflates.</font>&quot;;
+<br>
+move the pile of plastic to the holder of the boat;
+<br>
+remove the boat from play.
+<br>
+Understand &quot;<font color=#000080>brush teeth</font>&quot; as a mistake (&quot;<font color=#000080>Dental hygiene is highly recommended, but I'm not sure what you want to brush them with.</font>&quot;).
+<br>
+Inflating it with is an action applying to one thing and one carried thing.  Understand &quot;<font color=#000080>inflate [something] with/using [something]</font>&quot; and &quot;<font color=#000080>pump up [something] with/using [something]</font>&quot; as inflating it with.
+<br>
+Your lungs are a part of the player. Understand &quot;<font color=#000080>mouth</font>&quot; and &quot;<font color=#000080>breath</font>&quot; as your lungs.
+<br>
+Check inflating it with:
+<br>
+  if the noun is not the dboat and the noun is not the pile of plastic and the noun is not the boat, say &quot;<font color=#000080>How can you inflate that?</font>&quot;;
+<br>
+  if the noun is the dboat, say &quot;<font color=#000080>This boat will not inflate since some moron put a hole in it.</font>&quot; instead;
+<br>
+  if the noun is the boat, say &quot;<font color=#000080>Inflating it further would probably burst it.</font>&quot; instead;
+<br>
+  if the second noun is your lungs, say &quot;<font color=#000080>You don't have enough lung power to inflate it.</font>&quot; instead;
+<br>
+  if the second noun is not the air-pump, say &quot;<font color=#000080>You don't have enough lung power to inflate it.</font>&quot; instead;
+<br>
+  if the player is carrying the noun, say &quot;<font color=#000080>You cannot inflate it while carrying it.</font>&quot; instead.
+<br>
+Inflating is an action applying to one thing.  Understand &quot;<font color=#000080>pump up [something]</font>&quot; and &quot;<font color=#000080>inflate [something]</font>&quot; as inflating.
+<br>
+Check inflating:
+<br>
+  if the player can see the air-pump, try inflating the noun with the air-pump instead;
+<br>
+  else say &quot;<font color=#000080>I don't really see how.</font>&quot;
+<br>
+Brushing is an action applying to one carried thing.  Understand &quot;<font color=#000080>brush teeth with [something]</font>&quot; as brushing.
+<br>
+Check brushing:
+<br>
+  if the noun is not the viscous material, say &quot;<font color=#000080>Nice try, but with [a noun]?</font>&quot; instead.
+<br>
+Carry out brushing:
+<br>
+say &quot;<font color=#000080>Well, you seem to have been brushing your teeth with some sort of
+<br>
+</font><font color=#000080>glue. As a result, your mouth gets glued together (with your nose)
+<br>
+</font><font color=#000080>and you die of respiratory failure.</font>&quot;;
+<br>
+end the game in death.
+<br>
+Lubricating it with is an action applying to one thing and one carried thing.  Understand &quot;<font color=#000080>lubricate [something] with something</font>&quot; as lubricating it with. Understand &quot;<font color=#000080>oil [something] with something</font>&quot; as lubricating it with. Understand &quot;<font color=#000080>grease [something] with [something]</font>&quot; as lubricating it with.
+<br>
+Plugging it with is an action applying to one thing and one carried thing.  Understand &quot;<font color=#000080>plug [something] with [something]</font>&quot; and &quot;<font color=#000080>glue [something] with [something]</font>&quot; and &quot;<font color=#000080>patch [something] with [something]</font>&quot; as plugging it with.
+<br>
+Check plugging it with:
+<br>
+  if the second noun is not the viscous material, say &quot;<font color=#000080>That makes no sense.</font>&quot; instead;
+<br>
+  if the noun is not the leak2 and the noun is not the dboat, say &quot;<font color=#000080>That makes no sense.</font>&quot; instead.
+<br>
+Check lubricating it with:
+<br>
+  if the second noun is not the viscous material, say &quot;<font color=#000080>You probably put spinach in your gas tank, too.</font>&quot; instead;
+<br>
+  if the noun is not the bolt, say &quot;<font color=#000080>That's not very useful.</font>&quot; instead.
+<br>
+Turning it with is an action applying to one thing and one carried thing.  Understand &quot;<font color=#000080>turn [something] with [something]</font>&quot; as turning it with.
+<br>
+Understand &quot;<font color=#000080>flip [something] with [something]</font>&quot; as turning it with.
+<br>
+Check turning it with:
+<br>
+  if the noun is not the bolt and the noun is not the switch, try turning the noun instead.
+<br>
+
+<br>
+Check throwing something at the player:
+<br>
+  say &quot;<font color=#000080>A terrific throw! [The noun] hits you squarely in the head. Normally, this
+<br>
+</font><font color=#000080>wouldn't do much damage, but by incredible mischance, you fall over backwards
+<br>
+</font><font color=#000080>trying to duck, and break your neck, justice being swift and merciful in the
+<br>
+</font><font color=#000080>Great Underground Empire.</font>&quot;;
+<br>
+  end the game in death instead.
+<br>
+Wishing is an action applying to nothing. Understand &quot;<font color=#000080>wish</font>&quot; and &quot;<font color=#000080>make wish</font>&quot; and &quot;<font color=#000080>make a wish</font>&quot; as wishing.
+<br>
+Understand &quot;<font color=#000080>$VERIFY</font>&quot; as verifying the story file.
+<br>
+Carry out wishing:  
+<br>
+if the player is in Top of Well or the player is in Circular Room and the player is holding the bag of coins begin;
+<br>
+  say &quot;<font color=#000080>A whispering voice replies, 'Water makes the bucket go.'
+<br>
+</font><font color=#000080>Unfortunately, wishing makes the coins go...</font>&quot;;
+<br>
+  remove the bag of coins from play;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>No one is listening.</font>&quot;;
+<br>
+end if.
+<br>
+A room can be indoors or outdoors. A room is usually indoors. 
+<br>
+Understand &quot;<font color=#000080>wall</font>&quot; as a direction when the location is indoors. 
+<br>
+Understand &quot;<font color=#000080>cretin</font>&quot; as yourself.
+<br>
+The former location is a room that varies.
+<br>
+First carry out going rule: 
+<br>
+    change the former location to the location. 
+<br>
+Use the serial comma.
+<br>
+Include Basic Help Menu by Emily Short.
+<br>
+Include Punctuation Removal by Emily Short.
+<br>
+Before swearing obscenely:
+<br>
+  say &quot;<font color=#000080>[one of]Such language in a high-class establishment like this![or]Oh, dear. Such language from a supposedly winning adventurer![or]You ought to be ashamed of yourself.[or]It's not so bad. You could have been killed already.[or]Tough shit, asshole.[at random]</font>&quot; instead.
+<br>
+After reading a command:
+<br>
+     remove stray punctuation;
+<br>
+     if the player's command includes &quot;<font color=#000080>&amp;</font>&quot;, replace the matched text with &quot;<font color=#000080>and</font>&quot;.
+<br>
+Understand &quot;<font color=#000080>gdt</font>&quot; as a mistake (&quot;<font color=#000080>If you want to debug the game, use the standard Inform debugging verbs.</font>&quot;). 
+<br>
+Understand &quot;<font color=#000080>noobj</font>&quot; as a mistake (&quot;<font color=#000080>In the MDL sources, NOOBJ is described as a 'hack'. As we are above such practices, NOOBJ is not implemented.</font>&quot;).
+<br>
+Reading it through is an action applying to two things. Understand &quot;<font color=#000080>examine [something] in [something]</font>&quot; as reading it through. Understand &quot;<font color=#000080>examine [something] through [something]</font>&quot; as reading it through.
+<br>
+Understand &quot;<font color=#000080>read [something] in [something]</font>&quot; as reading it through. Understand &quot;<font color=#000080>read [something] through [something]</font>&quot; as reading it through.
+<br>
+Check reading it through:
+<br>
+if the second noun is the flask and the noun is the red cake begin;
+<br>
+  say &quot;<font color=#000080>The icing, now visible, says 'Evaporate'.</font>&quot;;
+<br>
+else if the second noun is the flask and the noun is the blue cake;
+<br>
+  say &quot;<font color=#000080>The icing, now visible, says 'Enlarge'.</font>&quot;;
+<br>
+else if the second noun is the flask and the noun is the orange cake;
+<br>
+  say &quot;<font color=#000080>The icing, now visible, says 'Explode'.</font>&quot;;
+<br>
+else if the second noun is not transparent and the second noun is not the flask;
+<br>
+    say &quot;<font color=#000080>How does one look through [a second noun]?</font>&quot; instead;
+<br>
+else if the second noun is the bottle and the noun is the red cake or the blue cake or the orange cake;
+<br>
+   say &quot;<font color=#000080>The letters appear larger but are still too small to read.</font>&quot;;
+<br>
+else;
+<br>
+   try examining the noun instead;
+<br>
+  end if.
+<br>
+Understand &quot;<font color=#000080>board [something]</font>&quot; as entering.
+<br>
+Understand &quot;<font color=#000080>disembark</font>&quot; as exiting.
+<br>
+Understand &quot;<font color=#000080>climb [direction]</font>&quot; as going.
+<br>
+Understand &quot;<font color=#000080>light [electric lamp]</font>&quot; as switching on.
+<br>
+Understand &quot;<font color=#000080>extinguish [something]</font>&quot; as switching off.
+<br>
+Understand &quot;<font color=#000080>douse [electric lamp]</font>&quot; as switching off.
+<br>
+Understand &quot;<font color=#000080>climb through [something]</font>&quot; as climbing.
+<br>
+Understand &quot;<font color=#000080>what is [something]</font>&quot; as examining.
+<br>
+
+<br>
+Understand &quot;<font color=#000080>mumble</font>&quot; and &quot;<font color=#000080>sigh</font>&quot; as a mistake (&quot;<font color=#000080>You'll have to speak up if you want me to hear you.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>repent</font>&quot; as a mistake (&quot;<font color=#000080>It may well be too late.</font>&quot;).
+<br>
+Ringing is an action applying to one carried thing.  Understand &quot;<font color=#000080>ring [something]</font>&quot; as ringing.
+<br>
+Check ringing:
+<br>
+if the noun is not a bell, say &quot;<font color=#000080>How, exactly, do you ring that?</font>&quot; instead.
+<br>
+Carry out ringing:
+<br>
+say &quot;<font color=#000080>Ding Dong.</font>&quot;
+<br>
+A bell is a kind of thing.
+<br>
+Your bare hands are a part of the player.
+<br>
+Understand the command &quot;<font color=#000080>stab</font>&quot; as &quot;<font color=#000080>attack</font>&quot;.
+<br>
+
+<br>
+The better attacking rule is listed instead of the block attacking rule in the check attacking rulebook.
+<br>
+This is the better attacking rule:
+<br>
+if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+if the player is carrying a weapon (called the blade), try attacking the noun with the blade instead;
+<br>
+if the noun is the player begin;
+<br>
+  say &quot;<font color=#000080>If you insist... Poof, you're dead!</font>&quot;;
+<br>
+  end the game in death instead;
+<br>
+end if;
+<br>
+say &quot;<font color=#000080>You'll have to say with what you want to attack [the noun].</font>&quot;.
+<br>
+Poking is an action applying to one visible thing. Understand &quot;<font color=#000080>poke [something]</font>&quot; and &quot;<font color=#000080>blind [something]</font>&quot; as poking.
+<br>
+Check poking:
+<br>
+if the noun is not the Cyclops, try attacking the noun instead.
+<br>
+Carry out poking: say &quot;<font color=#000080>'Do you think I'm as stupid as my father?' he says, dodging.</font>&quot;
+<br>
+When play begins:
+<br>
+move the thief to Round Room;
+<br>
+choose row 1 in Table of Basic Help Options;
+<br>
+change description entry to &quot;<font color=#000080>Welcome to Zork![paragraph break]   You are near a large dungeon, which is reputed to contain vast quantities of treasure.  Naturally, you wish to acquire some of it.  In order to do so, you must of course remove it from the dungeon. To receive full credit for it, you must deposit it safely in the trophy case in the living room of the house.[paragraph break]   In addition to valuables, the dungeon contains various objects which may or may not be useful in your attempt to get rich.  You may need sources of light, since dungeons are often dark, and weapons, since dungeons often have unfriendly things wandering about.  Reading material is scattered around the dungeon as well;  some of it
+<br>
+</font><font color=#000080>is rumored to be useful.[paragraph break]   To determine how successful you have been, a score is kept. When you find a valuable object and pick it up, you receive a certain number of points, which depends on the difficulty of finding the object.  You receive extra points for transporting the treasure
+<br>
+</font><font color=#000080>safely to the living room and placing it in the trophy case.  In addition, some particularly interesting rooms have a value associated with visiting them.  The only penalty is for getting yourself killed, which you may do only twice.[paragraph break]   Of special note is a thief (always carrying a large bag) who likes to wander around in the dungeon (he has never been seen by the light of day).  He likes to take things.  Since he steals for pleasure rather than profit and is somewhat sadistic, he only takes things which you have seen.  Although he prefers valuables, sometimes in his haste
+<br>
+</font><font color=#000080>he may take something which is worthless.  From time to time, he examines his take and discards objects which he doesn't like.  He may occasionally stop in a room you are visiting, but more often he just wanders through and rips you off (he is a skilled pickpocket).</font>&quot;.
+<br>
+
+<br>
+Rule for deciding whether all includes the quantity of water: if the quantity of water is in the bottle, it does not; else it does.
+<br>
+Rule for deciding whether all includes things which are fixed in place: it does not.
+<br>
+Understand &quot;<font color=#000080>bye</font>&quot; and &quot;<font color=#000080>goodbye</font>&quot; as quitting the game.
+<br>
+
+<br>
+Understand &quot;<font color=#000080>WIN</font>&quot; and &quot;<font color=#000080>WINNAGE</font>&quot; as a mistake (&quot;<font color=#000080>Naturally!</font>&quot;).
+<br>
+Understand &quot;<font color=#000080>LOSE</font>&quot; and &quot;<font color=#000080>CHOMP</font>&quot; as a mistake (&quot;<font color=#000080>I don't know how to do that: I win in all cases.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>foo</font>&quot; and &quot;<font color=#000080>bar</font>&quot; and &quot;<font color=#000080>bletch</font>&quot; as a mistake (&quot;<font color=#000080>Oh yeah, well FOO, BAR, and BLETCH to you too.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>PLUGH</font>&quot; and &quot;<font color=#000080>XYZZY</font>&quot; as a mistake (&quot;<font color=#000080>A hollow voice says 'Fool'.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>back</font>&quot; and &quot;<font color=#000080>go back</font>&quot; as a mistake (&quot;<font color=#000080>He who puts his hand to the plow and looks back is not fit for the kingdom of winners.  In any case, 'BACK' doesn't work.</font>&quot;).
+<br>
+
+<br>
+Odysseusing is an action applying to nothing. Understand &quot;<font color=#000080>ODYSSEUS</font>&quot; and &quot;<font color=#000080>ULYSSES</font>&quot; as Odysseusing.  Carry out odysseusing: say &quot;<font color=#000080>Wasn't he a sailor?</font>&quot;.
+<br>
+
+<br>
+Understand &quot;<font color=#000080>ZORK</font>&quot; and &quot;<font color=#000080>DUNGEON</font>&quot; as a mistake (&quot;<font color=#000080>At your service!</font>&quot;).
+<br>
+
+<br>
+Swimming is an action applying to nothing. Understand &quot;<font color=#000080>SWIM</font>&quot; as swimming. 
+<br>
+Carry out swimming: 
+<br>
+  if the player can see a watersource begin;
+<br>
+    say &quot;<font color=#000080>Swimming is not allowed in this dungeon.</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>I think swimming is best accomplished in water.</font>&quot;;
+<br>
+  end if.
+<br>
+Understand &quot;<font color=#000080>water</font>&quot; as a watersource.
+<br>
+Understand &quot;<font color=#000080>bug</font>&quot; as a mistake (&quot;<font color=#000080>It's not a bug, its a feature.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>feature</font>&quot; as a mistake (&quot;<font color=#000080>That's right.</font>&quot;).
+<br>
+
+<br>
+Finding is an action applying to one visible thing. Understand &quot;<font color=#000080>find [something]</font>&quot; as finding. Understand &quot;<font color=#000080>locate [something]</font>&quot; as finding. Understand &quot;<font color=#000080>where is [something]</font>&quot; as finding.
+<br>
+Check finding:
+<br>
+if the noun is the player, say &quot;<font color=#000080>You're around here somewhere...</font>&quot; instead;
+<br>
+if the noun is the white house, say &quot;<font color=#000080>It's right here! Are you blind or something?</font>&quot; instead;
+<br>
+if the noun is your hands, say &quot;<font color=#000080>Within six feet of your head, assuming you haven't left that somewhere.</font>&quot; instead;
+<br>
+if the noun is the lurking grue, say &quot;<font color=#000080>There is no grue here, but I'm sure there is at least one lurking in the darkness nearby. I wouldn't let my light go out if I were you!</font>&quot; instead.
+<br>
+Carry out finding:
+<br>
+say &quot;<font color=#000080>It's right here.</font>&quot;
+<br>
+
+<br>
+The better drinking rule is listed instead of the block drinking rule in the check drinking rulebook.
+<br>
+This is the better drinking rule:
+<br>
+if the noun is the quantity of water begin;
+<br>
+  say &quot;<font color=#000080>Thank you very much -- I was very thirsty (probably from all this talking).</font>&quot;;
+<br>
+  remove the noun from play;
+<br>
+else if the noun is the water;
+<br>
+  say &quot;<font color=#000080>Thank you very much -- I was very thirsty (probably from all this talking).</font>&quot;;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>I don't think [the noun] would agree with you.</font>&quot; instead;
+<br>
+end if.
+<br>
+
+<br>
+Greeting is an action applying to nothing. Understand &quot;<font color=#000080>hello</font>&quot; and &quot;<font color=#000080>hi</font>&quot; and &quot;<font color=#000080>greetings</font>&quot; as greeting. Carry out greeting: say &quot;<font color=#000080>[one of]Hello[or]Good day[or]Nice weather we've been having lately[or]Goodbye[at random].</font>&quot;
+<br>
+
+<br>
+Praying is an action applying to nothing. Understand &quot;<font color=#000080>pray</font>&quot; as praying. 
+<br>
+Check praying:
+<br>
+if the player is not in Altar and dead flag is true, say &quot;<font color=#000080>Your prayers are not heard.</font>&quot; instead;
+<br>
+if the player is not in Altar, say &quot;<font color=#000080>If you pray enough, your prayers may be answered.</font>&quot; instead.
+<br>
+
+<br>
+Carry out praying:
+<br>
+if dead flag is true, say &quot;<font color=#000080>From the distance the sound of a lone trumpet is heard.  The room becomes very bright, and you feel disembodied.  In a moment, the brightness fades, and you find yourself rising, as if from a long sleep, deep in the woods.  In the distance you can faintly hear a song bird and the sounds of the forest.</font>&quot;;
+<br>
+now the player is unlit;
+<br>
+change exit found to true;
+<br>
+move the player to Forest 1.
+<br>
+
+<br>
+A secret door is a kind of door.
+<br>
+A secret door can be revealed or unrevealed.
+<br>
+A secret door is unrevealed.
+<br>
+A secret door is scenery.
+<br>
+A secret door is closed.
+<br>
+A secret switch is a kind of thing.
+<br>
+A secret switch can be revealed or unrevealed.
+<br>
+A secret switch is unrevealed.
+<br>
+A secret switch is scenery.
+<br>
+
+<br>
+To print the you can't go message:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(- L__M(##Go, 2, 0); -).
+<br>
+
+<br>
+To print the you can't see message:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(- L__M(##Miscellany, 30, 0); -).
+<br>
+
+<br>
+Rule for printing the description of a dark room: say &quot;<font color=#000080>It is pitch black.  You are likely to be eaten by a grue.</font>&quot; instead. 
+<br>
+Rule for printing a refusal to act in the dark: say &quot;<font color=#000080>It is too dark in here to see.</font>&quot; instead.
+<br>
+Before going through a secret door which is unrevealed:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print the you can't go message instead.
+<br>
+
+<br>
+Before doing something to a secret door which is unrevealed:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print the you can't see message instead.
+<br>
+
+<br>
+Before doing something when when a secret door is the second noun and the second noun is unrevealed:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print the you can't see message instead.
+<br>
+
+<br>
+Before doing something to a secret switch which is unrevealed:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print the you can't see message instead.
+<br>
+
+<br>
+A thing has a number called case-points. The case-points of a thing is usually 0.
+<br>
+
+<br>
+After inserting a thing (called the treasure) into the trophy case: 
+<br>
+award case-points of the treasure points; 
+<br>
+continue the action. 
+<br>
+
+<br>
+The taking action has an object called the place taken from (matched 
+<br>
+as &quot;<font color=#000080>from</font>&quot;). 
+<br>
+Setting action variables for taking: 
+<br>
+        now the place taken from is the holder of the noun. 
+<br>
+After taking a thing (called the treasure) from the trophy case: 
+<br>
+        award zero minus case-points of the treasure points; 
+<br>
+        continue the action.
+<br>
+To say banknotes:
+<br>
+say line break;
+<br>
+say fixed letter spacing;
+<br>
+say &quot;<font color=#000080> _______________________________________________________________[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1  0   0         GREAT UNDERGROUND EMPIRE           1  0   0  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1 0 0 0 0                                           1 0 0 0 0 |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1 0 0 0 0                                           1 0 0 0 0 |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1  0   0                  DIMWIT                    1  0   0  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                      ||||||||||||||||                         |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                      ||   __  __   ||              B30332744D |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                      ||  -OO  OO-  ||                         |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|       IN FROBS       [unicode 92]||    &gt;&gt;    ||/       WE TRUST          |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                       ||  ______  ||                          |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| B30332744D             |  ------  |                           |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                        [unicode 92][unicode 92]________//                           |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1  0   0    Series       FLATHEAD     LD Flathead   1  0   0  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1 0 0 0 0   719GUE                     Treasurer    1 0 0 0 0 |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1 0 0 0 0                                           1 0 0 0 0 |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| 1  0   0        One Hundred Royal Zorkmids          1  0   0  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|_______________________________________________________________|[line break][variable letter spacing]</font>&quot;.
+<br>
+To say flathead: 
+<br>
+               say fixed letter spacing; 
+<br>
+   say &quot;<font color=#000080>               |||||||||||||| [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>              ||   __  __   || [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>              ||   $$  $$   || [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>             [unicode 92]||     &gt;&gt;     ||/ [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>              ||  ________  || [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>               |  -//-----  | [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>               [unicode 92][unicode 92]_//_______// [line 
+<br>
+</font><font color=#000080>break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>              ___// |  | [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>             /__//  |  | [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>                    |  | [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>         __________//  [unicode 92][unicode 92]__________ 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>        / $ /       ****       [unicode 92] $ [unicode 92] 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>       /   /         **         [unicode 92]   [unicode 92] 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>      /   /|         **         |[unicode 92]   [unicode 92] 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>     /   / |         **         | [unicode 92]   [unicode 92] 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>    /   /  |         **         |  [unicode 92]   [unicode 92] 
+<br>
+</font><font color=#000080>[line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>    ^   ^__|______$Z$**$Z$______|__^   ^ [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>    [unicode 92]         *   $Z$**$Z$   *         / [line 
+<br>
+</font><font color=#000080>break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>     [unicode 92]________*___$Z$**$ Z$___*________/ [line 
+<br>
+</font><font color=#000080>break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>           |      $Z$**$Z$      | [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>           J   PIERPONT  FLATHEAD [line break]</font>&quot;; 
+<br>
+   say &quot;<font color=#000080>                  CHAIRMAN[line break]</font>&quot;;
+<br>
+  say variable letter spacing.
+<br>
+Rotation speed is a number that varies. Rotation speed is usually 1.
+<br>
+Rotation room is a number that varies. Rotation room is usually 1.
+<br>
+The going action has a number called the dark terminus count. 
+<br>
+Setting action variables for going: 
+<br>
+    now the dark terminus count is 0; 
+<br>
+    if in darkness, increase the dark terminus count by 1. 
+<br>
+The last carry out going rule: 
+<br>
+    if in darkness, increase the dark terminus count by 1.
+<br>
+After going:
+<br>
+  if the dark terminus count is 2, set off the grues instead;
+<br>
+  if the coil of rope is attached to something (called the item) and the player is carrying the coil of rope, now the coil of rope is not attached to the item;
+<br>
+  continue the action.
+<br>
+  
+<br>
+To set off the grues:
+<br>
+say &quot;<font color=#000080>Oh no! You walked directly into the slavering fangs of a lurking grue!</font>&quot;;
+<br>
+end the game in death.
+<br>
+Procedural rule when inflating something that is part of the player:
+<br>
+ignore the carrying requirements rule.
+<br>
+A weapon is a kind of thing.
+<br>
+Understand the command &quot;<font color=#000080>swing</font>&quot; as something new.
+<br>
+Swinging it is an action applying to one carried thing.  Understand &quot;<font color=#000080>swing [something]</font>&quot; as swinging it.
+<br>
+Carry out swinging it:
+<br>
+if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+if the player can see a person (called the villain) who is not the player, try attacking the villain with the noun instead;
+<br>
+say &quot;<font color=#000080>Please specify at what do you wish to swing the [noun].</font>&quot;
+<br>
+Procedural rule while attacking something that is part of the player: ignore the carrying requirements rule. 
+<br>
+Procedural rule while brushing something which is part of the player: ignore the carrying requirements rule. 
+<br>
+Procedural rule while destroying something with something which is part of the player: ignore the carrying requirements rule.
+<br>
+Attacking it with is an action applying to one visible thing and one carried thing.
+<br>
+Understand &quot;<font color=#000080>attack [something] with [something]</font>&quot; as attacking it with.
+<br>
+Understand &quot;<font color=#000080>attack [something] using [something]</font>&quot; as attacking it with.
+<br>
+Carry out attacking it with:
+<br>
+if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+if the noun is the player begin;
+<br>
+say &quot;<font color=#000080>If you insist... Poof, you're dead!</font>&quot;;
+<br>
+end the game in death instead;
+<br>
+end if;
+<br>
+if the noun is not a person, say &quot;<font color=#000080>I've known strange people, but attacking [a noun]?</font>&quot; instead;
+<br>
+if the second noun is not a weapon, say &quot;<font color=#000080>Trying to kill [a noun] with only [a second noun] very self-destructive.</font>&quot; instead. 
+<br>
+The lurking grue is a backdrop. The lurking grue is everywhere.
+<br>
+The description of the lurking grue is &quot;<font color=#000080>The grue is a sinister, lurking presence in the dark places of the earth. Its favorite diet is adventurers, but its insatiable appetite is tempered by its fear of light. No grue has ever been seen by the light of day, and few have survived its fearsome jaws to tell the tale.</font>&quot;
+<br>
+
+<br>
+Understand the commands &quot;<font color=#000080>destroy</font>&quot;,  &quot;<font color=#000080>break</font>&quot;, &quot;<font color=#000080>hit</font>&quot;, and &quot;<font color=#000080>smash</font>&quot;  and &quot;<font color=#000080>thump</font>&quot; as something new.
+<br>
+ Destroying is an action applying to one visible thing. 
+<br>
+Understand &quot;<font color=#000080>destroy [something]</font>&quot; as destroying.
+<br>
+Understand &quot;<font color=#000080>mangle [something]</font>&quot; as destroying. 
+<br>
+Understand &quot;<font color=#000080>mung [something]</font>&quot; as destroying. 
+<br>
+Understand &quot;<font color=#000080>break [something]</font>&quot; as destroying. 
+<br>
+Understand &quot;<font color=#000080>hit [something]</font>&quot; as destroying.
+<br>
+Understand &quot;<font color=#000080>smash [something]</font>&quot; as destroying.
+<br>
+Understand &quot;<font color=#000080>thump [something]</font>&quot; as destroying.
+<br>
+Carry out destroying:
+<br>
+if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+if the noun is a person, try attacking the noun instead; 
+<br>
+say &quot;<font color=#000080>Trying to destroy [a noun] is not notably useful.</font>&quot;
+<br>
+
+<br>
+Destroying it with is an action applying to one visible thing and one carried thing. Understand &quot;<font color=#000080>destroy [something] with [something]</font>&quot; as destroying it with.
+<br>
+Understand &quot;<font color=#000080>mangle [something] with [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>mung [something] with [something]</font>&quot; as destroying it with . Understand &quot;<font color=#000080>break [something] with [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>smash [something] with [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>swing [something] at [something]</font>&quot; as destroying it with (with nouns reversed).
+<br>
+Understand &quot;<font color=#000080>mangle [something] using [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>mung [something] using [something]</font>&quot; as destroying it with . Understand &quot;<font color=#000080>break [something] using [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>smash [something] using [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>thump [something] with something</font>&quot; as destroying it with. Understand &quot;<font color=#000080>thump [something] using [something]</font>&quot; as destroying it with. Understand &quot;<font color=#000080>destroy [something] using [something]</font>&quot; as destroying it with.
+<br>
+Carry out destroying it with:
+<br>
+if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+if the noun is a person, try attacking the noun with the second noun instead; 
+<br>
+say &quot;<font color=#000080>Trying to destroy [a noun] is not notably useful.</font>&quot;
+<br>
+Check searching a door: 
+<br>
+    say &quot;<font color=#000080>[The noun] is [if open]open, but I can't see what's beyond it.[otherwise]closed.[end if]</font>&quot; instead.
+<br>
+
+<br>
+
+<br>
+Understand &quot;<font color=#000080>frobozz</font>&quot; as a mistake (&quot;<font color=#000080>The Frobozz Company, Ltd., created, owns, and operates this dungeon.</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>schedule</font>&quot; as a mistake (&quot;<font color=#000080>The dungeon is ALWAYS open (always room for one more).</font>&quot;).
+<br>
+
+<br>
+Understand &quot;<font color=#000080>time</font>&quot; as a mistake (&quot;<font color=#000080>You have been playing Zork for longer than you think.</font>&quot;).
+<br>
+First after reading a command rule:
+<br>
+if the player's command matches &quot;<font color=#000080>treasure</font>&quot;, replace the player's command with &quot;<font color=#000080>$treasure$</font>&quot;.
+<br>
+Treasure-travelling is an action applying to nothing. Understand &quot;<font color=#000080>$treasure$</font>&quot; as treasure-travelling. Check treasure-travelling: if the player is not in Temple, say &quot;<font color=#000080>Nothing happens.</font>&quot; instead.
+<br>
+Carry out treasure-travelling: move the player to Treasure Room.
+<br>
+Temple-travelling is an action applying to nothing. Understand &quot;<font color=#000080>temple</font>&quot; as temple-travelling. Check temple-travelling: if the player is not in Treasure Room, say &quot;<font color=#000080>Nothing happens.</font>&quot; instead.
+<br>
+Carry out temple-travelling: move the player to Temple.
+<br>
+Hi-saying is an action applying to one visible thing. Understand &quot;<font color=#000080>hello [something]</font>&quot; and &quot;<font color=#000080>hi [something]</font>&quot; as hi-saying.
+<br>
+Check hi-saying:
+<br>
+if the noun is the sailor, say &quot;<font color=#000080>Nothing happens here.</font>&quot; instead;
+<br>
+if the noun is the aviator, say &quot;<font color=#000080>Here, nothing happens.</font>&quot; instead;
+<br>
+if the noun is not a person, say &quot;<font color=#000080>I think that only schizophrenics say 'Hello' to [a noun].</font>&quot; instead.
+<br>
+Carry out hi-saying:
+<br>
+say &quot;<font color=#000080>[The noun] bows his head to you in greeting.</font>&quot;
+<br>
+Check asking someone to try greeting: try hi-saying the noun instead.
+<br>
+The sailor is a backdrop. The sailor is everywhere. 
+<br>
+The aviator is a backdrop. The aviator is everywhere. Understand &quot;<font color=#000080>flyer</font>&quot; as the aviator.
+<br>
+Brochure flag is a number that varies. Brochure flag is usually 0.
+<br>
+Sending for is an action applying to one visible thing. Understand &quot;<font color=#000080>send for [something]</font>&quot; as sending for. Understand &quot;<font color=#000080>send [something]</font>&quot; as sending for.
+<br>
+Check sending for:
+<br>
+if the noun is not the obj1234, say &quot;<font color=#000080>That doesn't make sends.</font>&quot; instead.
+<br>
+Carry out sending for the obj1234:
+<br>
+if brochure flag is 0 begin;
+<br>
+  say &quot;<font color=#000080>OK, but you know the postal service...</font>&quot;;
+<br>
+  change brochure flag to 1;
+<br>
+else if brochure flag is 1;
+<br>
+  say &quot;<font color=#000080>It's probably on its way now.</font>&quot;;
+<br>
+else if brochure flag is 2;
+<br>
+  say &quot;<font color=#000080>What, you mean you need another one?</font>&quot;;
+<br>
+end if.
+<br>
+
+<br>
+The obj1234 is a backdrop. The obj1234 is everywhere. Understand &quot;<font color=#000080>brochure</font>&quot; and &quot;<font color=#000080>free brochure</font>&quot; as the obj1234. The free brochure is a thing. 
+<br>
+The free brochure is inflammable.
+<br>
+Instead of doing something other than sending for to the obj1234: print the you can't see message.
+<br>
+The description of the brochure is &quot;<font color=#000080>[brochure text]</font>&quot;.
+<br>
+Does the player mean sending for the obj1234: it is very likely.
+<br>
+Does the player mean doing something other than sending for to the free brochure: it is very likely.
+<br>
+To say brochure text:
+<br>
+say &quot;<font color=#000080>The mailing label on this glossy brochure from MIT Tech reads [paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>               Intrepid Adventurer[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>               c/o Local Dungeon Master[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>               White House, GUE[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>From the Introduction:[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>The brochure describes, for the edification of the prospective student, the stringent but wide-ranging curriculum of MIT Tech.  Required courses are offered in Ambition, Distraction, Uglification, and Derision.  The Humanities are not slighted at this institution, as the student may register for Reeling and Writhing, Mystery (Ancient and Modern), Seaography, and Drawling (which includes Stretching and Fainting in Coils).  Advanced students are expected to learn Laughing and Grief.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>                                 William Barton Flathead, Founder[paragraph break]</font>&quot;;
+<br>
+say  &quot;<font color=#000080>(The brochure continues in this vein for a few hundred more pages.)[line break]</font>&quot;;
+<br>
+say  &quot;<font color=#000080>[if the Don Woods stamp is a part of the brochure]Affixed loosely to the brochure is a small stamp.[end if]</font>&quot;.
+<br>
+The Don Woods stamp is a part of the brochure.
+<br>
+Procedural rule when taking the Don Woods stamp: 
+<br>
+        ignore the can't take component parts rule.
+<br>
+The description of the Don Woods stamp is &quot;<font color=#000080>[stamp text]</font>&quot;.
+<br>
+The Don Woods stamp is inflammable.
+<br>
+To say stamp text:
+<br>
+say fixed letter spacing;
+<br>
+say &quot;<font color=#000080>+--v----v----v----v----v--+[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|         _______         |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;  One   /       [unicode 92]     G  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>| Lousy /         [unicode 92]    U  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt; Point |   ___   |    E  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|       |  (___)  |       |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;       &lt;--)___[unicode 40]--&gt;    P  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|       / /     [unicode 92][unicode 92]     o  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;      / /       [unicode 92][unicode 92]    s  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|     |-|---------|-|  t  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;     | |  [unicode 92] _ /  | |  a  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|     | | --(_)-- | |  g  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;     | |  /| |[unicode 92]  | |  e  &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|     |-|---|_|---|-|     |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;      [unicode 92] [unicode 92]__/_[unicode 92]__/ /      &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|       _/_______[unicode 92]_       |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;      |  f.m.i.c. |      &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|      -------------      |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;                         &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|   Donald Woods, Editor  |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>&gt;     Spelunker Today     &lt;[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>|                         |[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>+--^----^----^----^----^--+[line break]</font>&quot;;
+<br>
+say variable letter spacing.
+<br>
+The case-points of the Don Woods stamp is 1.
+<br>
+The size of the free brochure is 30.
+<br>
+The size of the Don Woods stamp is 1.
+<br>
+Check hi-saying the sailor for the tenth time:
+<br>
+say &quot;<font color=#000080>I think that phrase is getting a bit worn out.</font>&quot; instead.
+<br>
+Check hi-saying the sailor for the 20th time:
+<br>
+say &quot;<font color=#000080>You seem to be repeating yourself.</font>&quot; instead.
+<br>
+Understand &quot;<font color=#000080>pour [something] in/into/on/onto [something]</font>&quot; as inserting it into.
+<br>
+Understand &quot;<font color=#000080>fill [something] with [something]</font>&quot; as inserting it into (with nouns reversed).
+<br>
+A watersource is a kind of thing. A watersource is always scenery.
+<br>
+A watersource can be drainable or nondrainable. A watersource is usually drainable.
+<br>
+A quantity of water is a thing.
+<br>
+The size of the quantity of water is 4.
+<br>
+When play begins: move the quantity of water to the bottle.
+<br>
+Check taking a watersource:
+<br>
+if the player is carrying the bottle, try inserting the noun into the bottle instead;
+<br>
+else say &quot;<font color=#000080>The water slips through your fingers.</font>&quot; instead.
+<br>
+Check inserting a watersource into something:
+<br>
+if the second noun is closed begin;
+<br>
+  say &quot;<font color=#000080>[The second noun] is closed.</font>&quot; instead;
+<br>
+else if the second noun is not the bottle;
+<br>
+  say &quot;<font color=#000080>The water leaks out of [the second noun] and evaporates immediately.</font>&quot; instead;
+<br>
+else if something is in the bottle;
+<br>
+  say &quot;<font color=#000080>The bottle is already full.</font>&quot; instead;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>The bottle is now full of water.</font>&quot;;
+<br>
+  move the quantity of water to the bottle instead;
+<br>
+end if.
+<br>
+Check inserting the quantity of water into something:
+<br>
+if the second noun is closed begin;
+<br>
+  say &quot;<font color=#000080>[The second noun] is closed.</font>&quot; instead;
+<br>
+else if the second noun is not the bottle;
+<br>
+  say &quot;<font color=#000080>The water leaks out of [the second noun] and evaporates immediately.</font>&quot;;
+<br>
+  remove the quantity of water from play instead;
+<br>
+end if.
+<br>
+Check inserting the quantity of water into the bottle:
+<br>
+try taking the quantity of water instead.
+<br>
+Check inserting the quantity of water into an enterable container:
+<br>
+  if the bottle is closed, say &quot;<font color=#000080>The bottle is closed.</font>&quot; instead;
+<br>
+  say &quot;<font color=#000080>There is now a puddle in the bottom of [the second noun].</font>&quot;;
+<br>
+  now the quantity of water is in the second noun instead.
+<br>
+Check taking the quantity of water:
+<br>
+if the player is not carrying the bottle and the quantity of water is in the bottle begin;
+<br>
+  try taking the bottle instead;
+<br>
+else if the quantity of water is in the bottle;
+<br>
+  say &quot;<font color=#000080>You already have it.</font>&quot; instead;
+<br>
+else if the player is not carrying the bottle;
+<br>
+  say &quot;<font color=#000080>The water slips through your fingers.</font>&quot; instead;
+<br>
+else if the bottle is closed;
+<br>
+  say &quot;<font color=#000080>The bottle is closed.</font>&quot; instead;
+<br>
+else if something is in the bottle;
+<br>
+  say &quot;<font color=#000080>The bottle is already full.</font>&quot; instead;
+<br>
+else if the player is in the bucket;
+<br>
+  say &quot;<font color=#000080>The bottle is now full of water.</font>&quot;;
+<br>
+  move the quantity of water to the bottle;
+<br>
+  move the bucket to Circular Room instead;
+<br>
+else;
+<br>
+   say &quot;<font color=#000080>The bottle is now full of water.</font>&quot;;
+<br>
+  move the quantity of water to the bottle instead;
+<br>
+end if.
+<br>
+Check throwing the quantity of water at something:
+<br>
+  say &quot;<font color=#000080>The water splashes on [the second noun] and evaporates immediately.</font>&quot;;
+<br>
+  remove the quantity of water from play instead.
+<br>
+A persuasion rule for asking someone to try doing something when dead flag is true:
+<br>
+say &quot;<font color=#000080>No one hears you.</font>&quot; instead.
+<br>
+
+<br>
+Check dropping when the player's command includes &quot;<font color=#000080>throw</font>&quot;:
+<br>
+if the noun is the quantity of water begin;
+<br>
+  say &quot;<font color=#000080>The water splashes on the walls and evaporates immediately.</font>&quot;;
+<br>
+  remove the noun from play instead;
+<br>
+else;
+<br>
+  continue the action;
+<br>
+end if.
+<br>
+Check dropping the quantity of water when the player's command does not include &quot;<font color=#000080>throw</font>&quot;:
+<br>
+try pouring the noun instead.
+<br>
+Pouring is an action applying to one thing.
+<br>
+Understand &quot;<font color=#000080>pour [something]</font>&quot; as pouring. 
+<br>
+Carry out pouring: 
+<br>
+if the noun is the bottle and the quantity of water is in the bottle begin;
+<br>
+ try pouring the quantity of water instead;
+<br>
+else if the noun is the quantity of water and the bottle is closed;
+<br>
+  say &quot;<font color=#000080>You'll have to open the bottle first.</font>&quot;;
+<br>
+else if the player is in the bucket;  
+<br>
+  move the quantity of water to the bucket;
+<br>
+  say &quot;<font color=#000080>There is now a puddle in the bottom of the wooden bucket.</font>&quot;;
+<br>
+  say &quot;<font color=#000080>The bucket rises and comes to a stop.</font>&quot;;
+<br>
+move the bucket to Top of Well;
+<br>
+  try looking;
+<br>
+else if the noun is the quantity of water and the player is in an enterable container (called the conveyance);
+<br>
+   say &quot;<font color=#000080>There is now a puddle in the bottom of [the conveyance].</font>&quot;;
+<br>
+   move the quantity of water to the conveyance;
+<br>
+else if the noun is the quantity of water;
+<br>
+  say &quot;<font color=#000080>The water spills all over the ground and evaporates immediately.</font>&quot;;
+<br>
+  remove the quantity of water from play;
+<br>
+else if the noun is not a container;
+<br>
+  say &quot;<font color=#000080>You must tell me how to do that.</font>&quot;;
+<br>
+else if the noun is closed;
+<br>
+  say &quot;<font color=#000080>You'll have to open [the noun] first.</font>&quot;;
+<br>
+else;
+<br>
+  now everything which is in the noun is in the location;
+<br>
+  say &quot;<font color=#000080>The contents of [the noun] spill out of [the noun] and onto the floor.</font>&quot;;
+<br>
+end if.
+<br>
+Winding is an action applying to one carried thing. Understand &quot;<font color=#000080>wind [something]</font>&quot; and &quot;<font color=#000080>wind up [something]</font>&quot; and &quot;<font color=#000080>wind [something] up</font>&quot; as winding.
+<br>
+Check winding: if the noun is not the golden clockwork canary and the noun is not the broken canary, say &quot;<font color=#000080>You cannot wind up [a noun].</font>&quot; instead.
+<br>
+Understand the command &quot;<font color=#000080>answer</font>&quot; as something new.
+<br>
+Understand the command &quot;<font color=#000080>say</font>&quot; as something new.
+<br>
+Saying is an action applying to one topic. Understand &quot;<font color=#000080>answer [text]</font>&quot; as saying.
+<br>
+Understand &quot;<font color=#000080>say [text]</font>&quot; as saying.
+<br>
+Check saying:
+<br>
+if the player is not in Riddle Room or the topic understood does not include &quot;<font color=#000080>well</font>&quot; or the great door is open, say &quot;<font color=#000080>No one seems to be listening.</font>&quot; instead.
+<br>
+Carry out saying:
+<br>
+say &quot;<font color=#000080>There is a clap of thunder and the east door opens.</font>&quot;;
+<br>
+now the great door is open;
+<br>
+now the great door is openable.
+<br>
+Leaving is an action applying to one visible thing. Understand &quot;<font color=#000080>exit [something]</font>&quot; as leaving.
+<br>
+Check leaving:
+<br>
+if the player is not in the noun, say &quot;<font color=#000080>How do you expect to do that when you aren't even in [the noun]?</font>&quot; instead;
+<br>
+try exiting.
+<br>
+
+<br>
+<b>Table of Rankings</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>Score</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> Rank</u></td></tr>
+<tr><td halign="left" valign="top">-31&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Incompetent</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">0&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Beginner</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">31&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Amateur Adventurer</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">62&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Novice Adventurer</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">123&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Junior Adventurer</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">246&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Adventurer</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">370&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Hacker</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">493&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Winner</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">554&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Master</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">585&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Wizard</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">616&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Cheater</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">641&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Advanced Cheater</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">666&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Master Cheater</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">691&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Super Cheater</font>&quot;</td></tr>
+<tr><td halign="left" valign="top">716&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080>Dungeon Master</font>&quot;</td></tr>
+</table>
+<br>
+Kicking is an action applying to one visible thing. Understand &quot;<font color=#000080>kick [something]</font>&quot; as kicking.
+<br>
+Carry out kicking: if dead flag is true, say &quot;<font color=#000080>All such attacks are vain in your position.</font>&quot; instead;
+<br>
+say &quot;<font color=#000080>Kicking [a noun] is not notably useful.</font>&quot;
+<br>
+
+<br>
+Lamp-power is a number that varies. Lamp-power is usually 325.
+<br>
+
+<br>
+Check switching on the battery-powered brass lantern when lamp-power is 0: say &quot;<font color=#000080>The battery has died.</font>&quot; instead.
+<br>
+
+<br>
+Load-max is a number that varies. Load-max is usually 100.
+<br>
+A thing has a number called size.  The size of a thing is usually 5.
+<br>
+A container has a number called capacity. The capacity of a container is usually 5.
+<br>
+Weight-sum is a number that varies. Weight-sum is usually 0.
+<br>
+Check the player taking something:
+<br>
+change weight-sum to 0;
+<br>
+repeat with item running through things had by the player begin;
+<br>
+  change weight-sum to weight-sum plus the size of item;
+<br>
+end repeat;
+<br>
+if weight-sum plus the size of the noun is greater than load-max, say &quot;<font color=#000080>Your load is too heavy.  You will have to leave something behind.</font>&quot; instead.
+<br>
+Check inserting something into something else:
+<br>
+change weight-sum to 0;
+<br>
+repeat with item running through things in the second noun begin;
+<br>
+  change weight-sum to weight-sum plus the size of item;
+<br>
+end repeat;
+<br>
+if weight-sum plus the size of the noun is greater than the capacity of the second noun, say &quot;<font color=#000080>It won't fit.</font>&quot; instead.
+<br>
+Lifting is an action applying to one visible thing. Understand &quot;<font color=#000080>lift [something]</font>&quot; and &quot;<font color=#000080>raise [something]</font>&quot; as lifting.
+<br>
+Check lifting:
+<br>
+if the noun is the rug begin;
+<br>
+say &quot;<font color=#000080>The rug is too heavy to lift, but in trying to raise it you notice an irregularity beneath it.</font>&quot;;
+<br>
+else if the noun is the tbasket;
+<br>
+  if the player is in Lower Shaft begin;
+<br>
+    say &quot;<font color=#000080>The basket is raised to the top of the shaft.</font>&quot;;
+<br>
+    move the tbasket to Shaft Room;
+<br>
+    move the fbasket to Lower Shaft;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>Playing in this way with [a noun] has no effect.</font>&quot;;
+<br>
+  end if;
+<br>
+else if the noun is the fbasket;
+<br>
+  if the player is in Shaft Room begin;
+<br>
+    say &quot;<font color=#000080>The basket is raised to the top of the shaft.</font>&quot;;
+<br>
+    move the tbasket to Shaft Room;
+<br>
+    move the fbasket to Lower Shaft;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The basket is at the other end of the chain.</font>&quot;;
+<br>
+  end if;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>Playing in this way with [a noun] has no effect.</font>&quot;;
+<br>
+end if.
+<br>
+Lowering is an action applying to one visible thing. Understand &quot;<font color=#000080>lower [something]</font>&quot; as lowering.
+<br>
+Check lowering:
+<br>
+if the noun is the tbasket begin;
+<br>
+  if the player is in Shaft Room begin;
+<br>
+    say &quot;<font color=#000080>The basket is lowered to the bottom of the shaft.</font>&quot;;
+<br>
+    move the fbasket to Shaft Room;
+<br>
+    move the tbasket to Lower Shaft;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>Playing in this way with [a noun] has no effect.</font>&quot;;
+<br>
+  end if;
+<br>
+else if the noun is the fbasket;
+<br>
+ if the player is in Lower Shaft begin;
+<br>
+    say &quot;<font color=#000080>The basket is lowered to the bottom of the shaft.</font>&quot;;
+<br>
+    move the fbasket to Shaft Room;
+<br>
+    move the tbasket to Lower Shaft;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The basket is at the other end of the chain.</font>&quot;;
+<br>
+  end if;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>Playing in this way with [a noun] has no effect.</font>&quot;;
+<br>
+end if.
+<br>
+
+<br>
+Attachment relates things to each other in groups. The verb to be attached to implies the attachment relation. 
+<br>
+The block tying rule is not listed in any rulebook.
+<br>
+A rope is a kind of thing. Definition: a thing is nonrope if it is not a rope.
+<br>
+A thing can be round or unevenly shaped. A thing is usually round.
+<br>
+Check tying:
+<br>
+if the noun is the second noun, say &quot;<font color=#000080>There is nothing it can be tied to.</font>&quot; instead;
+<br>
+if the noun is the rope and the second noun is the braided wire, say &quot;<font color=#000080>There is nothing it can be tied to.</font>&quot; instead;
+<br>
+if the second noun is a rope, try tying the second noun to the noun instead;
+<br>
+if the noun is not a rope, say &quot;<font color=#000080>You can't tie stuff with that.</font>&quot; instead;
+<br>
+if the noun is attached to a nonrope thing (called the item), say &quot;<font color=#000080>[The noun] is already attached to [the item].</font>&quot; instead;
+<br>
+if the player is carrying the second noun, say &quot;<font color=#000080>It is too clumsy when you are carrying it.</font>&quot; instead;
+<br>
+if the second noun is round, say &quot;<font color=#000080>There is nothing it can be tied to.</font>&quot; instead.
+<br>
+
+<br>
+Carry out tying:
+<br>
+  now the noun is attached to the second noun;
+<br>
+  if the second noun is in Slide Room and the player is carrying the noun begin;
+<br>
+   move the noun to Slide Room;
+<br>
+   say &quot;<font color=#000080>The rope dangles down the slide.</font>&quot; instead;
+<br>
+  end if.
+<br>
+Report tying:
+<br>
+  say &quot;<font color=#000080>The rope is now attached to [the second noun].</font>&quot;.
+<br>
+Check taking a rope (called the coil) when the coil is attached to a nonrope thing (called the item):
+<br>
+  say &quot;<font color=#000080>You'll have to untie [the item] first.</font>&quot; instead.
+<br>
+Check taking a nonrope thing (called the item) which is attached to a rope:
+<br>
+say &quot;<font color=#000080>The coil of rope comes loose from [the item].</font>&quot;;
+<br>
+now the coil is not attached to the item.
+<br>
+Untying it from is an action applying to two things. 
+<br>
+Understand &quot;<font color=#000080>untie [something] from [something]</font>&quot; as untying it from. Understand &quot;<font color=#000080>untie [something]</font>&quot; as untying it from. 
+<br>
+
+<br>
+Rule for supplying a missing second noun while untying something from: 
+<br>
+    if the number of secondary things attached to the noun is 0, say &quot;<font color=#000080>[The noun] is already entirely free.</font>&quot; instead; 
+<br>
+    if the noun is a rope 
+<br>
+    begin; 
+<br>
+        if the number of touchable nonrope things which are attached to the rope &gt; 1 
+<br>
+        begin; 
+<br>
+            say &quot;<font color=#000080>You'll have to say which thing you want to untie [the noun] from.</font>&quot;; 
+<br>
+            rule fails; 
+<br>
+        otherwise; 
+<br>
+            if the number of touchable nonrope attached to the noun is 0, say &quot;<font color=#000080>You can't reach [the random nonrope thing attached to the noun].</font>&quot; instead; 
+<br>
+            let the tied object be a random touchable nonrope thing which is attached to the rope; 
+<br>
+            say &quot;<font color=#000080>(from [the tied object])[line break]</font>&quot;; 
+<br>
+            change the second noun to the tied object; 
+<br>
+        end if; 
+<br>
+    otherwise; 
+<br>
+        if the noun is attached to a rope (called the tied object) 
+<br>
+        begin; 
+<br>
+            say &quot;<font color=#000080>(from [the tied object])[line break]</font>&quot;; 
+<br>
+            change the second noun to the tied object; 
+<br>
+        end if; 
+<br>
+    end if. 
+<br>
+Check untying it from: 
+<br>
+    if the noun is attached to the second noun or the second noun is attached to the noun, do nothing; 
+<br>
+    otherwise say &quot;<font color=#000080>[The noun] and [the second noun] are already not tied together.</font>&quot; instead;
+<br>
+if the noun is not a rope, try untying the second noun from the noun instead.
+<br>
+Carry out untying it from: 
+<br>
+    now the noun is not attached to the second noun. 
+<br>
+Report untying it from: 
+<br>
+    say &quot;<font color=#000080>The rope is now untied.</font>&quot; 
+<br>
+Definition: a thing is secondary if it is not the noun. 
+<br>
+A thing has a text called the later appearance. The later appearance of something is usually &quot;<font color=#000080></font>&quot;.
+<br>
+Rule for writing a paragraph about something (called the thingy):
+<br>
+  if the thingy is untouched and the initial appearance of the thingy is not &quot;<font color=#000080></font>&quot; begin;
+<br>
+    say &quot;<font color=#000080>[initial appearance of the thingy]</font>&quot;;
+<br>
+  else if the later appearance of the thingy is not &quot;<font color=#000080></font>&quot;;
+<br>
+    say &quot;<font color=#000080>[later appearance of the thingy]</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>There is [a thingy] here[unicode 46]</font>&quot;;
+<br>
+  end if;
+<br>
+  if something visible is in the thingy begin;
+<br>
+    if the thingy is the trophy case begin;
+<br>
+     say &quot;<font color=#000080>[line break]Your collection of treasures consists of:[line break][stuff in the thingy]</font>&quot;;
+<br>
+    else if the thingy is the nest and the egg is in the thingy and the egg is untouched;
+<br>
+      say &quot;<font color=#000080>[initial appearance of the egg]</font>&quot;;
+<br>
+    else;
+<br>
+     say &quot;<font color=#000080>[line break][The thingy] contains:[line break][stuff in the thingy]</font>&quot;;
+<br>
+  end if;
+<br>
+end if.
+<br>
+To say stuff in (O - an object):
+<br>
+list the contents of O,
+<br>
+    with newlines, 
+<br>
+    indented, 
+<br>
+    giving inventory information, 
+<br>
+    including contents, 
+<br>
+    not listing concealed items, 
+<br>
+    and with extra indentation.
+<br>
+To say (j - a number) spaces:
+<br>
+   (- spaces({j}); -).
+<br>
+A thing can be untouched or touched. A thing is usually untouched.
+<br>
+The initial appearance of something is usually &quot;<font color=#000080></font>&quot;.
+<br>
+After taking something: now the noun is touched; continue the action.
+<br>
+To fatally leap:
+<br>
+  say &quot;<font color=#000080>[one of]You should have looked before you leaped.[or]I'm afraid that leap was a bit much for your weak frame.[or]In the movies, your life would be passing in front of your eyes.[or]Geronimo...[or]I'm afraid that leap you've attempted has done you in.[at random]</font>&quot;;
+<br>
+  end the game in death.
+<br>
+
+<br>
+<b>Table of Basic Help Options (continued)</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>title</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> subtable</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> description</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>InvisiClues Hints</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+
+<br>
+<b>Table of Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>title</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> subtable</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> description</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> toggle</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I open the egg?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Egg Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I enter Hades?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Hades Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I get the platinum bar?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Bar Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I pass the glacier?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Glacier Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I work the well?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Well Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I work the rainbow?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Rainbow Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>What good is the barrel?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Barrel Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How does the Bank of Zork work?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Bank Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I get to the endgame?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Endgame Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>How do I get the last point?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> Table of Brochure Hints&nbsp;&nbsp;</td><td halign="left" valign="top"> &quot;<font color=#000080></font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> hint toggle rule</td></tr>
+</table>
+<br>
+<b>Table of Egg Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You could try 'SMASH EGG'</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>But that severely detracts from its aesthetic appeal</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>It takes a great deal of manual dexterity and the proper tools.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Someone else in the game can do it. </font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Only the Thief can open the egg. Give it to him or leave it underground where he will find it.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Hades Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You must first exorcise the demons; are you properly equipped?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>For a hint, read the black book.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>It requires the bell, book and candles.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> -- </td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Ring the bell, light the candles, and read the black book.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Bar Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You must disable the echo.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The solution has something to do with the room's acoustics.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Type ECHO.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> -- </td></tr>
+</table>
+<br>
+<b>Table of Glacier Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The glacier swells with heat.  Have you found anything fiery?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Try throwing the torch at the glacier.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Well Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Have you tried making a wish?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Make sure you are carrying the coins. Saving the game would also be a good idea.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>If the well won't bring you water, you could try bringing water to the well.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Get in the bucket, then pour water into it.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Rainbow Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You can cross it and get the pot of gold.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You do not click your heels together three times while saying 'There's no place like home.' </font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Wave the stick while standing at the end of the rainbow</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>This is similar to the fissure puzzle in ADVENTURE</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Barrel Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The barrel is for joy riders.  If you have always wanted to go for a ride in a barrel, try 'Geronimo'.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Bank Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The Bank of Zork is built on illusions.  Walls are one of the key illusions.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Have you tried walking through the curtain of light?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The curtain leads to four locations.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>It is completely deterministic (i.e., non-random).</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>The location to which it leads is determined by the direction from which you entered the Depository.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>If you enter from the east or west East Viewing Room, you will be transported to Viewing Room. If you enter from the south (e.g., the Chairman's Office) you will be transported to the Small Room.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You can leave the Small Room by walking through the south wall (thus entering the Depository from the North). </font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>If you enter the Depository from the north, you will be transported to the Vault.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Endgame Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>You must win the main game (get all possible points).</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Wait around until you see a sinister wraithlike figure</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Then enter the crypt, close the door, turn off your lamp, and wait</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+<b>Table of Brochure Hints</b>
+<br>
+<table><tr><td halign="left" valign="top"><u>hint</u>&nbsp;&nbsp;</td><td halign="left" valign="top"><u> used</u></td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Have you read the newspaper?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> a number</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Have you availed yourself of ALL opportunities for intellectual improvement?</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Try reading the matchbook.</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+<tr><td halign="left" valign="top">&quot;<font color=#000080>Type 'SEND FOR FREE BROCHURE'</font>&quot;&nbsp;&nbsp;</td><td halign="left" valign="top"> --</td></tr>
+</table>
+<br>
+Check requesting the score:
+<br>
+if dead flag is true, say &quot;<font color=#000080>How can you think of your score in your condition?</font>&quot; instead.
+<br>
+Before opening:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before closing:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before eating:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before drinking:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before rubbing:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before touching:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before burning something with something:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before burning something:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before untying:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Even such a simple action is beyond your capabilities</font>&quot; instead.
+<br>
+Before saying:
+<br>
+if dead flag is true, say &quot;<font color=#000080>No one hears you.</font>&quot; instead.
+<br>
+Before switching on something:
+<br>
+if dead flag is true, say &quot;<font color=#000080>You need no light to guide you.</font>&quot; instead.
+<br>
+Before taking something:
+<br>
+if dead flag is true, say &quot;<font color=#000080>Your hand passes through the object.</font>&quot; instead.
+<br>
+Before taking inventory:
+<br>
+if dead flag is true, say &quot;<font color=#000080>You are empty handed.</font>&quot; instead.
+<br>
+Instead of doing something other than looking, going, attacking, kicking, or destroying:
+<br>
+if dead flag is false, continue the action;
+<br>
+say &quot;<font color=#000080>You can't do even that.</font>&quot;.
+<br>
+
+<br>
+Death count is a number that varies.
+<br>
+When play ends when the game ended in death:
+<br>
+increase death count by 1;
+<br>
+award -10 points;
+<br>
+if <font color=#404040>[endgame flag is true</font>] no begin;
+<br>
+  say &quot;<font color=#000080>Normally, I would attempt to rectify your condition, but I'm ashamed
+<br>
+</font><font color=#000080>to say my abilities are not equal to dealing with your present state
+<br>
+</font><font color=#000080>of disrepair.  Please let me express my profoundest regrets.</font>&quot;;
+<br>
+else if death count is 3;
+<br>
+  say &quot;<font color=#000080>You clearly are a suicidal maniac.  We don't allow psychotics in the
+<br>
+</font><font color=#000080>dungeon, since they may harm other adventurers.  Your remains will be
+<br>
+</font><font color=#000080>installed in the Land of the Living Dead, where your fellow adventurers
+<br>
+</font><font color=#000080>may gloat over them.</font>&quot;;
+<br>
+else if Altar is unvisited;
+<br>
+  say &quot;<font color=#000080>Shall I patch you up? </font>&quot;;
+<br>
+  if the player consents begin;
+<br>
+    say &quot;<font color=#000080>Now, let me see...[line break]Well, we weren't quite able to restore your state.  You can't have everything.</font>&quot;;
+<br>
+    if the player is carrying the battery-powered brass lantern begin;
+<br>
+      move the battery-powered brass lantern to Living Room;
+<br>
+      now the battery-powered brass lantern is switched off;
+<br>
+    end if;
+<br>
+    repeat with item running through things had by the player begin; 
+<br>
+      move the item to a random visited room; 
+<br>
+    end repeat; 
+<br>
+    move the player to Forest 1;
+<br>
+    resume the game;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>What?  You don't trust me?  Why, only last week I patched a running
+<br>
+</font><font color=#000080>ITS and it survived for over 30 seconds.  Oh, well.</font>&quot;;
+<br>
+  end if;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>As you take your last breath, you feel relieved of your burdens.  The feeling passes as you find yourself before the gates of Hell, where the spirits jeer at you and deny you entry.  Your senses are disturbed.  The objects in the dungeon appear indistinct, bleached of color, even
+<br>
+</font><font color=#000080>unreal.</font>&quot;;
+<br>
+  if the player is carrying the battery-powered brass lantern begin;
+<br>
+      move the battery-powered brass lantern to Living Room;
+<br>
+      now the battery-powered brass lantern is switched off;
+<br>
+  end if;
+<br>
+  repeat with item running through things had by the player begin; 
+<br>
+    move the item to a random visited room; 
+<br>
+  end repeat; 
+<br>
+  change dead flag to true;
+<br>
+  now the player is lit;
+<br>
+  move the player to Entrance to Hades;
+<br>
+  resume the game;
+<br>
+end if.
+<br>
+The player has a number called wounds.  Wounds is usually 0.
+<br>
+The player has a number called cure wait.  Cure wait is usually 0.
+<br>
+Diagnosing is an action applying to nothing.  Understand &quot;<font color=#000080>diagnose</font>&quot; as diagnosing.
+<br>
+Check diagnosing:
+<br>
+  if dead flag is true, say &quot;<font color=#000080>You are dead as a doornail.</font>&quot; instead.
+<br>
+<font color=#404040><sup><a href="#note4">[4]</a></sup></font>
+<br>
+Carry out diagnosing:
+<br>
+  if the wounds of the player is 0 begin;
+<br>
+    say &quot;<font color=#000080>You are in perfect health.  You are strong enough to take several wounds.</font>&quot;;
+<br>
+  else if the wounds of the player is 1;
+<br>
+    say &quot;<font color=#000080>You have a light wound, which will be cured in [cure wait of the player] turn[s].  You can survive one serious wound.</font>&quot;;
+<br>
+  else if the wounds of the player is 2;
+<br>
+    say &quot;<font color=#000080>You have a serious wound, which will be cured in [cure wait of the player] turn[s].  You can be killed by a serious wound.</font>&quot;;
+<br>
+  else if the wounds of the player is 3;
+<br>
+    say &quot;<font color=#000080>You have a several wounds, which will be cured in [cure wait of the player] turn[s].  You can be killed by one more light wound.</font>&quot;;  
+<br>
+  else if the wounds of the player is 4;
+<br>
+    say &quot;<font color=#000080>You have a serious wounds, which will be cured in [cure wait of the player] turn[s].  You are at death's door.</font>&quot;;  
+<br>
+  end if;
+<br>
+  if death count is 1, say &quot;<font color=#000080>You have been killed once.</font>&quot;;
+<br>
+  if death count is 2, say &quot;<font color=#000080>You have been killed twice.</font>&quot;.
+<br>
+
+<br>
+Burning it with is an action applying to one thing and one carried thing.  Understand &quot;<font color=#000080>burn [something] with/using [something]</font>&quot; as burning it with. Understand &quot;<font color=#000080>light [something] with/using [something]</font>&quot; as burning it with.
+<br>
+
+<br>
+Check burning (this is the new burning rule):
+<br>
+  if the noun is not the matchbook and the player is carrying something flaming begin;
+<br>
+    let i be the number of flaming things had by the player;
+<br>
+    if i is 1, try burning the noun with a random flaming thing held by the player instead;
+<br>
+    else say &quot;<font color=#000080>It's not clear what you want to burn [the noun] with.</font>&quot; instead;
+<br>
+  else if the noun is not the matchbook;
+<br>
+    say &quot;<font color=#000080>It's not clear what you want to burn [the noun] with.</font>&quot; instead;
+<br>
+  else if the matchbook is flaming;
+<br>
+    say &quot;<font color=#000080>The match is already lit.</font>&quot; instead;
+<br>
+  else if match count is less than 1;
+<br>
+    say &quot;<font color=#000080>I'm afraid you have run out of matches.</font>&quot; instead;
+<br>
+  end if.  
+<br>
+Match tick is a number that varies.  Match tick is usually -1.
+<br>
+Carry out burning:
+<br>
+ say &quot;<font color=#000080>One of the matches starts to burn.</font>&quot;;
+<br>
+ change match tick to 2;
+<br>
+ now the matchbook is flaming.
+<br>
+
+<br>
+Check switching off something which is flaming:
+<br>
+  if the noun is the matchbook begin;
+<br>
+    say &quot;<font color=#000080>The match is out.</font>&quot; instead;
+<br>
+    change match tick to -1;
+<br>
+    now the matchbook is non-flaming;
+<br>
+  else if the noun is the pair of candles;
+<br>
+    say &quot;<font color=#000080>The flame is extinguished.</font>&quot; instead;
+<br>
+  else if the noun is the ivory torch;
+<br>
+    say &quot;<font color=#000080>You burn your hand as you attempt to extinguish the flame.</font>&quot; instead;
+<br>
+  end if.
+<br>
+
+<br>
+
+<br>
+The new burning rule is listed instead of the block burning rule in the check burning rulebook.
+<br>
+
+<br>
+Check burning it with:
+<br>
+  if the second noun is not flaming, say &quot;<font color=#000080>How do you expect to burn anything with that?</font>&quot; instead;
+<br>
+  if the noun is the black book begin;
+<br>
+    say &quot;<font color=#000080>A booming voice says 'Wrong, cretin!' and you notice that you have turned into a pile of dust.</font>&quot;;
+<br>
+    end the game in death instead;
+<br>
+  end if;
+<br>
+  if the noun is the barrel, say &quot;<font color=#000080>The barrel is damp and cannot be burned.</font>&quot; instead;
+<br>
+  if the noun is flaming, say &quot;<font color=#000080>[The noun] is already burning.</font>&quot; instead;
+<br>
+  if the noun is not the candles and the noun is not inflammable, say &quot;<font color=#000080>I don't think you can burn [a noun].</font>&quot; instead;
+<br>
+  if the noun is the brick begin;
+<br>
+  say &quot;<font color=#000080>Now you've done it.  It seems that the brick has other properties
+<br>
+</font><font color=#000080>than weight, namely the ability to blow you to smithereens.</font>&quot;;
+<br>
+  remove the brick from play;
+<br>
+  end the game in death instead;
+<br>
+  end if.
+<br>
+
+<br>
+Candle tick is a number that varies.  Candle tick is usually 40.
+<br>
+Carry out burning it with:
+<br>
+if the noun is the pair of candles begin;
+<br>
+if the candles are flaming, say &quot;<font color=#000080>You realize, just in time, that the candles are already lighted.</font>&quot; instead;
+<br>
+if candle tick is 0, say &quot;<font color=#000080>There's not much left of the candles; definately not enough left to light.</font>&quot; instead;
+<br>
+if the second noun is the torch begin;
+<br>
+  say &quot;<font color=#000080>The heat from the torch is so intense that the candles are vaporized.</font>&quot;;
+<br>
+  remove the candles from play instead;
+<br>
+end if;
+<br>
+say &quot;<font color=#000080>The candles are now lighted.</font>&quot;;
+<br>
+if the player is in Entrance to Hades begin;
+<br>
+if exorcism flag is 1 begin;
+<br>
+say &quot;<font color=#000080>The flames flicker wildly and appear to dance.  The earth beneath
+<br>
+</font><font color=#000080>your feet trembles, and your legs nearly buckle beneath you.
+<br>
+</font><font color=#000080>The spirits cower at your unearthly power.</font>&quot;;
+<br>
+change exorcism flag to 2;
+<br>
+else if exorcism flag is -1;
+<br>
+continue the action;
+<br>
+else;
+<br>
+say &quot;<font color=#000080>The tension of this ceremony is broken, and the wraiths, amused but
+<br>
+</font><font color=#000080>shaken at your clumsy attempt, resume their hideous jeering.</font>&quot;;
+<br>
+change exorcism flag to 0;
+<br>
+end if;
+<br>
+end if;
+<br>
+now the candles are flaming;
+<br>
+else if the noun is in the receptacle;
+<br>
+  now the noun is flaming;
+<br>
+  say &quot;<font color=#000080>[The noun] burns inside the receptacle.</font>&quot;;
+<br>
+  change burn interrupt to 20 * the size of the noun;
+<br>
+else if the noun is the pile of leaves;
+<br>
+  now the grating is revealed;
+<br>
+  if the player is carrying the noun begin;
+<br>
+  say &quot;<font color=#000080>The sight of someone carrying a pile of burning leaves so offends the neighbors that  they come over and put you out.</font>&quot;;
+<br>
+   remove the pile of leaves from play;
+<br>
+   end the game in death;
+<br>
+   else;
+<br>
+     say &quot;<font color=#000080>The leaves burn and the neighbors start to complain.</font>&quot;;
+<br>
+     remove the pile of leaves from play;
+<br>
+   end if;
+<br>
+else if the noun is the coil of wire;
+<br>
+  if the coil of wire is not part of the brick begin;
+<br>
+  say &quot;<font color=#000080>The wire rapidly burns to nothingness.</font>&quot;;
+<br>
+  remove the coil of wire from play;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>The wire starts to burn.</font>&quot;;
+<br>
+    change wire clock to 1;
+<br>
+  end if;
+<br>
+else;
+<br>
+  if the noun is the bills, say &quot;<font color=#000080>Nothing like having money to burn!</font>&quot;;
+<br>
+  if the player is carrying the noun begin;
+<br>
+    say &quot;<font color=#000080>[The noun] catches fire and is consumed.  Unfortunately, you were holding it at the time.</font>&quot;;
+<br>
+    end the game in death;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>[The noun] catches fire and is consumed.</font>&quot;;
+<br>
+  end if;
+<br>
+end if.
+<br>
+
+<br>
+Wire clock is a number that varies.  Wire clock is usually -1.
+<br>
+Ledge clock is a number that varies.  Ledge clock is usually -1.
+<br>
+
+<br>
+Burn interrupt is a number that varies.  Burn interrupt is usually -1.
+<br>
+After dropping the candles:
+<br>
+if the candles are flaming, now the candles are non-flaming;
+<br>
+continue the action.
+<br>
+Every turn when the candles are flaming and the candles are touched:
+<br>
+  decrease candle tick by 1;
+<br>
+  if candle tick is 0 begin;
+<br>
+    now the candles are non-flaming;
+<br>
+    say &quot;<font color=#000080>I hope you have more light than from a pair of candles.</font>&quot;;
+<br>
+ else if candle tick is 20 or candle tick is 10 or candle tick is 5;
+<br>
+    say &quot;<font color=#000080>The candles grow shorter.</font>&quot;;
+<br>
+ end if.
+<br>
+The bad place is a room that varies.
+<br>
+Squish clock is a number variable.  Squish clock is usually -1.
+<br>
+
+<br>
+Knocking is an action applying to one visible thing.  Understand &quot;<font color=#000080>knock [something]</font>&quot; and &quot;<font color=#000080>knock on [something]</font>&quot; and &quot;<font color=#000080>rap on [something]</font>&quot; and &quot;<font color=#000080>rap [something]</font>&quot; as knocking.
+<br>
+
+<br>
+Check knocking:
+<br>
+if the noun is not a door, say &quot;<font color=#000080>Why knock on [a noun]?</font>&quot; instead;
+<br>
+if the noun is not the large wooden door, say &quot;<font color=#000080>I don't think anyone is home.</font>&quot; instead.
+<br>
+Carry out knocking:
+<br>
+say &quot;<font color=#000080>The knock reverberates along the hall.  For a time it seems there
+<br>
+</font><font color=#000080>will be no answer.  Then you hear someone unlatching the small wooden
+<br>
+</font><font color=#000080>panel.  Through the bars of the great door, the wrinkled face of an
+<br>
+</font><font color=#000080>old man appears.  He gazes down at you and intones as follows:[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>[5 spaces] 'I am the Master of the dungeon, whose task it is to insure
+<br>
+</font><font color=#000080>that none but the most scholarly and masterful adventurers are 
+<br>
+</font><font color=#000080>admitted into the secret realms of the dungeon.  To ascertain whether 
+<br>
+</font><font color=#000080>you meet the stringent requirements laid down by the Great
+<br>
+</font><font color=#000080>Implementers, I will ask three questions which should be easy for
+<br>
+</font><font color=#000080>one of your reputed excellence to answer.  You have undoubtedly
+<br>
+</font><font color=#000080>discovered the answers during your travels through the dungeon.
+<br>
+</font><font color=#000080>Should you answer each of these questions correctly within five
+<br>
+</font><font color=#000080>attempts, then I am obliged to acknowledge your skill and daring and
+<br>
+</font><font color=#000080>admit you to these regions.'[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>All answers should be in the form [']ANSWER 'answer'['].</font>&quot;;
+<br>
+change question number to 1;
+<br>
+move the dungeon master to Hallway4.
+<br>
+
+<br>
+Spinning it to is an action applying to one thing and one number.  Understand &quot;<font color=#000080>spin [something] to [a number]</font>&quot; as spinning it to. Understand &quot;<font color=#000080>turn [something] to [a number]</font>&quot; as spinning it to.
+<br>
+Check spinning it to:
+<br>
+if the noun is not the dial, say &quot;<font color=#000080>You can't do that to [the noun].</font>&quot; instead;
+<br>
+if the number understood is less than 1, say &quot;<font color=#000080>The dial only goes from 1 to 8.</font>&quot; instead;
+<br>
+if the number understood is greater than 8, say &quot;<font color=#000080>The dial only goes from 1 to 8.</font>&quot; instead.
+<br>
+Carry out spinning it to:
+<br>
+say &quot;<font color=#000080>The dial now points to [the number understood].</font>&quot;;
+<br>
+change dial number to the number understood.
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><p><i>Notes</i><p>
+<A name="note1"><font color=#404040>[1]. According to THE ELEMENTS OF STYLE --  FLAMMABLE: An oddity, chiefly useful in saving lives. The common word meaning "combustible" is inflammable. But some people are thrown off by the in- and think inflammable means "not combustible." For this reason, trucks carrying gasoline or explosives are now marked FLAMMABLE. Unless you are operating such a truck and hence are concerned with the safety of children and illiterates, use inflammable.</font><p>
+<A name="note2"><font color=#404040>[2].  It is absurd that the adventurer would be able to count so many leaves with such precision, especially in the minute or so time that a normal turn supposedly takes.</font><p>
+<A name="note3"><font color=#404040>[3].  Decimal 69 is equal to octal 105, and hexadecimal 69 is equal to decimal 105.</font><p>
+<A name="note4"><font color=#404040>[4].  Mind! I don't mean to say that I know, of my own knowledge, what there is particularly dead about a door-nail. I might have been inclined, myself, to regard a coffin-nail as the deadest piece of ironmongery in the trade. But the wisdom of our ancestors is in the simile; and my unhallowed hands shall not disturb it, or the Country-s done for. You will therefore permit me to repeat, emphatically, that Marley was as dead as a door-nail. --Charles Dickens</font><p>
+</font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>

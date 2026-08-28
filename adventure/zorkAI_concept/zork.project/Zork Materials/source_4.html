@@ -1,0 +1,762 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Zork - Source Text</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<table border="0" cellpadding="2"><tr><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></td><td align="left" valign="top">
+					<h3><font color="#0000cc" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">Zork</font></h3>
+					<h3><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif">An interactive fiction by Infocom -- Ported by Dean Menezes (1979) - the Inform 7 source text</font></h3>
+				</td></tr>
+		<tr align="left" valign="top"><td align="left" valign="top"><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><a href="index.html">Home page</a><br><br><a href="source.html">Contents</a><br><a href="source_3.html">Previous</a><br><a href="source_5.html">Next</a><br><br><a href="source.txt">Complete text</a></font></td><td align="left" valign="top"><font face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"><b>Part 5 - The Round Room, Temple, and Alice Area</b>
+<br>
+
+<br>
+West of a dungeon called East-West Passage is north of Troll Room. &quot;<font color=#000080>This is a narrow east-west passageway.  There is a narrow stairway leading down at the north end of the room.</font>&quot;
+<br>
+The rval of  East-West Passage is 5.
+<br>
+North of East-West Passage is a dungeon called Deep Ravine. Down from  East-West Passage is Deep Ravine. 
+<br>
+The description of Deep Ravine is &quot;<font color=#000080>This is a deep ravine at a crossing with an east-west crawlway.  Some stone steps are at the south of the ravine, and a steep staircase descends.</font>&quot;
+<br>
+
+<br>
+Down from Deep Ravine is south from a dungeon called Reservoir South. The description of Reservoir South is &quot;<font color=#000080>[if the pdl1 is on-stage]This is a long room on the south shore of a large reservoir.[otherwise]You are in a long room, to the north of which was formerly a reservoir.[end if]  There is a western exit, a passageway south, and a steep pathway climbing up along the edge of a cliff.</font>&quot;
+<br>
+A drainable watersource called the pdl1 is in Reservoir South.
+<br>
+Check going down from Deep Ravine when the player is carrying the coffin:
+<br>
+say &quot;<font color=#000080>The stairs are to steep for you with your burden.</font>&quot; instead.
+<br>
+East of East-West Passage is a dungeon called the Round Room.  The description of the Round Room is &quot;<font color=#000080>This is a circular room with passages off in eight directions.</font>&quot;
+<br>
+Southwest of Round Room is Maze 1. Northeast of Maze 1 is nowhere.
+<br>
+After going:
+<br>
+if the location is Round Room and rotation room is 1, say &quot;<font color=#000080>Your compass needle spins wildly, and you cannot get your bearings.</font>&quot;; continue the action.
+<br>
+Check going nowhere from Round Room when rotation room is 1: try going east instead.
+<br>
+Check going from the Round Room when rotation room is 1:
+<br>
+    say &quot;<font color=#000080>Unfortunately, it is impossible to tell directions in here.</font>&quot;; 
+<br>
+    move the player to a random adjacent room instead.
+<br>
+A dungeon called the Grail Room is east of the Round Room. &quot;<font color=#000080>You are standing in a small circular room with a pedestal.  A set of stairs leads up, and passages leave to the east and west.</font>&quot;
+<br>
+An open container called a grail is here. &quot;<font color=#000080>There is an extremely valuable (perhaps original) grail here.</font>&quot;
+<br>
+The grail is not openable.
+<br>
+The size of the grail is 10.
+<br>
+The capacity of the grail is 5.
+<br>
+Understand &quot;<font color=#000080>holy grail</font>&quot; as the grail. The case-points of the grail is 5.
+<br>
+After taking the grail for the first time: award 2 points; continue the action.
+<br>
+East of Grail Room is north of a dungeon called Narrow Crawlway. The description of Narrow Crawlway is  &quot;<font color=#000080>This is a narrow crawlway.  The crawlway leads from north to south. However, the south passage divides to the south and southwest.</font>&quot;
+<br>
+West of a dungeon called Temple is up from Grail Room. &quot;<font color=#000080>This is the west end of a large temple.  On the south wall is an ancient inscription, probably a prayer in a long-forgotten language. The north wall is solid granite.  The entrance at the west end of the room is through huge marble pillars.</font>&quot; 
+<br>
+A scenery thing called the inscription is in Temple. Understand &quot;<font color=#000080>prayer</font>&quot; as the inscription.  The description of the inscription is &quot;<font color=#000080>The prayer is inscribed in an ancient script which is hardly remembered these days, much less understood.  What little of it can be made out seems to be a diatribe against small insects, absent-mindedness, and the picking up and dropping of small objects.  The final verse seems to consign trespassers to the land of the dead.  All evidence indicates that the beliefs of the ancient Zorkers were obscure.</font>&quot;
+<br>
+A bell called a small brass bell is in Temple.
+<br>
+A dungeon called Altar is east of Temple. &quot;<font color=#000080>This is the east end of a large temple.  In front of you is what appears to be an altar.</font>&quot;
+<br>
+A pair of candles is here.  &quot;<font color=#000080>On the two ends of the altar are burning candles.</font>&quot;
+<br>
+The candles are flaming.
+<br>
+The later appearance of the pair of candles is &quot;<font color=#000080>There are two candles here.</font>&quot;
+<br>
+A large black book is here. &quot;<font color=#000080>On the altar is a large black book, open to page 569.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>bible</font>&quot; and &quot;<font color=#000080>good book</font>&quot; and &quot;<font color=#000080>goodbook</font>&quot; as the book.
+<br>
+The description of the black book is &quot;<font color=#000080>[book text]</font>&quot;.
+<br>
+The size of the black book is 10.
+<br>
+To say book text:
+<br>
+say fixed letter spacing;
+<br>
+say &quot;<font color=#000080>               Commandment #12592[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Oh ye who go about saying unto each other: 'Hello sailor':[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Dost thou know the magnitude of thy sin before the gods?[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Yea, verily, thou shalt be ground between two stones.[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Shall the angry gods cast thy body into the whirlpool?[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Surely, thy eye shall be put out with a sharp stick![line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Even unto the ends of the earth shalt thou wander and[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>unto the land of the dead shalt thou be sent at last.[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Surely thou shalt repent of thy cunning.</font>&quot;;
+<br>
+say variable letter spacing.
+<br>
+South of Round Room is a dungeon called Engravings Cave.  The description of Engravings cave is &quot;<font color=#000080>You have entered a cave with passages leading north and southeast.
+<br>
+</font><font color=#000080> There are old engravings on the walls here.</font>&quot;
+<br>
+The old engravings is a thing in Engravings Cave. The old engravings is scenery.
+<br>
+The description of the old engravings is &quot;<font color=#000080>The engravings were incised in the living rock of the cave wall by an unknown hand.  They depict, in symbolic form, the beliefs of the ancient peoples of Zork.  Skillfully interwoven with the bas reliefs are excerpts illustrating the major tenets expounded by the sacred texts of the religion of that time.  Unfortunately, a later age seems to have considered them blasphemous and just as skillfully excised them.</font>&quot;
+<br>
+Southeast of Engravings Cave is down from a dungeon called Riddle Room.
+<br>
+The description of Riddle Room is &quot;<font color=#000080>[riddle text]</font>&quot;.
+<br>
+
+<br>
+To say riddle text:
+<br>
+say &quot;<font color=#000080>This is a room which is bare on all sides.  There is an exit down. To the east is a great door made of stone.  Above the door, the following words are written: 'No man shall enter this room without solving this riddle--[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>       What is tall as a house,[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>       Round as a cup,[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>       And all the king's horses can't draw it up?'.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>(Reply via [']ANSWER 'answer'['].)</font>&quot;.
+<br>
+The great door is a door. The great door is closed and not openable. The great door is scenery. East of Riddle Room is the great door.
+<br>
+West of a dungeon called Pearl Room is the great door.
+<br>
+The description of Pearl Room is &quot;<font color=#000080>This is a former broom closet.  The exits are to the east and west.</font>&quot;
+<br>
+A pearl necklace is here. Understand &quot;<font color=#000080>pearls</font>&quot; as the pearl necklace.
+<br>
+The later appearance of the pearl necklace is &quot;<font color=#000080>There is a pearl necklace here with hundreds of large pearls.</font>&quot;
+<br>
+The pearl necklace is wearable. The description of the pearl necklace is &quot;<font color=#000080>This is a pearl necklace with hundreds of large pearls.</font>&quot;
+<br>
+After taking the necklace for the first time:
+<br>
+award 9 points; continue the action.
+<br>
+The case-points of the necklace is 5.
+<br>
+The size of the necklace is 5.
+<br>
+West of a dungeon called Circular Room is Pearl Room.
+<br>
+Check opening the unopenable great door: say &quot;<font color=#000080>The door cannot be opened.</font>&quot; instead.
+<br>
+The description of Circular Room is &quot;<font color=#000080>This is a damp circular room, whose walls are made of brick and mortar.  The roof of this room is not visible, but there appear to be some etchings on the walls.  There is a passageway to the west.</font>&quot;
+<br>
+An enterable container called the wooden bucket is here. 
+<br>
+The initial appearance of the wooden bucket is &quot;<font color=#000080>There is a wooden bucket here, three feet in diameter and three feet high.</font>&quot;
+<br>
+The later appearance of the wooden bucket is &quot;<font color=#000080>There is a wooden bucket here, three feet in diameter and three feet high.</font>&quot;
+<br>
+The wooden bucket is fixed in place.
+<br>
+Check taking the quantity of water while in the bucket:
+<br>
+  if the bottle is closed, say &quot;<font color=#000080>The bottle is closed.</font>&quot; instead;
+<br>
+  now the quantity of water is in the bottle;
+<br>
+  say &quot;<font color=#000080>The bottle is now full of water.</font>&quot;;
+<br>
+  say &quot;<font color=#000080>The bucket descends and comes to a stop.</font>&quot;;
+<br>
+  move the bucket to Circular Room;
+<br>
+  try looking instead.
+<br>
+Check entering the wooden bucket when the quantity of water is in the bucket and the player is in Circular Room:
+<br>
+   say &quot;<font color=#000080>The bucket rises and comes to a stop.</font>&quot;;
+<br>
+move the bucket to Top of Well;
+<br>
+move the player to the bucket, without printing a room description instead.
+<br>
+The rval of Top of Well is 10.
+<br>
+Check entering the wooden bucket when the quantity of water is in the bottle and the player is in Top of Well:
+<br>
+   say &quot;<font color=#000080>The bucket descends and comes to a stop.</font>&quot;;
+<br>
+   move the bucket to Circular Room;
+<br>
+   move the player to the bucket, without printing a room description instead.
+<br>
+
+<br>
+Top of Well is a dungeon. Top of Well is up from Circular Room.
+<br>
+Check going up from Circular Room:
+<br>
+  say &quot;<font color=#000080>The walls cannot be climbed.</font>&quot; instead.
+<br>
+The description of Top of Well is &quot;<font color=#000080>You are at the top of the well.  Well done.  There are etchings on the side of the well.  There is a small crack across the floor at the entrance to a room on the east, but it can be crossed easily.</font>&quot;
+<br>
+Check taking the bucket: say &quot;<font color=#000080>Playing with the bucket in this manner doesn't seem to be accomplishing anything.</font>&quot; instead.
+<br>
+The etchings is a backdrop. 
+<br>
+The etchings is in Circular Room and Top of Well.
+<br>
+The description of the etchings is &quot;<font color=#000080>[bucket text]</font>&quot;.
+<br>
+To say bucket text:
+<br>
+  say fixed letter spacing;
+<br>
+  if the player is in Circular Room begin;
+<br>
+    say &quot;<font color=#000080>               o  b  o[line break][line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>               A  G  I[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>                E   L[line break][line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>               m  p  a[line break]</font>&quot;;
+<br>
+  else;
+<br>
+    say &quot;<font color=#000080>                o  b  o[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>            r             z[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>         f   M  A  G  I  C    z[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>         c    W  E   L  L     y[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>            o             n[line break]</font>&quot;;
+<br>
+    say &quot;<font color=#000080>                m  p  a[line break]</font>&quot;;
+<br>
+  end if;
+<br>
+  say variable letter spacing.
+<br>
+Check going down from Top of Well: say &quot;<font color=#000080>It's a long way down.</font>&quot; instead.
+<br>
+Check jumping while in Top of Well: fatally leap instead.
+<br>
+Check kicking the bucket: say &quot;<font color=#000080>If you insist.</font>&quot;; end the game in death instead.
+<br>
+<font color=#404040>[Ha ha get it</font>]
+<br>
+East of Top of Well is a dungeon called Tea Room.
+<br>
+The description of Tea Room is &quot;<font color=#000080>This is a small square room, in the center of which is a large oblong table, no doubt set for afternoon tea.  It is clear from the objects on the table that the users were indeed mad.  In the eastern corner of this room is a small hole no more than four inches high.</font>&quot;
+<br>
+A large oblong table is here. The table is scenery.
+<br>
+A piece of eat-me cake is in Tea Room.
+<br>
+The initial appearance of the piece of eat-me cake is &quot;<font color=#000080>There is a piece of cake here with the words 'Eat-Me' on it.</font>&quot;
+<br>
+The later appearance of the piece of eat-me cake is &quot;<font color=#000080>There is a piece of cake here with the words 'Eat-Me' on it.</font>&quot;
+<br>
+Understand &quot;<font color=#000080>eatme cake</font>&quot; and &quot;<font color=#000080>eat me cake</font>&quot; as the eat-me cake.
+<br>
+The size of the eat-me cake is 10.
+<br>
+The size of the blue cake is 4.
+<br>
+The size of the orange cake is 4.
+<br>
+The size of the red cake is 4.
+<br>
+A red cake is in Tea Room.
+<br>
+The printed name of the red cake is &quot;<font color=#000080>piece of cake with red icing</font>&quot;. Understand &quot;<font color=#000080>piece of cake</font>&quot; and &quot;<font color=#000080>piece of cake with red icing</font>&quot; and &quot;<font color=#000080>piece of red cake</font>&quot; as the red cake.
+<br>
+An orange cake is in Tea Room.
+<br>
+The printed name of the orange cake is &quot;<font color=#000080>piece of cake with orange icing</font>&quot;. Understand &quot;<font color=#000080>piece of cake</font>&quot; and &quot;<font color=#000080>piece of cake with orange icing</font>&quot; and &quot;<font color=#000080>piece of orange cake</font>&quot; as the orange cake.The inventory listing of the orange cake is &quot;<font color=#000080>piece of cake with orange icing</font>&quot;.
+<br>
+A blue cake is in Tea Room.
+<br>
+The printed name of the blue cake is &quot;<font color=#000080>piece of cake with blue (ecch) icing</font>&quot;. Understand &quot;<font color=#000080>piece of cake</font>&quot; and &quot;<font color=#000080>piece of cake with blue icing</font>&quot; and &quot;<font color=#000080>piece of blue cake</font>&quot; as the blue cake.The inventory listing of the blue cake is &quot;<font color=#000080>piece of cake with blue icing</font>&quot;.
+<br>
+The red cake, the blue cake, and the eat-me cake are edible.
+<br>
+The description of the red cake is &quot;<font color=#000080>The only writing visible is a capital E.  The rest is too small to be clearly visible.</font>&quot;
+<br>
+The description of the orange cake is &quot;<font color=#000080>The only writing visible is a capital E.  The rest is too small to be clearly visible.</font>&quot;
+<br>
+The description of the blue cake is &quot;<font color=#000080>The only writing visible is a capital E.  The rest is too small to be clearly visible.</font>&quot;
+<br>
+After reading a command: 
+<br>
+  if the player's command includes &quot;<font color=#000080>cakes</font>&quot;, replace the matched text with &quot;<font color=#000080>both cake</font>&quot;. 
+<br>
+After eating the orange cake when the player is in Tea Room or Pool Room or Posts Room:
+<br>
+say &quot;<font color=#000080>You have been blasted to smithereens (whatever they are).</font>&quot;; end the game in death.
+<br>
+Check eating the blue cake when the player is in Tea Room or the player is in Pool Room:
+<br>
+  say &quot;<font color=#000080>The room around you seems to be getting smaller.[line break]The room seems to have become too small to hold you.  It seems that the walls are not as compressible as your body, which is more or less demolished.</font>&quot;;
+<br>
+end the game in death instead.
+<br>
+A dungeon called Low Room is northwest of Tea Room. &quot;<font color=#000080>This is a room with a low ceiling which is circular in shape. There are exits to the east and southeast.</font>&quot;
+<br>
+A person called a robot is here.
+<br>
+A green piece of paper is here.
+<br>
+Understand &quot;<font color=#000080>robby</font>&quot; and &quot;<font color=#000080>r2-d2</font>&quot; and &quot;<font color=#000080>c-3po</font>&quot; and &quot;<font color=#000080>r2d2</font>&quot; and &quot;<font color=#000080>c3po</font>&quot; as the robot.
+<br>
+The description of the green paper is &quot;<font color=#000080>[instruction text]</font>&quot;.
+<br>
+The green paper is inflammable.
+<br>
+To say instruction text:
+<br>
+center &quot;<font color=#000080>!!!! FROBOZZ MAGIC ROBOT COMPANY !!!!</font>&quot;;
+<br>
+say paragraph break;
+<br>
+say &quot;<font color=#000080>Hello, master![paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>    I am a late-model robot, trained at MIT Tech to perform various simple housekeeping functions.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>Instructions for use:[paragraph break]</font>&quot;;
+<br>
+say fixed letter spacing;
+<br>
+say &quot;<font color=#000080>    To activate me, use the following formula--[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>        TELL ROBOT 'something to do' (cr)[line break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>    The quotation marks are mandatory.[paragraph break]</font>&quot;;
+<br>
+say variable letter spacing;
+<br>
+say &quot;<font color=#000080>Warranty:[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080>    No warranty is expressed or implied.[paragraph break]</font>&quot;;
+<br>
+say &quot;<font color=#000080> At your service!</font>&quot;.
+<br>
+The description of the eat-me cake is &quot;<font color=#000080>The icing spells out Eat Me.</font>&quot;
+<br>
+After eating the red cake when the player is in Tea Room or Pool Room or Posts Room:
+<br>
+  say &quot;<font color=#000080>That was delicious, but your dying memory is of feeling horribly dehydrated and thirsty.</font>&quot;;
+<br>
+  end the game in death.
+<br>
+A persuasion rule for asking the robot to try doing something: 
+<br>
+    persuasion succeeds. 
+<br>
+Instead of asking the robot to try eating or drinking something: 
+<br>
+    say &quot;<font color=#000080>'I am sorry but that action is difficult for a being with no mouth.'</font>&quot;.
+<br>
+The block giving rule is not listed in any rulebook.
+<br>
+After giving something to the robot: say &quot;<font color=#000080>The robot gladly takes [the noun] and nods his head-like appendage in thanks.</font>&quot;
+<br>
+After reading a command:
+<br>
+  if the player's command includes &quot;<font color=#000080>tell robot</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;;
+<br>
+ if the player's command includes &quot;<font color=#000080>tell robby</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;;
+<br>
+ if the player's command includes &quot;<font color=#000080>tell r2-d2</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;;
+<br>
+ if the player's command includes &quot;<font color=#000080>tell r2d2</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;;
+<br>
+ if the player's command includes &quot;<font color=#000080>tell c-3po</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;;
+<br>
+ if the player's command includes &quot;<font color=#000080>tell c3po</font>&quot;, replace the matched text with &quot;<font color=#000080>robot,</font>&quot;.
+<br>
+Check giving the quantity of water to the robot:
+<br>
+  say &quot;<font color=#000080>The water slips through his fingers.</font>&quot;;
+<br>
+  remove the water from play instead.
+<br>
+Check throwing something at the robot:
+<br>
+  say &quot;<font color=#000080>The robot is injured (being of shoddy construction) and falls to the floor in a pile of garbage, which disintegrates before your eyes.</font>&quot;;
+<br>
+  remove the robot from play instead.
+<br>
+Check attacking the robot:
+<br>
+  say &quot;<font color=#000080>The robot is injured (being of shoddy construction) and falls to the floor in a pile of garbage, which disintegrates before your eyes.</font>&quot;;
+<br>
+  remove the robot from play instead.
+<br>
+Check attacking the robot with something:
+<br>
+try attacking the noun instead.
+<br>
+Check dropping the orange cake when the player's command includes &quot;<font color=#000080>throw</font>&quot; and the player is in Pool Room or Tea Room or Posts Room:
+<br>
+  say &quot;<font color=#000080>You have been blasted to smithereens (whatever they are).</font>&quot;;
+<br>
+  end the game in death instead.
+<br>
+Check throwing the orange cake at something when the player is in Pool Room or Tea Room or Posts Room:
+<br>
+  say &quot;<font color=#000080>You have been blasted to smithereens (whatever they are).</font>&quot;;
+<br>
+  end the game in death instead.
+<br>
+Check answering the robot that something: say &quot;<font color=#000080>'I am only a stupid robot and cannot perform that command.'</font>&quot; instead.
+<br>
+Instead of asking the robot to try doing something other than going, taking, dropping, inserting it into, pushing, turning, giving, or lifting:
+<br>
+  say &quot;<font color=#000080>'I am only a stupid robot and cannot perform that command.'</font>&quot;.
+<br>
+Instead of asking the robot to try doing something when dead flag is false:
+<br>
+  say &quot;<font color=#000080>'Whirr, buzz, click!'</font>&quot;; continue the action.
+<br>
+East of Low Room is a dungeon called Machine Room.
+<br>
+The description of Machine Room is &quot;<font color=#000080>This is a large room full of assorted heavy machinery.  The room smells of burned resistors.  The room is noisy from the whirring sounds of the machines.  Along one wall of the room are three buttons which are, respectively, round, triangular, and square.  Naturally, above the buttons are instructions
+<br>
+</font><font color=#000080>written in EBDIC.  A large sign above all the buttons says in English:[paragraph break][fixed letter spacing]
+<br>
+</font><font color=#000080>DANGER: HIGH VOLTAGE[paragraph break][variable letter spacing]There are exits to the west and the south.</font>&quot;
+<br>
+The round button is a thing in Machine Room. The round button is scenery.
+<br>
+The square button is a thing in Machine Room. The square button is scenery.
+<br>
+The triangular button is a thing in Machine Room. The triangular button is scenery.
+<br>
+After reading a command: 
+<br>
+  if the player's command includes &quot;<font color=#000080>buttons</font>&quot;, replace the matched text with &quot;<font color=#000080>both button</font>&quot;.
+<br>
+Pushing the round button is getting fried. Pushing the square button is getting fried. Pushing the triangular button is getting fried.
+<br>
+Instead of getting fried:
+<br>
+say &quot;<font color=#000080>There is a giant spark, and you are fried to a crisp.</font>&quot;;
+<br>
+end the game in death.
+<br>
+Instead of the robot pushing:
+<br>
+ if the noun is the triangular button and box flag is false begin;
+<br>
+  say &quot;<font color=#000080>A dull thump is heard in the distance.</font>&quot;;
+<br>
+  award 10 points;
+<br>
+  change rotation room to rotation room times -1;
+<br>
+  change box flag to true;
+<br>
+  move the dented steel box to Round Room;
+<br>
+  rule succeeds;
+<br>
+else if the noun is the triangular button;
+<br>
+  say &quot;<font color=#000080>Click.</font>&quot;;
+<br>
+  change rotation room to rotation room times -1;
+<br>
+  rule succeeds;  
+<br>
+else if the noun is the square button and rotation speed is -1;
+<br>
+  say &quot;<font color=#000080>Nothing seems to happen.</font>&quot;;
+<br>
+  rule succeeds;
+<br>
+else if the noun is the square button;
+<br>
+  say &quot;<font color=#000080>The whirring increases in intensity slightly.</font>&quot;;
+<br>
+  change rotation speed to -1;
+<br>
+  rule succeeds;
+<br>
+else if the noun is the round button and rotation speed is 1;
+<br>
+   say &quot;<font color=#000080>Nothing seems to happen.</font>&quot;;
+<br>
+   rule succeeds;
+<br>
+else if the noun is the round button;
+<br>
+  say &quot;<font color=#000080>The whirring decreases in intensity slightly.</font>&quot;;
+<br>
+  change rotation speed to 1;
+<br>
+  rule succeeds;
+<br>
+else;
+<br>
+  continue the action;
+<br>
+end if.
+<br>
+After going:
+<br>
+if the location is Low Room and rotation speed is -1 and rotation room is -1 begin;
+<br>
+  say &quot;<font color=#000080>According to Prof. TAA of MIT Tech, the rapidly changing magnetic fields in the room are so intense as to cause you to be electrocuted.  I really don't know, but in any event, something just killed you.</font>&quot;;
+<br>
+  end the game in death;
+<br>
+else if the location is Low Room and rotation room is -1;
+<br>
+  say &quot;<font color=#000080>Your compass needle spins wildly, and you cannot get your bearings.</font>&quot;;
+<br>
+end if;
+<br>
+continue the action.
+<br>
+Check going from Low Room when rotation room is -1: 
+<br>
+    say &quot;<font color=#000080>Unfortunately, it is impossible to tell directions in here.</font>&quot;;
+<br>
+    move the player to a random adjacent room instead.
+<br>
+Check going nowhere from Low Room when rotation room is -1: try going east instead.
+<br>
+After the robot going:
+<br>
+  if the robot is in Low Room and rotation speed is -1 and rotation room is -1 begin; say &quot;<font color=#000080>According to Prof. TAA of MIT Tech, the rapidly changing magnetic fields in the room are so intense as to fry all the delicate innards of the robot.  I really don't know, but in any event, smoke is coming out of its ears, and it has stopped moving.</font>&quot;; remove the robot from play; else; continue the action; end if.
+<br>
+Box flag is a truth state variable. Box flag is usually false.
+<br>
+The capacity of the dented steel box is 20.
+<br>
+The size of the dented steel box is 40.
+<br>
+The dented steel box is a closed openable container. In the dented steel is a fancy violin.
+<br>
+Understand &quot;<font color=#000080>stradivarius</font>&quot; and &quot;<font color=#000080>strad</font>&quot; as the fancy violin.
+<br>
+The later appearance of the fancy violin is &quot;<font color=#000080>There is a Stradivarius here.</font>&quot;
+<br>
+After taking the violin for the first time: award 11 points; continue the action.
+<br>
+The case-points of the violin is 10.
+<br>
+The size of the violin is 10.
+<br>
+After eating the eat-me cake while in Tea Room:
+<br>
+  say &quot;<font color=#000080>Suddenly, the room appears to have become very large.</font>&quot;;
+<br>
+  repeat with item running through things in Tea Room begin;
+<br>
+  if the item is not the robot and the item is not the table and the item is not a backdrop, move the item to Posts Room;
+<br>
+end repeat.
+<br>
+After eating the blue cake while in Posts Room:
+<br>
+  say &quot;<font color=#000080>Suddenly, the room appears to have become very small.</font>&quot;;
+<br>
+  repeat with item running through things in Posts Room begin;
+<br>
+  if the item is not a backdrop, move the item to Tea Room;
+<br>
+end repeat.
+<br>
+Pool Room is a dark room. Posts Room is a dark room.
+<br>
+The description of Posts Room is &quot;<font color=#000080>This is an enormous room, in the center of which are four wooden posts delineating a rectangular area, above which is what appears to be a wooden roof.  In fact, all objects in this room appear to be abnormally large.  To the east is a passageway.  There is a large chasm on the west and the northwest.</font>&quot;
+<br>
+Check going east from Tea Room: say &quot;<font color=#000080>Only a mouse could get in there.</font>&quot; instead.
+<br>
+Check going northwest while in Posts Room: say &quot;<font color=#000080>There is a chasm too wide to jump across.</font>&quot; instead.
+<br>
+Check going west while in Posts Room: say &quot;<font color=#000080>There is a chasm too wide to jump across.</font>&quot; instead.
+<br>
+Check jumping while in Posts Room: fatally leap instead.
+<br>
+East of Posts Room is Pool Room. The description of Pool Room is &quot;<font color=#000080>This is a large room, one half of which is depressed.  [if the leak is in Pool Room]There is a large leak in the ceiling through which brown colored goop is falling.  The leak has submerged the depressed area in a pool of sewage.  [end if]The only exit from this room is to the west.</font>&quot;
+<br>
+The leak is a thing in Pool Room. The leak is scenery.
+<br>
+The tin of rare spices is a thing. After taking the tin of spices for the first time: award 5 points; continue the action.
+<br>
+The case-points of the tin of rare spices is 5.
+<br>
+The size of the tin of spices is 8.
+<br>
+Check throwing the red cake at the leak:
+<br>
+  say &quot;<font color=#000080>The pool of water evaporates, revealing a tin of rare spices.</font>&quot;;
+<br>
+  remove the leak from play;
+<br>
+  move the tin of rare spices to Pool Room instead.
+<br>
+Check dropping the red cake when the player's command includes &quot;<font color=#000080>throw</font>&quot;:
+<br>
+  try throwing the red cake at the leak instead.
+<br>
+Check inserting the red cake into the leak:
+<br>
+  try throwing the red cake at the leak instead.
+<br>
+Understand &quot;<font color=#000080>pool</font>&quot; and &quot;<font color=#000080>pool of sewage</font>&quot; and &quot;<font color=#000080>pool of water</font>&quot; as the leak.
+<br>
+A flask is in Pool Room. &quot;<font color=#000080>A flask is filled with some clear liquid is here.</font>&quot;
+<br>
+Destroying the flask with something is getting poisoned. Destroying the flask is getting poisoned. Opening the flask is getting poisoned. Throwing the flask at something is getting poisoned.
+<br>
+Instead of getting poisoned:
+<br>
+  say &quot;<font color=#000080>Just before you pass out, you notice that the vapors from the
+<br>
+</font><font color=#000080>flask's contents are fatal.</font>&quot;;
+<br>
+  end the game in death.
+<br>
+Check dropping the flask when the player's command includes &quot;<font color=#000080>throw</font>&quot;: 
+<br>
+  try destroying the flask with your bare hands instead.
+<br>
+The size of the flask is 10.
+<br>
+South of Machine Room is a dark room called Dingy Closet. The description of Dingy Closet is &quot;<font color=#000080>This is a dingy closet adjacent to the machine room.  On one wall is a small sticker which reads:[sticker text]</font>&quot;.
+<br>
+To say sticker text:
+<br>
+center &quot;<font color=#000080>Protected by</font>&quot;;
+<br>
+center &quot;<font color=#000080>FROBOZZ</font>&quot;;
+<br>
+center &quot;<font color=#000080>Magic Alarm Company</font>&quot;;
+<br>
+center &quot;<font color=#000080>(Hello, footpad!)</font>&quot;.
+<br>
+A white crystal sphere is in Dingy Closet. 
+<br>
+Check searching the blue crystal sphere:  try examining the noun instead.
+<br>
+The later appearance of the white crystal sphere is &quot;<font color=#000080>There is a beautiful white crystal sphere here.</font>&quot;
+<br>
+The description of the white crystal sphere is &quot;<font color=#000080>[white sphere text]</font>&quot;.
+<br>
+To say white sphere text:
+<br>
+if the blue crystal sphere is in something which is closed and opaque begin;
+<br>
+  say &quot;<font color=#000080>You see only darkness.</font>&quot;;
+<br>
+else;
+<br>
+  say &quot;<font color=#000080>As you peer into the sphere, a strange vision takes shape of
+<br>
+</font><font color=#000080>a distant room, which can be described clearly....[paragraph break]</font>&quot;;
+<br>
+  say &quot;<font color=#000080>[description of the location of the blue crystal sphere][paragraph break]</font>&quot;;
+<br>
+  say &quot;<font color=#000080>The vision fades, revealing only an ordinary crystal sphere.</font>&quot;;
+<br>
+end if.
+<br>
+Check searching the blue crystal sphere:  try examining the noun instead.
+<br>
+Understand &quot;<font color=#000080>PALANTHIR</font>&quot; and &quot;<font color=#000080>STONE</font>&quot; and &quot;<font color=#000080>SEEING</font>&quot; and &quot;<font color=#000080>GLASS</font>&quot; and &quot;<font color=#000080>BALL</font>&quot; as the white crystal sphere.
+<br>
+The size of the white crystal sphere is 10.
+<br>
+After taking the white crystal sphere for the first time: award 6 points; continue the action.
+<br>
+The case-points of the white crystal sphere is 6.
+<br>
+Check asking the robot to try taking the sphere when the sphere is in Dingy Closet and cage solved is false:
+<br>
+say &quot;<font color=#000080>As the robot reaches for the sphere, a steel cage falls from the
+<br>
+</font><font color=#000080>ceiling.  The robot attempts to fend it off, but is trapped below it.
+<br>
+</font><font color=#000080>Alas, the robot short-circuits in his vain attempt to escape, and
+<br>
+</font><font color=#000080>crushes the sphere beneath him as he falls to the floor.</font>&quot;;
+<br>
+remove the robot from play;
+<br>
+remove the sphere from play instead.
+<br>
+Cage solved is a truth state variable. Cage solved is usually false.
+<br>
+Check taking the sphere when the player is in Dingy Closet:
+<br>
+if cage solved is true, continue the action;
+<br>
+  say &quot;<font color=#000080>As you reach for the sphere, a steel cage falls from the ceiling to entrap you.  To make matters worse, poisonous gas starts coming into the room.</font>&quot;;
+<br>
+  if the player can not see the robot begin;
+<br>
+    say &quot;<font color=#000080>Time passes...and you die from some obscure poisoning.</font>&quot;;
+<br>
+    end the game in death instead;
+<br>
+  else;
+<br>
+    move the player to Cage;
+<br>
+    move the robot to Cage instead;
+<br>
+  end if.
+<br>
+Cage is a dark room. The description of Cage is &quot;<font color=#000080>You are trapped inside a steel cage.</font>&quot;
+<br>
+Check asking the robot to try going down from Top of Well:
+<br>
+  say &quot;<font color=#000080>Whirr, buzz, click![paragraph break]The robot is unable to do that.</font>&quot; instead.
+<br>
+The steel cage is a thing in Cage. The steel cage is scenery.
+<br>
+Instead of asking the robot to try lifting or taking the steel cage:
+<br>
+  say &quot;<font color=#000080>Whirr, buzz, click![paragraph break]The cage shakes and is hurled across the room.</font>&quot;;
+<br>
+  now everything which is in the location which is not scenery is in Dingy Closet;
+<br>
+  change cage solved to true;
+<br>
+  move the mangled steel cage to Dingy Closet.
+<br>
+
+<br>
+The mangled steel cage is a thing. The size of the mangled steel cage is 60.
+<br>
+
+<br>
+</font>
+					<p><font size="-1" face="Trebuchet MS, Geneva, Arial, Helvetica, SunSans-Regular, sans-serif"></font></p>
+					<p></p>
+				</td></tr></table>
+	</body>
+
+</html>
