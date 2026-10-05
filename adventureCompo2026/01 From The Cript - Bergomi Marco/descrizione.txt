@@ -4,59 +4,86 @@ ma durante l'esplorazione vieni imprigionato da forze del male e
 gettato in una profonda spelonca del Dimmuborgir. 
 Devi riuscire a trovare la via d'uscita.
 
-
 --------------------------------------
 
-Questa avventura testuale è un classico viaggio di fuga da un dungeon oscuro e letale, 
-scritto in BASIC (strutturato con i tipici accorgimenti per Commodore 64, 
-come la rigorosa gestione dello schermo e l'impiego essenziale di variabili a una o due lettere al massimo).
+Questa avventura testuale è un classico viaggio di fuga 
+da un dungeon oscuro e letale, 
+scritto in BASIC (strutturato con i tipici accorgimenti 
+per Commodore 64, 
+come la rigorosa gestione dello schermo 
+e l'impiego essenziale di variabili a una o due lettere al massimo).
 
-**L'Ambientazione e l'Obiettivo**
+ L'Ambientazione e l'Obiettivo 
 
 Il gioco si apre in un'atmosfera cupa e disperata: 
-il protagonista si risveglia prigioniero in una lurida e angusta cella sotterranea, 
+il protagonista si risveglia prigioniero in una lurida 
+e angusta cella sotterranea, 
 con a disposizione solo una branda sfondata e un vaso pitale. 
 L'obiettivo è fuggire da questo dedalo sotterraneo e 
-raggiungere la luce del sole in superficie. Il dungeon è un luogo inospitale, 
+raggiungere la luce del sole in superficie. 
+Il dungeon è un luogo inospitale, 
 carico di trappole magiche e sorvegliato da creature ostili.
 
-**Il Gameplay e le Meccaniche**
+ Il Gameplay e le Meccaniche 
 
-L'interfaccia si affida ai tipici comandi a singola lettera dei giochi retrò: 
-ci si muove tramite i punti cardinali e si esplora l'ambiente esaminando, prendendo, 
-lasciando o usando gli oggetti. La sopravvivenza dipende da un indicatore di Energia, 
-che scende inevitabilmente durante gli scontri o quando si incappa in qualche trabocchetto. Il gioco è spietato e punitivo: bere la pozione sbagliata (rossa o nera), toccare un artefatto maledetto a mani nude o essere troppo lenti a digitare il comando di attacco porta a una fine istantanea e definitiva. Ogni mossa deve essere calcolata con attenzione.
+L'interfaccia si affida ai tipici comandi a singola 
+lettera dei giochi retrò: 
+ci si muove tramite i punti cardinali e si esplora 
+l'ambiente esaminando, prendendo, 
+lasciando o usando gli oggetti. 
+La sopravvivenza dipende da un indicatore di Energia, 
+che scende inevitabilmente durante gli scontri 
+o quando si incappa in qualche trabocchetto. 
+Il gioco è spietato e punitivo: 
+bere la pozione sbagliata (rossa o nera), 
+toccare un artefatto maledetto a mani nude 
+o essere troppo lenti a digitare il comando 
+di attacco porta a una fine istantanea e definitiva. 
+Ogni mossa deve essere calcolata con attenzione.
 
-**Enigmi e Ostacoli**
+Enigmi e Ostacoli 
 
 L'avventura richiede un perfetto equilibrio tra forza bruta e ingegno. 
 Il cammino è sbarrato da due tipologie principali di ostacoli:
 
-* **Combattimenti:** Il protagonista inizia a mani nude e deve 
+*  Combattimenti:  Il protagonista inizia a mani nude e deve 
 progressivamente armarsi trovando sbarre di metallo, 
 pugnali, spade e scudi. I nemici diventano via via più letali, 
-partendo da semplici guardie, passando per enormi orchi e scheletri rianimati, fino ad arrivare a creature infernali.
-* **Puzzle Logici e Magici:** Non tutto si risolve con la spada. 
-Il gioco presenta enigmi brillanti, come l'indovinello del "Sole dall'alba al tramonto" 
-che richiede di inserire una specifica sequenza di punti cardinali 
-(Est, Sud, Ovest, Nord) per accendere delle torce senza morire asfissiati. Un altro enigma di grande fascino richiede di disporre quattro statuette (Re, Boia, Monaco, Cavaliere) in un ordine preciso decifrando un criptico verso inciso su una targa.
+partendo da semplici guardie, 
+passando per enormi orchi e scheletri rianimati, 
+fino ad arrivare a creature infernali.
 
-**Elementi Sovrannaturali**
+*  Puzzle Logici e Magici:  Non tutto si risolve con la spada. 
+Il gioco presenta enigmi brillanti, 
+come l'indovinello del "Sole dall'alba al tramonto" 
+che richiede di inserire una specifica sequenza di punti cardinali 
+(Est, Sud, Ovest, Nord) per accendere delle torce 
+senza morire asfissiati. Un altro enigma 
+di grande fascino richiede di disporre quattro statuette (Re, Boia, Monaco, Cavaliere) in un ordine preciso decifrando un criptico verso inciso su una targa.
+
+ Elementi Sovrannaturali 
 
 Il dungeon è permeato di magia oscura. 
-Un semplice cerchio di pietre sul pavimento può paralizzare il giocatore, 
-richiedendo freddezza per uscirne. Alcuni nemici non hanno un corpo fisico: 
-un fantasma, ad esempio, blocca un intero corridoio e non può essere ferito, 
+Un semplice cerchio di pietre sul 
+pavimento può paralizzare il giocatore, 
+richiedendo freddezza per uscirne. 
+Alcuni nemici non hanno un corpo fisico: 
+un fantasma, ad esempio, blocca un intero 
+corridoio e non può essere ferito, 
 ma solo scacciato utilizzando un amuleto magico protettivo.
 
-**Il Gran Finale**
+ Il Gran Finale 
 
-La tensione narrativa culmina nell'ultima stanza. A un passo dall'uscita e dall'aria fresca, 
-il giocatore si trova faccia a faccia con un demone dalle sembianze sataniche. 
+La tensione narrativa culmina nell'ultima stanza. 
+A un passo dall'uscita e dall'aria fresca, 
+il giocatore si trova faccia a faccia con un demone 
+dalle sembianze sataniche. 
 Per trionfare in quest'ultimo scontro, la sola spada non basta: 
-è necessario usare una croce sacra per far arretrare la creatura prima di sferrare l'attacco decisivo.
+è necessario usare una croce sacra per 
+far arretrare la creatura prima di sferrare l'attacco decisivo.
 
 In sintesi, è un'avventura che premia l'esplorazione meticolosa, 
-la deduzione logica e la prudenza, restituendo in pieno il senso di pericolo 
+la deduzione logica e la prudenza, restituendo 
+in pieno il senso di pericolo 
 e mistero tipico dei giochi testuali della sua epoca.
 
