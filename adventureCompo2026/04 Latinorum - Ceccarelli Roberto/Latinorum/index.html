@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<title>Latinorum</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="description" content="A 1985 adventure on a 1985 computer, inspired by a true story" />
+		<meta name="ifiction:ifid" content="1d9b9fb0-d4e5-42e7-a011-a43c853ef135">
+		
+		<meta name="author" content="Roberto Ceccarelli" />
+		<link rel="author" type="text/html" href="https://strawberryfield.altervista.org/robertoceccarelli-fotografia-informatica.php?lang=en" title="Roberto Ceccarelli - To know the author of this story" />
+		<link rel="author" href="https://x.com/RobyStrawberry" title="Profilo X"/>
+		<link rel="author" href="https://www.facebook.com/roberto.strawberryfield" title="Profilo Facebook"/>
+		<link rel="author" href="https://it.linkedin.com/in/ceccarelliroberto/" title="Profilo Linkedin"/>
+		<link rel="author" href="https://www.flickr.com/photos/thestrawberryfield/" title="Photostream Flickr"/>
+		<link rel="author" href="https://github.com/strawberryfield/" title="GitHub repositories"/>
+		<link rel="me" href="https://mastodon.gamedev.place/@strawberryfield"/>
+		<meta property="og:site_name"     content="Latinorum" />
+		<meta property="og:type"          content="article" />
+		<meta property="og:title"         content="Latinorum" />
+		<meta property="og:description"   content="A 1985 adventure on a 1985 computer - Inspired by a true story." />
+
+		<link rel="stylesheet" type="text/css" href="vice/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="vice/vice.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="row" style="background-color: #55a2e6;">
+				<!-- row 1 -->
+				<div class="col-sm-4" >
+					<img src="images/cover_web.jpg" alt="LATINORUM" style="display: block;  width: 100%;  height: auto;"/>
+				</div>
+				<div class="col-sm-2">&nbsp;</div>
+				<div class="col-sm-6">
+				<h1><strong>LATINORUM</strong></h1>
+				<h3>A Commodore 64 retro adventure</h3>
+				<p>copyright &copy; 1985,2026 Roberto Ceccarelli - «<a href="https://strawberryfield.altervista.org/index.php?lang=en" target="_blank">The Strawberry Field</a>»</p>
+				<p>&nbsp;<br>&nbsp;</p>
+				<div class="container row">
+					<div class="col-sm-3"><a href="latinorum.d64" class="btn btn-info" role="button">Download</a></div>
+					<div class="col-sm-1">&nbsp;</div>
+					<div class="col-sm-8"><a href="play.html" target="_blank" class="btn btn-info" role="button">Play on-line</a></div>
+					
+				</div>
+				</div>
+			</div>
+			<!-- end row 1 -->
+			<div class="row">
+<div class="accordion" id="accordionExample" style="padding: 0;">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h5><strong>English</strong></h5>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body" style="background-color: #f0f0f0;"><div class="accordion" id="accordionEnglish">
+      
+	<h2 class="accordion-header" id="EnglishIntro">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnglishIntro" aria-expanded="true" aria-controls="collapseEnglishIntro">
+	    <strong>Intro</strong>
+	  </button>
+	</h2>
+        <div id="collapseEnglishIntro" class="accordion-collapse collapse show" aria-labelledby="EnglishIntro" data-bs-parent="#accordionEnglish">
+          <div class="accordion-body container row">
+	    <div class="col-sm-9">
+<p>A.D. MCMLXXXIV, somewhere in Italy.</p>
+<p>It's May and the end of the school year is approaching. If you don't do well in your last Latin test, Prof. De Boccis will fail you.</p>
+<p>De Boccis comes from another city and, knowing that he may be delayed by public transport, he leaves the test at school so that a colleague can start the test immediately.</p>
+<p>The plan is to get hold of the text and then translate it with the help of your classmate Secchioni: he will get a perfect A, while you will insert a few errors so as not to arouse too much suspicion.</p>
+<p>Let's go back to school for the ultimate student adventure: playing pranks on our teachers!</p>
+	    </div>
+	    <div class="col-sm-3"><img src="images/scuola1.jpg" alt="The halloway" style="display: block;  width: 100%;  height: auto;"/></div>
+	  </div>
+	</div>  
+	
+	<h2 class="accordion-header" id="EnglishBackground">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnglishBackground" aria-expanded="true" aria-controls="collapseEnglishBackground">
+	    <strong>Background</strong>
+	  </button>
+	</h2>
+        <div id="collapseEnglishBackground" class="accordion-collapse collapse" aria-labelledby="EnglishBackground" data-bs-parent="#accordionEnglish">
+          <div class="accordion-body container row">
+	    <div class="col-sm-9">
+<p>In February 1985, MCmicrocomputer magazine published the source code for a text adventure parser in its Apple 2 column.<br>  
+At the time, the reference was Enrico Colombini's book "Scrivere un gioco di avventura sul personal computer" (Writing an adventure game on a personal computer), but Guglielmo Nigri's program published in MC had a different approach.<br>  
+While in Colombini's system the game was hard-coded in the source code, Nigri's was a universal parser fed by text files containing the various adventures.</p>
+
+<p>I adapted the MC program for my Commodore 64 and even wrote a couple of adventures, but no one ever got to play them.</p>
+
+<p>Last summer, while searching through my old floppy disks for the legendary "<a href="https://strawberryfield.altervista.org/storie_foto/sosya-commodore64-planetologia.php?lang=en" title="SOSYA: A «space» adventure">SOSYA</a>", I rediscovered the two adventures I had forgotten.</p>
+
+<p>Playing "Latinorum" took me back to my high school days, the setting for the story, which was inspired by real events (later reworked in the game).</p>
+
+<p>Biblical loading times, despite the use of floppy disks, hardcoded commands, descriptions limited to 250 characters, and many other problems discouraged its use. But I was eager to give that little story a new lease on life, so I decided to rewrite the system from scratch, leaving it on the "plain vanilla" Commodore 64.</p>          
+	    </div>
+	    <div class="col-sm-3"><img src="images/scuola2.jpg" alt="Project is on the way" style="display: block;  width: 100%;  height: auto;"/></div>
+	  </div>
+        </div>
+	
+	<h2 class="accordion-header" id="EnglishSystem">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnglishSystem" aria-expanded="true" aria-controls="collapseEnglishSystem">
+	    <strong>The system</strong>
+	  </button>
+	</h2>
+        <div id="collapseEnglishSystem" class="accordion-collapse collapse" aria-labelledby="EnglishSystem" data-bs-parent="#accordionEnglish">
+          <div class="accordion-body container">
+	    <div class="row">
+	      <div class="col-sm-9">
+<p>The original program had an editor that requested various data in order and stored it in a .SEQ file.<br>
+No modification of the entered data was allowed.</p>
+
+<p>Completely abandoned, it has been replaced by a C# procedure that takes a JSON file and translates it into a series of .PRG modules that contain no code, only data: reading a .PRG file is much faster than a .SEQ file on the Commodore 64.<br>  
+The IFBuilder project also contains a program that extracts data from the original .SEQ files that I used to obtain the basis for this new edition.</p>
+
+<p>The modules thus created contain all the texts and commands, making it possible to use the same parsing program with any language.</p>
+
+<p>The new parser is written in BASIC 2.0, the one resident in the ROMs, supplemented by some procedures written in assembler for speed reasons and because it also uses the RAM located below the system ROMs.</p>
+
+<p>C64List, a tokenizer that allows the use of long variable names, labels instead of line numbers, and includes, was used to write the BASIC code.<br>  
+The end result is very compact code, as all comments and unnecessary spaces are removed, and the lines are numbered starting from 0 with consecutive numbers: almost impossible to read.</p>
+
+	      </div>
+	      <div class="col-sm-3"><img src="images/scuola3.jpg" alt="The lab" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    <div class="row">
+<p>The whole thing is completed by a loader that loads all the modules together with the "opening titles", aided by the "star turbo" which speeds up reading from the drive.</p>
+ <p>When testing the program on a real machine with an SD2IEC card reader, it became apparent that the card reader is incompatible with the "star turbo" program; therefore, an alternative version of the loader, named "latinorum.sd," was created that does not use that utility.<br>In that case, loading times triple.</p>
+	    </div>
+	  </div>
+        </div>	
+	
+	<h2 class="accordion-header" id="EnglishCommands">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnglishCommands" aria-expanded="true" aria-controls="collapseEnglishCommands">
+	    <strong>How to play</strong>
+	  </button>
+	</h2>
+        <div id="collapseEnglishCommands" class="accordion-collapse collapse" aria-labelledby="EnglishCommands" data-bs-parent="#accordionEnglish">
+          <div class="accordion-body container">
+	    <div class="row">
+	      <div class="col-sm-8">
+<p>The game uses a simple two-word parser: verb and object (the latter being optional in some cases).</p>
+<p>The available verbs are listed below; you can view the list during the game by typing <b>commands</b>.</p>
+<p>Usable items are highlighted in red in the descriptions; synonyms, articles, pronouns, or any other unhighlighted words are not allowed.</p>	  
+<p>The parser recognizes 26 types of actions that can also be associated
+with multiple commands, such as abbreviations.<br />
+The associations used in the English version of “Latinorum” will be used
+below.</p>
+	      </div>
+	      <div class="col-sm-4"><img src="images/commands.jpg" alt="Available commands" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    
+	    <div class="row">
+<h4 id="movements">Movements</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>north, n</strong>: movement in a northward direction.</li>
+<li><strong>south, s</strong>: movement in a southward direction.</li>
+<li><strong>east, e</strong>: movement in an eastward direction.</li>
+<li><strong>west, w</strong>: movement in a westward direction.</li>
+<li><strong>up, u</strong>: movement in an upward direction.</li>
+<li><strong>down</strong>: movement downwards.</li>
+<li><strong>go, g</strong> <em>direction</em>: movement in the indicated
+direction; the directions are those listed above, abbreviations are not
+allowed.</li>
+</ul>
+<h4 id="observation">Observation</h4>
+<ul>
+<li><strong>look, examine, l, x</strong> [<em>object</em>]: returns the
+description of the object; if not specified, describes the room.</li>
+<li><strong>inventory, i</strong>: returns the list of items owned by
+the player.</li>
+<li><strong>exits</strong>: returns a list of possible directions.</li>
+</ul>
+	      </div>
+	      <div class="col-sm-4"><img src="images/scuola4.jpg" alt="On the stairs" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+            <div class="row">
+<h4 id="object-handling">Object handling</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>take, t, get</strong> <em>object</em>: takes the object.</li>
+<li><strong>drop, d</strong> <em>object</em>: drops the object.</li>
+<li><strong>insert</strong> <em>object</em>: inserts the object into a
+container; if only one container is available, it will be selected
+automatically, otherwise you will be asked to choose from a list.</li>
+<li><strong>open</strong> <em>object</em>: opens the object; in some
+cases, the player must have an object suitable for unlocking it; if the
+necessary object is possessed, it is used automatically.</li>
+<li><strong>close</strong> <em>object</em>: closes the object.</li>
+<li><strong>power</strong> <em>object</em>: turns on the object; in some
+cases, the player must have a suitable object to turn it on. If the
+necessary object is possessed, it is used automatically.</li>
+<li><strong>unpower</strong> <em>object</em>: turns off the object.</li>
+</ul>
+<h4 id="magic">Magic</h4>
+<ul>
+<li><strong>xyzzy</strong>: invokes magical procedures.</li>
+</ul>
+
+	      </div>
+	      <div class="col-sm-4"><img src="images/scuola5.jpg" alt="Laboratory equipment" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    <div class="row">
+<h4 id="help">Help</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>help</strong>: displays possible help for the player.</li>
+<li><strong>commands</strong>: displays the list of available commands.</li>
+<li><strong>about</strong>: displays info about the story and the runtime.</li>
+</ul>
+<h4 id="system-commands">System commands</h4>
+<ul>
+<li><strong>save</strong>: saves the game state to a file.</li>
+<li><strong>load</strong>: loads the game state from a file.</li>
+<li><strong>record</strong>: records all commands to a file.</li>
+<li><strong>undo</strong>: undoes the last command; you can undo the
+last 4 commands.</li>
+<li><strong>quit</strong>: quits the game.</li>
+</ul>
+
+	      </div>
+	      <div class="col-sm-4"><img src="images/floppies.jpg" alt="My Commodore 64 floppy disks" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+
+          </div>
+        </div>
+	
+	<h2 class="accordion-header" id="EnglishWalkthrough">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnglishWalkthrough" aria-expanded="true" aria-controls="collapseEnglishWalkthrough">
+	    <strong>Walkthrough</strong>&nbsp;&nbsp;
+	    <i>Warning: this section contains spoilers!</i>
+	  </button>
+	</h2>
+        <div id="collapseEnglishWalkthrough" class="accordion-collapse collapse" aria-labelledby="EnglishWalkthrough" data-bs-parent="#accordionEnglish">
+          <div class="accordion-body">
+		<pre><embed src="walkthrough.en.seq" style="width: 100%; height: 30em;"></pre>
+	  </div>
+        </div>
+
+	
+      </div></div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <h5><strong>Italiano</strong></h5>
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body" style="background-color: #f0f0f0;"><div class="accordion" id="accordionItalian">
+      
+	<h2 class="accordion-header" id="ItalianIntro">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItalianIntro" aria-expanded="true" aria-controls="collapseItalianIntro">
+	    <strong>Intro</strong>
+	  </button>
+	</h2>
+        <div id="collapseItalianIntro" class="accordion-collapse collapse show" aria-labelledby="ItalianIntro" data-bs-parent="#accordionItalian">
+          <div class="accordion-body container row">
+	    <div class="col-sm-9">
+<p>A.D. MCMLXXXIV</p>
+<p>Maggio, l'anno scolastico sta per terminare e il prof. De Boccis ti rimanderà in Latino se non farai bene l'ultimo compito in classe.</p>
+<p>De Boccis viene da un'altra città e sapendo di poter avere dei ritardi dovuti ai trasporti pubblici lascia il testo del compito a scuola in modo che un collega possa far iniziare subito la prova.</p>
+<p>Il piano prevede di procurarsi il testo e poi tradurlo con l'aiuto del compagno Secchioni: lui prenderà un bel 10, mentre tu inserirai qualche errorino per non destare troppi sospetti.<br></p>
+<p>Torniamo a scuola per vivere la massima avventura per uno studente: fare fessi i propri insegnanti!</p>	    
+	    </div>
+	    <div class="col-sm-3"><img src="images/scuola1.jpg" alt="The halloway" style="display: block;  width: 100%;  height: auto;"/></div>
+	  </div>
+	</div>  
+ 
+	
+	<h2 class="accordion-header" id="ItalianBackground">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItalianBackground" aria-expanded="true" aria-controls="collapseItalianBackground">
+	    <strong>Antefatto</strong>
+	  </button>
+	</h2>
+        <div id="collapseItalianBackground" class="accordion-collapse collapse" aria-labelledby="ItalianBackground" data-bs-parent="#accordionItalian">
+          <div class="accordion-body container row">
+	    <div class="col-sm-9">
+<p>Nel febbraio 1985 la rivista MCmicrocomputer pubblica, nella rubrica dedicata all'Apple 2, il sorgente di un parser per avventure testuali.<br>  
+All'epoca il riferimento era il libro di Enrico Colombini "Scrivere un gioco di avventura sul personal computer", ma il programma di Guglielmo Nigri pubblicato su MC aveva un approccio diverso.<br>  
+Mentre nel sistema di Colombini il gioco era hard-coded nel sorgente, quello di Nigri era un prser universale alimentato da files testo contenti le varie avventure.</p>
+
+<p>Adattai il programma di MC per il mio Commodore 64 e ci scrissi anche un paio di avventure, che però nessuno ebbe modo di giocare.</p>
+
+<p>La scorsa estate, recuperando i miei vecchi floppy alla ricerca del mitico "<a href="https://strawberryfield.altervista.org/storie_foto/sosya-commodore64-planetologia.php" title="SOSYA: Una avventura «spaziale»">SOSYA</a>", sono tornate fuori le due avventure che avevo dimenticato.</p>
+
+<p>Giocare a "Latinorum" mi ha riportato ai tempi del liceo, quello in cui è ambientata la storia, ispirata a fatti realmente accaduti (poi rielaborati nel gioco).</p>
+
+<P>Tempi di caricamento biblici, nonostante l'uso dei floppy disk, comandi hardcoded, descrizioni limitate a 250 caratteri e tanti altri problemi ne scoraggiavano l'uso.<br>
+Ma la voglia di dare una nuova vita a quella storiella era tanta e così ho deciso di riscrivere da capo il sistema, lasciandolo comunque sul Commodore 64 "plain vanilla".</p>
+	    </div>
+	    <div class="col-sm-3"><img src="images/scuola2.jpg" alt="Project is on the way" style="display: block;  width: 100%;  height: auto;"/></div>
+	  </div>
+        </div>
+	
+	<h2 class="accordion-header" id="ItalianSystem">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItalianSystem" aria-expanded="true" aria-controls="collapseItalianSystem">
+	    <strong>Il sistema</strong>
+	  </button>
+	</h2>
+        <div id="collapseItalianSystem" class="accordion-collapse collapse" aria-labelledby="ItalianSystem" data-bs-parent="#accordionItalian">
+         <div class="accordion-body container">
+	    <div class="row">
+	      <div class="col-sm-9">
+<p>Il programma originale era dotato di un editor che richiedeva in ordine i vari dati e li memorizzava in un file .SEQ<br>  
+Non era permessa alcuna modifica dei dati inseriti.<p>
+
+<p>Completamente abbandonato è stato sostituito da una procedura C# che prende in carico un file JSON e lo traduce in una serie di moduli .PRG che non contengono codice, ma solo dati: la lettura di un file .PRG è estremamente più veloce di un .SEQ sul Commodore 64.<br>  
+Il progetto IFBuilder contiene anche un programma che estrae i dati dai .SEQ originali che ho usato per ottenere la base di questa nuova edizione.</p>
+
+<p>I moduli così creati contengono tutti i testi ed i comandi, rendendo possibile utilizzare lo stesso programma di parsing con qualsiasi lingua.</p>
+
+<p>Il nuovo parser è scritto in BASIC 2.0, quello residente nelle ROM, integrato da alcune procedure scritte in assembler per questioni di velocità e per il fatto che viene sfruttata anche la RAM posta al di sotto delle ROM di sistema.<p>
+
+<p>Per la scrittura del codice BASIC è stato utilizzato C64List, un tokenizer che consente di utilizzare nomi di variabili lunghe, etichette al posto dei numeri di linea ed include.<br>  
+Il risultato finale è un codice molto compatto in quanto vengono soppressi tutti i commenti, gli spazi non indispensabili e le righe vengono numerate a partire da 0 con i numeri tutti consecutivi: pressochè impossibile da leggere.</p>
+
+	      </div>
+	      <div class="col-sm-3"><img src="images/scuola3.jpg" alt="Project is on the way" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    <div class="row">
+<p>Completa il tutto un loader che si occupa di caricare tutti i moduli assieme ai "titoli di testa", aiutato dallo "star turbo" che velocizza la lettura dal drive.</p>
+<p>Testando il programma su una macchina reale con un lettore SD2IEC è emerso che quest'ultimo è incompatibile con il programma "star turbo" per cui è stata realizzata una versione alternativa del loader, denominata "latinorum.sd", che non sfrutta tale utility.<br>I tempi di caricamento in tal caso triplicano.</p>
+	    </div>
+	  </div>
+        </div>	
+	
+	<h2 class="accordion-header" id="ItalianCommands">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItalianCommands" aria-expanded="true" aria-controls="collapseItalianCommands">
+	    <strong>Come giocare</strong>
+	  </button>
+	</h2>
+        <div id="collapseItalianCommands" class="accordion-collapse collapse" aria-labelledby="ItalianCommands" data-bs-parent="#accordionItalian">
+          <div class="accordion-body container">
+	    <div class="row">
+	      <div class="col-sm-8">
+<p>Il gioco utilizza un semplice parser a due parole: verbo e oggetto (quest'ultimo opzionale in alcuni casi).</p>
+<p>I verbi conosciuti sono elencati più sotto, la lista è consultabile durante il gioco scrivendo <b>comandi</b>.</p>
+<p>Gli oggetti utilizzabili sono indicati in rosso nelle descrizioni, non sono ammessi sinonimi, articoli, pronomi o qualsiasi altra parola non evidenziata.</p>	  
+<p>Il parser riconosce 26 tipi di azioni che possono essere associate
+anche a più comandi, ad esempio abbreviazioni.<br />
+Nel seguito verranno utilizzate le associazioni utilizzate nella
+versione italiana di “Latinorum”.</p>
+	      </div>
+	      <div class="col-sm-4"><img src="images/commands.jpg" alt="Available commands" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    
+	    <div class="row">
+<h4 id="spostamenti">Spostamenti</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>nord, n</strong>: spostamento in direzione nord.</li>
+<li><strong>sud, s</strong>: spostamento in direzione sud.</li>
+<li><strong>est, e</strong>: spostamento in direzione est.</li>
+<li><strong>ovest, o, w</strong>: spostamento in direzione ovest.</li>
+<li><strong>alto, a</strong>: spostamento verso l’alto.</li>
+<li><strong>basso, b</strong>: spostamento verso il basso.</li>
+<li><strong>vai, v</strong> <em>direzione</em>: spostamento nella
+direzione indicata; le direzioni sono quelle elencate sopra, le
+abbreviazioni non sono ammesse.</li>
+</ul>
+<h4 id="osservazione">Osservazione</h4>
+<ul>
+<li><strong>guarda, g, esamina, x</strong> [<em>oggetto</em>]: restituisce la
+descrizione dell’oggetto; se non specificato descrive la stanza.</li>
+<li><strong>inventario, i</strong>: restituisce l’elenco degli oggetti
+posseduti dal giocatore.</li>
+<li><strong>uscite</strong>: restituisce l’elenco delle direzioni verso cui si può andare.</li>
+</ul>
+	      </div>
+	      <div class="col-sm-4"><img src="images/scuola4.jpg" alt="On the stairs" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+            <div class="row">
+<h4 id="movimentazione-oggetti">Movimentazione oggetti</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>prendi, p, t</strong> <em>oggetto</em>: prende l’oggetto.</li>
+<li><strong>lascia, l, d</strong> <em>oggetto</em>: lascia l’oggetto.</li>
+<li><strong>inserisci</strong> <em>oggetto</em>: inserisce l’oggetto in
+un contenitore; se è disponibile un solo contenitore questo verrà
+selezionato automaticamente, altrimenti verrà richiesto di sceglierlo da
+una lista.</li>
+<li><strong>apri</strong> <em>oggetto</em>: apre l’oggetto; in alcuni
+casi è necessario che il giocatore possegga un oggetto adatto a
+sbloccarlo, se l’oggetto necessario è posseduto viene utilizzato
+automaticamente.</li>
+<li><strong>chiudi</strong> <em>oggetto</em>: chiude l’oggetto.</li>
+<li><strong>accendi</strong> <em>oggetto</em>: accende l’oggetto; in
+alcuni casi è necessario che il giocatore possegga un oggetto adatto ad
+accenderlo, se l’oggetto necessario è posseduto viene utilizzato
+automaticamente.</li>
+<li><strong>spegni</strong> <em>oggetto</em>: spegne l’oggetto.</li>
+</ul>
+<h4 id="magia">Magia</h4>
+<ul>
+<li><strong>xyzzy, abracadabra</strong>: invoca procedure magiche.</li>
+</ul>
+	      </div>
+	      <div class="col-sm-4"><img src="images/scuola5.jpg" alt="Laboratory equipment" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+	    <div class="row">
+<h4 id="aiuto">Aiuto</h4>
+	    </div>
+	    <div class="row">
+	      <div class="col-sm-8">
+<ul>
+<li><strong>help, aiuto</strong>: mostra un possibile aiuto per il
+giocatore.</li>
+<li><strong>comandi</strong>: mostra la lista dei comandi disponibili.</li>
+<li><strong>info</strong>: mostra informazioni sulla storia e sul runtime.</li>
+</ul>
+<h4 id="comandi-di-sistema">Comandi di sistema</h4>
+<ul>
+<li><strong>salva</strong>: salva lo stato del gioco in un file.</li>
+<li><strong>carica</strong>: carica lo stato del gioco da un file.</li>
+<li><strong>registra</strong>: registra tutti i comandi in un file.</li>
+<li><strong>undo, annulla</strong>: annulla l’ultimo comando, è
+possibile annullare gli ultimi 4 comandi.</li>
+<li><strong>fine</strong>: termina il gioco.</li>
+</ul>
+
+	      </div>
+	      <div class="col-sm-4"><img src="images/floppies.jpg" alt="My Commodore 64 floppy disks" style="display: block;  width: 100%;  height: auto;"/></div>
+	    </div>
+
+          </div>
+        </div>
+
+	<h2 class="accordion-header" id="ItalianWalkthrough">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItalianWalkthrough" aria-expanded="true" aria-controls="collapseItalianWalkthrough">
+	    <strong>Walkthrough</strong>&nbsp;&nbsp;
+	    <i>Attenzione: questa sezione contiene spoilers!</i>
+	  </button>
+	</h2>
+        <div id="collapseItalianWalkthrough" class="accordion-collapse collapse" aria-labelledby="ItalianWalkthrough" data-bs-parent="#accordionItalian">
+          <div class="accordion-body">
+		<pre><embed src="walkthrough.it.seq" style="width: 100%; height: 30em;"></pre>
+	  </div>
+        </div>
+	
+      </div></div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <h5>Administrivia</h5>
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body" style="background-color: #f0f0f0;"><div class="accordion" id="accordionAdm">
+      
+	<h2 class="accordion-header" id="AdmStoryDisclaimer">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmStoryDisclaimer" aria-expanded="true" aria-controls="collapseAdmStoryDisclaimer">
+	    <strong>Story disclaimer</strong>
+	  </button>
+	</h2>
+        <div id="collapseAdmStoryDisclaimer" class="accordion-collapse collapse" aria-labelledby="AdmStoryDisclaimer" data-bs-parent="#accordionAdm">
+          <div class="accordion-body">
+<p>This is a work of fiction.</p>
+<p>Unless otherwise indicated, all the names,
+characters, businesses, places, events and incidents in this book are
+either the product of the author’s imagination or used in a fictitious
+manner.</p>
+<p>Any resemblance to actual persons, living or dead, or actual
+events is purely coincidental.<p>
+          </div>
+	</div>  
+	
+	<h2 class="accordion-header" id="AdmStoryLicense">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmStoryLicense" aria-expanded="true" aria-controls="collapseAdmStoryLicense">
+	    <strong>Story license (CC BY-NC-SA 4.0)</strong>
+	  </button>
+	</h2>
+        <div id="collapseAdmStoryLicense" class="accordion-collapse collapse" aria-labelledby="AdmStoryLicense" data-bs-parent="#accordionAdm">
+          <div class="accordion-body">
+	  <pre><embed src="ASSETS-LICENSE" style="width: 100%; height: 30em;"></pre>
+	  </div>
+        </div>
+	
+	<h2 class="accordion-header" id="AdmSoftwareDisclaimer">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmSoftwareDisclaimer" aria-expanded="true" aria-controls="collapseAdmSoftwareDisclaimer">
+	    <strong>Software disclaimer</strong>
+	  </button>
+	</h2>
+        <div id="collapseAdmSoftwareDisclaimer" class="accordion-collapse collapse" aria-labelledby="AdmSoftwareDisclaimer" data-bs-parent="#accordionAdm">
+          <div class="accordion-body">
+<p>Casasoft IFPlayer 2026 is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.</p>
+
+<p>Casasoft IFPlayer 2026 is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.</p>
+
+   <p>You should have received a copy of the GNU Affero General Public License
+    along with Casasoft IFPlayer 2026.<br>
+    If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+    </div>
+        </div>
+	
+	<h2 class="accordion-header" id="AdmSoftwareLicense">
+	  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmSoftwareLicense" aria-expanded="true" aria-controls="collapseAdmSoftwareLicense">
+	    <strong>Software license (GNU Affero GPL 3.0)</strong>
+	  </button>
+	</h2>
+        <div id="collapseAdmSoftwareLicense" class="accordion-collapse collapse" aria-labelledby="AdmSoftwareLicense" data-bs-parent="#accordionAdm">
+          <div class="accordion-body">
+	  <pre><embed src="SOFTWARE-LICENSE" style="width: 100%; height: 30em;"></pre>
+          </div>
+        </div>
+	
+      </div></div>
+    </div>
+  </div>
+</div>			
+			</div><!-- row2 -->
+		</div>
+		<!-- end container -->
+		<script type="text/javascript" src="vice/jquery.min.js"></script>
+		<script type="text/javascript" src="vice/bootstrap.min.js"></script>
+	</body>
+</html>

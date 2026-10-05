@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ifindex version="1.0" xmlns="http://babel.ifarchive.org/protocol/iFiction/">
+  <story>
+    <identification>
+      <format>executable</format>
+      <ifid>1d9b9fb0-d4e5-42e7-a011-a43c853ef135</ifid>
+    </identification>
+    <bibliographic>
+      <title>Latinorum</title>
+      <author>Roberto Ceccarelli</author>
+      <headline>Inspired by a true story</headline>
+      <genre>Adventure</genre>
+      <firstpublished>2026</firstpublished>
+      <description><![CDATA[A.D. MCMLXXXIV, somewhere in Italy.
+It's May and the end of the school year is approaching. If you don't do well in your last Latin test, Prof. De Boccis will fail you.
+De Boccis comes from another city and, knowing that he may be delayed by public transport, he leaves the test at school so that a colleague can start the test immediately.
+The plan is to get hold of the text and then translate it with the help of your classmate Secchioni: he will get a perfect A, while you will insert a few errors so as not to arouse too much suspicion.]]></description>
+      <language>en</language>
+    </bibliographic>
+    <releases>
+      <attached>
+        <release>
+          <releasedate>2026-05-03</releasedate>
+          <version>2</version>
+          <compiler>Casasoft IFBuilder64</compiler>
+          <compilerversion>1.0.0.0 2026-04-23</compilerversion>
+        </release>
+      </attached>
+    </releases>
+    <colophon>
+      <generator>Casasoft IFBuilder64</generator>
+      <generatorversion>1.0.0.0 2026-04-23</generatorversion>
+      <originated>2026-05-03</originated>
+    </colophon>
+    <contacts>
+      <url>https://strawberryfield.altervista.org/index.php?lang=en</url>
+      <authoremail>strawberryfield@altervista.org</authoremail>
+    </contacts>
+    <executable>
+      <compiler>Casasoft IFBuilder64</compiler>
+      <compilerversion>1.0.0.0 2026-04-23</compilerversion>
+      <serial>20260503</serial>
+      <platform>Commodore64</platform>
+    </executable>
+  </story>
+</ifindex>

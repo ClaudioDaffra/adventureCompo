@@ -1,0 +1,33 @@
+Roberto Ceccarelli
+
+Ciao Claudio,
+
+come promesso ti mando la mia avventura, in effetti ti mando dei link perchè gmail mi impedisce di allegare il file.
+
+https://strawberryfield.altervista.org/latinorum/latinorum_download.php
+
+Scarica il pacchetto completo che comprende anche il file .d64 
+nonchè una versione giocabile nel browser con vicejs
+Nello stesso pacchetto trovi una pagina introduttiva e il walkthrough
+nel sito c'è anche il postmortem della spring thing
+
+nelle pagine del sito trovi anche tutta la descrizione del sistema 
+utilizzato per riscrivere l'avventura, 
+i sorgenti sono su github: https://github.com/strawberryfield/IFBuilder64 
+
+Infine il link al podcast di presentazione che ho realizzato 
+
+Se vuoi utilizzarne dei pezzi fai pure e non preoccuparti della musica: 
+è tutta AI e non crea problemi su youtube.
+
+Per qualsiasi cosa chiedi pure.
+
+Sono curioso di vedere che cosa hanno fatto gli altri, a presto.
+
+Roberto
+
+https://strawberryfield.altervista.org/podcast/video/latinorum_podcast.mp4
+
+PREFERIBILE : 
+ 
+link https://youtu.be/5PJ7sW9-V_U?si=hnAY9ydtY08oBQKm

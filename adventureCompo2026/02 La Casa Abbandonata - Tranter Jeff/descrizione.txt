@@ -1,0 +1,72 @@
+The Abandoned Farmhouse Adventure 
+
+è un gioco di avventura testuale nello spirito dei titoli simili che giravano sui microcomputer a 8 bit degli anni ’70 e ’80, 
+oppure della più ambiziosa *Colossal Cave Adventure*, che inizialmente funzionava solo su mainframe e minicomputer.
+
+La trama e il gioco dovrebbero essere autoesplicativi. Capirli fa parte dell’esperienza.
+
+Ho iniziato a scriverlo in BASIC, ma alcune cose erano molto scomode da realizzare in modo efficiente nell’Apple 1 BASIC. 
+Ho anche considerato di scriverlo in linguaggio assembly, 
+ma alla fine l’ho sviluppato in C perché l’eccellente assembler CC65 
+ha funzionato molto bene per me.
+
+È stato scritto per funzionare sull’Apple Replica 1, anche se è in C portabile e dovrebbe girare su qualsiasi sistema dotato di compilatore 
+C (ho svolto la maggior parte dello sviluppo e dei test su un sistema Linux).
+
+Poiché doveva funzionare sul Replica 1, è stato mantenuto piccolo ed efficiente per rientrare nel limite di memoria di 32K, 
+usare solo caratteri maiuscoli e adattarsi a uno schermo di 40×24 caratteri. 
+Alcuni pezzi di codice possono sembrare un po’ insoliti perché ottimizzati per dimensioni e velocità, ad esempio l’uso di *char* invece di *int*, o l’uso di pre‑incremento/decremento invece del post‑incremento/decremento. È leggermente troppo grande per entrare in una EEPROM da 8K. Inoltre non funziona su un Apple 1 originale con 4K di memoria, ma sarei disposto a portarlo se qualcuno mi inviasse un sistema :-)
+
+Il sorgente è incluso ed è sotto licenza Apache, quindi puoi modificarlo e adattarlo come desideri. 
+Gran parte del codice è guidato dai dati e potrebbe essere usato 
+per implementare un’avventura completamente diversa semplicemente cambiando la mappa, le stringhe 
+e parte della logica che gestisce le azioni speciali.
+
+Ah, e a proposito: la fattoria descritta nel gioco si basa su una vera casa colonica 
+dove mio padre ha vissuto molti anni fa, fino alla disposizione della maggior parte delle stanze. 
+Inoltre, avevo anche un nipote che aveva quasi 3 anni quando ho scritto il gioco.
+
+Jeff Tranter <tranter@pobox.com>  
+[http://jefftranter.blogspot.ca/](http://jefftranter.blogspot.ca/)
+
+---------------------------------------------------------------------------------
+
+The Abandoned Farmhouse Adventure is a text adventure game in the
+spirit of similar games that ran on 8-bit microcomputers of the 1970s
+and 80s or the more ambitious Colossal Cave adventure that originally
+only ran on mainframes and minicomputers.
+
+The plot and game should be self-explanatory. Figuring it out is the
+point of the game.
+
+I started writing it in BASIC but some things were very awkward to do
+efficiently in Apple 1 BASIC. I also considered writing it in assembly
+language, but ended up writing it in C because the excellent CC65
+assembler worked very well for me.
+
+It was written to run on the Apple Replica 1 although it is in
+portable C and should run on any system with a C compiler (I did most
+of the development and testing on a Linux system).
+
+Because it was intended to run on the Replica 1 it was kept small and
+efficient to run within the 32K memory limit and only use uppercase
+characters and fit on a 40x24 character screen. Some code looks a
+little unusual because it makes some optimizations for size and speed,
+e.g. chars instead of ints, pre versus post increment/decrement. It is
+a little too big to fit in an 8K EEPROM. It also won't run on an
+original Apple 1 with 4K of memory but I am willing to port it if
+someone sends me a system :-)
+
+The source is included and under an Apache license so you can modify
+and adapt the code if you wish. Much of the code is data-driven and
+could be used to implement an entirely different adventure just by
+changing the map, strings, and some of the logic that handles special
+actions.
+
+Oh and by the way, the farm described here is based on a real
+farmhouse where my father lived many years ago, right down to the
+layout of most of the rooms. And I also have grandson who was
+almost 3 years old at the time I wrote this.
+
+Jeff Tranter <tranter@pobox.com>
+http://jefftranter.blogspot.ca/

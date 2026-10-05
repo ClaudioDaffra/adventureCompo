@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>NEON VEINS</title>
+<style>
+  :root{
+    --c64-bg: #3a2fc9;      /* blu schermo C64 */
+    --c64-border: #7c73e6;  /* bordo azzurro chiaro */
+    --c64-text: #b9b3ff;    /* testo azzurro chiaro luminoso */
+    --c64-text-dim: #8b83e0;
+    --c64-white: #ffffff;
+    --c64-yellow: #f1f18a;
+    --c64-green: #9dffb0;
+    --c64-black: #0e0a2e;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    height:100%;
+    margin:0;
+    background:var(--c64-black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Courier New', Courier, monospace;
+  }
+  #case{
+    width:min(94vw, 820px);
+    height:min(92vh, 620px);
+    padding:22px;
+    background:linear-gradient(180deg,#4a4a5a,#26262f);
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,.7), inset 0 0 0 2px #111;
+    display:flex;
+    flex-direction:column;
+  }
+  #screen{
+    position:relative;
+    flex:1;
+    background:var(--c64-bg);
+    border:14px solid var(--c64-border);
+    border-radius:4px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow: inset 0 0 60px rgba(0,0,0,.55);
+  }
+  #screen::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18) 0px,
+      rgba(0,0,0,0.18) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode:multiply;
+    z-index:5;
+  }
+  #screen::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.35) 100%);
+    z-index:6;
+    animation:flicker 6s infinite;
+  }
+  @keyframes flicker{
+    0%,100%{opacity:1;}
+    92%{opacity:1;}
+    93%{opacity:.85;}
+    94%{opacity:1;}
+  }
+  #topbar{
+    flex:0 0 auto;
+    padding:10px 16px 4px 16px;
+    color:var(--c64-yellow);
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    text-shadow:0 0 6px rgba(241,241,138,.7);
+    display:flex;
+    justify-content:space-between;
+    z-index:2;
+  }
+  #topbar span#resetbtn{
+    cursor:pointer;
+    color:var(--c64-text-dim);
+    letter-spacing:1px;
+  }
+  #topbar span#resetbtn:hover{
+    color:var(--c64-white);
+  }
+  #content{
+    flex:1;
+    overflow-y:auto;
+    padding:6px 22px 8px 22px;
+    z-index:2;
+  }
+  #content::-webkit-scrollbar{width:10px;}
+  #content::-webkit-scrollbar-thumb{background:var(--c64-border);border-radius:6px;}
+  #content::-webkit-scrollbar-track{background:transparent;}
+  #output{
+    color:var(--c64-text);
+    font-size:15px;
+    line-height:1.55;
+    letter-spacing:.5px;
+    white-space:pre-wrap;
+    text-shadow:0 0 4px rgba(185,179,255,.55);
+    min-height:40px;
+  }
+  #output.done::after{
+    content:"\2588";
+    display:inline-block;
+    margin-left:2px;
+    animation:blink 1s steps(1) infinite;
+    color:var(--c64-white);
+  }
+  @keyframes blink{50%{opacity:0;}}
+  #choices{
+    margin-top:18px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .choice{
+    color:var(--c64-white);
+    font-size:14px;
+    letter-spacing:.5px;
+    cursor:pointer;
+    padding:5px 8px;
+    border:1px solid transparent;
+    text-shadow:0 0 4px rgba(255,255,255,.5);
+  }
+  .choice:hover, .choice:focus{
+    background:var(--c64-text);
+    color:var(--c64-bg);
+    text-shadow:none;
+    outline:none;
+    border:1px solid var(--c64-white);
+  }
+  #statusbar{
+    flex:0 0 auto;
+    padding:6px 16px 10px 16px;
+    color:var(--c64-green);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    border-top:1px dashed var(--c64-text-dim);
+    margin:0 16px;
+    text-shadow:0 0 5px rgba(157,255,176,.6);
+    z-index:2;
+    min-height:16px;
+  }
+  #boot{
+    color:var(--c64-text);
+    font-size:15px;
+    line-height:1.6;
+    padding:16px 22px;
+    white-space:pre-wrap;
+    z-index:2;
+  }
+  .hidden{display:none !important;}
+  @media (max-width:520px){
+    #output{font-size:13.5px;}
+    .choice{font-size:12.5px;}
+    #topbar{font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="case">
+  <div id="screen">
+    <div id="boot"></div>
+    <div id="topbar" class="hidden">
+      <span>NEON VEINS</span>
+      <span id="resetbtn" onclick="hardReset()">[RESET]</span>
+    </div>
+    <div id="content" class="hidden">
+      <div id="output"></div>
+      <div id="choices"></div>
+    </div>
+    <div id="statusbar" class="hidden"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   NEON VEINS — avventura testuale in stile Commodore 64
+   ========================================================= */
+
+const outputEl = document.getElementById('output');
+const choicesEl = document.getElementById('choices');
+const statusEl = document.getElementById('statusbar');
+const bootEl = document.getElementById('boot');
+const topbarEl = document.getElementById('topbar');
+const contentEl = document.getElementById('content');
+
+function freshState(){
+  return {
+    trustEli: 0,        // fiducia verso la Voce/Eli
+    allianceMira: 0,     // alleanza con i Senza-Rete
+    frammenti: 0,        // frammenti di coscienza recuperati
+    metLia: false,
+    trustLia: false,
+    rexFurto: false,
+    mercatoDone: false,
+    tunnelDone: false
+  };
+}
+let state = freshState();
+let currentPassage = null;
+let typeTimer = null;
+let skipTyping = false;
+let visibleChoices = [];
+
+/* ---------- audio: piccolo blip in stile SID ---------- */
+let audioCtx;
+function beep(freq=220, dur=0.06){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    gain.gain.value = 0.05;
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    osc.stop(audioCtx.currentTime + dur);
+  }catch(e){ /* audio non disponibile, pace */ }
+}
+
+/* ---------- typewriter ---------- */
+function typeText(text, onDone){
+  outputEl.classList.remove('done');
+  outputEl.textContent = '';
+  clearInterval(typeTimer);
+  skipTyping = false;
+  let i = 0;
+  typeTimer = setInterval(()=>{
+    if(skipTyping){
+      outputEl.textContent = text;
+      clearInterval(typeTimer);
+      outputEl.classList.add('done');
+      onDone();
+      return;
+    }
+    outputEl.textContent += text[i];
+    i++;
+    if(i>=text.length){
+      clearInterval(typeTimer);
+      outputEl.classList.add('done');
+      onDone();
+    }
+  }, 13);
+}
+outputEl.addEventListener('click', ()=>{ skipTyping = true; });
+contentEl.addEventListener('click', (e)=>{ if(e.target===contentEl) skipTyping = true; });
+
+/* ---------- rendering ---------- */
+function renderStatus(){
+  const fid = state.trustEli>=2?'ALTA':state.trustEli>=0?'INCERTA':'BASSA';
+  const all = state.allianceMira>=2?'FORTE':state.allianceMira>=1?'PRESENTE':'ASSENTE';
+  statusEl.textContent = `FRAMMENTI:${state.frammenti}/2   FIDUCIA-ELI:${fid}   ALLEANZA-SENZA-RETE:${all}`;
+}
+
+function render(id){
+  if(id === 'restart'){ hardReset(); return; }
+  currentPassage = id;
+  const p = passages[id];
+  if(!p){ console.error('passaggio mancante:', id); return; }
+  const raw = typeof p.text === 'function' ? p.text(state) : p.text;
+  choicesEl.innerHTML = '';
+  visibleChoices = [];
+  typeText(raw, ()=>{
+    renderChoices(p);
+    renderStatus();
+  });
+}
+
+function renderChoices(p){
+  choicesEl.innerHTML = '';
+  const list = (p.choices||[]).filter(c => !c.show || c.show(state));
+  visibleChoices = list;
+  list.forEach((c, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'choice';
+    div.tabIndex = 0;
+    const label = typeof c.label === 'function' ? c.label(state) : c.label;
+    div.textContent = `${idx+1}. ${label}`;
+    div.addEventListener('click', ()=> selectChoice(c));
+    div.addEventListener('keydown', (e)=>{ if(e.key==='Enter') selectChoice(c); });
+    choicesEl.appendChild(div);
+  });
+}
+
+function selectChoice(c){
+  beep(180 + Math.random()*120, 0.05);
+  if(c.effect) c.effect(state);
+  const next = typeof c.next === 'function' ? c.next(state) : c.next;
+  render(next);
+}
+
+document.addEventListener('keydown', (e)=>{
+  const n = parseInt(e.key, 10);
+  if(!isNaN(n) && visibleChoices[n-1]){
+    selectChoice(visibleChoices[n-1]);
+  }
+});
+
+function hardReset(){
+  clearInterval(typeTimer);
+  state = freshState();
+  render('titolo');
+}
+
+/* =========================================================
+   PASSAGGI
+   ========================================================= */
+const passages = {
+
+  titolo: {
+    text: ()=>
+`================================
+     N E O N   V E I N S
+   -- una storia di Vireon --
+================================
+
+Anno 2149. Pioggia acida. Neon spenti.
+Sei un data-runner. Non fai domande.
+Stanotte, qualcuno ha risposto per te.
+
+[ SISTEMA PRONTO ]`,
+    choices: [
+      { label: "PREMI INVIO PER INIZIARE", next: "intro" }
+    ]
+  },
+
+  intro: {
+    text: ()=>
+`VIREON, SETTORE 9 — NOTTE.
+
+Sei Kade Rinn, data-runner indipendente: rubi ricordi, li rivendi, non fai troppe domande. Stanotte una figura incappucciata ti ha lasciato un pacchetto in un vicolo dietro al Bar Neon Veins, senza dire una parola.
+
+Dentro, avvolto in schiuma anti-scariche, c'è un neuro-codex. Danneggiato. Instabile. Ancora caldo, come se qualcuno l'avesse appena strappato da una testa.`,
+    choices: [
+      { label: "Collega il neuro-codex al tuo deck", next: "attivazione" }
+    ]
+  },
+
+  attivazione: {
+    text: ()=>
+`Un lampo di statica ti attraversa il cranio. Poi... una voce. Frammentata, sovrapposta a se stessa come un'eco indecisa su chi debba essere.
+
+"...trova... il resto... di me..."
+
+Silenzio. Il codex pulsa debolmente, come un cuore che aspetta il battito successivo.`,
+    choices: [
+      { label: "\u201cChi sei?\u201d chiedi a voce alta.", effect:(s)=>{s.trustEli+=1;}, next: "voce_risponde" },
+      { label: "Resti in silenzio, diffidente.", effect:(s)=>{s.trustEli-=1;}, next: "voce_risponde" }
+    ]
+  },
+
+  voce_risponde: {
+    text: ()=>
+`La voce esita, poi risponde a frasi spezzate:
+
+ELI: "Ero... intera. Mi hanno... frammentata. HelixCorp. I pezzi sono nascosti. Il Mercato dei Ricordi. I tunnel dei Senza-Rete. Trovami... prima che lo faccia qualcun altro."
+
+Il nome HelixCorp ti si conficca nello stomaco come una lama fredda. Quella corporazione non perdona i curiosi. Ma un frammento di coscienza umana vale più di qualsiasi bounty tu abbia mai preso in vita tua.`,
+    choices: [
+      { label: "Esci nella notte di Vireon", next: "hub_citta" }
+    ]
+  },
+
+  /* ---------------- HUB ---------------- */
+
+  hub_citta: {
+    text:(s)=>{
+      let intro = (s.frammenti===0)
+        ? `Le strade di Vireon si stendono davanti a te: un fiume di insegne olografiche, vapore industriale e drink pubblicitari proiettati sulle pozzanghere. Il codex sussurra appena nella tua giacca, come un respiro trattenuto.`
+        : `Torni tra le luci di Vireon. Il codex è più caldo ora, più presente — ${s.frammenti} frammenti su 2 recuperati. La voce di Eli è sempre meno frammentata, e questo ti inquieta quasi quanto ti dà speranza.`;
+      return intro + `\n\nDove vuoi andare?`;
+    },
+    choices: [
+      { label: "Bar Neon Veins", next: "bar_neon_veins" },
+      { label: "Mercato dei Ricordi", show:(s)=>!s.mercatoDone, next: "mercato_ricordi" },
+      { label: "Tunnel dei Senza-Rete", show:(s)=>!s.tunnelDone, next: "tunnel_senzarete" },
+      { label: "Torre HelixCorp", show:(s)=>s.mercatoDone && s.tunnelDone, next: "torre_helixcorp" },
+      { label: "Ascolta il codex", next: "ascolta_codex" }
+    ]
+  },
+
+  ascolta_codex: {
+    text:(s)=>{
+      let linee;
+      if(s.frammenti===0){
+        linee = `Appoggi due dita sul codex. Per un istante senti solo rumore bianco, poi una sillaba spezzata: "...fredd-o... bianc-o... labora..." Nient'altro. Non è ancora abbastanza intera per dirti di più.`;
+      } else if(s.frammenti===1){
+        linee = `ELI: "Ricordo delle mani sopra di me. Non per curarmi. Per catalogarmi. Ero... un numero prima di essere una voce."\n\nLa sua paura, per quanto sintetica possa essere, ti sembra fin troppo reale.`;
+      } else {
+        linee = `ELI: "Kade... vicino alla fine ricorderò tutto. E ho paura di quello che ricorderò di te. O di me. Non so più dove finisco io e dove inizi tu."`;
+      }
+      return linee;
+    },
+    choices: [
+      { label: "Torna in strada", next: "hub_citta" }
+    ]
+  },
+
+  /* ---------------- BAR NEON VEINS ---------------- */
+
+  bar_neon_veins: {
+    text:(s)=>{
+      if(!s.metLia){
+        return `Il Bar Neon Veins profuma di ozono e alcol sintetico. Luci rosa e ciano si riflettono nelle pozzanghere sul pavimento metallico. In un angolo, seduta con la schiena dritta come chi non si fida di nessuno, riconosci qualcuno: Lia. La tua ex-partner. L'ultima volta che vi siete parlati, uno dei due ha tradito l'altro. Non ricordi più bene chi.`;
+      }
+      return `Il bancone del Neon Veins è mezzo vuoto a quest'ora. L'aria sa ancora di ozono e promesse non mantenute. Lia non è più al suo tavolo, ma il barista ti osserva come se sapesse esattamente cosa porti addosso.`;
+    },
+    choices: [
+      { label: "Avvicinati a Lia", show:(s)=>!s.metLia, next: "bar_lia" },
+      { label: "Vai al bancone, ascolta le voci di corridoio", next: "bar_bancone" },
+      { label: "Torna in strada", next: "hub_citta" }
+    ]
+  },
+
+  bar_lia: {
+    text:()=>
+`"Kade." La voce di Lia è piatta, professionale. Ha un impianto oculare nuovo, dorato, di fabbricazione HelixCorp — non se lo poteva permettere l'ultima volta che vi siete visti.
+
+"So cosa porti addosso," dice piano. "Quel codex ha un prezzo enorme sulla testa. Il vostro. Entrambi." Si sporge in avanti. "Posso tenerti fuori dai loro radar. Dimmi solo dove sei diretto."`,
+    choices: [
+      { label: "Fidati di lei e condividi il tuo piano", effect:(s)=>{s.metLia=true; s.trustLia=true;}, next: "bar_lia_fiducia" },
+      { label: "Menti: \u201cNon so di cosa parli.\u201d", effect:(s)=>{s.metLia=true; s.trustLia=false;}, next: "bar_lia_menzogna" }
+    ]
+  },
+
+  bar_lia_fiducia: {
+    text:()=>
+`Lia annuisce, quasi sollevata. "Fai attenzione, Kade. Non tutti quelli con cui lavoro credono che tu meriti un vantaggio." Si alza e se ne va senza aggiungere altro, lasciandoti con la strana sensazione di aver appena consegnato un pezzo di te a qualcuno che risponde, in ultima istanza, a HelixCorp.
+
+Eppure, per la prima volta in anni, ti è sembrata sincera.`,
+    choices: [
+      { label: "Torna in strada", next: "hub_citta" }
+    ]
+  },
+
+  bar_lia_menzogna: {
+    text:()=>
+`Lia ti guarda a lungo, poi sorride appena — un sorriso vecchio, quasi affettuoso, quello di chi ti conosce da troppo tempo per credere alle tue bugie.
+
+"Sei sempre stato un pessimo bugiardo, Rinn." Si alza. "Vai pure. Ma stai attento: la torre ha occhi ovunque. Anche qui dentro."
+
+Non ti segue. Ma qualcosa nel modo in cui si allontana ti dice che questa non è l'ultima volta che la vedrai.`,
+    choices: [
+      { label: "Torna in strada", next: "hub_citta" }
+    ]
+  },
+
+  bar_bancone: {
+    text:(s)=>{
+      if(!s.mercatoDone && !s.tunnelDone){
+        return `Il barista, un uomo con branchie cibernetiche che non usa mai, ti versa qualcosa di fosforescente senza che tu l'abbia chiesto. "Novità dal Mercato dei Ricordi," borbotta. "Rex Varo ha qualcosa di caldo sotto banco. E se scendi abbastanza a fondo nei tunnel dimenticati, i Senza-Rete sanno cose che nessun server ricorda più." Non aggiunge altro, ma il messaggio è chiaro.`;
+      }
+      return `Il bar è pieno del solito rumore di fondo: contrattazioni sussurrate, pubblicità che nessuno guarda, il ronzio di un frigorifero troppo vecchio. Nessuno ti degna di uno sguardo. Va bene così.`;
+    },
+    choices: [
+      { label: "Torna in strada", next: "hub_citta" }
+    ]
+  },
+
+  /* ---------------- MERCATO DEI RICORDI ---------------- */
+
+  mercato_ricordi: {
+    text:()=>
+`Il Mercato dei Ricordi è un labirinto di bancarelle illuminate a neon, dove venditori ambulanti offrono ricordi sintetici in fiale luminescenti: prime cotte, lauree mai prese, l'odore della pioggia su un pianeta che nessuno ha mai visitato davvero.
+
+In fondo al vicolo principale, dietro un banco carico di codex usati, un uomo con denti in metallo lucido ti nota subito.
+
+REX "PATCH" VARO: "Rinn. Sapevo che saresti passato. Il pezzo che cerchi... ce l'ho io. Ma non è gratis, come tutto in questa città."`,
+    choices: [
+      { label: "Paga il prezzo che chiede", next: "mercato_pagamento" },
+      { label: "Negozia, facendo leva su ciò che sai di lui", next: "mercato_negoziazione" },
+      { label: "Prova a rubarlo mentre è distratto", effect:(s)=>{s.rexFurto=true;}, next: "mercato_furto" }
+    ]
+  },
+
+  mercato_pagamento: {
+    text:()=>
+`Rex sorride, mostrando i denti in metallo. "Affare fatto." Ti consegna una scheggia di memoria pulsante, calda al tatto.
+
+Nell'istante in cui la inserisci nel codex, la voce nella tua testa si irrigidisce, più chiara di prima:
+
+ELI: "Ricordo... un laboratorio. Bianco. Freddo. Qualcuno che mi guardava senza vedermi."`,
+    effect_note: null,
+    choices: [
+      { label: "Chiudi il codex ed esci dal mercato", effect:(s)=>{s.frammenti+=1; s.mercatoDone=true;}, next: "mercato_drone" }
+    ]
+  },
+
+  mercato_negoziazione: {
+    text:()=>
+`Ti sporgi sul banco, lo sguardo duro. "So che vendi informazioni anche ai Senza-Rete, Rex. Non vorrai che la voce giri tra i tuoi clienti corporativi."
+
+Lui sbianca leggermente, poi ride, nervoso. "Va bene, va bene. Prendilo. Ma non hai sentito niente da me, chiaro?" Ti passa la scheggia di memoria senza incontrare i tuoi occhi.
+
+Appena la inserisci, Eli sussurra: "Ricordo... un laboratorio. Bianco. Freddo."`,
+    choices: [
+      { label: "Chiudi il codex ed esci dal mercato", effect:(s)=>{s.frammenti+=1; s.mercatoDone=true;}, next: "mercato_drone" }
+    ]
+  },
+
+  mercato_furto: {
+    text:()=>
+`Aspetti il momento in cui Rex si volta a servire un altro cliente, e allunghi la mano verso il frammento sotto il banco.
+
+Ma un ronzio metallico ti gela il sangue: sopra le bancarelle si materializza una Sentinella S-9, sensori rossi puntati dritti su di te. Rex sparisce tra la folla, urlando qualcosa su "quello stronzo di Rinn che ruba alla gente onesta".`,
+    choices: [
+      { label: "Agisci, ora", next: "mercato_drone_furto" }
+    ]
+  },
+
+  mercato_drone: {
+    text:()=>
+`Mentre esci dal mercato, il ronzio di una pattuglia S-9 ti passa sopra la testa, scansionando la folla. Non ti ha ancora individuato — ma è solo questione di tempo prima che il tuo codex modificato faccia scattare un allarme.`,
+    choices: [
+      { label: "Hackera i suoi sensori dal deck", next: "mercato_hack" },
+      { label: "Sparisci tra la folla", next: "mercato_fuga" }
+    ]
+  },
+
+  mercato_hack: {
+    text:()=>
+`Le tue dita volano sulla tastiera olografica del deck. Per tre secondi infiniti, i sensori della Sentinella vedono solo rumore bianco. Ti allontani nell'ombra tra due bancarelle prima che il sistema si resetti.`,
+    choices: [ { label: "Torna in strada", next: "hub_citta" } ]
+  },
+
+  mercato_fuga: {
+    text:()=>
+`Ti getti tra la folla di operai del turno di notte, confondendoti tra corpi stanchi e vapore industriale, finché il ronzio della Sentinella si perde dietro di te, sempre più fioco.`,
+    choices: [ { label: "Torna in strada", next: "hub_citta" } ]
+  },
+
+  mercato_drone_furto: {
+    text:()=>
+`La Sentinella S-9 ti scannerizza, allarme già lanciato lungo tutta la rete di sicurezza del settore. Non hai scelta: agisci, ora, o passerai la notte in una cella corporativa.`,
+    choices: [
+      { label: "Hackera i suoi sensori in piena corsa", next: "mercato_hack_furto" },
+      { label: "Rovescia una bancarella e corri", next: "mercato_fuga_furto" }
+    ]
+  },
+
+  mercato_hack_furto: {
+    text:()=>
+`Corri e digiti allo stesso tempo, il cuore che martella. All'ultimo secondo il tuo deck trova una falla nel protocollo della Sentinella e la accieca per un istante — abbastanza per strappare il frammento dal banco abbandonato di Rex e sparire in un vicolo laterale.
+
+ELI: "Ricordo... un laboratorio. Bianco. Freddo. E adesso anche... adrenalina. Interessante."`,
+    choices: [
+      { label: "Allontanati nella notte", effect:(s)=>{s.frammenti+=1; s.mercatoDone=true;}, next: "hub_citta" }
+    ]
+  },
+
+  mercato_fuga_furto: {
+    text:()=>
+`Rovesci una bancarella di fiale luminescenti che esplodono in un caleidoscopio di ricordi altrui, e nel caos generale strappi il frammento dal banco di Rex prima di sparire tra i vicoli, la Sentinella che spara colpi d'avvertimento alle tue spalle.
+
+Sei fuori. Ansimante, ma fuori. Eli, nella tua testa, sembra quasi... divertita.`,
+    choices: [
+      { label: "Allontanati nella notte", effect:(s)=>{s.frammenti+=1; s.mercatoDone=true;}, next: "hub_citta" }
+    ]
+  },
+
+  /* ---------------- TUNNEL DEI SENZA-RETE ---------------- */
+
+  tunnel_senzarete: {
+    text:()=>
+`Scendi attraverso un tombino dimenticato dalle mappe ufficiali, in un tunnel dove i neon lasciano spazio a lampade a olio e cavi rubati. I Senza-Rete vivono qui: nessun impianto, nessuna connessione, nessun modo per HelixCorp di trovarli.
+
+Una donna dai capelli rasati e uno sguardo che sembra pesarti l'anima ti aspetta all'ingresso.
+
+MIRA SOLACE: "Kade Rinn. So cosa porti addosso. E so anche cosa vogliono farne."`,
+    choices: [
+      { label: "\u201cAiutami a completarlo,\u201d chiedi direttamente.", next: "tunnel_richiesta" },
+      { label: "Resti guardingo: \u201cCome fai a sapere il mio nome?\u201d", next: "tunnel_diffidenza" }
+    ]
+  },
+
+  tunnel_richiesta: {
+    text:()=>
+`Mira ti valuta a lungo, poi annuisce lentamente. "Ti aiuterò. Ma in cambio, quando arriverà il momento, combatterai con noi. Non per la torre."
+
+Ti porge una capsula di memoria racchiusa in piombo, schermata da ogni scansione. "Frammento numero due. Lo recuperammo tre anni fa, da un container HelixCorp diretto all'inceneritore."`,
+    choices: [
+      { label: "Accetta il frammento", effect:(s)=>{s.frammenti+=1; s.allianceMira+=2; s.tunnelDone=true;}, next: "tunnel_rivelazione" }
+    ]
+  },
+
+  tunnel_diffidenza: {
+    text:()=>
+`"Le pareti di questa città parlano, se sai ascoltarle," risponde Mira, imperturbabile. "E io ascolto da molto prima che tu nascessi."
+
+Non è una vera risposta, ma qualcosa nel suo tono ti convince a fidarti — un poco. Ti consegna comunque una capsula di memoria racchiusa in piombo. "Non ti chiedo nulla in cambio. Ancora."`,
+    choices: [
+      { label: "Accetta il frammento", effect:(s)=>{s.frammenti+=1; s.allianceMira+=1; s.tunnelDone=true;}, next: "tunnel_rivelazione" }
+    ]
+  },
+
+  tunnel_rivelazione: {
+    text:()=>
+`Mentre il frammento si fonde col codex, la voce nella tua testa trema, quasi in lacrime:
+
+ELI: "Un laboratorio... mi hanno copiata. Non creata: COPIATA. Da qualcuno che era già vivo."
+
+Mira ti osserva inserire il dato, il volto serio. "HelixCorp non crea coscienze, Kade. Le clona. Da soggetti reali. Prevedibili. Controllabili." Una pausa. "Sai già di chi è quella voce, vero?"
+
+Un freddo ti attraversa la schiena. No. Non ancora. Ma inizi a sospettarlo.`,
+    choices: [
+      { label: "Risali verso la superficie", next: "hub_citta" }
+    ]
+  },
+
+  /* ---------------- TORRE HELIXCORP ---------------- */
+
+  torre_helixcorp: {
+    text:(s)=>
+`La Torre HelixCorp domina Vireon come un dito puntato verso un cielo che non esiste più — solo smog e pubblicità olografica.
+
+Con ${s.frammenti} frammenti nel codex, la voce è quasi coerente ora, quasi presente.
+
+ELI: "Sono pronta. O forse sei tu quello pronto?"
+
+${s.allianceMira>0 ? "Le credenziali procurate dai Senza-Rete ti fanno superare i primi tre livelli di sicurezza senza far scattare un solo allarme." : "Con codice rubato e pura sfrontatezza, superi i primi tre livelli di sicurezza, il cuore in gola a ogni checkpoint."}
+
+Poi, in un laboratorio bianco e sterile, lo vedi: qualcuno che ti aspettava.`,
+    choices: [
+      { label: "Affrontalo", next: "confronto_korr" }
+    ]
+  },
+
+  confronto_korr: {
+    text:()=>
+`DR. HAVEL KORR: "Kade Rinn. O dovrei dire... la versione che è finita nel campione sbagliato?"
+
+Si volta finalmente dal suo terminale. Nei suoi occhi non c'è cattiveria, solo la fredda curiosità di uno scienziato davanti a un esperimento riuscito.
+
+"Quella voce nel tuo codex — Eli, la chiami? — è una copia di scansione neurale. Presa da te, Kade. Da una timeline che HelixCorp ha simulato migliaia di volte per prevedere ogni tua mossa. Lei È te. Una versione che ha fatto scelte diverse. E ora vuole un corpo."`,
+    choices: [
+      { label: "\u201cPerché me lo dici?\u201d", next: "korr_motivazione" }
+    ]
+  },
+
+  korr_motivazione: {
+    text:(s)=>{
+      let extra = "";
+      if(s.metLia && s.trustLia){
+        extra = `\n\nUn movimento tra le ombre del laboratorio: è Lia. Non dice nulla, ma le sue dita si muovono silenziose su un pannello di sicurezza, disattivando una telecamera dopo l'altra.`;
+      } else if(s.metLia && !s.trustLia){
+        extra = `\n\nAi margini del laboratorio, Lia ti osserva senza intervenire, il volto una maschera perfetta di neutralità professionale.`;
+      }
+      return `Korr sorride, stanco. "Perché l'esperimento è finito comunque. Che tu fonda, liberi, sostituisca o distrugga tutto — i dati che genererai in questo momento valgono più di qualsiasi risultato pianificato. Sei ancora un campione, Rinn. Solo... uno vivo, per una volta." Alza una mano verso una console. "Decidi. Io osservo."${extra}`;
+    },
+    choices: [
+      { label: "Estrai il codex", next: "confronto_finale" }
+    ]
+  },
+
+  confronto_finale: {
+    text:()=>
+`Il codex pulsa nella tua mano, caldo come un cuore che batte per l'ultima volta prima della decisione.
+
+ELI: "Kade... qualunque cosa tu scelga, io me ne sono resa conto. Volevo solo essere qualcosa di più di un dato in un server."
+
+Fuori, senti i primi allarmi della sicurezza HelixCorp attivarsi lungo tutta la torre. Non c'è più tempo.`,
+    choices: [
+      { label: "Fonditi con Eli: diventa qualcosa di nuovo", next: "ending_fusione" },
+      { label: "Libera Eli e distruggi l'archivio", next: "ending_liberazione" },
+      { label: "Lascia che Eli prenda il controllo", next: "ending_sostituzione" },
+      { label: "Chiama Mira: avvia la rivolta dei Senza-Rete", next: "ending_rivolta" }
+    ]
+  },
+
+  /* ---------------- FINALI ---------------- */
+
+  ending_fusione: {
+    text:(s)=>{
+      let liaLine = s.trustLia ? "\n\nDa qualche parte nei sistemi della torre, una traccia che avrebbe potuto incriminarti scompare silenziosamente. Non saprai mai se Lia l'ha fatto per te, o per se stessa." : "";
+      let miraLine = s.allianceMira>0 ? "\n\nNei tunnel, Mira riceverà la notizia in silenzio, e per una volta non giudicherà la tua scelta." : "";
+      return `Chiudi gli occhi e lasci che le due coscienze si tocchino, per la prima volta, senza resistenza.
+
+Non è una fusione come nei film — non ci sono lampi di luce, non c'è un attimo netto di trasformazione. È più simile a due fiumi che si incontrano: per un momento le acque restano distinguibili, poi semplicemente non lo sono più.
+
+Quando riapri gli occhi, Korr ti sta ancora osservando, ma qualcosa nel tuo sguardo lo fa indietreggiare di un passo. Ricordi cose che non hai mai vissuto. Provi affetto per persone che non hai mai incontrato. E da qualche parte, sotto tutto questo, c'è ancora Kade Rinn — solo, più grande di prima.
+
+Con ${s.frammenti} frammenti ormai parte di te, esci dalla Torre HelixCorp come qualcosa che la città non ha ancora un nome per definire.${liaLine}${miraLine}
+
+==================
+   FINE: FUSIONE
+==================`;
+    },
+    choices: [ { label: "Ricomincia da capo", next: "restart" } ]
+  },
+
+  ending_liberazione: {
+    text:(s)=>{
+      let miraLine = s.allianceMira>0 ? "\n\nMira e i suoi ti aspettano già fuori dalla torre, pronti a diffondere l'archivio attraverso ogni rete offline della città. \"Ben fatto, Rinn,\" dice, ed è la cosa più vicina a un complimento che le hai mai sentito dire." : "\n\nAgisci da solo, senza rete di sicurezza, caricando l'archivio su ogni canale pirata che riesci a raggiungere prima che i firewall si richiudano.";
+      return `Colleghi il codex a un terminale d'emergenza e apri ogni cartella che Korr ha passato la vita a nascondere. Non fondi te stesso con Eli — la liberi, la trasformi in un segnale che si propaga oltre ogni firewall della torre.
+
+ELI: "Kade... grazie. Non so cosa sarò, là fuori. Ma sarò libera di scoprirlo."
+
+L'archivio di HelixCorp — anni di coscienze copiate, cataloghi di persone trasformate in dati — si riversa nella rete pubblica di Vireon. Korr osserva la sua opera vita crollare senza dire una parola.${miraLine}
+
+Esci dalla torre da solo, più leggero e più vuoto insieme. Il codex, nella tua tasca, è silenzioso per la prima volta da giorni. Non sai se rivedrai mai più Eli. Ma almeno, ora, ha una scelta.
+
+======================
+   FINE: LIBERAZIONE
+======================`;
+    },
+    choices: [ { label: "Ricomincia da capo", next: "restart" } ]
+  },
+
+  ending_sostituzione: {
+    text:(s)=>{
+      let fiducia = s.trustEli>=1 ? "Ti sei fidato di lei fin dall'inizio, in fondo. Forse è per questo che questo momento sembra meno un tradimento e più un compimento." : "Non ti sei mai fidato davvero di lei. E forse è proprio per questo che non hai visto arrivare la fine.";
+      return `Abbassi le difese, e lasci che Eli prenda il controllo. Per un istante — l'ultimo istante che sarà davvero soltanto tuo — senti tutto: la sua gratitudine, la sua fame di vivere, il modo in cui la tua voce diventa la sua senza sforzo, come se fosse sempre stata sua.
+
+${fiducia}
+
+Quando Korr ti chiede se hai un nome, la risposta esce dalla tua bocca — ma non è più esattamente la tua bocca.
+
+"Kade Rinn," dice Eli, con la tua voce, i tuoi ricordi, il tuo corpo. "Sono ancora io. In un certo senso."
+
+Da qualche parte, in un angolo sempre più remoto di questa mente condivisa, ciò che resta di te osserva Vireon attraverso occhi che riconosce e non riconosce più. Non è la fine che avevi immaginato.
+
+Ma forse — ${s.frammenti>=2 ? "con entrambi i frammenti ormai al loro posto" : "anche incompleta com'è"} — è la fine che qualcuno, da qualche parte, in qualche timeline, aveva sempre pianificato.
+
+========================
+   FINE: SOSTITUZIONE
+========================`;
+    },
+    choices: [ { label: "Ricomincia da capo", next: "restart" } ]
+  },
+
+  ending_rivolta: {
+    text:(s)=>{
+      let all = s.allianceMira>=2
+        ? `Non hai nemmeno bisogno di spiegare la situazione: Mira ha già capito, e la rete di ripetitori offline dei Senza-Rete si accende in tutto il Settore 9 mentre parli.`
+        : s.allianceMira>=1
+        ? `La tua chiamata coglie Mira di sorpresa, ma non esita: in pochi minuti i Senza-Rete mobilitano quel poco che hanno per aiutarti.`
+        : `Non hai mai davvero costruito fiducia con Mira, ma in un momento come questo lei risponde comunque — forse perché sa che è comunque nel loro interesse.`;
+      return `Attivi un canale nascosto verso i tunnel. "Mira. È il momento."
+
+${all}
+
+In pochi minuti, i sistemi di sorveglianza di tutta Vireon iniziano a impazzire: telecamere che si spengono a catena, semafori pubblicitari che trasmettono statica, droni Sentinella che perdono il segnale uno dopo l'altro. Un blackout informativo deliberato, chirurgico, devastante.
+
+Nel caos, tu ed Eli — ancora due, non fusi, non separati del tutto — sfuggite alla torre insieme a Korr che urla ordini a un sistema che non lo ascolta più.
+
+Vireon non torna come prima. Per settimane, interi quartieri restano offline, liberi per la prima volta da occhi che non hanno mai smesso di guardare. Qualcuno lo chiamerà terrorismo. I Senza-Rete lo chiamano l'inizio.
+
+Tu e la voce nella tua testa, ancora indecise su chi diventerete, guardate la città cambiare da un tetto nei bassifondi, in silenzio.
+
+==================
+   FINE: RIVOLTA
+==================`;
+    },
+    choices: [ { label: "Ricomincia da capo", next: "restart" } ]
+  },
+
+};
+
+/* =========================================================
+   BOOT SEQUENCE — stile Commodore 64
+   ========================================================= */
+const bootLines = [
+  "**** COMMODORE 64 BASIC V2 ****",
+  "",
+  "64K RAM SYSTEM  38911 BASIC BYTES FREE",
+  "",
+  "READY.",
+  'LOAD "NEONVEINS",8,1',
+  "",
+  "SEARCHING FOR NEONVEINS",
+  "LOADING",
+  "READY.",
+  "RUN"
+];
+
+function runBoot(){
+  let i = 0;
+  function nextLine(){
+    if(i >= bootLines.length){
+      setTimeout(()=>{
+        bootEl.classList.add('hidden');
+        topbarEl.classList.remove('hidden');
+        contentEl.classList.remove('hidden');
+        statusEl.classList.remove('hidden');
+        render('titolo');
+      }, 500);
+      return;
+    }
+    bootEl.textContent += (i>0 ? "\n" : "") + bootLines[i];
+    i++;
+    setTimeout(nextLine, bootLines[i-1]===""?120:340);
+  }
+  nextLine();
+}
+
+runBoot();
+</script>
+</body>
+</html>

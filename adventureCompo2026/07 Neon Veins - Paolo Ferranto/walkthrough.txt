@@ -1,0 +1,233 @@
+================================================================
+ N E O N   V E I N S  --  WALKTHROUGH
+ (guida completa a scelte, percorsi e finali)
+================================================================
+
+COME LEGGERE QUESTO FILE
+----------------------------------------------------------------
+- Le scelte nel gioco sono selezionabili col mouse/tocco oppure
+  coi tasti numerici 1-9, nell'ordine in cui compaiono a schermo.
+- L'ordine e il numero delle opzioni all'HUB (le strade di
+  Vireon) cambiano man mano che completi Mercato e Tunnel, quindi
+  qui sotto uso le ETICHETTE delle scelte, non solo i numeri.
+- In fondo trovi anche una "speedrun" numerica per ogni finale,
+  valida se salti il Bar e le opzioni facoltative.
+
+STATISTICHE TRACCIATE (non visibili come numeri esatti a schermo,
+solo come parole: BASSA/INCERTA/ALTA, ecc.)
+----------------------------------------------------------------
+- trustEli       -> fiducia in Eli/la Voce (sale/scende con le
+                     prime battute e resta memorizzata)
+- allianceMira    -> alleanza coi Senza-Rete (+1 se diffidente ma
+                     accetti comunque, +2 se accetti subito)
+- frammenti       -> 0/1/2, cresce al Mercato e al Tunnel
+- metLia/trustLia -> se hai incontrato Lia al bar e se ti sei
+                     fidato di lei o le hai mentito
+- mercatoDone / tunnelDone -> sblocca la Torre HelixCorp quando
+  entrambi sono veri
+
+================================================================
+ MAPPA DELLE LOCATION
+================================================================
+
+                     [ TITOLO ]
+                         |
+                     [ INTRO ]
+                         |
+                   [ ATTIVAZIONE ]  (fiducia in Eli +1 / -1)
+                         |
+                  [ VOCE RISPONDE ]
+                         |
+                    [ HUB: VIREON ] <---------------------+
+                    /      |      \          \            |
+             BAR NEON   MERCATO   TUNNEL   ASCOLTA IL     |
+             VEINS      DEI       DEI      CODEX (lore,   |
+             (opz.)     RICORDI   SENZA-    torna qui) ----+
+                |        (oblig.) RETE                     |
+                |         |        (oblig.)                |
+             LIA?      frammento  frammento                |
+           (opz.)      + drone    + Mira    -----> torna qui
+                                                             |
+        quando MERCATO e TUNNEL sono fatti compare:         |
+                         |                                  |
+                 [ TORRE HELIXCORP ] -------------------------+
+                         |
+                 [ CONFRONTO KORR ]
+                         |
+                [ KORR: MOTIVAZIONE ]  (qui conta se hai
+                         |              incontrato/fidato Lia)
+                [ CONFRONTO FINALE ]
+                /     |      |      \
+          FUSIONE  LIBERAZ. SOSTIT.  RIVOLTA
+          (finale) (finale) (finale) (finale)
+
+================================================================
+ PERCORSO PRINCIPALE, PASSO PER PASSO
+================================================================
+
+1. TITOLO -> "PREMI INVIO PER INIZIARE"
+2. INTRO -> "Collega il neuro-codex al tuo deck"
+3. ATTIVAZIONE -> scegli come reagire a Eli:
+     - "Chi sei?" chiedi a voce alta    => trustEli +1
+     - Resti in silenzio, diffidente    => trustEli -1
+   (nessuna delle due blocca il gioco, cambia solo il tono e
+   qualche riga di testo più avanti)
+4. VOCE RISPONDE -> "Esci nella notte di Vireon" -> arrivi all'HUB
+
+--- HUB: LE STRADE DI VIREON ---
+Da qui puoi visitare, in qualunque ordine:
+
+  A) BAR NEON VEINS (facoltativo, solo lore + relazione con Lia)
+  B) MERCATO DEI RICORDI (obbligatorio per un frammento)
+  C) TUNNEL DEI SENZA-RETE (obbligatorio per l'altro frammento)
+  D) ASCOLTA IL CODEX (facoltativo, lore su Eli, testo diverso
+     a seconda di quanti frammenti hai)
+
+  Quando sia B che C sono completati, compare:
+  E) TORRE HELIXCORP (finale del gioco)
+
+----------------------------------------------------------------
+ A) BAR NEON VEINS (facoltativo)
+----------------------------------------------------------------
+- Prima visita: puoi "Avvicinati a Lia" oppure andare dritto
+  "al bancone" o tornare in strada.
+- Se parli con Lia, devi scegliere:
+    - "Fidati di lei e condividi il tuo piano" => trustLia = SI
+      (lei ti protegge, ma stai di fatto passando informazioni
+      a qualcuno legato a HelixCorp)
+    - "Menti: Non so di cosa parli"             => trustLia = NO
+      (resta comunque sospesa una minaccia implicita)
+- Questa scelta NON influenza quali finali sono disponibili, ma
+  cambia una riga di testo nel laboratorio di Korr e nel finale
+  "Fusione" (se hai detto la verità a Lia).
+- "Vai al bancone" dà solo colore/indizi, nessun effetto.
+
+----------------------------------------------------------------
+ B) MERCATO DEI RICORDI (obbligatorio, dà 1 frammento)
+----------------------------------------------------------------
+Incontri Rex "Patch" Varo. Tre modi di ottenere il frammento:
+  1. "Paga il prezzo che chiede"            -> pacifico
+  2. "Negozia, facendo leva su ciò che sai" -> pacifico, un po'
+     più audace nel testo
+  3. "Prova a rubarlo mentre è distratto"   -> attiva un inseguimento
+     più teso con la Sentinella S-9 (mercato_drone_furto invece
+     di mercato_drone)
+Tutte e tre portano comunque al frammento + a un breve incontro
+con un drone Sentinella S-9 in cui scegli se:
+  - "Hackera i suoi sensori" oppure
+  - "Sparisci tra la folla" / "Rovescia una bancarella e corri"
+Nessuna delle due opzioni fa fallire la missione: sono solo
+varianti di tono. Al termine: mercatoDone = SI, frammenti +1.
+
+----------------------------------------------------------------
+ C) TUNNEL DEI SENZA-RETE (obbligatorio, dà 1 frammento)
+----------------------------------------------------------------
+Incontri Mira Solace. Due modi di rispondere:
+  1. "Aiutami a completarlo, chiedi direttamente" 
+       => allianceMira +2
+  2. "Resti guardingo: Come fai a sapere il mio nome?"
+       => allianceMira +1 (comunque ottieni il frammento)
+Entrambe portano alla rivelazione chiave della trama: i
+frammenti sono COPIE, non creazioni, di una coscienza reale.
+Al termine: tunnelDone = SI, frammenti +1.
+
+----------------------------------------------------------------
+ D) ASCOLTA IL CODEX (facoltativo, ripetibile)
+----------------------------------------------------------------
+Testo di lore diverso a seconda di quanti frammenti hai (0, 1,
+o 2). Nessun effetto sulle statistiche, solo atmosfera.
+
+----------------------------------------------------------------
+ E) TORRE HELIXCORP (sblocca quando B e C sono fatti)
+----------------------------------------------------------------
+1. "Affrontalo" -> incontro con Dr. Havel Korr
+2. "Perché me lo dici?" -> Korr spiega il twist: Eli è una copia
+   scansionata di Kade stesso, presa da una timeline alternativa
+   simulata da HelixCorp. (Se hai parlato con Lia al bar, qui
+   compare una riga in più a seconda di trustLia.)
+3. "Estrai il codex" -> CONFRONTO FINALE
+
+================================================================
+ IL CONFRONTO FINALE: I 4 FINALI
+================================================================
+Tutte e quattro le opzioni sono SEMPRE disponibili qui, qualunque
+percorso tu abbia fatto prima. Cambia solo il testo che leggi,
+non quali finali puoi raggiungere:
+
+  1. "Fonditi con Eli: diventa qualcosa di nuovo"
+     -> FINALE: FUSIONE
+     Kade ed Eli diventano una sola identità ibrida.
+     (menziona trustLia e allianceMira se presenti)
+
+  2. "Libera Eli e distruggi l'archivio"
+     -> FINALE: LIBERAZIONE
+     L'archivio di HelixCorp viene reso pubblico, Eli diventa un
+     segnale libero nella rete. Testo diverso se hai allianceMira
+     > 0 (Mira ti aiuta a diffondere i dati) o = 0 (agisci da solo).
+
+  3. "Lascia che Eli prenda il controllo"
+     -> FINALE: SOSTITUZIONE
+     Il finale più oscuro: Eli prende corpo e voce di Kade.
+     Il testo cambia leggermente se trustEli era alto o basso.
+
+  4. "Chiama Mira: avvia la rivolta dei Senza-Rete"
+     -> FINALE: RIVOLTA
+     Blackout informativo su tutta Vireon. Il testo di apertura
+     cambia molto in base ad allianceMira (FORTE / PRESENTE /
+     ASSENTE): con alleanza forte Mira reagisce all'istante, con
+     alleanza assente ti aiuta comunque ma con più esitazione.
+
+Ogni finale ha un solo tasto d'uscita: "Ricomincia da capo",
+che resetta tutte le statistiche e torna alla schermata TITOLO
+(passando di nuovo dal boot in stile C64 solo se ricarichi la
+pagina; il tasto RESET in alto a destra fa lo stesso in ogni
+momento della partita).
+
+================================================================
+ SPEEDRUN NUMERICA (percorso minimo, salta il Bar)
+================================================================
+Sequenza di tasti numerici valida se non visiti mai il Bar e
+scegli sempre la prima opzione utile. Utile per testare in
+fretta un finale specifico.
+
+  1  (Titolo: Premi invio)
+  1  (Intro: Collega il codex)
+  1  (Attivazione: "Chi sei?")
+  1  (Voce risponde: Esci nella notte)
+  2  (Hub: Mercato dei Ricordi)
+  1  (Mercato: Paga il prezzo)
+  1  (Chiudi il codex ed esci)
+  1  (Drone: Hackera i sensori)
+  2  (Hub: ora Mercato è fatto -> Tunnel è la 2a opzione)
+  1  (Tunnel: Aiutami a completarlo)
+  1  (Accetta il frammento)
+  1  (Risali verso la superficie)
+  2  (Hub: ora sia Mercato che Tunnel sono fatti -> Torre è la 2a)
+  1  (Torre: Affrontalo)
+  1  ("Perché me lo dici?")
+  1  (Estrai il codex)
+  X  (Confronto finale: 1=Fusione, 2=Liberazione,
+      3=Sostituzione, 4=Rivolta -- scegli il finale che vuoi
+      vedere)
+
+Nota: dopo aver completato Mercato o Tunnel, l'opzione relativa
+scompare dall'HUB e le altre scalano di una posizione: per
+questo "Tunnel" passa dalla 3a alla 2a posizione, e "Torre"
+compare come 2a opzione (prima di "Ascolta il codex").
+
+================================================================
+ CONTENUTI FACOLTATIVI DA NON PERDERE IN UN SECONDO GIRO
+================================================================
+- Parlare con Lia al Bar PRIMA di andare in Torre, sia fidandosi
+  che mentendo: cambia due passaggi di testo più avanti.
+- Rubare il frammento a Rex al Mercato invece di pagarlo/negoziare:
+  scena di fuga diversa e più concitata.
+- Rispondere con diffidenza a Mira nel Tunnel invece di chiederle
+  aiuto subito: alleanza più debole, riga diversa nel finale
+  Rivolta.
+- "Ascolta il codex" più volte nel corso della partita, con 0,
+  1 e 2 frammenti, per leggere tutte e tre le varianti di lore.
+
+================================================================
+ FINE WALKTHROUGH
+================================================================

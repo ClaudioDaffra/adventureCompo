@@ -1,0 +1,28 @@
+Caro Claudio,
+sono riuscito a rispettare la scadenza.
+
+Ti allego il prg dell'avventura, scritta un pò di corsa ma con tanta passione.
+So che è una piccolissima cosa, molto breve e forse troppo facile per chi è pratico di avventure.
+Ma partecipare mi sembrava il modo migliore per dimostrare 
+concretamente l'apprezzamento per questa bella iniziativa a cui Ti va dato merito.
+
+Ho avuto poco tempo per farla testare (a mio figlio e ad un suo amico); ma dovrebbe reggere.
+Ad ogni modo me ne assumo completamente la responsabilità.
+
+Non Ti dico nullo, perchè è davvero banale.
+Solo i comandi:
+H, mostra i comandi disponibili
+I, inventario
+ESAMINA, ripete la descrizione della stanza in cui Ti trovi.
+
+ciao paolo
+
+
+ecco la descrizione:
+
+Ti risvegli in una caverna claustrofobica, sigillata da un masso titanico: 
+alla luce tremolante di un focolare si erge il tuo carceriere.
+In questa trappola oscura, la forza fisica non ti salverà: 
+la tua unica arma è l'ingegno.
+
+ciao e grazie

@@ -1,0 +1,11 @@
+body { background-color: #b3b3b3; color: black; } 
+
+.emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; height: 80%; }
+div.emscripten { text-align: center; }
+/* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+canvas.emscripten { border: 0px none; height: 44px; }
+
+a {color: black;}
+
+a:visited {color: black}
+

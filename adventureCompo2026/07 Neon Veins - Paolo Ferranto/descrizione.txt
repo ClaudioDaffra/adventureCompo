@@ -1,0 +1,36 @@
+
+paolo ferranto
+
+NEON VEINS
+Un'avventura testuale interattiva  stile Commodore 64
+
+Nella pioggia acida di Vireon, un frammento di coscienza rubato ti chiede di trovare il resto di sé. 
+Il problema è che potrebbe essere te.
+
+Anno 2149. Sei Kade Rinn, data-runner indipendente nella megalopoli stratificata di Vireon: 
+rubi ricordi, li rivendi, non fai domande. 
+Una notte ricevi un neuro-codex danneggiato che contiene una voce frammentata  chiede solo di essere ricostruita. 
+Per farlo dovrai muoverti tra il Mercato dei Ricordi, 
+i tunnel offline dei Senza-Rete e, infine, la Torre della corporazione HelixCorp, 
+scoprendo che ogni pezzo recuperato ti avvicina a una verità che preferiresti non conoscere. 
+Chi stai davvero salvando? E cosa resterà di te, alla fine?
+
+Neon Veins è un'avventura a bivi ambientata in una Vireon fatta di neon, 
+sorveglianza corporativa e memorie in vendita al dettaglio. 
+Non c'è combattimento: ci sono persone da cui fidarsi o no (Mira Solace e i Senza-Rete, 
+la tua ex-partner Lia, il mercante Rex "Patch" Varo), 
+scelte che si accumulano silenziosamente in fiducia e alleanze,
+e una voce nella tua testa , Eli  che potrebbe essere una vittima da liberare o una minaccia da fermare. 
+La storia converge in un confronto finale con quattro esiti radicalmente diversi: 
+fusione, liberazione, sostituzione, rivolta. Nessuno di questi è "quello giusto".
+
+Il tutto è presentato con un'estetica volutamente anacronistica: 
+un boot screen in stile Commodore 64 BASIC, testo azzurro fosforescente su schermo blu, 
+scanline e un piccolo blip sonoro a ogni scelta  
+il contrasto tra l'hardware anni '80 e l'ambientazione cyberpunk è parte del tono del gioco.
+
+Dettagli tecnici
+- Genere: narrativa interattiva a bivi (stile Twine), ambientazione cyberpunk
+- Formato: file HTML singolo, autonomo, gira in qualsiasi browser
+- Durata: 15–25 minuti a partita, rigiocabile per i 4 finali diversi
+- Contenuti: nessuna violenza grafica; temi trattati : identità, sorveglianza, autonomia della coscienza
